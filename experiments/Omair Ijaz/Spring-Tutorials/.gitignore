@@ -28,3 +28,18 @@ hs_err_pid*
 
 
 # End of https://www.gitignore.io/api/java
+
+### Eclipse Stuff ###
+
+.mylyn/.taskListIndex/
+*.log
+.plugins/org.eclipse.m2e.core/nexus/
+*.swp
+.mylyn/*
+.plugins/org.eclipse.core.resources/.root/*.tree
+.markers
+.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.prefs
+.plugins/org.eclipse.ui.workbench/workingsets.xml
+.plugins/org.eclipse.team.cvs.core
+
+# end of eclipse stuff
