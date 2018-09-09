@@ -2,10 +2,14 @@ import React from 'react'
 
 import './home.css'
 
+import Container from '../Map/Container.js'
+
 class Home extends React.Component {
   render () {
     return (
-      <h1>Home</h1>
+      <div id='home'>
+        <Container/>
+      </div>
     );
   }
 }

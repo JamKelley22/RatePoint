@@ -16,9 +16,7 @@ class App extends Component {
       <Router>
         <div className='container'>
           <div id='content'>
-            <div id='center'>
-              <Route exact path={routes.HOME} component={() => <Home/>} />
-            </div>
+            <Route exact path={routes.HOME} component={() => <Home/>} />
             <Route exact path={routes.LANDING} component={() => <Landing/>} />
           </div>
         </div>
