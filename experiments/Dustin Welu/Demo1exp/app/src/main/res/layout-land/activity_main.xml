@@ -26,12 +26,12 @@
         android:text="Stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/button2"
         android:layout_below="@+id/timeview"
         android:layout_toRightOf="@+id/startbutton"
         android:layout_toEndOf="@+id/startbutton"
         android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:id="@+id/stopbutton" />
+        android:layout_marginStart="20dp" />
 
     <EditText
         android:layout_width="wrap_content"
