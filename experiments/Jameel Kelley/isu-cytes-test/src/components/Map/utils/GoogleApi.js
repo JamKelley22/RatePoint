@@ -40,4 +40,4 @@ export const GoogleApi = function(opts) {
   return url();
 }
 
-export default GoogleApi
+export default GoogleApi;
