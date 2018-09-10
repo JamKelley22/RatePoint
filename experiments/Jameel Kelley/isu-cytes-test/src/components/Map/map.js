@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import './map.css'
 
+let MAP = undefined;
+
 class Map extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +13,8 @@ class Map extends React.Component {
     this.state = {
       currentLocation: {
         lat: lat,
-        lng: lng
+        lng: lng,
+        map: undefined
       }
     }
   }
@@ -36,15 +39,30 @@ class Map extends React.Component {
         center: center,
         zoom: zoom
       })
-      this.map = new maps.Map(node, mapConfig);
-      console.log(this.map);
+      MAP = new maps.Map(node, mapConfig);
+      //console.log(this.map);
     }
+  }
+
+  renderChildren = () => {
+    const {children} = this.props;
+
+    if(!children) return;
+
+    return React.Children.map(children, c => {
+      return React.cloneElement(c, {
+        map: this.state.map,
+        google: this.props.google,
+        mapCenter: this.state.currentLocation
+      });
+    })
   }
 
   render() {
     return (
       <div id='map' ref='map'>
         Loading map...
+        {this.renderChildren()}
       </div>
     )
   }

@@ -12,11 +12,11 @@
 }
 
 #block2 {
-  background-color: green;
+  background-color: #4F5946;
 }
 
 #block3 {
-  background-color: blue;
+  background-color: #66735A;
 }
 
 #header {
@@ -46,6 +46,12 @@
   justify-content: center;
 }
 
+#header__links p {
+  color: white;
+  margin: 20px;
+  margin-top: 10px;
+}
+
 #body__button--account {
   display: flex;
   justify-content: center;
@@ -66,6 +72,8 @@ body {
 h1 {
   margin: 0px;
   color: white;
+  font-size: 50px;
+  font-weight: 10;
 }
 
 h5 {
@@ -112,22 +120,41 @@ h5 {
   display: flex;
   width: 20%;
   color: rgba(194, 194, 194, 0.75);
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-top: -10px;
+  text-decoration: none;
+}
+
+#infoPiece:hover {
+  color: white;
+  cursor: pointer;
 }
 
 #infoPiece i {
   font-size: 50px;
+  margin-top: 10px;
+  padding-right: 5px;
 }
 
-#infoPiece p {
+#infoPiece div p {
   font-size: 12px;
+  margin: 0px;
+}
+
+#infoPiece div h3 {
+  margin: 0px;
 }
 
 .button {
   border:none;
   border-radius: 40px;
-  width: 90px;
+  width: 150px;
   height: 30px;
   cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .signup {

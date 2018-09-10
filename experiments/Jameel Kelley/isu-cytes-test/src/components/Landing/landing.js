@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import './landing.css'
 
 import * as routes from '../../constants/routes.js'
+import Feature from './feature.js'
 
 class Landing extends React.Component {
   render () {
@@ -19,33 +20,33 @@ class Landing extends React.Component {
                 to={routes.HOME}>
                 Home
               </NavLink>
-
+              <p>|</p>
               <NavLink
                 className='header__link'
                 activeClassName='is-active'
-                to={routes.LANDING}>
-                Test
+                to={routes.HOME}>
+                Map
               </NavLink>
-
+              <p>|</p>
               <NavLink
                 className='header__link'
                 activeClassName='is-active'
                 to={routes.LANDING}>
-                Test
+                Team
               </NavLink>
-
+              <p>|</p>
               <NavLink
                 className='header__link'
                 activeClassName='is-active'
                 to={routes.LANDING}>
-                Test
+                Help
               </NavLink>
             </div>
           </div>
           {/*===============================*/}
           <div id='body'>
-            <h1>Lorim Ipsum Set Dolor</h1>
-            <h5>Lorim Ipsum Set Dolor</h5>
+            <h1>Local Student Ratings and Reviews</h1>
+            <h5></h5>
             <div id='body__button--account'>
               <button className='button signup'>Sign Up</button>
               <button className="button login">Login</button>
@@ -53,22 +54,26 @@ class Landing extends React.Component {
           </div>
           {/*===============================*/}
           <div id='footer'>
-            <div id='infoPiece'>
-              <i className="far fa-thumbs-up"></i>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div id='infoPiece'>
-              <i className="fas fa-trophy"></i>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div id='infoPiece'>
-              <i className="far fa-clock"></i>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div id='infoPiece'>
-              <i className="fas fa-car"></i>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
+            <Feature
+              icon='far fa-thumbs-up'
+              title='Ratings'
+              desc='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+            />
+            <Feature
+              icon='fas fa-trophy'
+              title='Top Sites'
+              desc='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+            />
+            <Feature
+              icon='far fa-clock'
+              title='Ratings'
+              desc='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+            />
+            <Feature
+              icon='fas fa-car'
+              title='Ratings'
+              desc='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+            />
           </div>
         </div>
 
