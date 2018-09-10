@@ -1,26 +1,147 @@
 #landing {
   height: 100%;
+  overflow-y: auto;
 }
 
-header {
+#block1,#block2,#block3 {
+  height: 100%;
+}
+
+#block1 {
+
+}
+
+#block2 {
+  background-color: green;
+}
+
+#block3 {
+  background-color: blue;
+}
+
+#header {
+  height: 10%;
+  max-height: 10%;
+}
+
+#footer {
   text-align: center;
+  height: 10%;
+
+}
+
+#body {
+  height: 80%;
+  max-height: 80%;
   display: flex;
-  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#header__links {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  justify-content: center;
+}
+
+#body__button--account {
+  display: flex;
+  justify-content: center;
+}
+
+#body__button--account button {
+  margin: 10px;
+}
+
+.header__link {
+  margin: 10px;
 }
 
 body {
   text-align: center;
 }
 
-footer {
-  text-align: center;
+h1 {
+  margin: 0px;
+  color: white;
+}
+
+h5 {
+  margin-top: 10px;
+  color: white;
 }
 
 .header__link {
-  color: black;
-
+  color: white;
+  text-decoration: none;
 }
 
 .header__link:hover {
   text-decoration: underline;
+}
+
+#bridgeBackround {
+  height: 100%;
+  background: url(bridge.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+
+  position: fixed;
+  width: 110%;
+  height: 110%;
+  top: -5%;
+  left: -5%;
+  z-index: -1;
+}
+
+#footer {
+  display: flex;
+  justify-content: center;
+
+}
+
+#infoPiece {
+  display: flex;
+  width: 20%;
+  color: rgba(194, 194, 194, 0.75);
+}
+
+#infoPiece i {
+  font-size: 50px;
+}
+
+#infoPiece p {
+  font-size: 12px;
+}
+
+.button {
+  border:none;
+  border-radius: 40px;
+  width: 90px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.signup {
+  background-color: #FFFFFF;
+}
+
+.signup:hover {
+  background-color: #d0d0d0;
+}
+
+.login {
+  background-color: #777F70;
+}
+
+.login:hover {
+  background-color: #61675B;
 }
