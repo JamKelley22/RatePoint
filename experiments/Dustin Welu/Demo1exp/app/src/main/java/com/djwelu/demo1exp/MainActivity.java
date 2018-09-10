@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     TextView timeview;
     Button startbutton, stopbutton;
     Handler hand;
-    long startTime, stopTime;
+    long startTime, stopTime, ms;
     boolean stateCounting = false;
 
     @Override
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startTime = SystemClock.uptimeMillis();
                 stateCounting = true;
+                hand.postDelayed(runnable, 0);
             }
         });
 
@@ -44,7 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
     public Runnable runnable = new Runnable() {
         public void run() {
-
+            if(stateCounting) {
+                ms = SystemClock.uptimeMillis() - startTime;
+            }
+            int sec = (int)ms/1000;
+            int min = sec/60;
+            sec = sec%60;
+            timeview.setText(String.format("%02d",min)+":"+String.format("%02d",sec));
+            hand.postDelayed(this,0);
         }
     };
 
