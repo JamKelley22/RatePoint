@@ -6,11 +6,32 @@ import './landing.css'
 import * as routes from '../../constants/routes.js'
 import Feature from './feature.js'
 
+import Bridge from './bridge.jpg'
+import Red from './low_bridge.JPG'
+
+let img;
+
 class Landing extends React.Component {
+  state = {
+    backgroundImg: Red
+  }
+
+  componentDidMount() {
+    img = new Image();
+    img.src = Bridge;
+    img.addEventListener('load', this.onBackgroundImageLoad);
+  }
+
+  onBackgroundImageLoad = () => {
+    this.setState({
+      backgroundImg: img.src
+    })
+  }
+
   render () {
     return (
       <div id='landing'>
-        <div id='bridgeBackround'/>
+        <img id='bridgeBackround' src={this.state.backgroundImg}/>
         <div id='block1'>
           <div id='header'>
             <div id='header__links'>
