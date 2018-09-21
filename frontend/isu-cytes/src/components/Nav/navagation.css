@@ -1,0 +1,8 @@
+.navagation__bar {
+  background-color: red;
+  display: flex;
+}
+
+.navagation__links {
+  display: flex;
+}

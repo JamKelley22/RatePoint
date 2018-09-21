@@ -1,11 +1,22 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
+
+import * as routes from '../../constants/routes.js'
 
 import './landing.css'
 
 class Landing extends React.Component {
   render () {
     return (
-      <h1>Landing</h1>
+      <div>
+        <h1>Landing</h1>
+        <NavLink
+          className='header__link'
+          activeClassName='is-active'
+          to={routes._POI}>
+          POI
+        </NavLink>
+      </div>
     );
   }
 }
