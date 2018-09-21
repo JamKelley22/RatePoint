@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "cross-env": "^5.2.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-router-dom": "^4.3.1",
@@ -12,6 +13,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "push": "cross-env-shell scp -r build/* $NETID@proj309-tg-03.misc.iastate.edu:/var/www/html",
+    "clean": "cross-env-shell ssh $NETID@proj309-tg-03.misc.iastate.edu \"rm -rf /var/www/html/*\"",
+    "upload": "yarn build && yarn clean && yarn push"
   }
 }
