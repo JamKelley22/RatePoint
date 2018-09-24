@@ -15,5 +15,5 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 
 	//query to return everything from review table
     @Query("SELECT r FROM Review")
-    public List<Review> leftOuterJoin();
+    public List<Review> returnAll();
 }
