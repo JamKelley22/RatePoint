@@ -19,7 +19,7 @@ public class ReviewController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "/reviews/new")
-	public @ResponseBody String addNewReview (@RequestParam String poi, @RequestParam String rating, 
+	public @ResponseBody String addNewReview (@RequestParam Integer poi, @RequestParam Integer rating, 
 			@RequestParam String title, @RequestParam String body) {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
