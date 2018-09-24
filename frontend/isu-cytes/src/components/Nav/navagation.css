@@ -1,8 +1,67 @@
 .navagation__bar {
-  background-color: red;
+  background-color: #143600;
   display: flex;
+  justify-content: space-evenly;
+  color: #99AE8D;
+  min-height: 50px;
+  min-width: 800px;
+}
+
+.navagation__logo {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-self: center;
 }
 
 .navagation__links {
   display: flex;
+  justify-content: space-evenly;
+  flex-grow: 2;
+  align-self: center;
+}
+
+.navagation__searchbar {
+  flex-grow: 2;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.navagation__searchbar form {
+  width: 90%;
+  height: 25px;
+}
+
+.navagation__searchbar__input {
+  width: 80%;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border: none;
+  height: 100%;
+}
+
+.navagation__searchbar__submit {
+  width: 20%;
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  height: 100%;
+  background-color: #99AE8D;
+  color: #143600;
+}
+
+.navagation__link {
+  color: #99AE8D;
+  text-decoration: none;
+}
+
+.navagation__link:hover {
+  text-decoration: underline;
+  color: #99AE8D;
+}
+
+h3 {
+  margin-top: 15px;
+  margin-bottom: 15px;
 }

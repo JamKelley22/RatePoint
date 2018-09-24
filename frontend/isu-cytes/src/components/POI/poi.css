@@ -1,0 +1,201 @@
+.poi__upper {
+  background-color: #99AE8D;
+  flex-grow: 1;
+}
+
+.poi__upper h1 {
+  text-align: center;
+  margin-top: 20px;
+  font-family: "Book Antiqua", Times, serif;
+  font-weight: bold;
+}
+
+.poi__lower {
+  background-color: #777F70;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-left: 20%;
+  padding-right: 20%;
+  padding-top: 20px;
+  color: white;
+}
+
+.navagation {
+flex-grow: 1;
+}
+
+.poi__lower__ratingline {
+  display: flex;
+  color: white;
+  justify-content: flex-start;
+  width: auto;
+}
+.poi__lower__ratingline > p {
+  margin-left: 10px;
+  margin-bottom: 0px;
+}
+.poi__lower__ratingline > i {
+  margin-left: 10px;
+  color: #8DA182;
+}
+.poi__lower__ratingline * {
+  align-self: center;
+}
+.fa-star {
+  color: yellow;
+  margin: 2px;
+}2
+
+.poi__lower__description {
+
+}
+.poi__lower__tags {
+  display: flex;
+}
+.tag {
+  display: flex;
+  background-color: #376700;
+  border-radius: 20px;
+  padding: 3px 5px 3px 5px;
+  margin-right: 5px;
+}
+.tag * {
+  align-self: center;
+  margin: 2px;
+}
+.poi__lower__reviews__line {
+  display: flex;
+}
+.poi__lower__review__link {
+  align-self: center;
+  margin-left: 10px;
+  color: white;
+  font-style: italic;
+}
+.poi__lower__review__link:hover {
+  color: white;
+}
+
+button {
+  border: none;
+}
+.poi__lower__buttons {
+  display: flex;
+  flex-direction: column;
+}
+.poi__lower__button {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background-color: #99AE8D;
+  color: black;
+
+  -webkit-box-shadow: 5px 5px 6px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 5px 5px 6px 0px rgba(0,0,0,0.2);
+  box-shadow: 5px 5px 6px 0px rgba(0,0,0,0.2);
+}
+.poi__lower__button p {
+  margin: 0px;
+  font-size: 30px;
+}
+.poi__lower__button i {
+  font-size: 20px;
+}
+.poi__lower__buttons__option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.poi__lower__buttons__option > p {
+  color: #99AE8D;
+  text-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+}
+
+#allReviews {
+  display: flex;
+  overflow-x: auto;
+}
+.review {
+  width: 100%;
+  display: flex;
+}
+.review__user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.review__content {
+  margin-left: 20px;
+  overflow: hidden;
+}
+.review__content p {
+  max-height: 100px;
+}
+
+.review__user__pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-top: 5px;
+}
+
+/*========Carousel========*/
+.carousel {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+@keyframes unblur {
+  from {
+    -webkit-filter: blur(3px); /* Safari 6.0 - 9.0 */
+    filter: blur(3px);
+  }
+  to {
+    -webkit-filter: blur(0px); /* Safari 6.0 - 9.0 */
+    filter: blur(0px);
+  }
+}
+
+.carousel__pic {
+  border-radius: 10px;
+  width: 25%;
+  position: relative;
+  z-index: 0;
+  align-self: center;
+
+  -webkit-filter: blur(3px); /* Safari 6.0 - 9.0 */
+  filter: blur(3px);
+
+  -webkit-box-shadow: 5px 5px 6px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 5px 5px 6px 0px rgba(0,0,0,0.2);
+  box-shadow: 5px 5px 6px 0px rgba(0,0,0,0.2);
+}
+
+.carousel__pic:hover {
+  animation-name: unblur;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+#carousel__left {
+  left: 50px;
+}
+
+#carousel__center {
+  width: 35%;
+  -webkit-filter: blur(0px); /* Safari 6.0 - 9.0 */
+  filter: blur(0px);
+  z-index: 1;
+}
+#carousel__center:hover {
+  animation-name: none;
+}
+
+#carousel__right {
+  left: -50px;
+}
