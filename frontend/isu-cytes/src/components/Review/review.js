@@ -9,8 +9,8 @@ class Review extends React.Component {
         this.state = {
             poi: "Insert POI here",
             title: '',
-            display: 0,
-            rating: 0,
+            display: 1,
+            rating: 1,
             body: ''
         };
     }
@@ -25,21 +25,17 @@ class Review extends React.Component {
         let data = {
             poi: this.state.poi,
             title: formdata.get('title'),
-            rating: '',
+            rating: this.state.rating,
             body: formdata.get('body')
         };
         console.log(JSON.stringify(data));
-        fetch('/reviewSubmit', {method: 'POST', body: JSON.stringify(data)})
+        fetch('/reviews/new', {method: 'POST', body: JSON.stringify(data)})
             .catch(function(error){
                 console.log(error);
                 return;
             });
-        this.setState({title:'',rating:'',body:''});
-    }
-
-    componentDidMount(){
-
-    }
+        this.setState({title:'',rating:1,body:''});
+    };
 
     TitleChange = (e) => {
         this.setState({ title: e.target.value });
@@ -49,12 +45,16 @@ class Review extends React.Component {
         this.setState({ body: e.target.value });
     };
 
-    RatingChange = () => {
-
+    RatingChange = (i) => {
+        this.setState({rating:i});
     };
 
-    RatingDisplayedChange = () => {
+    RatingDisplayedChange = (i) => {
+        this.setState({display:i});
+    }
 
+    RatingBackToState = () => {
+        this.setState({display:this.state.rating});
     }
 
     render() {
@@ -73,23 +73,30 @@ class Review extends React.Component {
                         <br/>
                         <div id="container">
                             <div id="gettable">
-                                <div id="icon1div">
-                                    <img id="icon1" src="img/staricon.png" height="30px" width="30px"/>
+                                <div id="icon1div" onMouseOver={(e) => this.RatingDisplayedChange(1)}
+                                     onClick={(e) => this.RatingChange(1)} onMouseLeave={this.RatingBackToState}>
+                                    <img id="icon1" src="img/staricon.png" alt="yee" height="30px" width="30px"/>
                                 </div>
-                                <div id="icon2div">
-                                    <img id="icon2" src="img/staricon.png" height="30px" width="30px"/>
+                                <div id="icon2div" onMouseOver={(e) => this.RatingDisplayedChange(2)}
+                                     onClick={(e) => this.RatingChange(2)} onMouseLeave={this.RatingBackToState}>
+                                    <img id="icon2" src="img/staricon.png" alt="yee" height="30px" width="30px"/>
                                 </div>
-                                <div id="icon3div">
-                                    <img id="icon3" src="img/staricon.png" height="30px" width="30px"/>
+                                <div id="icon3div" onMouseOver={(e) => this.RatingDisplayedChange(3)}
+                                     onClick={(e) => this.RatingChange(3)} onMouseLeave={this.RatingBackToState}>
+                                    <img id="icon3" src="img/staricon.png" alt="yee" height="30px" width="30px"/>
                                 </div>
-                                <div id="icon4div">
-                                    <img id="icon4" src="img/staricon.png" height="30px" width="30px"/>
+                                <div id="icon4div" onMouseOver={(e) => this.RatingDisplayedChange(4)}
+                                     onClick={(e) => this.RatingChange(4)} onMouseLeave={this.RatingBackToState}>
+                                    <img id="icon4" src="img/staricon.png" alt="yee" height="30px" width="30px"/>
                                 </div>
-                                <div id="icon5div">
-                                    <img id="icon5" src="img/staricon.png" height="30px" width="30px"/>
+                                <div id="icon5div" onMouseOver={(e) => this.RatingDisplayedChange(5)}
+                                     onClick={(e) => this.RatingChange(5)} onMouseLeave={this.RatingBackToState}>
+                                    <img id="icon5" src="img/staricon.png" alt="yee" height="30px" width="30px"/>
                                 </div>
                             </div>
                         </div>
+                        display:{this.state.display}
+                        state:{this.state.rating}
                         <br/>
                         Body
                         <br/>
