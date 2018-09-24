@@ -1,6 +1,13 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Modal, Button } from 'react-bootstrap'
+import { TwitterShareButton, FacebookShareButton, RedditShareButton, EmailShareButton } from 'react-share';
+import {
+  FacebookIcon,
+  TwitterIcon,
+  RedditIcon,
+  EmailIcon,
+} from 'react-share';
 
 import * as routes from '../../constants/routes.js'
 
@@ -16,6 +23,7 @@ import './poi.css'
 
 class POI extends React.Component {
   state = {
+    id: undefined,
     name: '',
     images: [],
     rating: 0,
@@ -25,11 +33,19 @@ class POI extends React.Component {
     tags: [],
     reviews: [],
 
-    shareScreenState: false
+    shareScreenState: false,
+    descriptionScrollState: 'hidden',
+    shareButtonClassName: 'poi__lower__button',
+    listButtonClassName: 'poi__lower__button',
+    reviewButtonClassName: 'poi__lower__button',
+    reportButtonClassName: 'poi__lower__button'
   }
 
   componentDidMount() {
+    this.fetchDataFromServer();
+    /*
     this.setState({
+      id: 1111,
       name: 'The Coover Moth',
       images: [Moth,Moth,Moth],
       rating: 4,
@@ -57,6 +73,26 @@ class POI extends React.Component {
           rating: 3
         }
       ]
+    })
+    */
+  }
+
+  fetchDataFromServer = async() => {
+    let response = await fetch('http://localhost:3004/moth');
+    // only proceed once promise is resolved
+    let data = await response.json();
+    // only proceed once second promise is resolved
+    //console.log(data);
+    this.setState({
+      id: data.id,
+      name: data.name,
+      images: data.images,
+      rating: data.rating,
+      numRatings: data.numRatings,
+      accessability: data.accessability,
+      description: data.description,
+      tages: data.tags,
+      reviews: data.reviews
     })
   }
 
@@ -110,26 +146,75 @@ class POI extends React.Component {
     );
   }
 
-  handleClick = (btn) => {
-    switch (btn) {
-      case 'Share':
-        console.log('Clicked Share Btn');
-        this.openCloseShareScreen(true);
-        break;
-      default:
-
-    }
-  }
-
   openCloseShareScreen = (nextState) => {
     this.setState({
       shareScreenState: nextState
     })
   }
 
+  setDescriptionScroll = (nextState) => {
+    this.setState({
+      descriptionScrollState: nextState
+    })
+  }
+
+  addToList = () => {
+    console.log("Add POI with id: " + this.state.id + " to list");
+  }
+
+  reportPOI = () => {
+    console.log("Reported POI with id: " + this.state.id);
+  }
+
+  handleClick = (btn) => {
+    switch (btn) {
+      case 'Share':
+        console.log('Clicked Share Btn');
+        this.setState({
+          shareButtonClassName: 'poi__lower__button--pressed'
+        }, () => {
+          setTimeout(() => {this.setState({shareButtonClassName: 'poi__lower__button'})}, 200);
+        })
+        this.openCloseShareScreen(true);
+        break;
+      case 'List':
+        console.log('Clicked List Btn');
+        this.setState({
+          listButtonClassName: 'poi__lower__button--pressed'
+        }, () => {
+          setTimeout(() => {this.setState({listButtonClassName: 'poi__lower__button'})}, 200);
+        })
+        this.addToList();
+        break;
+      case 'Review':
+        console.log('Clicked Review Btn');
+        this.setState({
+          reviewButtonClassName: 'poi__lower__button--pressed'
+        }, () => {
+          setTimeout(() => {this.setState({reviewButtonClassName: 'poi__lower__button'})}, 200);
+        })
+        break;
+      case 'Report':
+        console.log('Clicked Report Btn');
+        this.setState({
+          reportButtonClassName: 'poi__lower__button--pressed'
+        }, () => {
+          setTimeout(() => {this.setState({reportButtonClassName: 'poi__lower__button'})}, 200);
+        })
+        this.reportPOI();
+        break;
+      default:
+
+    }
+  }
+
   render () {
+    let descriptionStyle = {
+        overflowY: this.state.descriptionScrollState
+    };
+
     return (
-      <React.Fragment>
+      <div className='poiPage'>
         <Navagation className='navagation'/>
         <div className='poi__upper'>
           <h1>{this.state.name}</h1>
@@ -149,18 +234,24 @@ class POI extends React.Component {
             </div>
 
             <div className='poi__lower__description'>
-              <h3>Description</h3>
-              <p>{this.state.description}</p>
+              <h4>Description</h4>
+              <p
+                onMouseEnter={() => this.setDescriptionScroll('auto')}
+                onMouseLeave={() => this.setDescriptionScroll('hidden')}
+                style={descriptionStyle}
+                >
+                {this.state.description}
+              </p>
             </div>
 
             <div>
-              <h3>Tags</h3>
+              <h4>Tags</h4>
               <div className='poi__lower__tags'>{this.getTags()}</div>
             </div>
 
             <div className='poi__lower__reviews'>
               <div className='poi__lower__reviews__line'>
-                <h3>Reviews</h3>
+                <h4>Reviews</h4>
                 <NavLink
                   className='poi__lower__review__link'
                   activeClassName='is-active'
@@ -177,7 +268,7 @@ class POI extends React.Component {
           <div className='poi__lower__buttons'>
             <div className='poi__lower__buttons__option'>
               <button
-                className='poi__lower__button'
+                className={this.state.shareButtonClassName}
                 onClick={() => this.handleClick('Share')}>
                 <i className="fas fa-share-alt"/>
               </button>
@@ -186,7 +277,7 @@ class POI extends React.Component {
 
             <div className='poi__lower__buttons__option'>
               <button
-                className='poi__lower__button'
+                className={this.state.listButtonClassName}
                 onClick={() => this.handleClick('List')}>
                 <p>+</p>
               </button>
@@ -195,7 +286,7 @@ class POI extends React.Component {
 
             <div className='poi__lower__buttons__option'>
               <button
-                className='poi__lower__button'
+                className={this.state.reviewButtonClassName}
                 onClick={() => this.handleClick('Review')}>
                 <p>T</p>
               </button>
@@ -204,9 +295,9 @@ class POI extends React.Component {
 
             <div className='poi__lower__buttons__option'>
               <button
-                className='poi__lower__button'
+                className={this.state.reportButtonClassName}
                 onClick={() => this.handleClick('Report')}>
-                <i class="fas fa-flag"/>
+                <i className="fas fa-flag"/>
               </button>
               <p>Report</p>
             </div>
@@ -219,14 +310,38 @@ class POI extends React.Component {
             <Modal.Title>Share {this.state.name}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Text in a modal</h4>
-            {twitterShare}
+              <TwitterShareButton
+                url="isucytes.com"
+                title="ISU Moth"
+                className="Demo__some-network__share-button">
+                <TwitterIcon
+                  size={32}
+                  round />
+              </TwitterShareButton>
+
+              <FacebookShareButton
+                url="isucytes.com"
+                quote="ISU Moth"
+                className="Demo__some-network__share-button">
+                <FacebookIcon
+                  size={32}
+                  round />
+              </FacebookShareButton>
+
+              <RedditShareButton
+                url="isucytes.com"
+                title="ISU Moth"
+                className="Demo__some-network__share-button">
+                <RedditIcon
+                  size={32}
+                  round />
+              </RedditShareButton>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={() => this.openCloseShareScreen(false)}>Close</Button>
           </Modal.Footer>
         </Modal>
-      </React.Fragment>
+      </div>
     );
   }
 }

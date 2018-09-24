@@ -15,7 +15,12 @@ class Navigation extends React.Component {
     return (
       <div className='navagation__bar'>
         <div className='navagation__logo'>
-          <h3>ISU Cytes</h3>
+          <NavLink
+            className='navagation__link'
+            activeClassName='navagation__link--active'
+            to={routes._HOME}>
+            <h3>ISU Cytes</h3>
+          </NavLink>
         </div>
         <div className='navagation__links'>
           <NavLink
