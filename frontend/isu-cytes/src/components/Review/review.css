@@ -1,3 +1,33 @@
 #form {
     text-align: center;
 }
+
+#container{
+    margin: auto;
+    width: 10%;
+    display: table;
+}
+
+#gettable{
+    display: table-row;
+}
+
+#icon1div{
+    display: table-cell;
+}
+
+#icon2div{
+    display: table-cell;
+}
+
+#icon3div{
+    display: table-cell;
+}
+
+#icon4div{
+    display: table-cell;
+}
+
+#icon5div{
+    display: table-cell;
+}

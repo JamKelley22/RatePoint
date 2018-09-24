@@ -9,7 +9,8 @@ class Review extends React.Component {
         this.state = {
             poi: "Insert POI here",
             title: '',
-            rating: '',
+            display: 0,
+            rating: 0,
             body: ''
         };
     }
@@ -37,7 +38,7 @@ class Review extends React.Component {
     }
 
     componentDidMount(){
-        
+
     }
 
     TitleChange = (e) => {
@@ -47,6 +48,14 @@ class Review extends React.Component {
     BodyChange = (e) => {
         this.setState({ body: e.target.value });
     };
+
+    RatingChange = () => {
+
+    };
+
+    RatingDisplayedChange = () => {
+
+    }
 
     render() {
         return (
@@ -59,6 +68,28 @@ class Review extends React.Component {
                         <br/>
                         <input type="text" required id="title" name="title" value={this.state.title}
                                onChange={this.TitleChange} maxLength="20" autoComplete="off"/>
+                        <br/>
+                        Rating
+                        <br/>
+                        <div id="container">
+                            <div id="gettable">
+                                <div id="icon1div">
+                                    <img id="icon1" src="img/staricon.png" height="30px" width="30px"/>
+                                </div>
+                                <div id="icon2div">
+                                    <img id="icon2" src="img/staricon.png" height="30px" width="30px"/>
+                                </div>
+                                <div id="icon3div">
+                                    <img id="icon3" src="img/staricon.png" height="30px" width="30px"/>
+                                </div>
+                                <div id="icon4div">
+                                    <img id="icon4" src="img/staricon.png" height="30px" width="30px"/>
+                                </div>
+                                <div id="icon5div">
+                                    <img id="icon5" src="img/staricon.png" height="30px" width="30px"/>
+                                </div>
+                            </div>
+                        </div>
                         <br/>
                         Body
                         <br/>
