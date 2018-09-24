@@ -11,4 +11,11 @@ public class ReviewController {
 		return "TEST";
 	}
 	
+	//post controller
+	@RequestMapping(method = RequestMethod.POST, path = "/reviews/new")
+	public String saveReview(Review review) {
+		reviewsRepository.save(review);
+		return "New Review " + review.getTitle() + " saved";
+	}
+	 
 }
