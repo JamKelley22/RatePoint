@@ -128,9 +128,6 @@ class POI extends React.Component {
   }
 
   render () {
-    let twitterShare = (
-
-    );
     return (
       <React.Fragment>
         <Navagation className='navagation'/>
