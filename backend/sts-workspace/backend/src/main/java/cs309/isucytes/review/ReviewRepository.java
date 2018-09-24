@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
 public interface ReviewRepository extends JpaRepository<Review, Integer> {
 
 	//query to return everything from review table
-    @Query("SELECT r FROM Review")
+    @Query("SELECT * FROM Review")
     public List<Review> returnAll();
 }
