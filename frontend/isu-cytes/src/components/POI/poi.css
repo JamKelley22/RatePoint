@@ -6,6 +6,12 @@
   height: 100%;
 }
 
+@media only screen and (max-height: 600px) {
+    .poiPage {
+        overflow-y: auto;
+    }
+}
+
 .poi__upper {
   background-color: #99AE8D;
   flex-grow: 1;
@@ -54,7 +60,12 @@ flex-grow: 1;
 .fa-star {
   color: yellow;
   margin: 2px;
-}2
+}
+
+.fa-star-half-alt {
+  color: yellow;
+  margin: 2px;
+}
 
 .poi__lower__description {
   margin: 0px;
@@ -95,11 +106,14 @@ button {
 .poi__lower__buttons {
   display: flex;
   flex-direction: column;
+  min-height: 300px;
 }
 .poi__lower__button {
   position: relative;
   width: 40px;
   height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   border-radius: 50%;
   background-color: #99AE8D;
   color: black;
@@ -218,7 +232,8 @@ button {
 
 .carousel__pic {
   border-radius: 10px;
-  width: 18%;
+  width: 20%;
+  min-width: 200px;
   position: relative;
   z-index: 0;
   align-self: center;
@@ -242,7 +257,7 @@ button {
 }
 
 #carousel__center {
-  width: 20%;
+  width: 25%;
   -webkit-filter: blur(0px); /* Safari 6.0 - 9.0 */
   filter: blur(0px);
   z-index: 1;

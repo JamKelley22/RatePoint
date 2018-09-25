@@ -6,11 +6,19 @@ class Rating extends React.Component {
   render () {
     let arr = [];
     let i;
-    for (i = 0; i < this.props.number; i++) {
+    let wholeNum = Math.floor(this.props.number);
+    let dec = this.props.number % 1;
+    for (i = 0; i < wholeNum; i++) {
       arr.push(
         <i className="fas fa-star" key={i}/>
       )
     };
+    if(dec === .5) {
+      arr.push(
+        <i className="fas fa-star-half-alt" key={i}/>
+      );
+      i++;
+    }
     while(i < 5) {
       arr.push(
         <i className="far fa-star" key={i}/>

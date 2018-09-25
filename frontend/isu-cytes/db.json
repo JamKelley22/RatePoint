@@ -6,7 +6,7 @@
 	"id": 1111,
 	"name": "The Coover Moth",
 	"images": ["https://upload.wikimedia.org/wikipedia/commons/f/fc/Emperor_Gum_Moth.jpg","http://ichef.bbci.co.uk/wwfeatures/wm/live/1280_640/images/live/p0/2y/t0/p02yt05d.jpg"],
-	"rating": 4,
+	"rating": 2.5,
 	"numRatings": 10,
 	"accessability": ["handicap", "bus"],
 	"description": "The sculpture outside of coover, walk around it to see the moth. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis velit vitae felis sagittis, vitae vestibulum justo placerat. Proin et nibh id purus consequat interdum pharetra ut mi.",
