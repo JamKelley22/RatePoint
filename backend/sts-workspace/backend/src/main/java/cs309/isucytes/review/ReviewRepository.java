@@ -1,9 +1,6 @@
 package cs309.isucytes.review;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -12,8 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Integer> {
-
-	//query to return everything from review table
-    @Query("SELECT * FROM Review")
-    public List<Review> returnAll();
+	// Only need to define methods here if we need specific 
+	// queries. Fine to leave blank for now
 }
