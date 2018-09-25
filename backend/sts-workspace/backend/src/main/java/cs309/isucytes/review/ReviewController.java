@@ -31,5 +31,10 @@ public class ReviewController {
 		reviewRepository.save(r);
 		return "Saved";
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/reviews/get")
+	public @ResponseBody Iterable<Review> getAllReviews(){
+		return reviewRepository.findAll();
+	}
 	 
 }
