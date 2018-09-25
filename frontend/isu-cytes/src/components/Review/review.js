@@ -29,11 +29,14 @@ class Review extends React.Component {
             body: formdata.get('body')
         };
         console.log(JSON.stringify(data));
-        fetch('/reviews/new', {method: 'POST', body: JSON.stringify(data)})
-            .catch(function(error){
-                console.log(error);
-                return;
-            });
+        fetch('/reviews/new', {
+            method: 'POST',
+            body: JSON.stringify(data)
+        })
+        .catch(function(error){
+            alert(error);
+            return;
+        });
         this.setState({title:'',rating:1,body:''});
     };
 
