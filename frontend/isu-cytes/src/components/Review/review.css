@@ -31,3 +31,11 @@
 #icon5div{
     display: table-cell;
 }
+
+.review__kiwi{
+
+}
+
+.review__kiwi--colored{
+    color: red;
+}

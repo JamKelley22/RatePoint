@@ -31,7 +31,7 @@ class Review extends React.Component {
             body: formdata.get('body')
         };
         console.log(JSON.stringify(data));
-        fetch('/reviews/new', {
+        fetch('http://proj309-tg-03.misc.iastate.edu:8080/review/new', {
             method: 'POST',
             body: JSON.stringify(data)
         })
@@ -81,29 +81,32 @@ class Review extends React.Component {
                           <div id="container">
                               <div id="gettable">
                                   <div id="icon1div" onMouseOver={(e) => this.RatingDisplayedChange(1)}
-                                       onClick={(e) => this.RatingChange(1)} onMouseLeave={this.RatingBackToState}>
-                                      <img id="icon1" src="img/staricon.png" alt="yee" height="30px" width="30px"/>
+                                       onClick={(e) => this.RatingChange(1)} onMouseLeave={this.RatingBackToState}
+                                        className={(this.state.display<1) ? "review__kiwi":"review__kiwi--colored"}>
+                                      <i id="icon1" class="fas fa-kiwi-bird"></i>
                                   </div>
                                   <div id="icon2div" onMouseOver={(e) => this.RatingDisplayedChange(2)}
-                                       onClick={(e) => this.RatingChange(2)} onMouseLeave={this.RatingBackToState}>
-                                      <img id="icon2" src="img/staricon.png" alt="yee" height="30px" width="30px"/>
+                                       onClick={(e) => this.RatingChange(2)} onMouseLeave={this.RatingBackToState}
+                                       className={(this.state.display<2) ? "review__kiwi":"review__kiwi--colored"}>
+                                      <i id="icon2" class="fas fa-kiwi-bird"></i>
                                   </div>
                                   <div id="icon3div" onMouseOver={(e) => this.RatingDisplayedChange(3)}
-                                       onClick={(e) => this.RatingChange(3)} onMouseLeave={this.RatingBackToState}>
-                                      <img id="icon3" src="img/staricon.png" alt="yee" height="30px" width="30px"/>
+                                       onClick={(e) => this.RatingChange(3)} onMouseLeave={this.RatingBackToState}
+                                       className={(this.state.display<3) ? "review__kiwi":"review__kiwi--colored"}>
+                                      <i id="icon3" class="fas fa-kiwi-bird"></i>
                                   </div>
                                   <div id="icon4div" onMouseOver={(e) => this.RatingDisplayedChange(4)}
-                                       onClick={(e) => this.RatingChange(4)} onMouseLeave={this.RatingBackToState}>
-                                      <img id="icon4" src="img/staricon.png" alt="yee" height="30px" width="30px"/>
+                                       onClick={(e) => this.RatingChange(4)} onMouseLeave={this.RatingBackToState}
+                                       className={(this.state.display<4) ? "review__kiwi":"review__kiwi--colored"}>
+                                      <i id="icon4" class="fas fa-kiwi-bird"></i>
                                   </div>
                                   <div id="icon5div" onMouseOver={(e) => this.RatingDisplayedChange(5)}
-                                       onClick={(e) => this.RatingChange(5)} onMouseLeave={this.RatingBackToState}>
-                                      <img id="icon5" src="img/staricon.png" alt="yee" height="30px" width="30px"/>
+                                       onClick={(e) => this.RatingChange(5)} onMouseLeave={this.RatingBackToState}
+                                       className={(this.state.display<5) ? "review__kiwi":"review__kiwi--colored"}>
+                                      <i id="icon5" class="fas fa-kiwi-bird"></i>
                                   </div>
                               </div>
                           </div>
-                          display:{this.state.display}
-                          state:{this.state.rating}
                           <br/>
                           Body
                           <br/>
