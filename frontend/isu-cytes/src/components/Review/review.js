@@ -30,15 +30,19 @@ class Review extends React.Component {
             rating: this.state.rating,
             body: formdata.get('body')
         };
-        console.log(JSON.stringify(data));
-        fetch('http://proj309-tg-03.misc.iastate.edu:8080/review/new', {
-            method: 'POST',
-            body: JSON.stringify(data)
-        })
-        .catch(function(error){
-            alert(error);
-            return;
-        });
+        (async () => {
+            const rawResponse = await fetch('http://proj309-tg-03.misc.iastate.edu:8080/review/new', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const content = await rawResponse.json();
+
+            console.log(content);
+        })();
         this.setState({title:'',rating:1,body:''});
     };
 
