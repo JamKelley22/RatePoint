@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Navagation from '../Nav/navagation.js'
+import { history, routes } from '../../history.js'
 
 import './review.css'
 
@@ -9,7 +10,7 @@ class Review extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            poi: "Insert POI here",
+            poi: 1,
             title: '',
             display: 1,
             rating: 1,
@@ -17,7 +18,7 @@ class Review extends React.Component {
         };
     }
 
-    reviewSubmit = (e) => {
+    reviewSubmit = async(e) => {
         e.preventDefault();
         const formdata = new FormData(e.target);
         if(!e.target.checkValidity()){
@@ -30,20 +31,45 @@ class Review extends React.Component {
             rating: this.state.rating,
             body: formdata.get('body')
         };
-        (async () => {
-            const rawResponse = await fetch('http://proj309-tg-03.misc.iastate.edu:8080/review/new', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-            const content = await rawResponse.json();
 
-            console.log(content);
-        })();
+        //console.log(JSON.stringify(data));
+        /*
+        let rawResponse;
+        try {
+          rawResponse = await fetch('http://proj309-tg-03.misc.iastate.edu:8080/reviews/new', {
+              method: 'POST',
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+          });
+        } catch (e) {
+          console.error(e);
+        }
+
+        let content = await rawResponse.json();
+
+        console.log(content);
+        */
+        let url = `http://proj309-tg-03.misc.iastate.edu:8080/reviews/new?poi=${data.poi}&rating=${data.rating}&title=${data.title}&body=${data.body}`;
+        let rawResponse;
+        try {
+          rawResponse = await fetch(url, {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+          });
+        } catch (e) {
+          console.log(e);
+        }
+
         this.setState({title:'',rating:1,body:''});
+        setTimeout(() => history.push(routes._POI),1000);
     };
 
     TitleChange = (e) => {
@@ -87,27 +113,27 @@ class Review extends React.Component {
                                   <div id="icon1div" onMouseOver={(e) => this.RatingDisplayedChange(1)}
                                        onClick={(e) => this.RatingChange(1)} onMouseLeave={this.RatingBackToState}
                                         className={(this.state.display<1) ? "review__kiwi":"review__kiwi--colored"}>
-                                      <i id="icon1" class="fas fa-kiwi-bird"></i>
+                                      <i id="icon1" className="fas fa-kiwi-bird"></i>
                                   </div>
                                   <div id="icon2div" onMouseOver={(e) => this.RatingDisplayedChange(2)}
                                        onClick={(e) => this.RatingChange(2)} onMouseLeave={this.RatingBackToState}
                                        className={(this.state.display<2) ? "review__kiwi":"review__kiwi--colored"}>
-                                      <i id="icon2" class="fas fa-kiwi-bird"></i>
+                                      <i id="icon2" className="fas fa-kiwi-bird"></i>
                                   </div>
                                   <div id="icon3div" onMouseOver={(e) => this.RatingDisplayedChange(3)}
                                        onClick={(e) => this.RatingChange(3)} onMouseLeave={this.RatingBackToState}
                                        className={(this.state.display<3) ? "review__kiwi":"review__kiwi--colored"}>
-                                      <i id="icon3" class="fas fa-kiwi-bird"></i>
+                                      <i id="icon3" className="fas fa-kiwi-bird"></i>
                                   </div>
                                   <div id="icon4div" onMouseOver={(e) => this.RatingDisplayedChange(4)}
                                        onClick={(e) => this.RatingChange(4)} onMouseLeave={this.RatingBackToState}
                                        className={(this.state.display<4) ? "review__kiwi":"review__kiwi--colored"}>
-                                      <i id="icon4" class="fas fa-kiwi-bird"></i>
+                                      <i id="icon4" className="fas fa-kiwi-bird"></i>
                                   </div>
                                   <div id="icon5div" onMouseOver={(e) => this.RatingDisplayedChange(5)}
                                        onClick={(e) => this.RatingChange(5)} onMouseLeave={this.RatingBackToState}
                                        className={(this.state.display<5) ? "review__kiwi":"review__kiwi--colored"}>
-                                      <i id="icon5" class="fas fa-kiwi-bird"></i>
+                                      <i id="icon5" className="fas fa-kiwi-bird"></i>
                                   </div>
                               </div>
                           </div>

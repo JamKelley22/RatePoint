@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  BrowserRouter as Router,
+  Router,
   Route,
   Switch
 } from 'react-router-dom';
@@ -18,6 +18,8 @@ import Review from './components/Review/review.js';
 import POI from './components/POI/poi.js';
 import Error404 from './components/Error/error404.js';
 
+import { history } from './history.js';
+
 import * as routes from './constants/routes';
 
 import './App.css';
@@ -25,7 +27,7 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <div className="App">
           <Switch>
             <Route exact path={routes._LANDING} component={() => <Landing/>} />

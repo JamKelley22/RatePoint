@@ -9,7 +9,7 @@ import {
   EmailIcon,
 } from 'react-share';
 
-import * as routes from '../../constants/routes.js'
+import { history, routes } from '../../history.js'
 
 import Navagation from '../Nav/navagation.js'
 import POICarousel from './poiCarousel.js'
@@ -17,7 +17,7 @@ import Rating from './rating.js'
 import Tag from './tag.js'
 import Review from './review.js'
 
-import Moth from '../../images/moth.jpg';
+import { FakeData } from './fakeData.js'
 
 import './poi.css'
 
@@ -43,46 +43,37 @@ class POI extends React.Component {
 
   componentDidMount() {
     this.fetchDataFromServer();
-    /*
-    this.setState({
-      id: 1111,
-      name: 'The Coover Moth',
-      images: [Moth,Moth,Moth],
-      rating: 4,
-      numRatings: 10,
-      accessability: ['handicap', 'bus'],
-      description: 'The sculpture outside of coover, walk around it to see the moth. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis velit vitae felis sagittis, vitae vestibulum justo placerat. Proin et nibh id purus consequat interdum pharetra ut mi. ',
-      tags: ['Art', 'Outside'],
-      reviews: [
-        {
-          user: {
-            username: 'John Doe',
-            pic: Moth
-          },
-          title: 'Test Review',
-          body: 'Vestibulum dignissim ante ultricies, iaculis ipsum a, ullamcorper mi. Maecenas maximus varius augue et eleifend. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sed convallis mauris, sit amet varius purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum metus diam, commodo et cursus in.',
-          rating: 5
-        },
-        {
-          user: {
-            username: 'Jane Doe',
-            pic: Moth
-          },
-          title: 'Test Review2',
-          body: 'This place is ok...',
-          rating: 3
-        }
-      ]
-    })
-    */
   }
 
   fetchDataFromServer = async() => {
-    let response = await fetch('http://localhost:3004/moth');
+    let response = await fetch('http://proj309-tg-03.misc.iastate.edu:8080/reviews/get');
     // only proceed once promise is resolved
     let data = await response.json();
     // only proceed once second promise is resolved
-    //console.log(data);
+    let currPOI = 1;
+    let poiData = data.filter(review => {
+      return review.poi === currPOI;
+    })
+    let totalRatingScore = 0;
+    poiData.forEach(review => {
+      totalRatingScore += parseInt(review.rating)
+    })
+
+    console.log(FakeData.moth.tags);
+
+    this.setState({
+      id: currPOI,
+      reviews: poiData,
+      rating: totalRatingScore / poiData.length,
+      numRatings: poiData.length,
+      //=====Begin Fake Data=====
+      name: FakeData.moth.name,
+      images: FakeData.moth.images,
+      accessability: FakeData.moth.accessability,
+      description: FakeData.moth.description,
+      tags: FakeData.moth.tags
+    })
+    /*
     this.setState({
       id: data.id,
       name: data.name,
@@ -94,9 +85,15 @@ class POI extends React.Component {
       tages: data.tags,
       reviews: data.reviews
     })
+    */
   }
 
   getAccessibilityIcons = () => {
+    if(this.state.accessability === undefined) {
+      console.error("Problem getting accessibility icons");
+      return;
+    }
+
     let icons = [];
     this.state.accessability.map((accessabilityOption,i) => {
       switch (accessabilityOption) {
@@ -118,6 +115,11 @@ class POI extends React.Component {
   }
 
   getTags = () => {
+    if(this.state.tags === undefined) {
+      console.error("Problem getting tags");
+      return;
+    }
+
     return (
       this.state.tags.map((tagName,i) => {
         return (
@@ -131,6 +133,11 @@ class POI extends React.Component {
   }
 
   getReviews = () => {
+    if(this.state.reviews === undefined) {
+      console.error("Problem getting reviews");
+      return;
+    }
+
     return (
       this.state.reviews.map((item,i) => {
         return (
@@ -169,7 +176,7 @@ class POI extends React.Component {
   handleClick = (btn) => {
     switch (btn) {
       case 'Share':
-        console.log('Clicked Share Btn');
+        //console.log('Clicked Share Btn');
         this.setState({
           shareButtonClassName: 'poi__lower__button--pressed'
         }, () => {
@@ -178,7 +185,7 @@ class POI extends React.Component {
         this.openCloseShareScreen(true);
         break;
       case 'List':
-        console.log('Clicked List Btn');
+        //console.log('Clicked List Btn');
         this.setState({
           listButtonClassName: 'poi__lower__button--pressed'
         }, () => {
@@ -187,15 +194,18 @@ class POI extends React.Component {
         this.addToList();
         break;
       case 'Review':
-        console.log('Clicked Review Btn');
+        //console.log('Clicked Review Btn');
         this.setState({
           reviewButtonClassName: 'poi__lower__button--pressed'
         }, () => {
-          setTimeout(() => {this.setState({reviewButtonClassName: 'poi__lower__button'})}, 200);
+          setTimeout(() => {
+            this.setState({reviewButtonClassName: 'poi__lower__button'});
+            history.push(routes._REVIEW);
+          }, 200);
         })
         break;
       case 'Report':
-        console.log('Clicked Report Btn');
+        //console.log('Clicked Report Btn');
         this.setState({
           reportButtonClassName: 'poi__lower__button--pressed'
         }, () => {
