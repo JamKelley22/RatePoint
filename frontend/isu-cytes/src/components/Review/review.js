@@ -140,9 +140,9 @@ class Review extends React.Component {
                           <br/>
                           Body
                           <br/>
-                          <input type="text" required id="body" name="body" value={this.state.body}
-                                 onChange={this.BodyChange} autoComplete="off" maxLength="500" size="100"/>
-                          <br/>
+                          <textarea type="text" required id="body" name="body" value={this.state.body} cols="100"
+                                    rows="5" onChange={this.BodyChange} autoComplete="off" maxLength="500"/>
+                          <br/><br/>
                           <input type="submit" value="Submit Review"/>
                       </fieldset>
                   </form>
