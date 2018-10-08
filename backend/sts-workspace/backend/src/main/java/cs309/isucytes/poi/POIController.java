@@ -15,7 +15,7 @@ import cs309.isucytes.poi.POIRepository;
 
 
 @RestController
-@RequestMapping("/poi")
+@RequestMapping(path = "/pois")
 public class POIController {
 	
 	@Autowired
