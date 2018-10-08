@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,9 +28,9 @@ public class POIController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, path = "/new")
-	public @ResponseBody String addNewReview (POI poi) {
+	public @ResponseBody String addNewReview (@RequestBody POI poi) {
 		POIRepository.save(poi);
-		return "Saved";
+		return "You Saved " + poi.getName();
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/get")
