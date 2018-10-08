@@ -8,7 +8,7 @@ import {
 import Landing from './components/Landing/landing.js';
 
 import Home from './components/Home/home.js';
-import Map from './components/Map/map.js';
+import MapContainer from './components/Map/map.js';
 import Explore from './components/Explore/explore.js';
 import Friends from './components/Friends/friends.js';
 import Suggest from './components/Suggest/suggest.js';
@@ -33,7 +33,7 @@ class App extends Component {
             <Route exact path={routes._LANDING} component={() => <Landing/>} />
 
             <Route exact path={routes._HOME} component={() => <Home/>} />
-            <Route exact path={routes._MAP} component={() => <Map/>} />
+            <Route exact path={routes._MAP} component={() => <MapContainer/>} />
             <Route exact path={routes._EXPLORE} component={() => <Explore/>} />
             <Route exact path={routes._FRIENDS} component={() => <Friends/>} />
             <Route exact path={routes._SUGGEST} component={() => <Suggest/>} />
