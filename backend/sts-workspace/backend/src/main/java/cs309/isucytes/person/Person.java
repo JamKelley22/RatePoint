@@ -19,6 +19,7 @@ public class Person {
 	 * The person's username, also primary key for this example.
 	 */
 	@Id
+	@Column(length = 30)
 	private String username;
 
 	/**
