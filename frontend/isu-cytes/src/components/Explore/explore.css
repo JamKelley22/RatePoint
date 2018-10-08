@@ -1,0 +1,34 @@
+#explorePage {
+  background-color: #4F5946;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.poiCard {
+  margin: 50px;
+  max-width: 300px;
+  max-height: 250px;
+  overflow: hidden;
+  background-color: #B1C79E;
+  color: #4F5946;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  box-shadow: 3px 3px 5px black;
+}
+.poiCard img {
+  width: 200px;
+  padding: 5px;
+}
+.poiCard:hover {
+  box-shadow: 1px 1px 5px black;
+  transform: translate(2px,2px);
+}
+.poiCard:active {
+  box-shadow: none;
+  transform: translate(3px,3px);
+}
+
+#exploreComponent {
+  height: 100%;
+}
