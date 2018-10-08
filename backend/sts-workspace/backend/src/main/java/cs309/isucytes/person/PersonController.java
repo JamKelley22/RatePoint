@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,7 +25,7 @@ public class PersonController {
 	 */
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST, path = "person/new")
-	public String newPerson(Person person) {
+	public String newPerson(@RequestBody Person person) {
 		personRepository.save(person);
 		return "Person " + person.getName() + " saved.";
 	}
