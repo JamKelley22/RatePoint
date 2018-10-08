@@ -13,11 +13,6 @@ public class ReviewController {
 	@Autowired
     ReviewRepository reviewRepository;
 
-	@RequestMapping("/test")
-	public String sayHi() {
-		return "TEST";
-	}
-
 	@RequestMapping(method = RequestMethod.POST, path = "/reviews/new")
 	public @ResponseBody String addNewReview (@RequestParam Integer poi, @RequestParam Integer rating, 
 			@RequestParam String title, @RequestParam String body) {
