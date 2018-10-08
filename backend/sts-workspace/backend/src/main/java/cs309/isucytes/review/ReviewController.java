@@ -1,6 +1,7 @@
 package cs309.isucytes.review;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,16 +15,8 @@ public class ReviewController {
     ReviewRepository reviewRepository;
 
 	@RequestMapping(method = RequestMethod.POST, path = "/reviews/new")
-	public @ResponseBody String addNewReview (@RequestParam Integer poi, @RequestParam Integer rating, 
-			@RequestParam String title, @RequestParam String body) {
-		// @ResponseBody means the returned String is the response, not a view name
-		// @RequestParam means it is a parameter from the GET or POST request
-		Review r = new Review();
-		r.setPoi(poi);
-		r.setRating(rating);
-		r.setTitle(title);
-		r.setBody(body);
-		reviewRepository.save(r);
+	public @ResponseBody String addNewReview (@RequestBody Review review) {
+		reviewRepository.save(review);
 		return "Saved";
 	}
 	
