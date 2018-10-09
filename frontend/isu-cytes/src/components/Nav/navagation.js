@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 
-import * as routes from '../../constants/routes.js'
+import { routes } from '../../history.js'
 
 import './navagation.css'
 

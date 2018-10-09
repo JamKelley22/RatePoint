@@ -5,7 +5,6 @@ import {
   Switch
 } from 'react-router-dom';
 
-
 import { Landing, Home, Map, Explore, Friends, Suggest, Account, Review, POI, Error404 } from './components'
 
 import { history } from './history.js';
