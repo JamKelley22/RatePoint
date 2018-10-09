@@ -6,6 +6,7 @@
     "cross-env": "^5.2.0",
     "google-maps-react": "^2.0.2",
     "history": "^4.7.2",
+    "node-sass": "^4.9.3",
     "react": "^16.5.2",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.5.2",
