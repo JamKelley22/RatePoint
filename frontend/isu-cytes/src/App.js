@@ -13,7 +13,8 @@ import Explore from './components/Explore/explore.js';
 import Friends from './components/Friends/friends.js';
 import Suggest from './components/Suggest/suggest.js';
 import Account from './components/Account/account.js';
-
+import Login from './components/Login/login.js';
+import CreateAccount from './components/CreateAccount/createAccount.js';
 import Review from './components/Review/review.js';
 import POI from './components/POI/poi.js';
 import Error404 from './components/Error/error404.js';
@@ -38,7 +39,8 @@ class App extends Component {
             <Route exact path={routes._FRIENDS} component={() => <Friends/>} />
             <Route exact path={routes._SUGGEST} component={() => <Suggest/>} />
             <Route exact path={routes._ACCOUNT} component={() => <Account/>} />
-
+            <Route exact path={routes._LOGIN} component={() => <Login/>} />
+            <Route exact path={routes._CREATEACCOUNT} component={() => <CreateAccount/>} />
             <Route exact path={routes._REVIEW} component={() => <Review/>} />
             <Route exact path={routes._POI} component={() => <POI/>} />
             <Route component={() => <Error404/>} />

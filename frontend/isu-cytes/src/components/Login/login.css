@@ -1,0 +1,19 @@
+#containerLogin {
+    background-color: #99AE8D;
+    height: 100%;
+    width: 100%;
+}
+
+#formLogin {
+    background-color: #777F70;
+    height: 30%;
+    width: 30%;
+    margin: auto;
+    margin-top: 10%;
+    text-align: center;
+    border-radius: 30%;
+}
+
+#loginHeader {
+    font-size: x-large;
+}
