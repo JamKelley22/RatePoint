@@ -20,7 +20,7 @@ import Review from './review.js'
 
 import { FakeData } from './fakeData.js'
 
-import './poi.css'
+import './poi.scss'
 
 class POI extends React.Component {
   state = {

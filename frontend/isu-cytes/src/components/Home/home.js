@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Navagation } from '../index.js'
 
-import './home.css'
+import './home.scss'
 
 class Home extends React.Component {
   render () {

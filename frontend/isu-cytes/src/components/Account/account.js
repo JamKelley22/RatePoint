@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Navagation } from '../index.js'
 
-import './account.css'
+import './account.scss'
 
 class Account extends React.Component {
   render () {

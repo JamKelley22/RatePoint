@@ -66,8 +66,8 @@ const Button = (props) => {
 export default Button;
 
 Button.propTypes = {
-  name: PropTypes.string,
-  onClick: PropTypes.func,
+  name: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   square: PropTypes.bool
 };

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Navagation } from '../index.js'
 
-import './error404.css'
+import './error404.scss'
 
 class Error404 extends React.Component {
   render () {

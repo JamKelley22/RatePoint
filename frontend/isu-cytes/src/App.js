@@ -6,19 +6,23 @@ import {
 } from 'react-router-dom';
 
 import { Landing, Home, Map, Explore, Friends, Suggest, Account, Review, POI, Error404 } from './components'
-import { Button } from './util'
 import { history } from './history.js';
 
 import * as routes from './constants/routes';
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStroopwafel } from '@fortawesome/free-solid-svg-icons'
+
 import './App.css';
+
+library.add(faStroopwafel);
 
 class App extends Component {
   render() {
     return (
       <Router history={history}>
         <div className="App">
-          <Button/>
           <Switch>
             <Route exact path={routes._LANDING} component={() => <Landing/>} />
 

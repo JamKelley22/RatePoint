@@ -3,7 +3,7 @@ import React from 'react'
 import { Navagation } from '../index.js'
 import { history, routes } from '../../history.js'
 
-import './review.css'
+import './review.scss'
 
 class Review extends React.Component {
 

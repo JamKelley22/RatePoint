@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import { routes } from '../../history.js'
 
-import './navagation.css'
+import './navagation.scss'
 
 class Navigation extends React.Component {
 
