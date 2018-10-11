@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './poi.css'
+import './poi.scss'
 
 class POICarousel extends React.Component {
   state = {

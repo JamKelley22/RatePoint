@@ -1,10 +1,10 @@
 import React from 'react'
 
-import Navagation from '../Nav/navagation.js'
+import { Navagation } from '../index.js'
 import POICard from './poiCard.js'
 import Moth from '../../images/moth.jpg'
 
-import './explore.css'
+import './explore.scss'
 
 class Explore extends React.Component {
   render () {

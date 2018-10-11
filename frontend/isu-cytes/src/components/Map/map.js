@@ -1,9 +1,9 @@
 import React from 'react'
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
-import Navagation from '../Nav/navagation.js'
+import { Navagation } from '../index.js'
 
-import './map.css'
+import './map.scss'
 
 class MapContainer extends React.Component {
   render () {

@@ -1,8 +1,8 @@
 import React from 'react'
 
-import Navagation from '../Nav/navagation.js'
+import { Navagation } from '../index.js'
 
-import './suggest.css'
+import './suggest.scss'
 
 class Suggest extends React.Component {
   render () {

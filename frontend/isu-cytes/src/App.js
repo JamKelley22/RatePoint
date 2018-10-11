@@ -19,11 +19,18 @@ import Review from './components/Review/review.js';
 import POI from './components/POI/poi.js';
 import Error404 from './components/Error/error404.js';
 
+import { Landing, Home, Map, Explore, Friends, Suggest, Account, Review, POI, Error404 } from './components'
 import { history } from './history.js';
 
 import * as routes from './constants/routes';
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStroopwafel } from '@fortawesome/free-solid-svg-icons'
+
 import './App.css';
+
+library.add(faStroopwafel);
 
 class App extends Component {
   render() {
@@ -34,7 +41,7 @@ class App extends Component {
             <Route exact path={routes._LANDING} component={() => <Landing/>} />
 
             <Route exact path={routes._HOME} component={() => <Home/>} />
-            <Route exact path={routes._MAP} component={() => <MapContainer/>} />
+            <Route exact path={routes._MAP} component={() => <Map/>} />
             <Route exact path={routes._EXPLORE} component={() => <Explore/>} />
             <Route exact path={routes._FRIENDS} component={() => <Friends/>} />
             <Route exact path={routes._SUGGEST} component={() => <Suggest/>} />

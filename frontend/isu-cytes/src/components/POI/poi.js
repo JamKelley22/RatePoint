@@ -11,7 +11,8 @@ import {
 
 import { history, routes } from '../../history.js'
 
-import Navagation from '../Nav/navagation.js'
+import { Navagation } from '../index.js'
+
 import POICarousel from './poiCarousel.js'
 import Rating from './rating.js'
 import Tag from './tag.js'
@@ -19,7 +20,7 @@ import Review from './review.js'
 
 import { FakeData } from './fakeData.js'
 
-import './poi.css'
+import './poi.scss'
 
 class POI extends React.Component {
   state = {

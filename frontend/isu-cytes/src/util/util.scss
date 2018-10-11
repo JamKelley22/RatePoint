@@ -1,0 +1,163 @@
+@import '../colors';
+@import 'react-datetime';
+
+$borderRadiusSmall: 12px;
+$borderRadiusMedium: 15px;
+$borderRadiusLarge: 25px;
+
+$clickDistance: 3px;
+
+button, input {
+  border: none;
+  outline: none;
+}
+/*=============Button=============*/
+.button {
+  background-color: $brown;
+  color: $blue;
+  max-width: 100%;
+  margin: 10px;
+
+  box-shadow: $clickDistance $clickDistance 0px darken( $brown, 10% );
+}
+.buttonSmall {
+  width: 100px;
+  height: 25px;
+  font-size: 15px;
+  border-radius: 0% $borderRadiusSmall 0% $borderRadiusSmall;
+}
+.buttonMedium {
+  width: 120px;
+  height: 30px;
+  font-size: 18px;
+  border-radius: 0% $borderRadiusMedium 0% $borderRadiusMedium;
+}
+.buttonLarge {
+  width: 140px;
+  height: 50px;
+  font-size: 25px;
+  border-radius: 0% $borderRadiusLarge 0% $borderRadiusLarge;
+}
+.square {
+  width: 30px;
+  height: 30px;
+}
+.button:hover {
+  transform: translateY($clickDistance * .4) translateX($clickDistance * .4);
+  box-shadow: $clickDistance * .6 $clickDistance * .6 0px darken( $brown, 10% );
+  background-color: lighten($brown, 5%);
+}
+.button:active {
+  transform: translateY($clickDistance) translateX($clickDistance);
+  box-shadow: none;
+}
+.buttonText svg{
+  padding: 0px;
+}
+/*================================*/
+
+$formBorderRadius: 50px;
+$inputBorderRadius: 8px;
+$inputWidth: 250px;
+$inputHeight: 30px;
+
+/*=============Form===============*/
+.form__container {
+  background-color: $tan;
+  width: 100%;
+  height: 100%;
+  border-radius: 0% $formBorderRadius 0% $formBorderRadius;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+
+  min-width: 550px;
+  overflow: visible;
+}
+.form__container--hidden {
+  display: none;
+}
+.singleForm {
+
+}
+.modalForm {
+  position: fixed;
+  z-index: 10;
+  width: 80%;
+  height: 80%;
+  box-shadow: 0px 0px 1000px black;
+
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.form {
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.form__top {
+  display: flex;
+  justify-content: space-around;
+}
+.form__top__left {
+  display: flex;
+  flex-direction: column;
+}
+.form__top__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.form__bottom {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.formIcon {
+  color: $brown;
+  font-size: 18em;
+  font-weight: bold;
+}
+.formIconFlip {
+  -moz-transform: scale(-1, 1);
+  -webkit-transform: scale(-1, 1);
+  -o-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+.formTitle {
+  color: $brown;
+  font-size: 3em;
+  font-weight: bold;
+  padding-bottom: 50px;
+}
+.component__input__label {
+  color: $brown;
+  margin: 5px;
+  font-size: 1.3em;
+}
+.component__input, .component__datetime input {
+  border-radius: 0% $inputBorderRadius 0% $inputBorderRadius;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+
+  width: $inputWidth;
+  height: $inputHeight;
+}
+.component__input::placeholder, .component__datetime input::placeholder {
+  color: lighten($brown,40%);
+}
+.component__input[type=text], .component__input[type=password], .component__datetime input[type=text] {
+  color: $brown;
+  padding-left: 10px;
+}
+.component__input--invalid[type=text] {
+  color: red;
+}
+
+.form__note {
+  font-size: 20px;
+  font-weight: bold;
+  align-self: center;
+  color: $brown;
+}

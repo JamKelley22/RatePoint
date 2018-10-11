@@ -1,8 +1,8 @@
 import React from 'react'
 
-import Navagation from '../Nav/navagation.js'
+import { Navagation } from '../index.js'
 
-import './friends.css'
+import './friends.scss'
 
 class Friends extends React.Component {
   render () {

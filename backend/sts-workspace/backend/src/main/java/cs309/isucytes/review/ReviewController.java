@@ -1,9 +1,12 @@
 package cs309.isucytes.review;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,28 +16,21 @@ public class ReviewController {
 	@Autowired
     ReviewRepository reviewRepository;
 
-	@RequestMapping("/test")
-	public String sayHi() {
-		return "TEST";
-	}
-
 	@RequestMapping(method = RequestMethod.POST, path = "/reviews/new")
-	public @ResponseBody String addNewReview (@RequestParam Integer poi, @RequestParam Integer rating, 
-			@RequestParam String title, @RequestParam String body) {
-		// @ResponseBody means the returned String is the response, not a view name
-		// @RequestParam means it is a parameter from the GET or POST request
-		Review r = new Review();
-		r.setPoi(poi);
-		r.setRating(rating);
-		r.setTitle(title);
-		r.setBody(body);
-		reviewRepository.save(r);
+	public @ResponseBody String addNewReview (@RequestBody Review review) {
+		reviewRepository.save(review);
 		return "Saved";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/reviews/get")
 	public @ResponseBody Iterable<Review> getAllReviews(){
 		return reviewRepository.findAll();
+	}
+	
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.GET, path = "reviews/get/{id}")
+	public Optional<Review> getReviewByID(@PathVariable("id") int id){
+		return reviewRepository.findById(id);
 	}
 	 
 }
