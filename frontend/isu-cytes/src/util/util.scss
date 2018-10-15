@@ -13,12 +13,12 @@ button, input {
 }
 /*=============Button=============*/
 .button {
-  background-color: $brown;
-  color: $blue;
+  background-color: $secondary_color;
+  color: $base_color;
   max-width: 100%;
   margin: 10px;
 
-  box-shadow: $clickDistance $clickDistance 0px darken( $brown, 10% );
+  box-shadow: $clickDistance $clickDistance 0px darken( $secondary_color, 10% );
 }
 .buttonSmall {
   width: 100px;
@@ -44,8 +44,8 @@ button, input {
 }
 .button:hover {
   transform: translateY($clickDistance * .4) translateX($clickDistance * .4);
-  box-shadow: $clickDistance * .6 $clickDistance * .6 0px darken( $brown, 10% );
-  background-color: lighten($brown, 5%);
+  box-shadow: $clickDistance * .6 $clickDistance * .6 0px darken( $secondary_color, 10% );
+  background-color: lighten($secondary_color, 5%);
 }
 .button:active {
   transform: translateY($clickDistance) translateX($clickDistance);
@@ -63,7 +63,7 @@ $inputHeight: 30px;
 
 /*=============Form===============*/
 .form__container {
-  background-color: $tan;
+  background-color: $accent_color;
   width: 100%;
   height: 100%;
   border-radius: 0% $formBorderRadius 0% $formBorderRadius;
@@ -115,7 +115,7 @@ $inputHeight: 30px;
   align-items: flex-end;
 }
 .formIcon {
-  color: $brown;
+  color: $secondary_color;
   font-size: 18em;
   font-weight: bold;
 }
@@ -127,13 +127,13 @@ $inputHeight: 30px;
   transform: scale(-1, 1);
 }
 .formTitle {
-  color: $brown;
+  color: $secondary_color;
   font-size: 3em;
   font-weight: bold;
   padding-bottom: 50px;
 }
 .component__input__label {
-  color: $brown;
+  color: $secondary_color;
   margin: 5px;
   font-size: 1.3em;
 }
@@ -145,10 +145,10 @@ $inputHeight: 30px;
   height: $inputHeight;
 }
 .component__input::placeholder, .component__datetime input::placeholder {
-  color: lighten($brown,40%);
+  color: lighten($secondary_color,40%);
 }
 .component__input[type=text], .component__input[type=password], .component__datetime input[type=text] {
-  color: $brown;
+  color: $secondary_color;
   padding-left: 10px;
 }
 .component__input--invalid[type=text] {
@@ -159,5 +159,5 @@ $inputHeight: 30px;
   font-size: 20px;
   font-weight: bold;
   align-self: center;
-  color: $brown;
+  color: $secondary_color;
 }
