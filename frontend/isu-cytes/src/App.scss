@@ -1,0 +1,27 @@
+@import 'colors';
+@import 'mediaQuery';
+
+.App {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  @include mobile {
+    background-color: green;
+    overflow: auto;
+  }
+
+  @include tablet {
+    background-color: red;
+    overflow: auto;
+  }
+
+  @include laptop {
+    //background-color: blue;
+  }
+
+  @include desktop {
+    background-color: yellow;
+  }
+
+}

@@ -1,37 +1,37 @@
 import React from 'react'
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 import { Navagation } from '../index.js'
+import MapContainer from './mapContainer.js'
 
 import './map.scss'
 
-class MapContainer extends React.Component {
-  render () {
-    const style = {
-      maxWidth: '200px',
-      maxHeight: '200px'
-    }
-    return (
-      <div>
-        <Navagation/>
-        <div className='mapHolder'>
-          <Map
-            google={this.props.google}
-            zoom={14}
-            style={style}
-            initialCenter={{
-              lat: 42.026770,
-              lng: -93.617055
-            }}
-          >
-        </Map>
-        </div>
+class Map extends React.Component {
+  state = {
+    rangeSliderValue: 4
+  }
 
+  handleSliderChange = (e) => {
+    e.preventDefault();
+    this.setState({
+      rangeSliderValue: e.target.value
+    })
+  }
+
+  render () {
+    return (
+      <div className = 'map'>
+        <Navagation/>
+        <div className='mapContainer'>
+          <span>Filter by: </span>
+          <span>Range:</span>
+          <input type="range" min="1" max="5" value={this.state.rangeSliderValue} onChange={this.handleSliderChange}/>
+          <MapContainer
+            ratingFilterNum={this.state.rangeSliderValue}
+          />
+        </div>
       </div>
     );
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: ('AIzaSyC5q54v6n33maflm2zG1WjVrD43AOYa6YM')
-})(Map);
+export default Map;
