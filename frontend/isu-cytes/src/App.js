@@ -8,7 +8,7 @@ import {
 import Landing from './components/Landing/landing.js';
 
 import Home from './components/Home/home.js';
-import MapContainer from './components/Map/map.js';
+import Map from './components/Map/map.js';
 import Explore from './components/Explore/explore.js';
 import Friends from './components/Friends/friends.js';
 import Suggest from './components/Suggest/suggest.js';
@@ -19,7 +19,7 @@ import Review from './components/Review/review.js';
 import POI from './components/POI/poi.js';
 import Error404 from './components/Error/error404.js';
 
-import { Landing, Home, Map, Explore, Friends, Suggest, Account, Review, POI, Error404 } from './components'
+//import { Landing, Home, Map, Explore, Friends, Suggest, Account, Review, POI, Error404 } from './components'
 import { history } from './history.js';
 
 import * as routes from './constants/routes';

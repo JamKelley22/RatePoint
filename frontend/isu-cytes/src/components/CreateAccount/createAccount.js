@@ -15,9 +15,43 @@ class CreateAccount extends React.Component {
         };
     }
 
+    validatePassword = (pass, passCon) => {
+        if(pass!==passCon){
+            alert("passwords not the same");
+            return false;
+        }
+        if(pass.length<8){
+            alert("password must be atleast 8 characters");
+            return false;
+        }
+        let symbol = /[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(pass);
+        if(!symbol){
+            alert("password must include at least one symbol");
+            return false;
+        }
+        let symbol2 = /abcdefghijklmnopqrstuvwxyz/g.test(pass);
+        if(!symbol2){
+            alert("password must include at least one lower case character");
+            return false;
+        }
+        let symbol3 = /ABCDEFGHIJKLMNOPQRSTUVWXYZ/g.test(pass);
+        if(!symbol3){
+            alert("password must include at least one upper case character");
+            return false;
+        }
+        return true;
+    };
+
     createRequest = (e) => {
         e.preventDefault();
         const formdata = new FormData(e.target);
+        let pass1 = document.getElementById('pass1').value;
+        let pass2 = document.getElementById('pass2').value;
+        if(!this.validatePassword(pass1,pass2)){
+            return;
+        }
+        //encrypt
+        //fetch
         document.getElementById('pass1').value='';
         document.getElementById('pass2').value='';
         this.setState({username:'',email:''});
