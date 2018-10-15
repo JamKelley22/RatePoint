@@ -3,7 +3,7 @@ import React from 'react'
 import Navagation from '../Nav/navagation.js'
 import { history, routes } from '../../history.js'
 
-import './createAccount.css'
+import './createAccount.scss'
 
 class CreateAccount extends React.Component {
 
