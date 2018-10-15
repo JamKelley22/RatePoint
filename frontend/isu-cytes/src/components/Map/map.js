@@ -7,18 +7,13 @@ import './map.scss'
 
 class MapContainer extends React.Component {
   render () {
-    const style = {
-      maxWidth: '200px',
-      maxHeight: '200px'
-    }
     return (
       <div>
-        <Navagation/>
+        
         <div className='mapHolder'>
           <Map
             google={this.props.google}
             zoom={14}
-            style={style}
             initialCenter={{
               lat: 42.026770,
               lng: -93.617055

@@ -9,6 +9,22 @@ import Navagation from './Nav/navagation.js'
 import POI from './POI/poi.js'
 import Review from './Review/review.js'
 import Suggest from './Suggest/suggest.js'
+import Login from './Login/login.js'
+import CreateAccount from './CreateAccount/createAccount.js'
 
 
-export { Account, Error404, Explore, Friends, Home, Landing, Map, Navagation, POI, Review, Suggest }
+export {
+  Account,
+  Error404,
+   Explore,
+   Friends,
+   Home,
+   Landing,
+   Map,
+   Navagation,
+   POI,
+   Review,
+   Suggest,
+   Login,
+   CreateAccount
+ }
