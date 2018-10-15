@@ -1,0 +1,29 @@
+#containerCreate {
+    background-color: #99AE8D;
+    height: 100%;
+    width: 100%;
+}
+
+#formCreate {
+    background-color: #777F70;
+    height: 40%;
+    width: 30%;
+    margin: auto;
+    margin-top: 10%;
+    text-align: center;
+    border-radius: 30%;
+}
+
+#positionForm {
+    height: 100%;
+    text-align: right;
+    width: 75%;
+}
+
+#createHeader {
+    font-size: x-large;
+}
+
+#createSubmit {
+    margin-right: 20%;
+}
