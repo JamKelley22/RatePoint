@@ -23,7 +23,6 @@ import { history } from './history.js';
 import * as routes from './constants/routes';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp, faTrophy, faClock, faCar } from '@fortawesome/free-solid-svg-icons'
 
 import './App.scss';

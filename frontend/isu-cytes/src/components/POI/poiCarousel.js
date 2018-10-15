@@ -11,7 +11,7 @@ class POICarousel extends React.Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    if(nextProps.images == undefined) {
+    if(nextProps.images === undefined) {
       console.error("Problem loading images");
       return;
     }

@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { routes } from '../../history.js'
+import { history, routes } from '../../history.js'
 import { Button } from '../../util'
 import Feature from './feature.js'
 
@@ -50,11 +50,11 @@ class Landing extends React.Component {
             <div className='buttons'>
               <Button
                 name='Sign Up'
-                onClick={() => console.log("Sign Up")}
+                onClick={() => history.push(routes._CREATEACCOUNT)}
               />
               <Button
                 name='Log In'
-                onClick={() => console.log("Log In")}
+                onClick={() => history.push(routes._LOGIN)}
               />
             </div>
           </div>
