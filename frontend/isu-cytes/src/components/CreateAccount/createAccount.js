@@ -19,56 +19,57 @@ class CreateAccount extends React.Component {
     }
 
     validatePassword = (pass, passCon) => {
-        if(pass!==passCon){
-            alert("passwords not the same");
-            return false;
+        if (pass !== passCon) {
+            this.setState({
+                error: 'Passwords do not match'
+            });
+            return true;
         }
-        if(pass.length<8){
-            alert("password must be atleast 8 characters");
-            return false;
+        if (pass.length < 8) {
+            this.setState({
+                error: 'password must be atleast 8 characters'
+            });
+            return true;
         }
         let symbol = /[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(pass);
-        if(!symbol){
-            alert("password must include at least one symbol");
-            return false;
+        if (!symbol) {
+            this.setState({
+                error: 'password must include at least one symbol'
+            });
+            return true;
         }
         let symbol2 = /abcdefghijklmnopqrstuvwxyz/g.test(pass);
-        if(!symbol2){
-            alert("password must include at least one lower case character");
-            return false;
+        if (!symbol2) {
+            this.setState({
+                error: 'password must include at least one lower case character'
+            });
+            return true;
         }
         let symbol3 = /ABCDEFGHIJKLMNOPQRSTUVWXYZ/g.test(pass);
-        if(!symbol3){
-            alert("password must include at least one upper case character");
-            return false;
+        if (!symbol3) {
+            this.setState({
+                error: 'password must include at least one upper case character'
+            });
+            return true;
         }
-        return true;
+        this.setState({
+            error: null
+        });
+        return false;
     };
 
-    /*createRequest = (e) => {
-        e.preventDefault();
-        const formdata = new FormData(e.target);
-        let pass1 = document.getElementById('pass1').value;
-        let pass2 = document.getElementById('pass2').value;
-        if(!this.validatePassword(pass1,pass2)){
-            return;
-        }
-        //encrypt
-        //fetch
-        document.getElementById('pass1').value='';
-        document.getElementById('pass2').value='';
-        this.setState({username:'',email:''});*/
     createRequest = async(e) => {
         e.preventDefault();
-        //const formdata = new FormData(e.target);
-        //Not recomended
-        //document.getElementById('pass1').value='';
-        //document.getElementById('pass2').value='';
-        if(this.checkError()) {
+        if(this.validatePassword(this.state.pass1,this.state.pass2)){
+            console.error("Form Invalid");
+            //Some error in form
+            return;
+        }
+        /*if(this.checkError()) {
           console.error("Form Invalid");
           //Some error in form
           return;
-        }
+        }*/
         console.log("no error");
         console.log("Username: " + this.state.username);
         console.log("Email: " + this.state.email);
@@ -117,7 +118,7 @@ class CreateAccount extends React.Component {
       //Check email valid format
 
       //Check username for foul language
-    }
+    };
 
     /*
     Use in future for forms

@@ -11,19 +11,24 @@ class Login extends React.Component {
         super(props);
         this.state = {
             username: '',
+            pass1: ''
         };
     }
 
     loginRequest = (e) => {
         e.preventDefault();
         const formdata = new FormData(e.target);
-        document.getElementById('pass').value='';
-        this.setState({username:''});
+
+        this.setState({username:'',pass1:''});
     };
 
     usernameChange = (e) => {
         this.setState({ username: e.target.value });
     };
+
+    pass1Change = (e) => {
+        this.setState({ pass1: e.target.value });
+    }
 
     render(){
         return(
@@ -39,7 +44,8 @@ class Login extends React.Component {
                                    onChange={this.usernameChange} required/>
                             <br/><br/>
                             <b>password:</b>
-                            <input type="password" maxLength="32" autoComplete="off" id="pass" required/>
+                            <input type="password" maxLength="32" autoComplete="off" id="pass1" required
+                                   onChange={this.pass1Change} onBlur={this.checkError}/>
                             <br/><br/>
                             <input type="submit" value="Login"/>
                         </form>
