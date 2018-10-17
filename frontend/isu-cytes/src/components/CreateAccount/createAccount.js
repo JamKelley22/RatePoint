@@ -56,7 +56,8 @@ class CreateAccount extends React.Component {
         this.setState({
             error: null
         });
-        return false;
+        //Check email valid format
+        //Check username for foul language
     };
 
     createRequest = async(e) => {
@@ -102,28 +103,6 @@ class CreateAccount extends React.Component {
         //console.log(data);
 
         this.setState({username:'',email:'', pass1:'', pass2:''});
-    };
-
-    checkError = () => {
-      //No empty fields
-
-      //Compare Passwords
-      if(this.state.pass1 !== this.state.pass2) {
-        this.setState({
-          error: 'Passwords do not match'
-        })
-        return true;
-      }
-      else {
-        this.setState({
-          error: null
-        })
-        return false;
-      }
-
-      //Check email valid format
-
-      //Check username for foul language
     };
 
     /*

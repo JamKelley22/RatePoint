@@ -15,10 +15,22 @@ class Login extends React.Component {
         };
     }
 
-    loginRequest = (e) => {
+    loginRequest = async(e) => {
         e.preventDefault();
         const formdata = new FormData(e.target);
-
+        let body = JSON.stringify({
+            username: this.state.username,
+            password: this.state.pass1,
+        });
+        let response = await fetch('http://proj309-tg-03.misc.iastate.edu:8080/people/validate', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: body
+        });
+        console.log(response);
         this.setState({username:'',pass1:''});
     };
 
@@ -28,7 +40,7 @@ class Login extends React.Component {
 
     pass1Change = (e) => {
         this.setState({ pass1: e.target.value });
-    }
+    };
 
     render(){
         return(
