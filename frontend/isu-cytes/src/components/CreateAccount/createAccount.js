@@ -1,4 +1,5 @@
 import React from 'react'
+//import bcrypt from 'bcrypt'
 
 import Navagation from '../Nav/navagation.js'
 import { history, routes } from '../../history.js'
@@ -34,6 +35,17 @@ class CreateAccount extends React.Component {
         console.log("Email: " + this.state.email);
         console.log("Password: " + this.state.pass1);
 
+        /*bcrypt.hash(this.state.pass1, 10,(err, hash) => {
+          console.log(hash);
+        })*/
+        let body = JSON.stringify({
+          username: this.state.username,
+          email: this.state.email,
+          name: this.state.username,
+          password: this.state.pass1,
+          biography: ''
+        });
+        console.log(body);
         //Make post request
         let response = await fetch('http://proj309-tg-03.misc.iastate.edu:8080/people/new', {
           method: 'POST',
@@ -41,13 +53,7 @@ class CreateAccount extends React.Component {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            'username': "this.state.username",
-            'email': "this.state.email",
-            'name': "this.state.username",
-            'password': "this.state.pass1",
-            'biography': 'Bio'
-          })
+          body: body
         });
         console.log(response);
         //const data = await response.json();

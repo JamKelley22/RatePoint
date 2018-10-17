@@ -1,5 +1,7 @@
+@import '../../mediaQuery';
+
 #containerCreate {
-    background-color: #99AE8D;
+    //background-color: #99AE8D;
     height: 100%;
     width: 100%;
 }
@@ -26,4 +28,20 @@
 
 #createSubmit {
     margin-right: 20%;
+}
+
+@include mobile {
+  //background-color: green;
+}
+
+@include tablet {
+  //background-color: red;
+}
+
+@include laptop {
+  //background-color: blue;
+}
+
+@include desktop {
+  //background-color: yellow;
 }

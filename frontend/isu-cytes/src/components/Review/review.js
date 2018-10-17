@@ -31,33 +31,13 @@ class Review extends React.Component {
             rating: this.state.rating,
             body: formdata.get('body')
         };
+        console.log(data);
 
-        //console.log(JSON.stringify(data));
-        /*
-        let rawResponse;
-        try {
-          rawResponse = await fetch('http://proj309-tg-03.misc.iastate.edu:8080/reviews/new', {
-              method: 'POST',
-              headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(data)
-          });
-        } catch (e) {
-          console.error(e);
-        }
-
-        let content = await rawResponse.json();
-
-        console.log(content);
-        */
-        let url = `http://proj309-tg-03.misc.iastate.edu:8080/reviews/new?poi=${data.poi}&rating=${data.rating}&title=${data.title}&body=${data.body}`;
+        let url = 'http://proj309-tg-03.misc.iastate.edu:8080/reviews/new';
         let rawResponse;
         try {
           rawResponse = await fetch(url, {
               method: 'POST',
-              mode: 'no-cors',
               headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json'
