@@ -9,3 +9,6 @@ export const _EXPLORE = '/explore';
 export const _FRIENDS = '/friends';
 export const _SUGGEST = '/suggest';
 export const _ACCOUNT = '/account';
+
+
+export const _SIGNUP = '/signup';
