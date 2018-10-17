@@ -17,7 +17,6 @@ class Login extends React.Component {
 
     loginRequest = async(e) => {
         e.preventDefault();
-        const formdata = new FormData(e.target);
         let body = JSON.stringify({
             username: this.state.username,
             password: this.state.pass1,
@@ -53,10 +52,10 @@ class Login extends React.Component {
                             <br/>
                             <b>username:</b>
                             <input maxLength="20" autoComplete="off" value={this.state.username}
-                                   onChange={this.usernameChange} required/>
+                                   onChange={this.usernameChange} />
                             <br/><br/>
                             <b>password:</b>
-                            <input type="password" maxLength="32" autoComplete="off" id="pass1" required
+                            <input type="password" maxLength="32" autoComplete="off" id="pass1"
                                    onChange={this.pass1Change} onBlur={this.checkError}/>
                             <br/><br/>
                             <input type="submit" value="Login"/>

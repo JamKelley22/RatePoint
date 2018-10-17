@@ -105,6 +105,26 @@ class CreateAccount extends React.Component {
         this.setState({username:'',email:'', pass1:'', pass2:''});
     };
 
+    checkError = () => {
+      //No empty fields
+
+      //Compare Passwords
+      if(this.state.pass1 !== this.state.pass2) {
+        this.setState({
+          error: 'Passwords do not match'
+        })
+        return true;
+      }
+      else {
+        this.setState({
+          error: null
+        })
+        return false;
+      }
+      //Check email valid format
+      //Check username for foul language
+    };
+
     /*
     Use in future for forms
     onElementChange = (e) => {
@@ -142,7 +162,7 @@ class CreateAccount extends React.Component {
                             <form onSubmit={(e) => this.createRequest(e)} noValidate autoComplete="off">
                                 <br/>
                                 <b>email:</b>
-                                <input maxLength="32" autoComplete="off" value={this.state.email}
+                                <input type="email" maxLength="32" autoComplete="off" value={this.state.email}
                                        onChange={this.emailChange} required onBlur={this.checkError}/>
                                 <br/><br/>
                                 <b>username:</b>
@@ -150,11 +170,11 @@ class CreateAccount extends React.Component {
                                        onChange={this.usernameChange} required onBlur={this.checkError}/>
                                 <br/><br/>
                                 <b>password:</b>
-                                <input type="password" maxLength="32" autoComplete="off" id="pass1" required
+                                <input type="password" maxLength="32" autoComplete="off" id="pass1"
                                   onChange={this.pass1Change} onBlur={this.checkError}/>
                                 <br/><br/>
                                 <b>confirm password:</b>
-                                <input type="password" maxLength="32" autoComplete="off" id="pass2" required
+                                <input type="password" maxLength="32" autoComplete="off" id="pass2"
                                   onChange={this.pass2Change} onBlur={this.checkError}/>
                                 <br/><br/>
                                 <input type="submit" value="Submit" id="createSubmit"/>
