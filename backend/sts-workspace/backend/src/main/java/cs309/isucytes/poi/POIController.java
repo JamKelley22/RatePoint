@@ -21,20 +21,22 @@ public class POIController {
 	@Autowired
     POIRepository POIRepository;
 	
-	
+	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, path = "/get/{id}")
-	public Optional<POI> getIdByValue(@PathVariable("id") Integer id) {
+	public Optional<POI> getPOIByID(@PathVariable("id") Integer id) {
 		return POIRepository.findById(id);
 	}
 	
+	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST, path = "/new")
-	public @ResponseBody String addNewReview (@RequestBody POI poi) {
+	public String addNewPOI (@RequestBody POI poi) {
 		POIRepository.save(poi);
 		return "You Saved " + poi.getName();
 	}
 	
+	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, path = "/get")
-	public @ResponseBody Iterable<POI> getAllPOIs(){
+	public Iterable<POI> getAllPOIs(){
 		return POIRepository.findAll();
 	}
 
