@@ -1,15 +1,16 @@
 @import '../../mediaQuery';
 
 #containerCreate {
-    //background-color: #99AE8D;
+    background-color: #99AE8D;
     height: 100%;
     width: 100%;
+    display: flex;
 }
 
 #formCreate {
     background-color: #777F70;
-    height: 40%;
-    width: 30%;
+    height: 275px;
+    width: 475px;
     margin: auto;
     margin-top: 10%;
     text-align: center;
