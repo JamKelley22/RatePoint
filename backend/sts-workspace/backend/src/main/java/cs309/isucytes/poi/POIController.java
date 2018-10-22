@@ -39,5 +39,12 @@ public class POIController {
 	public Iterable<POI> getAllPOIs(){
 		return POIRepository.findAll();
 	}
+	
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.DELETE, path = "/delete/{id}")
+	public String deletePOI(@PathVariable("id") Integer id){
+		POIRepository.deleteById(id);
+		return "You deleted a POI!";
+	}
 
 }
