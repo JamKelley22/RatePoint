@@ -20,6 +20,7 @@ class Login extends React.Component {
         bcrypt.hash(this.state.pass1, 10, (err, hash) => {
             console.log(hash);
             let hashedPass = hash;
+            this.setState({pass1:hash});
         });
         let body = JSON.stringify({
             username: this.state.username,
