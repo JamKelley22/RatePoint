@@ -1,5 +1,5 @@
 import React from 'react'
-//import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 import Navagation from '../Nav/navagation.js'
 import { history, routes } from '../../history.js'
