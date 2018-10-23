@@ -1,5 +1,5 @@
 import React from 'react'
-//import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 import Navagation from '../Nav/navagation.js'
 import { history, routes } from '../../history.js'
@@ -77,9 +77,9 @@ class CreateAccount extends React.Component {
         console.log("Email: " + this.state.email);
         console.log("Password: " + this.state.pass1);
 
-        /*bcrypt.hash(this.state.pass1, 10,(err, hash) => {
+        bcrypt.hash(this.state.pass1, 10,(err, hash) => {
           console.log(hash);
-        })*/
+        })
         let body = JSON.stringify({
           username: this.state.username,
           email: this.state.email,
