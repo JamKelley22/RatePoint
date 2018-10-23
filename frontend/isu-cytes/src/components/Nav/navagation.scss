@@ -1,8 +1,10 @@
+@import "../../colors.scss";
+
 .navagation__bar {
   background-color: #143600;
   display: flex;
   justify-content: space-evenly;
-  color: #99AE8D;
+  color: $secondary_color;
   min-height: 50px;
   height: 8%;
   min-width: 800px;
@@ -65,4 +67,34 @@
 h3 {
   margin-top: 15px;
   margin-bottom: 15px;
+}
+
+.navagation__link__account {
+  position: relative;
+}
+
+.navagation__link__account:hover {
+  svg {
+
+  }
+}
+
+.accountBox {
+  position: absolute;
+  background-color: $secondary_color;
+  color: $primary_color;
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.--hidden {
+  display: none;
+}
+.account__link {
+  padding: 5px;
+  text-decoration: none;
+}
+.account__link:hover {
+  text-decoration: underline;
 }

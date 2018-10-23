@@ -23,11 +23,11 @@ import { history } from './history.js';
 import * as routes from './constants/routes';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faThumbsUp, faTrophy, faClock, faCar } from '@fortawesome/free-solid-svg-icons'
+import { faThumbsUp, faTrophy, faClock, faCar, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
 import './App.scss';
 
-library.add(faThumbsUp, faTrophy, faClock, faCar);
+library.add(faThumbsUp, faTrophy, faClock, faCar, faCaretDown);
 
 class App extends Component {
   render() {

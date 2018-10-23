@@ -1,14 +1,24 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { routes } from '../../history.js'
 
 import './navagation.scss'
 
 class Navigation extends React.Component {
+  state = {
+    accountVisible: false
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
+  }
+
+  toggleAccount = () => {
+    this.setState({
+      accountVisible: !this.state.accountVisible
+    })
   }
 
   render () {
@@ -61,12 +71,29 @@ class Navigation extends React.Component {
             to={routes._SUGGEST}>
             Suggest a Location
           </NavLink>
-          <NavLink
-            className='navagation__link'
-            activeClassName='navagation__link--active'
-            to={routes._ACCOUNT}>
-            Account
-          </NavLink>
+
+          <div
+            className='navagation__link__account'
+            onClick={this.toggleAccount}>
+            Account <FontAwesomeIcon icon="caret-down" />
+          <div className={`accountBox ${this.state.accountVisible ? '' : '--hidden'}`}>
+              <NavLink
+                className='account__link'
+                to={routes._ACCOUNT}>
+                View
+              </NavLink>
+              <NavLink
+                className='account__link'
+                to={routes._LOGIN}>
+                Login
+              </NavLink>
+              <NavLink
+                className='account__link'
+                to={routes._CREATEACCOUNT}>
+                Signup
+              </NavLink>
+            </div>
+          </div>
         </div>
       </div>
     );
