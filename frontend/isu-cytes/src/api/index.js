@@ -1,3 +1,5 @@
 import * as POIAPI from './poi.js'
+import * as PersonAPI from './person.js'
+import * as ReviewAPI from './review.js'
 
-export { POIAPI }
+export { POIAPI, PersonAPI, ReviewAPI }

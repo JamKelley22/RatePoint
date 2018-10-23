@@ -1,3 +1,5 @@
+import to from 'await-to-js';
+
 export const GetPOIs = async() => {
   let response = await fetch(`http://proj309-tg-03.misc.iastate.edu:8080/pois/get`)
   let data = await response.json();
