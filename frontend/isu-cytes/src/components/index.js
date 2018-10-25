@@ -11,7 +11,7 @@ import Review from './Review/review.js'
 import Suggest from './Suggest/suggest.js'
 import Login from './Login/login.js'
 import CreateAccount from './CreateAccount/createAccount.js'
-
+import APIPage from './APIPage/apiPage.js'
 
 export {
   Account,
@@ -26,5 +26,6 @@ export {
    Review,
    Suggest,
    Login,
-   CreateAccount
+   CreateAccount,
+   APIPage
  }
