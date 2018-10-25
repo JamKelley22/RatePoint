@@ -21,7 +21,7 @@ export const GetPOI = async(id) => {
   }
 }
 
-export const UpdatePOI = async(id,userID,name,pictures,description,coordinates) => {
+export const UpdatePOI = async(id,name,pictures,description,coordinates) => {
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/poi/${id}`, {
     method: 'PUT',

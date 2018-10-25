@@ -129,11 +129,11 @@ class APIPage extends React.Component {
     console.log(res);
   }
   updatePOI = async() => {
-    let res = await POIAPI.UpdatePOI();
+    let res = await POIAPI.UpdatePOI(this.state.poiID,this.state.poiName,this.state.poiPictures,this.state.poiDescription,this.state.poiCoordinates);
     console.log(res);
   }
   deletePOI = async() => {
-    let res = await POIAPI.DeletePOI();
+    let res = await POIAPI.DeletePOI(this.state.poiID);
     console.log(res);
   }
   getPOIs = async() => {
@@ -141,20 +141,20 @@ class APIPage extends React.Component {
     console.log(res);
   }
   submitPOI = async() => {
-    let res = await POIAPI.SubmitPOI();
+    let res = await POIAPI.SubmitPOI(this.state.userID,this.state.poiName,this.state.poiPictures,this.state.poiDescription,this.state.poiCoordinates)
     console.log(res);
   }
   //==========================================================
   getPerson = async() => {
-    let res = await PersonAPI.GetPerson();
+    let res = await PersonAPI.GetPerson(this.state.personID);
     console.log(res);
   }
   updatePerson = async() => {
-    let res = await PersonAPI.UpdatePerson();
+    let res = await PersonAPI.UpdatePerson(this.state.personID,this.state.username,this.state.email,this.state.userName,this.state.biography,this.state.password);
     console.log(res);
   }
   deletePerson = async() => {
-    let res = await PersonAPI.DeletePerson();
+    let res = await PersonAPI.DeletePerson(this.state.personID);
     console.log(res);
   }
   getAllPersons = async() => {
@@ -162,20 +162,20 @@ class APIPage extends React.Component {
     console.log(res);
   }
   submitPerson = async() => {
-    let res = await PersonAPI.SubmitPerson();
+    let res = await PersonAPI.SubmitPerson(this.state.username,this.state.email,this.state.userName,this.state.biography,this.state.password);
     console.log(res);
   }
   //======================================================
   getReview = async() => {
-    let res = await ReviewAPI.GetReview();
+    let res = await ReviewAPI.GetReview(this.state.reviewID);
     console.log(res);
   }
   updateReview = async() => {
-    let res = await ReviewAPI.UpdateReview();
+    let res = await ReviewAPI.UpdateReview(this.state.reviewID,this.state.rating,this.state.title,this.state.body);
     console.log(res);
   }
   deleteReview = async() => {
-    let res = await ReviewAPI.DeleteReview();
+    let res = await ReviewAPI.DeleteReview(this.state.reviewID);
     console.log(res);
   }
   getAllReviews = async() => {
@@ -183,7 +183,7 @@ class APIPage extends React.Component {
     console.log(res);
   }
   submitReview = async() => {
-    let res = await ReviewAPI.SubmitReview();
+    let res = await ReviewAPI.SubmitReview(this.state.poiID,this.state.rating,this.state.title,this.state.body);
     console.log(res);
   }
 
@@ -356,6 +356,7 @@ class APIPage extends React.Component {
       case STATE_MACHINE.SubmitPOI://Needs Auth (_UserID, _Cookie)
         VisibleInputs = (
           <React.Fragment>
+            {_UserID}
             {_POIName}
             {_POIPictures}
             {_POIDescription}
