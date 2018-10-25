@@ -145,11 +145,11 @@ class CreateAccount extends React.Component {
 
     pass1Change = (e) => {
       this.setState({ pass1: e.target.value });
-    }
+    };
 
     pass2Change = (e) => {
       this.setState({ pass2: e.target.value });
-    }
+    };
 
     render(){
         return(
