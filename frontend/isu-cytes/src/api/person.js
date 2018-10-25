@@ -85,7 +85,7 @@ export const GetAllPersons = async() => {
   }
 }
 
-export const SubmitPerson = async(username,email,name,biography,password) => {
+export const SubmitPerson = async(id,username,email,name,biography,password) => {
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/people/${id}`, {
     method: 'POST',
