@@ -75,9 +75,14 @@ public class POIController {
 	 */
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.DELETE, path = "{id}")
-	public String deletePOI(@PathVariable("id") Integer id){
-		POIRepository.deleteById(id);
-		return "You deleted a POI!";
+	public ResponseEntity<?> deletePOIByID(@PathVariable("id") Integer id) {
+		Optional<POI> getPOI = POIRepository.findById(id);
+		if(getPOI.isPresent()) {
+			POIRepository.deleteById(id);
+			return new ResponseEntity<>(getPOI.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
 	}
 
 }
