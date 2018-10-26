@@ -51,7 +51,6 @@ class Suggest extends React.Component {
 
     setMarker = ({lat, lng}) => {
         this.setState({markerLat:lat, markerLng:lng});
-        console.log(lat,lng);
     };
 
     render() {
