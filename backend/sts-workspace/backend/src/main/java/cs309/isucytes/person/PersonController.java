@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +27,7 @@ public class PersonController {
 	 * @return success message upon completion.
 	 */
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.POST, path = "/new")
+	@RequestMapping(method = RequestMethod.POST, path = "/")
 	public String newPerson(@RequestBody Person person) {
 		personRepository.save(person);
 		return "Person " + person.getName() + " saved.";
@@ -37,7 +39,7 @@ public class PersonController {
 	 * @return JSON array of all people in the DB
 	 */
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET, path = "/get")
+	@RequestMapping(method = RequestMethod.GET, path = "/")
 	public List<Person> getAllPeople() {
 		return personRepository.findAll();
 	}
@@ -49,9 +51,14 @@ public class PersonController {
 	 * @return Person with the username, if they exist.
 	 */
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET, path = "/get/{username}")
-	public Optional<Person> getPersonById(@PathVariable("username") String username) {
-		return personRepository.findById(username);
+	@RequestMapping(method = RequestMethod.GET, path = "/{username}")
+	public ResponseEntity<?> getPersonById(@PathVariable("username") String username) {
+		Optional<Person> getPerson = personRepository.findByUsername(username);
+		if(getPerson.isPresent()) {
+			return new ResponseEntity<>(getPerson.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
 	}
 
 }
