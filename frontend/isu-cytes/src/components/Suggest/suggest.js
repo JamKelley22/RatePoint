@@ -18,6 +18,7 @@ class Suggest extends React.Component {
             zoom: 15,
             markerLat: 0,
             markerLng: 0,
+            file: undefined,
             error: null
         };
     }
@@ -38,6 +39,7 @@ class Suggest extends React.Component {
             placeLat: this.state.markerLat,
             placeLng: this.state.markerLng
         });
+        console.log(this.state.file);
         /*let response = await fetch('http://proj309-tg-03.misc.iastate.edu:8080/people/new', {
          method: 'POST',
          headers: {
@@ -46,12 +48,18 @@ class Suggest extends React.Component {
          },
          body: body
          });*/
-        this.setState({name: '', description: ''});
+        /*this.setState({name: '', description: ''});*/
     };
 
     setMarker = ({lat, lng}) => {
         this.setState({markerLat:lat, markerLng:lng});
     };
+
+    fileChange = (event) => {
+        event.preventDefault();
+        this.setState({file: URL.createObjectURL(event.target.files[0])});
+        console.log(this.state.file);
+    }
 
     render() {
         return (
@@ -75,7 +83,8 @@ class Suggest extends React.Component {
                                     <br/><br/>
                                     <b>Image:</b>
                                     <br/>
-                                    <input/>
+                                    <input type="file" onChange={(e)=>this.fileChange(e)}/>
+                                    <img src={this.state.file}/>
                                 </div>
                                 <div id="suggestMaps">
                                     <b>Location:</b>
