@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin
 @RequestMapping(path = "/people")
 public class PersonController {
 
@@ -27,9 +29,9 @@ public class PersonController {
 	 * @return success message upon completion.
 	 */
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.POST, path = "/")
+	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> newPerson(@RequestBody Person person) {
-		if (this.getPersonById(person.getUsername()).getStatusCode() == HttpStatus.NOT_FOUND) {
+		if (this.getPersonByUsername(person.getUsername()).getStatusCode() == HttpStatus.NOT_FOUND) {
 			personRepository.save(person);
 			return new ResponseEntity<>(person, HttpStatus.OK);
 		} else {
@@ -43,7 +45,7 @@ public class PersonController {
 	 * @return JSON array of all people in the DB
 	 */
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET, path = "/")
+	@RequestMapping(method = RequestMethod.GET)
 	public List<Person> getAllPeople() {
 		return personRepository.findAll();
 	}
@@ -56,7 +58,7 @@ public class PersonController {
 	 */
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, path = "/{username}")
-	public ResponseEntity<?> getPersonById(@PathVariable("username") String username) {
+	public ResponseEntity<?> getPersonByUsername(@PathVariable("username") String username) {
 		Optional<Person> getPerson = personRepository.findByUsername(username);
 		if (getPerson.isPresent()) {
 			return new ResponseEntity<>(getPerson.get(), HttpStatus.OK);
@@ -65,4 +67,21 @@ public class PersonController {
 		}
 	}
 
+	/**
+	 * Delete a person by a given Username
+	 * 
+	 * @param username username to delete passed in URL
+	 * @return username if deleted, nothing if not found, along with HTTP codes
+	 */
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.DELETE, path = "/{username}")
+	public ResponseEntity<?> deletePersonByUsername(@PathVariable("username") String username) {
+		Optional<Person> getPerson = personRepository.findByUsername(username);
+		if (getPerson.isPresent()) {
+			personRepository.deleteByUsername(username);
+			return new ResponseEntity<>(getPerson.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
+	}
 }
