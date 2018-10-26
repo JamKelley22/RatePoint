@@ -40,7 +40,6 @@ public class POIController {
 		} else {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		}
-
 	}
 	
 	/**
@@ -51,9 +50,15 @@ public class POIController {
 	 */
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST)
-	public String addNewPOI (@RequestBody POI poi) {
-		POIRepository.save(poi);
-		return "You Saved " + poi.getName();
+	public ResponseEntity<?> addNewPOI (@RequestBody POI poi) {
+		//if the poi we are about to add is not found, then we add it
+		if(this.getPOIByID(poi.getId()).getStatusCode() == HttpStatus.NOT_FOUND) {
+			POIRepository.save(poi);
+			Optional<POI> getPOI = POIRepository.findById(poi.getId());
+			return new ResponseEntity<>(getPOI.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+		}
 	}
 	
 	/**
