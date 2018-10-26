@@ -37,11 +37,11 @@ let fakePOIData = [
 class MapContainer extends React.Component {
   state = {
     markers: []
-  }
+  };
 
   componentDidMount = () => {
     this.getPOIS();
-  }
+  };
 
   getPOIS = async() => {
     let response = await fetch('http://proj309-tg-03.misc.iastate.edu:8080/pois/get');
@@ -55,12 +55,12 @@ class MapContainer extends React.Component {
         return poi.rating > this.props.ratingFilterNum;
       })
     })
-  }
+  };
 
   componentWillReceiveProps() {//Apparently this is being depracated...
     let filteredPOIS = fakePOIData.filter(poi => {
       return poi.rating >= this.props.ratingFilterNum;
-    })
+    });
     //console.log(filteredPOIS);
     this.setState({
       markers: filteredPOIS
@@ -69,13 +69,13 @@ class MapContainer extends React.Component {
 
   onPOIClick = (marker) => {
     alert(marker.name);
-  }
+  };
 
   render () {
     const style = {
       maxWidth: '100%',
       maxHeight: '92%'
-    }
+    };
     return (
       <Map
         google={this.props.google}

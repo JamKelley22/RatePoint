@@ -4,34 +4,44 @@
   background-color: #99AE8D;
   height: 100%;
   width: 100%;
-  display: flex;
-}
-
-#formSuggest{
-  width: 100%;
-  height: 100%;
-  margin-top: 5%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 #suggestHeader{
-  font-size: x-large;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  font-size: xx-large;
 }
 
 #suggestForm {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#row1 {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+#row2 {
+  flex-direction: row;
 }
 
 #suggestMaps {
-  float: right;
-  height: 50%;
   width: 50%;
-  border: dashed;
+  flex-direction: column;
 }
 
 #suggestNotMaps {
-  float: left;
-  height: 50%;
   width: 50%;
-  border: dashed;
+  flex-direction: column;
+}
+
+#actualMap{
+  height: 100%;
+  width: 100%;
 }

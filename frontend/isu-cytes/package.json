@@ -9,6 +9,7 @@
     "await-to-js": "^2.0.1",
     "bcryptjs": "^2.4.3",
     "cross-env": "^5.2.0",
+    "google-map-react": "^1.0.9",
     "google-maps-react": "^2.0.2",
     "history": "^4.7.2",
     "moment": "^2.22.2",
