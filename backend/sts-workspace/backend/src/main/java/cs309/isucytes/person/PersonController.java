@@ -28,9 +28,13 @@ public class PersonController {
 	 */
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST, path = "/")
-	public String newPerson(@RequestBody Person person) {
-		personRepository.save(person);
-		return "Person " + person.getName() + " saved.";
+	public ResponseEntity<?> newPerson(@RequestBody Person person) {
+		if (this.getPersonById(person.getUsername()).getStatusCode() == HttpStatus.NOT_FOUND) {
+			personRepository.save(person);
+			return new ResponseEntity<>(person, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+		}
 	}
 
 	/**
@@ -54,7 +58,7 @@ public class PersonController {
 	@RequestMapping(method = RequestMethod.GET, path = "/{username}")
 	public ResponseEntity<?> getPersonById(@PathVariable("username") String username) {
 		Optional<Person> getPerson = personRepository.findByUsername(username);
-		if(getPerson.isPresent()) {
+		if (getPerson.isPresent()) {
 			return new ResponseEntity<>(getPerson.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
