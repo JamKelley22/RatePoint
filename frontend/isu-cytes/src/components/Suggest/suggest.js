@@ -1,5 +1,5 @@
 import React from 'react'
-import GoogleMapReact from 'google-map-react';
+import GoogleMap from 'google-map-react';
 import {Navagation} from '../index.js'
 
 import './suggest.scss'
@@ -11,12 +11,13 @@ class Suggest extends React.Component {
         this.state = {
             name: '',
             description: '',
-            center : {
-                lat: 37.3596049,
-                lng: -122.0665
+            center: {
+                lat: 42.02622525183353,
+                lng: -93.64745560839157
             },
-            zoom : 16,
-            marker : '',
+            zoom: 15,
+            markerLat: 0,
+            markerLng: 0,
             error: null
         };
     }
@@ -34,6 +35,8 @@ class Suggest extends React.Component {
         let body = JSON.stringify({
             placeName: this.state.name,
             placeDescription: this.state.description,
+            placeLat: this.state.markerLat,
+            placeLng: this.state.markerLng
         });
         /*let response = await fetch('http://proj309-tg-03.misc.iastate.edu:8080/people/new', {
          method: 'POST',
@@ -44,6 +47,11 @@ class Suggest extends React.Component {
          body: body
          });*/
         this.setState({name: '', description: ''});
+    };
+
+    setMarker = ({lat, lng}) => {
+        this.setState({markerLat:lat, markerLng:lng});
+        console.log(lat,lng);
     };
 
     render() {
@@ -57,25 +65,32 @@ class Suggest extends React.Component {
                             <div id="row1">
                                 <div id="suggestNotMaps">
                                     <b>Name of Place:</b>
+                                    <br/>
                                     <input maxLength="32" autoComplete="off" value={this.state.name}
                                            onChange={this.nameChange} onBlur={this.checkError}/>
                                     <br/><br/>
                                     <b>Description:</b>
+                                    <br/>
                                     <input maxLength="32" autoComplete="off" value={this.state.description}
                                            onChange={this.descriptionChange} onBlur={this.checkError}/>
                                     <br/><br/>
                                     <b>Image:</b>
+                                    <br/>
                                     <input/>
                                 </div>
                                 <div id="suggestMaps">
                                     <b>Location:</b>
                                     <div id="actualMap">
-                                        <GoogleMapReact
+                                        <GoogleMap
                                             bootstrapURLKeys={{key: 'AIzaSyC5q54v6n33maflm2zG1WjVrD43AOYa6YM'}}
                                             defaultCenter={this.state.center}
                                             defaultZoom={this.state.zoom}
+                                            onClick={this.setMarker}
                                         >
-                                        </GoogleMapReact>
+                                            <i id="icon" className="fas fa-kiwi-bird"
+                                               lat={this.state.markerLat} lng={this.state.markerLng}
+                                            />
+                                        </GoogleMap>
                                     </div>
                                 </div>
                             </div>
