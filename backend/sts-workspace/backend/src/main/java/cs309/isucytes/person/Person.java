@@ -2,6 +2,8 @@ package cs309.isucytes.person;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,28 +18,35 @@ import javax.persistence.Table;
 public class Person {
 
 	/**
-	 * The person's username, also primary key for this example.
+	 * The unique identifier for a person
 	 */
 	@Id
-	@Column(length = 30)
+	@Column
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
+
+	/**
+	 * The person's username, also primary key for this example.
+	 */
+	@Column(length=30, unique=true, nullable=false)
 	private String username;
 
 	/**
 	 * A person's name
 	 */
-	@Column
+	@Column(nullable=false)
 	private String name;
 
 	/**
 	 * A person's email
 	 */
-	@Column
+	@Column(unique=true)
 	private String email;
 
 	/**
 	 * A hashed password
 	 */
-	@Column
+	@Column(nullable=false)
 	private String password;
 
 	/**
@@ -45,6 +54,26 @@ public class Person {
 	 */
 	@Column
 	private String biography;
+	
+	/**
+	 * Cookie to track login
+	 */
+	@Column
+	private String cookie;
+	
+	/**
+	 * Role that the user is assigned (0 = user, 1 = mod, 2 = admin);
+	 */
+	@Column(nullable=false)
+	private Integer role;
+
+	/**
+	 * get the unique identifier of a person
+	 * @return
+	 */
+	public Integer getId() {
+		return id;
+	}
 
 	/**
 	 * Get's the person's username
@@ -53,6 +82,15 @@ public class Person {
 	 */
 	public String getUsername() {
 		return username;
+	}
+
+	/**
+	 * Change a person's username
+	 * 
+	 * @param username new username
+	 */
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	/**
@@ -134,5 +172,33 @@ public class Person {
 	 */
 	public void setBiography(String biography) {
 		this.biography = biography;
+	}
+
+	/**
+	 * @return the cookie
+	 */
+	public String getCookie() {
+		return cookie;
+	}
+
+	/**
+	 * @param cookie the cookie to set
+	 */
+	public void setCookie(String cookie) {
+		this.cookie = cookie;
+	}
+
+	/**
+	 * @return the role
+	 */
+	public Integer getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(Integer role) {
+		this.role = role;
 	}
 }
