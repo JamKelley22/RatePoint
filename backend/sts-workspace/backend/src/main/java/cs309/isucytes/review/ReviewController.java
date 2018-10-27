@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import cs309.isucytes.poi.POI;
-
 @CrossOrigin
 @RestController
 @RequestMapping(path = "/reviews")
@@ -24,6 +22,11 @@ public class ReviewController {
 	@Autowired
     ReviewRepository reviewRepository;
 
+	/**
+	 * Takes in a new review to add to the database.
+	 * @param review New review to be added.
+	 * @return the JSON object and the proper HTTP status
+	 */
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> addNewReview(@RequestBody Review review) {
@@ -36,12 +39,21 @@ public class ReviewController {
 		}
 	}
 	
+	/**
+	 * Returns all reviews in the database.
+	 * @return An array of JSON reviews.
+	 */
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Review> getAllReviews(){
 		return reviewRepository.findAll();
 	}
 	
+	/**
+	 * Gets a review by its id, if it exits.
+	 * @param id id to search for
+	 * @return Review with the specified id, if any, and proper HTTP status.
+	 */
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}")
 	public ResponseEntity<?> getReviewByID(@PathVariable("id") int id){
@@ -53,6 +65,11 @@ public class ReviewController {
 		}
 	}
 	
+	/**
+	 * Deletes a review, if any, in the database given an id.
+	 * @param id id to search for
+	 * @return Deleted review and an HTTP status. 
+	 */
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
 	public ResponseEntity<?> deleteReviewByID(@PathVariable("id") Integer id) {
@@ -64,5 +81,4 @@ public class ReviewController {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		}
 	}
-	 
 }
