@@ -1,11 +1,19 @@
 package cs309.isucytes.person;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import cs309.isucytes.userlist.UserList;
 
 /**
  * Represents a person in our SQL table
@@ -67,6 +75,10 @@ public class Person {
 	@Column(nullable=false)
 	private Integer role;
 
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "list_user")
+	private List<UserList> lists;
+	
 	/**
 	 * get the unique identifier of a person
 	 * @return

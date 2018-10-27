@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  *
  */
 @Repository
-public interface PersonRepository extends JpaRepository<Person, String> {
+public interface PersonRepository extends JpaRepository<Person, Integer> {
 	// Only need to define methods here if we need specific queries.
 
 	/**
