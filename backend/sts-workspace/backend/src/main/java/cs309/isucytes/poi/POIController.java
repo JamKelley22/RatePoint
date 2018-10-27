@@ -20,7 +20,7 @@ import cs309.isucytes.poi.POIRepository;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = "/pois/")
+@RequestMapping(path = "/pois")
 public class POIController {
 	
 	@Autowired
@@ -33,7 +33,7 @@ public class POIController {
 	 * @return a POI that matched with the id 
 	 */
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET, path = "{id}")
+	@RequestMapping(method = RequestMethod.GET, path = "/{id}")
 	public ResponseEntity<?> getPOIByID(@PathVariable("id") Integer id) {
 		Optional<POI> getPOI = POIRepository.findById(id);
 		if(getPOI.isPresent()) {
@@ -80,7 +80,7 @@ public class POIController {
 	 * @return a String that is returned on success for deleting a POI
 	 */
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.DELETE, path = "{id}")
+	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
 	public ResponseEntity<?> deletePOIByID(@PathVariable("id") Integer id) {
 		Optional<POI> getPOI = POIRepository.findById(id);
 		if(getPOI.isPresent()) {
