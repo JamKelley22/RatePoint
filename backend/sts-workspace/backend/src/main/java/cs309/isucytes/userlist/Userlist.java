@@ -20,24 +20,23 @@ import cs309.isucytes.poi.POI;
 @Entity
 @Table
 public class Userlist {
-	
+
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
+
 	@Column(nullable = false)
 	private String listname;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "listitems",
-    	joinColumns = { @JoinColumn(name = "listid") },
-    	inverseJoinColumns = { @JoinColumn(name = "poiid") })
+	@JoinTable(name = "listitems", joinColumns = { @JoinColumn(name = "listid") }, inverseJoinColumns = {
+			@JoinColumn(name = "poiid") })
 	private List<POI> poilist = new ArrayList<>();
-	
+
 	@Column
 	private Integer listuser;
-	
+
 	/**
 	 * @return the listname
 	 */
@@ -72,7 +71,7 @@ public class Userlist {
 	public void setPoilist(List<POI> poilist) {
 		this.poilist = poilist;
 	}
-	
+
 	/**
 	 * @param poi poi to add to the list
 	 */
@@ -93,16 +92,21 @@ public class Userlist {
 	public void setListuser(Integer listuser) {
 		this.listuser = listuser;
 	}
-	
-	public void updateUserlist(Userlist userlist) {
+
+	/**
+	 * Updates the list with the given list object. Ignores null values.
+	 * 
+	 * @param userlist values to update to
+	 */
+	public void update(Userlist userlist) {
 		if (userlist.getListname() != null) {
 			this.listname = userlist.getListname();
 		}
-		
+
 		if (userlist.getListuser() != null) {
 			this.listuser = userlist.getListuser();
 		}
-		
+
 		if (userlist.getPoilist() != null && !userlist.getPoilist().isEmpty()) {
 			this.poilist = userlist.getPoilist();
 		}

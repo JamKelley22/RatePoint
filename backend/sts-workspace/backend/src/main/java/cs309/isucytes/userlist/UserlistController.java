@@ -50,7 +50,7 @@ public class UserlistController {
 	public ResponseEntity<Userlist> updateUserlist(@PathVariable("id") Integer id, @RequestBody Userlist userlist) {
 		Optional<Userlist> getList = userlistRepository.findById(id);
 		if (getList.isPresent()) {
-			getList.get().updateUserlist(userlist);
+			getList.get().update(userlist);
 			userlistRepository.save(getList.get());
 			return new ResponseEntity<>(getList.get(), HttpStatus.OK);
 		} else {
