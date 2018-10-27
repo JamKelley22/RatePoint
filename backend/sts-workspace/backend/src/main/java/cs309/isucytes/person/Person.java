@@ -228,4 +228,43 @@ public class Person {
 	public void setLists(List<Userlist> lists) {
 		this.lists = lists;
 	}
+	
+	/**
+	 * Updates the person with the given person's info. Does not change ID.
+	 * 
+	 * @param person person to update the called object with.
+	 */
+	public void update(Person person) {
+		if (person.getUsername() != null) {
+			this.username = person.getUsername();
+		}
+		
+		if (person.getName() != null) {
+			this.name = person.getName();
+		}
+		
+		if (person.getEmail() != null) {
+			this.email = person.getEmail();
+		}
+		
+		if (person.getPassword() != null) {
+			this.password = person.getPassword();
+		}
+		
+		if (person.getBiography() != null) {
+			this.biography = person.getBiography();
+		}
+		
+		if (person.getCookie() != null) {
+			this.cookie = person.getCookie();
+		}
+		
+		if (person.getRole() != null) {
+			this.role = person.getRole();
+		}
+		
+		if (person.getLists() != null && !person.getLists().isEmpty()) {
+			this.lists = person.getLists();
+		}
+	}
 }

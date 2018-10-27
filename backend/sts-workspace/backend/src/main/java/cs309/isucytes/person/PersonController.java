@@ -89,13 +89,47 @@ public class PersonController {
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST, path = "/{username}/lists")
-	public ResponseEntity<Person> addNewUserList (@PathVariable("username") String username, @RequestBody Userlist userList) {
+	public ResponseEntity<Person> addNewUserList (@PathVariable("username") String username, @RequestBody Userlist userlist) {
 		Optional<Person> getPerson = personRepository.findByUsername(username);
 		if (getPerson.isPresent()) {
 			List<Userlist> personList = getPerson.get().getLists();
-			personList.add(userList);
+			personList.add(userlist);
 			getPerson.get().setLists(personList);
 			personRepository.save(getPerson.get());
+			return new ResponseEntity<>(getPerson.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	/**
+	 * Update the person at the given username with the given information. Checks
+	 * for conflicts on emails and usernames.
+	 * 
+	 * @param username Username of profile to update.
+	 * @param person   Information to update with.
+	 * @return person if update, 404 if not found, 409 if email or username
+	 *         conflict.
+	 */
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.PUT, path = "/{username}")
+	public ResponseEntity<Person> updatePerson (@PathVariable("username") String username, @RequestBody Person person) {
+		Optional<Person> getPerson = personRepository.findByUsername(username);
+		if (getPerson.isPresent()) {
+			String potentialUsername = person.getUsername();
+			String potentialEmail = person.getEmail();
+			
+			if (potentialUsername != null && personRepository.findByUsername(potentialUsername).isPresent()) {
+				return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+			}
+			
+			if (potentialEmail != null && personRepository.findByEmail(potentialEmail).isPresent() ) {
+				return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+			}
+			
+			getPerson.get().update(person);
+			personRepository.save(getPerson.get());
+			
 			return new ResponseEntity<>(getPerson.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
