@@ -13,25 +13,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
+@RequestMapping(path = "/reviews")
 public class ReviewController {
-
 
 	@Autowired
     ReviewRepository reviewRepository;
 
-	@RequestMapping(method = RequestMethod.POST, path = "/reviews/new")
+	@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody String addNewReview (@RequestBody Review review) {
 		reviewRepository.save(review);
 		return "Saved";
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, path = "/reviews/get")
+	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody Iterable<Review> getAllReviews(){
 		return reviewRepository.findAll();
 	}
 	
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET, path = "reviews/get/{id}")
+	@RequestMapping(method = RequestMethod.GET, path = "/{id}")
 	public Optional<Review> getReviewByID(@PathVariable("id") int id){
 		return reviewRepository.findById(id);
 	}
