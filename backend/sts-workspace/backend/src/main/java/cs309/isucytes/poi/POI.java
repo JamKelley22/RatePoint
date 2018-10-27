@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import cs309.isucytes.userlist.UserList;
+import cs309.isucytes.userlist.Userlist;
 
 @Entity
 @Table
@@ -35,7 +35,7 @@ public class POI {
 	private Boolean approved;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "poilist")
-	private List<UserList> listsBelongingTo;
+	private List<Userlist> listsBelongingTo;
 	
 	
 	public Integer getId() {

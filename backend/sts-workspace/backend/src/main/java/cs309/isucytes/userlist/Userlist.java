@@ -18,7 +18,7 @@ import cs309.isucytes.poi.POI;
 
 @Entity
 @Table
-public class UserList {
+public class Userlist {
 	
 	@Id
 	@Column

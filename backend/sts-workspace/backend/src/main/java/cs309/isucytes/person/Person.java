@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import cs309.isucytes.userlist.UserList;
+import cs309.isucytes.userlist.Userlist;
 
 /**
  * Represents a person in our SQL table
@@ -76,8 +76,8 @@ public class Person {
 	private Integer role;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "list_user")
-	private List<UserList> lists;
+	@JoinColumn(name = "listuser")
+	private List<Userlist> lists = new ArrayList<>();
 	
 	/**
 	 * get the unique identifier of a person

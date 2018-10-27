@@ -14,5 +14,5 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserListController {
 
 	@Autowired
-    UserListRepository userListRepository;
+	UserlistRepository userlistRepository;
 }
