@@ -119,11 +119,11 @@ public class PersonController {
 			String potentialUsername = person.getUsername();
 			String potentialEmail = person.getEmail();
 			
-			if (potentialUsername != null && personRepository.findByUsername(potentialUsername).isPresent()) {
+			if (potentialUsername != null && !potentialUsername.equals(getPerson.get().getUsername()) && personRepository.findByUsername(potentialUsername).isPresent()) {
 				return new ResponseEntity<>(null, HttpStatus.CONFLICT);
 			}
 			
-			if (potentialEmail != null && personRepository.findByEmail(potentialEmail).isPresent() ) {
+			if (potentialEmail != null && !potentialEmail.equals(getPerson.get().getEmail()) && personRepository.findByEmail(potentialEmail).isPresent() ) {
 				return new ResponseEntity<>(null, HttpStatus.CONFLICT);
 			}
 			
