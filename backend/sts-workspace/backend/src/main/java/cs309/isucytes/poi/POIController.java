@@ -1,5 +1,6 @@
 package cs309.isucytes.poi;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +69,7 @@ public class POIController {
 	 */
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET)
-	public Iterable<POI> getAllPOIs(){
+	public List<POI> getAllPOIs(){
 		return POIRepository.findAll();
 	}
 	
