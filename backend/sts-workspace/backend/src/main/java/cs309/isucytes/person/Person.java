@@ -1,5 +1,6 @@
 package cs309.isucytes.person;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -212,5 +213,19 @@ public class Person {
 	 */
 	public void setRole(Integer role) {
 		this.role = role;
+	}
+
+	/**
+	 * @return the lists
+	 */
+	public List<Userlist> getLists() {
+		return lists;
+	}
+
+	/**
+	 * @param lists the lists to set
+	 */
+	public void setLists(List<Userlist> lists) {
+		this.lists = lists;
 	}
 }

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import cs309.isucytes.userlist.Userlist;
+
 @RestController
 @CrossOrigin
 @RequestMapping(path = "/people")
@@ -30,7 +32,7 @@ public class PersonController {
 	 */
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> newPerson(@RequestBody Person person) {
+	public ResponseEntity<Person> newPerson(@RequestBody Person person) {
 		if (this.getPersonByUsername(person.getUsername()).getStatusCode() == HttpStatus.NOT_FOUND) {
 			personRepository.save(person);
 			return new ResponseEntity<>(person, HttpStatus.OK);
@@ -58,7 +60,7 @@ public class PersonController {
 	 */
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, path = "/{username}")
-	public ResponseEntity<?> getPersonByUsername(@PathVariable("username") String username) {
+	public ResponseEntity<Person> getPersonByUsername(@PathVariable("username") String username) {
 		Optional<Person> getPerson = personRepository.findByUsername(username);
 		if (getPerson.isPresent()) {
 			return new ResponseEntity<>(getPerson.get(), HttpStatus.OK);
@@ -75,10 +77,25 @@ public class PersonController {
 	 */
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{username}")
-	public ResponseEntity<?> deletePersonByUsername(@PathVariable("username") String username) {
+	public ResponseEntity<Person> deletePersonByUsername(@PathVariable("username") String username) {
 		Optional<Person> getPerson = personRepository.findByUsername(username);
 		if (getPerson.isPresent()) {
 			personRepository.deleteByUsername(username);
+			return new ResponseEntity<>(getPerson.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.POST, path = "/{username}/lists")
+	public ResponseEntity<Person> addNewUserList (@PathVariable("username") String username, @RequestBody Userlist userList) {
+		Optional<Person> getPerson = personRepository.findByUsername(username);
+		if (getPerson.isPresent()) {
+			List<Userlist> personList = getPerson.get().getLists();
+			personList.add(userList);
+			getPerson.get().setLists(personList);
+			personRepository.save(getPerson.get());
 			return new ResponseEntity<>(getPerson.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
