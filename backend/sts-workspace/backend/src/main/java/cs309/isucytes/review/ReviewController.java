@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import cs309.isucytes.poi.POI;
+
 @CrossOrigin
 @RestController
 @RequestMapping(path = "/reviews")
@@ -45,6 +47,18 @@ public class ReviewController {
 	public ResponseEntity<?> getReviewByID(@PathVariable("id") int id){
 		Optional<Review> getReview = reviewRepository.findById(id);
 		if(getReview.isPresent()) {
+			return new ResponseEntity<>(getReview.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+	public ResponseEntity<?> deleteReviewByID(@PathVariable("id") Integer id) {
+		Optional<Review> getReview = reviewRepository.findById(id);
+		if(getReview.isPresent()) {
+			reviewRepository.deleteById(id);
 			return new ResponseEntity<>(getReview.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
