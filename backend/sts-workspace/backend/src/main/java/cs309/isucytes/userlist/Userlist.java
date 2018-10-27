@@ -1,5 +1,6 @@
 package cs309.isucytes.userlist;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -30,10 +31,13 @@ public class Userlist {
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "listitems",
-    	joinColumns = { @JoinColumn(name = "list_id") },
-    	inverseJoinColumns = { @JoinColumn(name = "poi_id") })
-	private List<POI> poilist;
-
+    	joinColumns = { @JoinColumn(name = "listid") },
+    	inverseJoinColumns = { @JoinColumn(name = "poiid") })
+	private List<POI> poilist = new ArrayList<>();
+	
+	@Column
+	private Integer listuser;
+	
 	/**
 	 * @return the listname
 	 */
@@ -54,7 +58,53 @@ public class Userlist {
 	public Integer getId() {
 		return id;
 	}
+
+	/**
+	 * @return the poilist
+	 */
+	public List<POI> getPoilist() {
+		return poilist;
+	}
+
+	/**
+	 * @param poilist the poilist to set
+	 */
+	public void setPoilist(List<POI> poilist) {
+		this.poilist = poilist;
+	}
 	
+	/**
+	 * @param poi poi to add to the list
+	 */
+	public void addPoi(POI poi) {
+		poilist.add(poi);
+	}
+
+	/**
+	 * @return the listuser
+	 */
+	public Integer getListuser() {
+		return listuser;
+	}
+
+	/**
+	 * @param listuser the listuser to set
+	 */
+	public void setListuser(Integer listuser) {
+		this.listuser = listuser;
+	}
 	
-	
+	public void updateUserlist(Userlist userlist) {
+		if (userlist.getListname() != null) {
+			this.listname = userlist.getListname();
+		}
+		
+		if (userlist.getListuser() != null) {
+			this.listuser = userlist.getListuser();
+		}
+		
+		if (userlist.getPoilist() != null && !userlist.getPoilist().isEmpty()) {
+			this.poilist = userlist.getPoilist();
+		}
+	}
 }
