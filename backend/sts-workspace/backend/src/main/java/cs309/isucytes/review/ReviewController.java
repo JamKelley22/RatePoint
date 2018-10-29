@@ -50,6 +50,16 @@ public class ReviewController {
 	}
 	
 	/**
+	 * Returns all reviews in the database relating to a specific POI, if any.
+	 * @return An array of JSON reviews for a POI.
+	 */
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.GET, path = "/poi/{id}")
+	public List<Review> getAllReviewsByPOI(@PathVariable("id") int PoiID){
+		return reviewRepository.findByPoi(PoiID);
+	}
+	
+	/**
 	 * Gets a review by its id, if it exits.
 	 * @param id id to search for
 	 * @return Review with the specified id, if any, and proper HTTP status.
