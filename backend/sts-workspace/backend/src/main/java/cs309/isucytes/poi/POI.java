@@ -1,11 +1,18 @@
 package cs309.isucytes.poi;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import cs309.isucytes.userlist.Userlist;
 
 @Entity
 @Table
@@ -26,6 +33,9 @@ public class POI {
 	
 	@Column
 	private Boolean approved;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "poilist")
+	private List<Userlist> listsBelongingTo;
 	
 	
 	public Integer getId() {

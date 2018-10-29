@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 
-import {userReducer,initialState} from './reducers/'
+import {userReducer,poiReducer,initialState} from './reducers/'
 
 const enhancers = []
 const middleware = [
@@ -23,7 +23,8 @@ const composedEnhancers = compose(
 )
 
 const rootReducer = combineReducers({
-  user: userReducer
+  user: userReducer,
+  poi: poiReducer
 })
 
 export const store = createStore(

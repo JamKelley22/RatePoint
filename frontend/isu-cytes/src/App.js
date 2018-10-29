@@ -17,7 +17,9 @@ import {
   POI,
   Error404,
   Login,
-  CreateAccount} from './components'
+  CreateAccount,
+  APIPage
+} from './components'
 import { history } from './history.js';
 
 import * as routes from './constants/routes';
@@ -47,6 +49,7 @@ class App extends Component {
             <Route exact path={routes._CREATEACCOUNT} component={() => <CreateAccount/>} />
             <Route exact path={routes._REVIEW} component={() => <Review/>} />
             <Route exact path={routes._POI} component={() => <POI/>} />
+            <Route exact path={routes._API} component={() => <APIPage/>} />
             <Route component={() => <Error404/>} />
           </Switch>
         </div>
@@ -56,3 +59,5 @@ class App extends Component {
 }
 
 export default App;
+
+//<Route exact path={routes._API} component={() => <API/>} />

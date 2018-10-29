@@ -8,6 +8,9 @@ import {
   RedditIcon,
   EmailIcon,
 } from 'react-share';
+import { connect } from 'react-redux'
+import {bindActionCreators} from 'redux';
+import { Redirect } from "react-router-dom";
 
 import { history, routes } from '../../history.js'
 
@@ -24,6 +27,7 @@ import './poi.scss'
 
 class POI extends React.Component {
   state = {
+    /*
     id: undefined,
     name: '',
     images: [],
@@ -33,7 +37,7 @@ class POI extends React.Component {
     description: '',
     tags: [],
     reviews: [],
-
+    */
     shareScreenState: false,
     descriptionScrollState: 'hidden',
     shareButtonClassName: 'poi__lower__button',
@@ -43,9 +47,10 @@ class POI extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchDataFromServer();
+    //this.fetchDataFromServer();
   }
 
+/*
   fetchDataFromServer = async() => {
     let response = await fetch('http://proj309-tg-03.misc.iastate.edu:8080/reviews/get');
     // only proceed once promise is resolved
@@ -60,8 +65,6 @@ class POI extends React.Component {
       totalRatingScore += parseInt(review.rating)
     })
 
-    console.log(FakeData.moth.tags);
-
     this.setState({
       id: currPOI,
       reviews: poiData,
@@ -74,20 +77,8 @@ class POI extends React.Component {
       description: FakeData.moth.description,
       tags: FakeData.moth.tags
     })
-    /*
-    this.setState({
-      id: data.id,
-      name: data.name,
-      images: data.images,
-      rating: data.rating,
-      numRatings: data.numRatings,
-      accessability: data.accessability,
-      description: data.description,
-      tages: data.tags,
-      reviews: data.reviews
-    })
-    */
   }
+
 
   getAccessibilityIcons = () => {
     if(this.state.accessability === undefined) {
@@ -153,6 +144,7 @@ class POI extends React.Component {
       })
     );
   }
+  */
 
   openCloseShareScreen = (nextState) => {
     this.setState({
@@ -223,25 +215,35 @@ class POI extends React.Component {
     let descriptionStyle = {
         overflowY: this.state.descriptionScrollState
     };
+    let poi = this.props.poi;
+    //console.log(poi);
+
+    if(poi == null) {
+      return (
+        <div className=''>
+          <Redirect to={routes._EXPLORE}/>
+        </div>
+      )
+    }
 
     return (
       <div className='poiPage'>
         <Navagation className='navagation'/>
         <div className='poi__upper'>
-          <h1>{this.state.name}</h1>
+          <h1>{poi.name}</h1>
           <POICarousel
-            images={this.state.images}
-            name={this.state.name}
+            images={poi.pictures}
+            name={poi.name}
           />
         </div>
         <div className='poi__lower'>
           <div>
             <div className='poi__lower__ratingline'>
               <Rating
-                number={this.state.rating}
+                number={poi.rating}
               />
-              <p>{this.state.numRatings} Ratings</p>
-              {this.getAccessibilityIcons()}
+              <p>{poi.numRatings} Ratings</p>
+              {/*this.getAccessibilityIcons()*/}
             </div>
 
             <div className='poi__lower__description'>
@@ -251,13 +253,13 @@ class POI extends React.Component {
                 onMouseLeave={() => this.setDescriptionScroll('hidden')}
                 style={descriptionStyle}
                 >
-                {this.state.description}
+                {poi.description}
               </p>
             </div>
 
             <div>
               <h4>Tags</h4>
-              <div className='poi__lower__tags'>{this.getTags()}</div>
+              <div className='poi__lower__tags'>{/*this.getTags()*/}</div>
             </div>
 
             <div className='poi__lower__reviews'>
@@ -271,7 +273,7 @@ class POI extends React.Component {
                 </NavLink>
               </div>
               <div id='allReviews'>
-                {this.getReviews()}
+                {/*this.getReviews()*/}
               </div>
             </div>
           </div>
@@ -357,4 +359,19 @@ class POI extends React.Component {
   }
 }
 
-export default POI;
+function mapStateToProps(state) {
+  return {
+    poi: state.poi.currPOI
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(POI);

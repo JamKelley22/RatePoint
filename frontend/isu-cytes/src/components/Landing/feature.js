@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const Feature = (props) => {
   return (
-    <div className='feature'>
+    <div className='feature' onClick={props.onClick}>
       <div className='icon'>
         {props.icon}
       </div>

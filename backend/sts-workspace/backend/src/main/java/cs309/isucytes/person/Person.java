@@ -1,9 +1,20 @@
 package cs309.isucytes.person;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import cs309.isucytes.userlist.Userlist;
 
 /**
  * Represents a person in our SQL table
@@ -16,28 +27,35 @@ import javax.persistence.Table;
 public class Person {
 
 	/**
-	 * The person's username, also primary key for this example.
+	 * The unique identifier for a person
 	 */
 	@Id
-	@Column(length = 30)
+	@Column
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
+
+	/**
+	 * The person's username, also primary key for this example.
+	 */
+	@Column(length=30, unique=true, nullable=false)
 	private String username;
 
 	/**
 	 * A person's name
 	 */
-	@Column
+	@Column(nullable=false)
 	private String name;
 
 	/**
 	 * A person's email
 	 */
-	@Column
+	@Column(unique=true)
 	private String email;
 
 	/**
 	 * A hashed password
 	 */
-	@Column
+	@Column(nullable=false)
 	private String password;
 
 	/**
@@ -45,6 +63,30 @@ public class Person {
 	 */
 	@Column
 	private String biography;
+	
+	/**
+	 * Cookie to track login
+	 */
+	@Column
+	private String cookie;
+	
+	/**
+	 * Role that the user is assigned (0 = user, 1 = mod, 2 = admin);
+	 */
+	@Column(nullable=false)
+	private Integer role;
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "listuser")
+	private List<Userlist> lists = new ArrayList<>();
+	
+	/**
+	 * get the unique identifier of a person
+	 * @return
+	 */
+	public Integer getId() {
+		return id;
+	}
 
 	/**
 	 * Get's the person's username
@@ -53,6 +95,15 @@ public class Person {
 	 */
 	public String getUsername() {
 		return username;
+	}
+
+	/**
+	 * Change a person's username
+	 * 
+	 * @param username new username
+	 */
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	/**
@@ -134,5 +185,86 @@ public class Person {
 	 */
 	public void setBiography(String biography) {
 		this.biography = biography;
+	}
+
+	/**
+	 * @return the cookie
+	 */
+	public String getCookie() {
+		return cookie;
+	}
+
+	/**
+	 * @param cookie the cookie to set
+	 */
+	public void setCookie(String cookie) {
+		this.cookie = cookie;
+	}
+
+	/**
+	 * @return the role
+	 */
+	public Integer getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(Integer role) {
+		this.role = role;
+	}
+
+	/**
+	 * @return the lists
+	 */
+	public List<Userlist> getLists() {
+		return lists;
+	}
+
+	/**
+	 * @param lists the lists to set
+	 */
+	public void setLists(List<Userlist> lists) {
+		this.lists = lists;
+	}
+	
+	/**
+	 * Updates the person with the given person's info. Does not change ID.
+	 * 
+	 * @param person person to update the called object with.
+	 */
+	public void update(Person person) {
+		if (person.getUsername() != null) {
+			this.username = person.getUsername();
+		}
+		
+		if (person.getName() != null) {
+			this.name = person.getName();
+		}
+		
+		if (person.getEmail() != null) {
+			this.email = person.getEmail();
+		}
+		
+		if (person.getPassword() != null) {
+			this.password = person.getPassword();
+		}
+		
+		if (person.getBiography() != null) {
+			this.biography = person.getBiography();
+		}
+		
+		if (person.getCookie() != null) {
+			this.cookie = person.getCookie();
+		}
+		
+		if (person.getRole() != null) {
+			this.role = person.getRole();
+		}
+		
+		if (person.getLists() != null && !person.getLists().isEmpty()) {
+			this.lists = person.getLists();
+		}
 	}
 }
