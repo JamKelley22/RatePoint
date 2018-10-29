@@ -216,6 +216,7 @@ class POI extends React.Component {
         overflowY: this.state.descriptionScrollState
     };
     let poi = this.props.poi;
+    //console.log(poi);
 
     if(poi == null) {
       return (
@@ -231,7 +232,7 @@ class POI extends React.Component {
         <div className='poi__upper'>
           <h1>{poi.name}</h1>
           <POICarousel
-            images={poi.images}
+            images={poi.pictures}
             name={poi.name}
           />
         </div>

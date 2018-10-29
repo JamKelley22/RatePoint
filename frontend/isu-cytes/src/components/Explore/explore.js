@@ -28,7 +28,6 @@ class Explore extends React.Component {
   }
 
   onPOICardClick = (poi) => {
-    console.log("onPOICardClick");
     //Update Redux
     this.props.Actions.setPOI(poi);
     //Push new history
@@ -41,6 +40,8 @@ class Explore extends React.Component {
         <POICard
           title={poi.name}
           key={i}
+          pic={poi.pictures.length > 0 ? poi.pictures[0] : null}
+          rating={poi.rating}
           onClick={() => this.onPOICardClick(poi)}
         />
       )

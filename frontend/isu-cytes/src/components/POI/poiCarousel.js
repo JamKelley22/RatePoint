@@ -10,37 +10,47 @@ class POICarousel extends React.Component {
     centerPic: undefined
   }
 
+  componentDidMount = () => {
+    this.updatePics(this.props.images);
+  }
+
+/*
   componentWillReceiveProps = (nextProps) => {
-    if(nextProps.images === undefined) {
+    this.updatePics(nextProps.images);
+  }
+*/
+  updatePics = (images) => {
+    console.log(images);
+    if(this.props.images === undefined) {
       console.error("Problem loading images");
       return;
     }
-    switch (nextProps.images.length) {
+    switch (this.props.images.length) {
       case 0:
         console.log("0");
         break;
       case 1:
         console.log("1");
         this.setState({
-          leftPic: nextProps.images[0],
-          centerPic: nextProps.images[0],
-          rightPic: nextProps.images[0],
+          leftPic: this.props.images[0],
+          centerPic: this.props.images[0],
+          rightPic: this.props.images[0],
         })
         break;
       case 2:
         console.log("2");
         this.setState({
-          leftPic: nextProps.images[1],
-          centerPic: nextProps.images[0],
-          rightPic: nextProps.images[1],
+          leftPic: this.props.images[1],
+          centerPic: this.props.images[0],
+          rightPic: this.props.images[1],
         })
         break;
       case 3:
         console.log("3");
         this.setState({
-          leftPic: nextProps.images[1],
-          centerPic: nextProps.images[0],
-          rightPic: nextProps.images[2],
+          leftPic: this.props.images[1],
+          centerPic: this.props.images[0],
+          rightPic: this.props.images[2],
         })
         break;
       default:

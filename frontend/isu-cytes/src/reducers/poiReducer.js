@@ -2,7 +2,6 @@ import * as types from '../actions/actionTypes.js';
 import {initialState} from './initialState.js'
 
 const poiReducer = (state=initialState.poi, action) => {
-  console.log("POI Reducer");
   switch (action.type) {
     case types.SET_POI:
       console.log(action.payload);

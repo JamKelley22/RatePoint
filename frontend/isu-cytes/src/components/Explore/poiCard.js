@@ -7,10 +7,14 @@ const POICard = (props) => {
   return (
     <div className='poiCard' onClick={props.onClick}>
       <h1>{props.title}</h1>
-      <img src={props.pic} alt='site'/>
-      <Rating
-        number={props.rating}
-      />
+      <div className='poiCardImg'>
+        <img src={props.pic} alt='site'/>
+      </div>
+      <div className='poiCardRating'>
+        <Rating
+          number={props.rating}
+        />
+      </div>
     </div>
   )
 }
