@@ -78,12 +78,13 @@ class Suggest extends React.Component {
                                     <br/><br/>
                                     <b>Description:</b>
                                     <br/>
-                                    <input maxLength="32" autoComplete="off" value={this.state.description}
-                                           onChange={this.descriptionChange} onBlur={this.checkError}/>
+                                    <textarea type="text" value={this.state.body} cols="100" rows="5" id="discriptBox"
+                                              onChange={this.descriptionChange} autoComplete="off" maxLength="500"/>
                                     <br/><br/>
                                     <b>Image:</b>
                                     <br/>
                                     <input type="file" onChange={(e)=>this.fileChange(e)}/>
+                                    <br/>
                                     <img src={this.state.file}/>
                                 </div>
                                 <div id="suggestMaps">
