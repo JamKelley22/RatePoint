@@ -1,6 +1,7 @@
 import * as types from '../actions/actionTypes.js';
+import {initialState} from './initialState.js'
 
-const userReducer = (state={}, action) => {
+const userReducer = (state=initialState.user, action) => {
   switch (action.type) {
     case types.LOGIN:
       console.log("userReducer == Login");
