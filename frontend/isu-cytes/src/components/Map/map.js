@@ -22,17 +22,22 @@ class Map extends React.Component {
       <div className = 'map'>
         <Navagation/>
         <div className='mapContainer'>
-          <div className='rangeFilter'>
-            <span>Range:</span>
-            <input
-              type="range"
-              min="1"
-              max="5"
-              value={this.state.rangeSliderValue}
-              onChange={this.handleSliderChange}
-            />
-          >= {this.state.rangeSliderValue}
-          </div>
+          {
+            /*
+            <div className='rangeFilter'>
+              <span>Range:</span>
+              <input
+                type="range"
+                min="1"
+                max="5"
+                value={this.state.rangeSliderValue}
+                onChange={this.handleSliderChange}
+              />
+            >= {this.state.rangeSliderValue}
+            </div>
+            */
+          }
+
 
           <MapContainer
             ratingFilterNum={this.state.rangeSliderValue}

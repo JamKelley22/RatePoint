@@ -1,42 +1,29 @@
 import React from 'react'
 import {Map, InfoWindow, Marker, GoogleApiWrapper, InfoBox} from 'google-maps-react';
+import { connect } from 'react-redux'
+import {bindActionCreators, compose} from 'redux';
 
+import { history, routes } from '../../history.js'
+
+import { POIAPI } from '../../api/'
+import * as Actions from '../../actions/actions.js'
 
 import { Navagation } from '../index.js'
 
 import './map.scss'
 
-//For now lets just generate some fake data
-let fakePOIData = [
-  {
-    approved: true,
-    coordinates: { lat: 42.028770, lng: -93.618055 },
-    description: 'POI 1 Desc',
-    id: 19,
-    name: 'POI 1',
-    rating: 1
-  },
-  {
-    approved: true,
-    coordinates: { lat: 42.026770, lng: -93.617055 },
-    description: 'POI 2 Desc',
-    id: 39,
-    name: 'POI 2',
-    rating: 3
-  },
-  {
-    approved: true,
-    coordinates: { lat: 42.023770, lng: -93.616055 },
-    description: 'POI 3 Desc',
-    id: 49,
-    name: 'POI 3',
-    rating: 5
-  }
-]
+/*
+approved: true,
+coordinates: { lat: 42.028770, lng: -93.618055 },
+description: 'POI 1 Desc',
+id: 19,
+name: 'POI 1',
+rating: 1
+*/
 
 class MapContainer extends React.Component {
   state = {
-    markers: []
+    pois: []
   }
 
   componentDidMount = () => {
@@ -44,19 +31,17 @@ class MapContainer extends React.Component {
   }
 
   getPOIS = async() => {
-    let response = await fetch('http://proj309-tg-03.misc.iastate.edu:8080/pois/get');
-    let poiData = await response.json();
-    //Once this actually has correct coords in here we can map through them and render point s on map
-    console.log(poiData);
-
+    let pois = await POIAPI.GetPOIs();
 
     this.setState({
-      markers: fakePOIData.filter(poi => {
+      /*markers: pois.filter(poi => {
         return poi.rating > this.props.ratingFilterNum;
-      })
+      })*/
+      pois: pois
     })
   }
 
+  /*
   componentWillReceiveProps() {//Apparently this is being depracated...
     let filteredPOIS = fakePOIData.filter(poi => {
       return poi.rating >= this.props.ratingFilterNum;
@@ -66,9 +51,14 @@ class MapContainer extends React.Component {
       markers: filteredPOIS
     })
   }
+  */
 
-  onPOIClick = (marker) => {
-    alert(marker.name);
+  onPOIClick = (poi) => {
+    //alert(poi.name);
+    //Update Redux
+    this.props.Actions.setPOI(poi);
+    //Push new history
+    history.push(routes._POI);
   }
 
   render () {
@@ -76,21 +66,29 @@ class MapContainer extends React.Component {
       maxWidth: '100%',
       maxHeight: '92%'
     }
+    let ISU = {
+      lat: 42.026682,
+      lng: -93.646449
+    }
     return (
       <Map
         google={this.props.google}
-        zoom={14}
+        zoom={16}
         style={style}
-        initialCenter={{
-            lat: 42.026770,
-            lng: -93.617055
-          }}
+        initialCenter={ISU}
         >
         {
-          this.state.markers.map((marker, i) => {
+          this.state.pois.map((marker, i) => {
+            let coordinatesArr = marker.coordinates.split(',');
+            let lat = coordinatesArr[0];
+            let long = coordinatesArr[1];
+            let coordinates = {
+              lat: lat,
+              lng: long
+            }
             return (
               <Marker
-                position={marker.coordinates}
+                position={coordinates}
                 key={i}
                 onClick={() => this.onPOIClick(marker)}
               />
@@ -102,6 +100,21 @@ class MapContainer extends React.Component {
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: ('AIzaSyC5q54v6n33maflm2zG1WjVrD43AOYa6YM')
-})(MapContainer);
+function mapStateToProps(state) {
+  return {
+
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    Actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+const composedHoc = compose(
+    connect(mapStateToProps,mapDispatchToProps),
+    GoogleApiWrapper({apiKey: ('AIzaSyC5q54v6n33maflm2zG1WjVrD43AOYa6YM')})
+)(MapContainer);
+
+export default composedHoc;
