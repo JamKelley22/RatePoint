@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cs309.isucytes.poi.POI;
 import cs309.isucytes.poi.POIRepository;
+import cs309.isucytes.review.ReviewRepository;
 
 
 @CrossOrigin
@@ -25,6 +26,8 @@ public class POIController {
 	
 	@Autowired
     POIRepository POIRepository;
+	@Autowired
+	ReviewRepository reviewRepository;
 	
 	/**
 	 * Returns a POI, if any, given an id
@@ -90,5 +93,15 @@ public class POIController {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		}
 	}
-
+	
+	/**
+	 * Calculates the average rating of all reviews for a POI given its id.
+	 * 
+	 * @return the average rating of all reviews for a POI.
+	 */
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.GET, path = "/{id}/average")
+	public Double getAverageRating(@PathVariable("id") Integer id){
+		return reviewRepository.avgReviewsByPoiId(id);
+	}
 }
