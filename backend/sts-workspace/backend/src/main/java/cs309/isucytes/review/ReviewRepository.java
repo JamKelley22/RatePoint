@@ -3,6 +3,8 @@ package cs309.isucytes.review;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,5 +16,8 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 	// Only need to define methods here if we need specific 
 	// queries. Fine to leave blank for now
 	
-	public List<Review> findByPoi(Integer poi);
+	public List<Review> findByPoi(Integer poi);	
+	
+	@Query("select avg(r.rating) from Review r where r.poi = :poi")
+	public Double avgReviewsByPoiId(@Param("poi") Integer poi);
 }
