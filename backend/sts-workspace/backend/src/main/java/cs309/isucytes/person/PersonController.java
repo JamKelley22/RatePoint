@@ -135,4 +135,25 @@ public class PersonController {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	/**
+	 * Verify's a person login by their username
+	 * 
+	 * @param username username to search for
+	 * @return Person if the login succeeds, 404 if no user found, 401 if incorrect
+	 *         password if login fails (i.e. password does not match.
+	 */
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.PUT, path = "/verify")
+	public ResponseEntity<Person> verifyPersonLogic(@RequestBody Person person) {
+		Optional<Person> getPerson = personRepository.findByUsername(person.getUsername());
+		if (getPerson.isPresent()) {
+			if (getPerson.get().getPassword().equals(person.getPassword())) {
+				return new ResponseEntity<>(getPerson.get(), HttpStatus.OK);
+			}
+			return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+		} else {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
+	}
 }
