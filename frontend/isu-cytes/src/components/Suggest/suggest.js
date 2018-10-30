@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import GoogleMap from 'google-map-react';
-import {Navagation} from '../index.js'
-
+import {Navagation} from '../index.js';
+import { POIAPI } from '../../api/';
 import './suggest.scss'
 
 class Suggest extends React.Component {
@@ -33,22 +33,8 @@ class Suggest extends React.Component {
 
     createRequest = async (e) => {
         e.preventDefault();
-        let body = JSON.stringify({
-            placeName: this.state.name,
-            placeDescription: this.state.description,
-            placeLat: this.state.markerLat,
-            placeLng: this.state.markerLng
-        });
-        console.log(this.state.file);
-        /*let response = await fetch('http://proj309-tg-03.misc.iastate.edu:8080/people/new', {
-         method: 'POST',
-         headers: {
-         'Accept': 'application/json',
-         'Content-Type': 'application/json'
-         },
-         body: body
-         });*/
-        /*this.setState({name: '', description: ''});*/
+        let response = await POIAPI.submitPOI(" ",this.state.name,this.state.file,this.state.description,this.state.markerLng+" "+this.state.markerLat);
+        this.setState({name: '', description: '',markerLat: 0, markerLng: 0, file: undefined});
     };
 
     setMarker = ({lat, lng}) => {
@@ -59,7 +45,7 @@ class Suggest extends React.Component {
         event.preventDefault();
         this.setState({file: URL.createObjectURL(event.target.files[0])});
         console.log(this.state.file);
-    }
+    };
 
     render() {
         return (
