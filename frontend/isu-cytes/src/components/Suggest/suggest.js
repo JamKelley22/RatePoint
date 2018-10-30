@@ -33,7 +33,7 @@ class Suggest extends React.Component {
 
     createRequest = async (e) => {
         e.preventDefault();
-        let response = await POIAPI.submitPOI(" ",this.state.name,this.state.file,this.state.description,this.state.markerLng+" "+this.state.markerLat);
+        let response = await POIAPI.submitPOI(" ",this.state.name,this.state.file,this.state.description,this.state.markerLat+","+this.state.markerLng);
         this.setState({name: '', description: '',markerLat: 0, markerLng: 0, file: undefined});
     };
 
