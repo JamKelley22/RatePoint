@@ -29,7 +29,7 @@ public class ReviewController {
 	 */
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> addNewReview(@RequestBody Review review) {
+	public ResponseEntity<Review> addNewReview(@RequestBody Review review) {
 		if(this.getReviewByID(review.getId()).getStatusCode() == HttpStatus.NOT_FOUND) {
 			reviewRepository.save(review);
 			Optional<Review> getReview = reviewRepository.findById(review.getId());
@@ -66,7 +66,7 @@ public class ReviewController {
 	 */
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}")
-	public ResponseEntity<?> getReviewByID(@PathVariable("id") int id){
+	public ResponseEntity<Review> getReviewByID(@PathVariable("id") int id){
 		Optional<Review> getReview = reviewRepository.findById(id);
 		if(getReview.isPresent()) {
 			return new ResponseEntity<>(getReview.get(), HttpStatus.OK);
@@ -82,10 +82,28 @@ public class ReviewController {
 	 */
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
-	public ResponseEntity<?> deleteReviewByID(@PathVariable("id") Integer id) {
+	public ResponseEntity<Review> deleteReviewByID(@PathVariable("id") Integer id) {
 		Optional<Review> getReview = reviewRepository.findById(id);
 		if(getReview.isPresent()) {
 			reviewRepository.deleteById(id);
+			return new ResponseEntity<>(getReview.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	/**
+	 * Updates a review, if any, in the database given an id.
+	 * @param id id to search for
+	 * @return Updated review and an HTTP status. 
+	 */
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.PUT, path = "/{id}")
+	public ResponseEntity<Review> updateReview(@PathVariable("id") Integer id, @RequestBody Review review) {
+		Optional<Review> getReview = reviewRepository.findById(id);
+		if(getReview.isPresent()) {
+			getReview.get().updateReview(review);
+			reviewRepository.save(getReview.get());
 			return new ResponseEntity<>(getReview.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
