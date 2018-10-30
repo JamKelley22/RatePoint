@@ -77,5 +77,23 @@ public class POI {
 	public void setApproved(Boolean approved) {
 		this.approved = approved;
 	}
+	
+	public void update(POI poi) {
+		if(poi.getName() != null ) {
+			this.name = poi.getName();
+		}
+		
+		if(poi.getDescription() != null ) {
+			this.description = poi.getDescription();
+		}
+		
+		if(poi.getCoordinates() != null ) {
+			this.coordinates = poi.getCoordinates();
+		}
+		
+		if(poi.getApproved() != null ) {
+			this.approved = poi.getApproved();
+		}
+	}
 }
 

@@ -67,4 +67,21 @@ public class Review {
 		this.body = body;
 	}
 	
+	public void updateReview(Review review) { 
+		if (review.getPoi() != null) {
+			this.poi = review.getPoi();
+		}
+		
+		if (review.getRating() != null) {
+			this.rating = review.getRating();
+		}
+		
+		if (review.getTitle() != null) {
+			this.title = review.getTitle();
+		}
+		
+		if (review.getBody() != null) {
+			this.body = review.getBody();
+		}
+	}	
 }
