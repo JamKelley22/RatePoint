@@ -1,5 +1,5 @@
 import React from 'react';
-import GoogleMap from 'google-map-react';
+import GoogleMap from 'google-maps-react';
 import {Navagation} from '../index.js';
 import { POIAPI } from '../../api/';
 import './suggest.scss'
