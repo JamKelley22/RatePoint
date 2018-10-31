@@ -54,6 +54,29 @@
   color: #143600;
 }
 
+.navagation__searchbar__results {
+  position: relative;
+  background-color: $secondary_color;
+  width: 80%;
+  z-index: 100;
+  border: 2px solid black;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  color: $primary_color;
+}
+.searchResult {
+  cursor: pointer;
+}
+.searchResult:hover {
+  background-color: darken($secondary_color, 10%);
+}
+.searchHeading {
+  width: 100%;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .navagation__link {
   color: #99AE8D;
   text-decoration: none;

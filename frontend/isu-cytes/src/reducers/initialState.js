@@ -2,5 +2,7 @@ export const initialState = {
   poi: {
     currPOI: null
   },
-  user: null
+  user: {
+    currUser: null
+  }
 }

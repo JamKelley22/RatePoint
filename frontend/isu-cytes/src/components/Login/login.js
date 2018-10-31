@@ -1,70 +1,57 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import {bindActionCreators} from 'redux';
 import bcrypt from 'bcryptjs';
 
 import Navagation from '../Nav/navagation.js'
 import { history, routes } from '../../history.js'
+import * as Actions from '../../actions/actions.js'
 
 import './login.css'
 
 class Login extends React.Component {
   state = {
     username: '',
-    pass1: ''
+    pass: ''
   }
-
-  loginRequest = async(e) => {
-    e.preventDefault();
-    const formdata = new FormData(e.target);
-    let body = JSON.stringify({
-      username: this.state.username,
-      password: this.state.pass1,
-    });
-    // TODO: Update Fetch
-    /*
-    let response = await fetch('http://proj309-tg-03.misc.iastate.edu:8080/people/validate', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: body
-    });
-    */
-    //console.log(response);
-    this.setState({username:'',pass1:''});
-  };
 
   usernameChange = (e) => {
     this.setState({ username: e.target.value });
   };
 
 
-  pass1Change = (e) => {
-    this.setState({ pass1: e.target.value });
+  passChange = (e) => {
+    this.setState({ pass: e.target.value });
   };
 
-  loginRequest = async(e) => {
+  onSubmitLogin = async(e) => {
       e.preventDefault();
-      bcrypt.hash(this.state.pass1, 10, (err, hash) => {
-          console.log(hash);
-          this.setState({pass1:hash});
-      });
-      let body = JSON.stringify({
-          username: this.state.username,
-          password: this.state.pass1,
-      });
-      let response = await fetch('http://proj309-tg-03.misc.iastate.edu:8080/people/validate', {
-          method: 'POST',
-          headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-          },
-          body: body
-      });
-      console.log(response);
-      this.setState({username:'',pass1:''});
+      if(this.formHasError()) {
+        console.error("Form has error");
+        return;
+      }
+      this.hashPasswordThenLogin(this.state.pass);
   };
+
+  formHasError = () => {
+    //Do error checking
+    //Fields not empty
+    //password length
+  }
+
+  hashPasswordThenLogin = async(password) => {
+    bcrypt.hash(password, 10, (err, hash) => this.doLoginRequest(err,hash));
+  }
+
+  doLoginRequest = async(err,hash) => {
+    this.props.Actions.loginUser(this.state.username,hash)
+    .then(res => {
+      alert("Logged In");
+    })
+    .catch(err => {
+      alert("Log in error: " + err);
+    })
+  }
 
   render(){
       return(
@@ -73,15 +60,15 @@ class Login extends React.Component {
               <div id="containerLogin">
                   <div id="formLogin">
                       <b id="loginHeader">Login</b>
-                      <form onSubmit={(e) => this.loginRequest(e)} noValidate autoComplete="off">
+                      <form onSubmit={(e) => this.onSubmitLogin(e)} noValidate autoComplete="off">
                           <br/>
                           <b>username:</b>
                           <input maxLength="20" autoComplete="off" value={this.state.username}
                                  onChange={this.usernameChange} />
                           <br/><br/>
                           <b>password:</b>
-                          <input type="password" maxLength="32" autoComplete="off" id="pass1"
-                                 onChange={this.pass1Change} onBlur={this.checkError}/>
+                          <input type="password" maxLength="32" autoComplete="off" id="pass"
+                                 onChange={this.passChange} onBlur={this.checkError}/>
                           <br/><br/>
                           <input type="submit" value="Login"/>
                       </form>
@@ -94,16 +81,14 @@ class Login extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user.currUser
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    login: (info) => {
-      dispatch({type: 'LOGIN', payload: info})
-    }
-  }
+    Actions: bindActionCreators(Actions, dispatch)
+  };
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Login);

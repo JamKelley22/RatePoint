@@ -110,3 +110,26 @@ export const SubmitPerson = async(id,username,email,name,biography,password) => 
     return data;
   }
 }
+
+export const VerifyPerson = async(username,password) => {
+  let error, response;
+  [error, response] = await to(fetch(`${BASE_URL}/verify`, {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: {
+      username: username,
+      password: password
+    }
+  }));
+  if(error) {
+    console.error(error);
+    return {error: error}
+  }
+  else {
+    let data = await response.json();
+    return data;
+  }
+}
