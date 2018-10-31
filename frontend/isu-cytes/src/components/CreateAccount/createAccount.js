@@ -32,30 +32,38 @@ class CreateAccount extends React.Component {
             });
             return true;
         }
-        let symbol = /[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(pass);
+        let symbol = /[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/.test(pass);
         if (!symbol) {
             this.setState({
                 error: 'password must include at least one symbol'
             });
             return true;
         }
-        let symbol2 = /abcdefghijklmnopqrstuvwxyz/g.test(pass);
+        let symbol2 = /[a-z]/.test(pass);
         if (!symbol2) {
             this.setState({
                 error: 'password must include at least one lower case character'
             });
             return true;
         }
-        let symbol3 = /ABCDEFGHIJKLMNOPQRSTUVWXYZ/g.test(pass);
+        let symbol3 = /[A-Z]/.test(pass);
         if (!symbol3) {
             this.setState({
                 error: 'password must include at least one upper case character'
             });
             return true;
         }
+        let symbol4 = /[0-9]/.test(pass);
+        if (!symbol4) {
+            this.setState({
+                error: 'password must include at least one number'
+            });
+            return true;
+        }
         this.setState({
             error: null
         });
+        return false;
         //Check email valid format
         //Check username for foul language
     };
@@ -145,11 +153,11 @@ class CreateAccount extends React.Component {
 
     pass1Change = (e) => {
       this.setState({ pass1: e.target.value });
-    }
+    };
 
     pass2Change = (e) => {
       this.setState({ pass2: e.target.value });
-    }
+    };
 
     render(){
         return(

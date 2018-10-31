@@ -18,7 +18,6 @@ import cs309.isucytes.userlist.Userlist;
 
 @RestController
 @CrossOrigin
-@RequestMapping(path = "/people")
 public class PersonController {
 
 	@Autowired
@@ -31,7 +30,7 @@ public class PersonController {
 	 * @return success message upon completion.
 	 */
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST, path = "/people")
 	public ResponseEntity<Person> newPerson(@RequestBody Person person) {
 		if (this.getPersonByUsername(person.getUsername()).getStatusCode() == HttpStatus.NOT_FOUND) {
 			personRepository.save(person);
@@ -47,7 +46,7 @@ public class PersonController {
 	 * @return JSON array of all people in the DB
 	 */
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET, path = "/people")
 	public List<Person> getAllPeople() {
 		return personRepository.findAll();
 	}
@@ -59,7 +58,7 @@ public class PersonController {
 	 * @return Person with the username, if they exist.
 	 */
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET, path = "/{username}")
+	@RequestMapping(method = RequestMethod.GET, path = "/people/{username}")
 	public ResponseEntity<Person> getPersonByUsername(@PathVariable("username") String username) {
 		Optional<Person> getPerson = personRepository.findByUsername(username);
 		if (getPerson.isPresent()) {
@@ -76,7 +75,7 @@ public class PersonController {
 	 * @return username if deleted, nothing if not found, along with HTTP codes
 	 */
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.DELETE, path = "/{username}")
+	@RequestMapping(method = RequestMethod.DELETE, path = "/people/{username}")
 	public ResponseEntity<Person> deletePersonByUsername(@PathVariable("username") String username) {
 		Optional<Person> getPerson = personRepository.findByUsername(username);
 		if (getPerson.isPresent()) {
@@ -88,7 +87,7 @@ public class PersonController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.POST, path = "/{username}/lists")
+	@RequestMapping(method = RequestMethod.POST, path = "/people/{username}/lists")
 	public ResponseEntity<Person> addNewUserList (@PathVariable("username") String username, @RequestBody Userlist userlist) {
 		Optional<Person> getPerson = personRepository.findByUsername(username);
 		if (getPerson.isPresent()) {
@@ -112,7 +111,7 @@ public class PersonController {
 	 *         conflict.
 	 */
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.PUT, path = "/{username}")
+	@RequestMapping(method = RequestMethod.PUT, path = "/people/{username}")
 	public ResponseEntity<Person> updatePerson (@PathVariable("username") String username, @RequestBody Person person) {
 		Optional<Person> getPerson = personRepository.findByUsername(username);
 		if (getPerson.isPresent()) {
@@ -131,6 +130,27 @@ public class PersonController {
 			personRepository.save(getPerson.get());
 			
 			return new ResponseEntity<>(getPerson.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	/**
+	 * Verify's a person login by their username
+	 * 
+	 * @param username username to search for
+	 * @return Person if the login succeeds, 404 if no user found, 401 if incorrect
+	 *         password if login fails (i.e. password does not match.
+	 */
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.PUT, path = "/verify")
+	public ResponseEntity<Person> verifyPersonLogic(@RequestBody Person person) {
+		Optional<Person> getPerson = personRepository.findByUsername(person.getUsername());
+		if (getPerson.isPresent()) {
+			if (getPerson.get().getPassword().equals(person.getPassword())) {
+				return new ResponseEntity<>(getPerson.get(), HttpStatus.OK);
+			}
+			return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
 		} else {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		}

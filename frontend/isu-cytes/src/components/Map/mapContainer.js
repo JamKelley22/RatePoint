@@ -28,7 +28,7 @@ class MapContainer extends React.Component {
 
   componentDidMount = () => {
     this.getPOIS();
-  }
+  };
 
   getPOIS = async() => {
     let pois = await POIAPI.GetPOIs();
@@ -39,13 +39,13 @@ class MapContainer extends React.Component {
       })*/
       pois: pois
     })
-  }
+  };
 
   /*
   componentWillReceiveProps() {//Apparently this is being depracated...
     let filteredPOIS = fakePOIData.filter(poi => {
       return poi.rating >= this.props.ratingFilterNum;
-    })
+    });
     //console.log(filteredPOIS);
     this.setState({
       markers: filteredPOIS

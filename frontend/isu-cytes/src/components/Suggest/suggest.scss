@@ -1,0 +1,57 @@
+@import '../../mediaQuery';
+
+#containerSuggest{
+  background-color: #99AE8D;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#suggestHeader{
+  margin-top: 3%;
+  margin-bottom: 3%;
+  font-size: xx-large;
+  text-align: center;
+}
+
+#suggestForm {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: grey;
+}
+
+#row1 {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 500px;
+}
+
+#row2 {
+  flex-direction: row;
+  height: 100%;
+  text-align: center;
+  margin-top: 2%;
+}
+
+#suggestMaps {
+  width: 50%;
+  flex-direction: column;
+}
+
+#suggestNotMaps {
+  width: 50%;
+  flex-direction: column;
+  margin-left: 5%;
+}
+
+#actualMap{
+  height: 95%;
+  width: 80%;
+}
+
+#discriptBox{
+  resize: none;
+}

@@ -50,7 +50,7 @@ public class POIController {
 	 * Adds a POI to the db
 	 * 
 	 * @param poi New POI to be added
-	 * @return a string that is returned on success
+	 * @return an HTTP status code 
 	 */
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST)
@@ -80,7 +80,7 @@ public class POIController {
 	 * Deletes a POI, if any, that matches id
 	 * 
 	 * @param id id of the POI to be deleted
-	 * @return a String that is returned on success for deleting a POI
+	 * @return an HTTP status code
 	 */
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
@@ -88,6 +88,26 @@ public class POIController {
 		Optional<POI> getPOI = POIRepository.findById(id);
 		if(getPOI.isPresent()) {
 			POIRepository.deleteById(id);
+			return new ResponseEntity<>(getPOI.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	/**
+	 * Update a POI, if any, that matches id
+	 * 
+	 * @param id id of the POI to be updated
+	 * @return an HTTP status code
+	 * 	 
+	 */
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.PUT, path = "/{id}")
+	public ResponseEntity<POI> updatePOI(@PathVariable("id") Integer id, @RequestBody POI poi) {
+		Optional<POI> getPOI = POIRepository.findById(id);
+		if(getPOI.isPresent()) {
+			getPOI.get().update(poi);
+			POIRepository.save(getPOI.get());
 			return new ResponseEntity<>(getPOI.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
