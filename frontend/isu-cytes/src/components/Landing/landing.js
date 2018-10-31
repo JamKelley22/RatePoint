@@ -35,6 +35,9 @@ class Landing extends React.Component {
               to={routes._MAP}>
               Map
             </NavLink>
+            <div href='#' className='link sitetitle'>
+              RatePoint
+            </div>
             <NavLink
               className='link'
               activeClassName='is-active'

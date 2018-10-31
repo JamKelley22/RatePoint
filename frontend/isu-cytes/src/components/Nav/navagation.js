@@ -136,7 +136,7 @@ class Navigation extends React.Component {
             className='navagation__link'
             activeClassName='navagation__link--active'
             to={routes._HOME}>
-            <h3>ISU Cytes</h3>
+            <h3>RatePoint</h3>
           </NavLink>
         </div>
         <div className='navagation__links'>

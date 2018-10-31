@@ -41,6 +41,7 @@ $step: 8;
 .landingNavagation {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .link {
   text-decoration: none;
@@ -52,6 +53,15 @@ $step: 8;
 .link:hover {
   text-decoration: underline;
   color: white;
+}
+.sitetitle {
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 3px 3px 5px gray;
+  &:hover {
+    text-decoration: none;
+  }
 }
 .centerInfo {
   display: flex;
