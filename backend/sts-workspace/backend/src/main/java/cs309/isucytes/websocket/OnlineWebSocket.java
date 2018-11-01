@@ -1,11 +1,11 @@
-package websocket;
+package cs309.isucytes.websocket;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 @Configuration
-public class ReviewWebSocket {
+public class OnlineWebSocket {
 	@Bean
 	public ServerEndpointExporter serverEndpointExporter() {
 		return new ServerEndpointExporter();

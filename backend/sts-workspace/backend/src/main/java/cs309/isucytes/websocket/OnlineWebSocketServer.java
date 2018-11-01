@@ -1,4 +1,4 @@
-package websocket;
+package cs309.isucytes.websocket;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @ServerEndpoint("/websocket/onlineusers/{username}")
 @Component
-public class ReviewWebSocketServer {
+public class OnlineWebSocketServer {
 
 	// Store all socket session and their corresponding username.
 	private static Map<Session, String> sessionUsernameMap = new HashMap<>();
