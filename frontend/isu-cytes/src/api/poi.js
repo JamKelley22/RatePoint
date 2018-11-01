@@ -109,3 +109,22 @@ export const SubmitPOI = async(userID,name,pictures,description,coordinates) => 
     return data;
   }
 }
+
+export const GetPOIRating = async(poiID) => {
+  let error, response;
+  [error, response] = await to(fetch(`${BASE_URL}/pois/${poiID}/average`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  }));
+  if(error) {
+    console.error(error);
+    return {error: error}
+  }
+  else {
+    let data = await response.json();
+    return data;
+  }
+}

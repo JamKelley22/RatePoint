@@ -5,11 +5,8 @@ import {bindActionCreators} from 'redux';
 import { Navagation } from '../index.js'
 import POICard from './poiCard.js'
 import Moth from '../../images/moth.jpg'
-
 import { history, routes } from '../../history.js'
-
 import { POIAPI } from '../../api/'
-
 import * as Actions from '../../actions/actions.js'
 
 import './explore.scss'
@@ -21,10 +18,26 @@ class Explore extends React.Component {
 
   componentDidMount = async() => {
     let pois = await POIAPI.GetPOIs();
-    console.log(pois);
+    let newPOIs = await this.getPOIsWithRatings(pois);
+    console.log(newPOIs);
     this.setState({
-      pois: pois
+      pois: newPOIs
     })
+  }
+
+  getPOIsWithRatings = async(pois) => {
+    let newPOIs = [];
+    for(var i = 0; i < pois.length; i++) {
+      let rating = await POIAPI.GetPOIRating(pois[i].id)
+      let newPOI = pois[i];
+      newPOI.rating = rating.averageRating
+      newPOIs.push(newPOI)
+    }
+    return newPOIs;
+  }
+
+  getPOIRating = async(id) => {
+      return await POIAPI.GetPOIRating(id)
   }
 
   onPOICardClick = (poi) => {
@@ -35,6 +48,7 @@ class Explore extends React.Component {
   }
 
   render () {
+    console.log(this.state.pois);
     let cards = this.state.pois.map((poi,i) => {
       return (
         <POICard
