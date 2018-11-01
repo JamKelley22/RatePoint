@@ -13,15 +13,13 @@ import {bindActionCreators} from 'redux';
 import { Redirect } from "react-router-dom";
 
 import { history, routes } from '../../history.js'
-
 import { Navagation } from '../index.js'
+import { ReviewAPI } from '../../api'
 
 import POICarousel from './poiCarousel.js'
 import Rating from './rating.js'
 import Tag from './tag.js'
 import Review from './review.js'
-
-import { FakeData } from './fakeData.js'
 
 import './poi.scss'
 
@@ -36,8 +34,8 @@ class POI extends React.Component {
     accessability: [],
     description: '',
     tags: [],
-    reviews: [],
     */
+    reviews: [],
     shareScreenState: false,
     descriptionScrollState: 'hidden',
     shareButtonClassName: 'poi__lower__button',
@@ -48,6 +46,24 @@ class POI extends React.Component {
 
   componentDidMount() {
     //this.fetchDataFromServer();
+    this.getReviews();
+  }
+
+  getReviews = async() => {
+    if(this.props.poi === null) {
+      console.error("Null POI");
+      return;
+    }
+
+    let reviews = await ReviewAPI.GetReviewsByPOI(this.props.poi.id)
+    if(reviews.Error) {
+      console.error(reviews.Error);
+      return;
+    }
+    this.setState({
+      reviews: reviews
+    })
+
   }
 
 /*
@@ -212,6 +228,7 @@ class POI extends React.Component {
   }
 
   render () {
+
     let descriptionStyle = {
         overflowY: this.state.descriptionScrollState
     };
@@ -273,7 +290,19 @@ class POI extends React.Component {
                 </NavLink>
               </div>
               <div id='allReviews'>
-                {/*this.getReviews()*/}
+                {
+                  this.state.reviews.map((review,i) => {
+                    return (
+                      <Review
+                        user={review.user}
+                        title={review.title}
+                        body={review.body}
+                        rating={review.rating}
+                        key={i}
+                      />
+                    );
+                  })
+                }
               </div>
             </div>
           </div>

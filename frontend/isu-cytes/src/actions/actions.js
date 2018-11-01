@@ -34,3 +34,7 @@ export function loginUser(username,password) {
 export function logoutUser() {
   return { type: actions.LOGOUT }
 }
+
+export function setAllPOIs(pois) {
+  return { type: actions.SET_ALL_POIS, payload: pois }
+}

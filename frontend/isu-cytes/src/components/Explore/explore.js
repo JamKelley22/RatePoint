@@ -13,31 +13,7 @@ import './explore.scss'
 
 class Explore extends React.Component {
   state = {
-    pois: []
-  }
 
-  componentDidMount = async() => {
-    let pois = await POIAPI.GetPOIs();
-    let newPOIs = await this.getPOIsWithRatings(pois);
-    console.log(newPOIs);
-    this.setState({
-      pois: newPOIs
-    })
-  }
-
-  getPOIsWithRatings = async(pois) => {
-    let newPOIs = [];
-    for(var i = 0; i < pois.length; i++) {
-      let rating = await POIAPI.GetPOIRating(pois[i].id)
-      let newPOI = pois[i];
-      newPOI.rating = rating.averageRating
-      newPOIs.push(newPOI)
-    }
-    return newPOIs;
-  }
-
-  getPOIRating = async(id) => {
-      return await POIAPI.GetPOIRating(id)
   }
 
   onPOICardClick = (poi) => {
@@ -49,7 +25,7 @@ class Explore extends React.Component {
 
   render () {
     console.log(this.state.pois);
-    let cards = this.state.pois.map((poi,i) => {
+    let cards = this.props.pois.map((poi,i) => {
       return (
         <POICard
           title={poi.name}
@@ -63,6 +39,7 @@ class Explore extends React.Component {
     return (
       <div id='exploreComponent'>
         <Navagation/>
+        <button onClick={this.props.refreshPOIs}>Refresh</button>
         <div id='explorePage'>
         {cards}
         </div>
@@ -73,7 +50,7 @@ class Explore extends React.Component {
 
 function mapStateToProps(state) {
   return {
-
+    pois: state.poi.allPOIs
   };
 }
 

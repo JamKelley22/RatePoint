@@ -6,6 +6,8 @@ const poiReducer = (state=initialState.poi, action) => {
     case types.SET_POI:
       console.log(action.payload);
       return {...state, currPOI: action.payload};
+    case types.SET_ALL_POIS:
+      return {...state, allPOIs: action.payload}
     default:
       return state;
   }
