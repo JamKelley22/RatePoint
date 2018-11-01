@@ -1,4 +1,5 @@
 @import '../../colors.scss';
+@import '../../mediaQuery';
 
 $step: 8;
 
@@ -135,4 +136,36 @@ $step: 8;
 }
 #tab4 {
   background-image: linear-gradient(darken( $secondary_color, 3*$step ),darken( $secondary_color, 4*$step ));
+}
+
+@include mobile {
+  .feature {
+    display: none;
+  }
+  .tagLine {
+    font-size: 6vw;
+  }
+  .subtitle {
+    font-size: 4vw;
+  }
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    button {
+      width: 80vw;
+      height: 8vh;
+    }
+  }
+}
+
+@include tablet {
+
+}
+
+@include laptop {
+
+}
+
+@include desktop {
+
 }

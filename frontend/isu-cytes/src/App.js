@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   Router,
   Route,
   Switch
-} from 'react-router-dom';
+} from 'react-router-dom'
 
 import {
   Landing,
@@ -20,25 +20,29 @@ import {
   CreateAccount,
   APIPage
 } from './components'
-import { history } from './history.js';
+import { history } from './history.js'
+import { WebSocket } from './api'
 
 import * as routes from './constants/routes';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faThumbsUp, faTrophy, faClock, faCar, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
-import './App.scss';
+import './App.scss'
 
-library.add(faThumbsUp, faTrophy, faClock, faCar, faCaretDown);
+library.add(faThumbsUp, faTrophy, faClock, faCar, faCaretDown)
 
 class App extends Component {
+  componentDidMount() {
+    WebSocket.connect("JoeMama")
+  }
+
   render() {
     return (
       <Router history={history}>
         <div className="App">
           <Switch>
             <Route exact path={routes._LANDING} component={() => <Landing/>} />
-
             <Route exact path={routes._HOME} component={() => <Home/>} />
             <Route exact path={routes._MAP} component={() => <Map/>} />
             <Route exact path={routes._EXPLORE} component={() => <Explore/>} />

@@ -10,6 +10,8 @@
   @include mobile {
     background-color: green;
     overflow: auto;
+    overflow-y: scroll; /* has to be scroll, not auto */
+    -webkit-overflow-scrolling: touch;
   }
 
   @include tablet {

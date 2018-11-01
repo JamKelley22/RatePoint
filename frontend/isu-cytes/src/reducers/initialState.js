@@ -3,6 +3,7 @@ export const initialState = {
     currPOI: null
   },
   user: {
-    currUser: null
+    currUser: null,
+    onlineusers: []
   }
 }
