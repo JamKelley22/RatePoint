@@ -4,27 +4,25 @@ import {initialState} from './initialState.js'
 const userReducer = (state=initialState.user, action) => {
   switch (action.type) {
     case types.LOGIN:
+      if (action.payload.error) {
+        return state;
+      }
       return {...state, currUser: action.payload};
     case types.LOGOUT:
       return {...state, currUser: null};
     case types.USER_DISCONNECT:
+    console.log(state);
       return {
         ...state,
-        user: {
-          ...state.user,
-          onlineusers: state.user.onlineusers.filter(user => user !== action.payload)
-        }
+        onlineusers: state.onlineusers.filter(user => user !== action.payload)
       };
     case types.USER_CONNECT:
       return {
         ...state,
-        user: {
-          ...state.user,
-          onlineusers: [
-            ...state.user.onlineusers,
-            action.payload
-          ]
-        }
+        onlineusers: [
+          ...state.onlineusers,
+          action.payload
+        ]
       };
     case types.GET_CURRENT_USERS:
       return state;
@@ -34,13 +32,3 @@ const userReducer = (state=initialState.user, action) => {
 }
 
 export default userReducer;
-
-/*
-user: [
-  ...state.todos,
-  {
-    text: action.text,
-    completed: false
-  }
-]
-*/

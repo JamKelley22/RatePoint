@@ -6,9 +6,11 @@ export function connect(username) {
   console.log(WEBSOCKET_URL + username);
   let ws = new WebSocket(WEBSOCKET_URL + username);
 
-  ws.onconnect = (event) => {
-    console.log("===OnConnect===");
-    console.log(event.data);
+  ws.onopen = (event) => {
+    console.log("===OnOpen===");
+    console.log(event);
+    //Can't Get Data in onopen???
+    /*
     store.dispatch(
       Actions.getCurrentUsers(
         event.data.map(user => {
@@ -16,11 +18,12 @@ export function connect(username) {
         })
       )
     )
+    */
   }
 
   ws.onmessage = (event) => {
-    console.log("===OnMessage===");
-    console.log(event.data);
+    //console.log("===OnMessage===");
+    //console.log(event.data);
     let dataArr = event.data.split(' ');
     if(dataArr.length < 2) {
       //Error, needs to look like ["+","username"]

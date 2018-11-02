@@ -16,20 +16,21 @@ export function updatePOIList() {
  }
 }
 
-export function loginUser(username,password) {
-  return function (dispatch){
-   return PersonAPI.VerifyPerson(username,password)
-   .then(person => {
-     dispatch({
-       type: actions.LOGIN,
-       payload: person
-     })
-   })
-   .catch(error => {
-     console.error("loginUser Error: " + error);
-   })
- }
-}
+export const loginUser = (username, password) => (dispatch) =>
+  new Promise((resolve, reject) => {
+      // Function is expected to return a promise
+      PersonAPI.VerifyPerson(username,password).then(person => {
+        dispatch({
+          type: actions.LOGIN,
+          payload: person
+        })
+
+        resolve(person);
+      }).catch(error => {
+        // TBD: Handle errors for Redux
+        reject(error);
+      })
+  });
 
 export function logoutUser() {
   return { type: actions.LOGOUT }

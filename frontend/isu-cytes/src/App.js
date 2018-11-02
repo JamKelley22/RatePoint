@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 import { Router,Route,Switch } from 'react-router-dom';
 import { connect } from 'react-redux'
 import {bindActionCreators} from 'redux';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faThumbsUp, faTrophy, faClock, faCar, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
 import { Landing,Home,Map,Explore,Friends,Suggest,Account,
   Review,POI,Error404,Login,CreateAccount,APIPage } from './components'
 import { history } from './history.js'
 import * as routes from './constants/routes'
-import { POIAPI } from './api'
+import { POIAPI, RatePointWebSocket } from './api'
 import * as Actions from './actions/actions.js'
-
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faThumbsUp, faTrophy, faClock, faCar, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
 import './App.scss'
 
@@ -21,7 +20,7 @@ class App extends Component {
 
   componentDidMount() {
     this.cachePOIs();
-    //WebSocket.connect("JoeMama")
+    //RatePointWebSocket.connect("JoeMama")
   }
 
   cachePOIs = async() => {
@@ -42,9 +41,21 @@ class App extends Component {
   }
 
   render() {
+    let OnlineUserList = (
+      <div className='onlineUserList'>
+        {this.props.onlineusers.map((user,i) =>
+          <div className='onlineUser' key={i}>
+            {user}
+          </div>
+        )}
+      </div>
+    )
+    console.log(this.props.onlineusers);
+
     return (
       <Router history={history}>
         <div className="App">
+          { this.props.currUser && OnlineUserList }
           <Switch>
             <Route exact path={routes._LANDING} component={() => <Landing/>} />
             <Route exact path={routes._HOME} component={() => <Home/>} />
@@ -68,7 +79,8 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-
+    currUser: state.user.currUser,
+    onlineusers: state.user.onlineusers
   };
 }
 

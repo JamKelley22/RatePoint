@@ -6,6 +6,7 @@ import bcrypt from 'bcryptjs';
 import Navagation from '../Nav/navagation.js'
 import { history, routes } from '../../history.js'
 import * as Actions from '../../actions/actions.js'
+import { RatePointWebSocket } from '../../api'
 
 import './login.css'
 
@@ -34,6 +35,7 @@ class Login extends React.Component {
   };
 
   formHasError = () => {
+    return !(this.state.username.length > 0 && this.state.pass.length > 0);
     //Do error checking
     //Fields not empty
     //password length
@@ -45,8 +47,17 @@ class Login extends React.Component {
 
   doLoginRequest = async(err,hash) => {
     this.props.Actions.loginUser(this.state.username,hash)
-    .then(res => {
-      alert("Logged In");
+    .then(person => {
+      console.log(person);
+      if(person.error) {
+        //Unsuscessful Login
+        alert("Problem")
+      }
+      else {
+        //Suscessful Login
+        alert("Logged In")
+        RatePointWebSocket.connect(person.username)
+      }
     })
     .catch(err => {
       alert("Log in error: " + err);

@@ -28,3 +28,17 @@
   }
 
 }
+
+.onlineUserList {
+  position: absolute;
+  z-index: 101;
+  min-width: 100px;
+  min-height: 100px;
+  background-color: red;
+  bottom: 0;
+  right: 0;
+  overflow-y: auto;
+}
+.onlineUser {
+  color: black;
+}
