@@ -5,26 +5,15 @@ import {bindActionCreators} from 'redux';
 import { Navagation } from '../index.js'
 import POICard from './poiCard.js'
 import Moth from '../../images/moth.jpg'
-
 import { history, routes } from '../../history.js'
-
 import { POIAPI } from '../../api/'
-
 import * as Actions from '../../actions/actions.js'
 
 import './explore.scss'
 
 class Explore extends React.Component {
   state = {
-    pois: []
-  }
 
-  componentDidMount = async() => {
-    let pois = await POIAPI.GetPOIs();
-    console.log(pois);
-    this.setState({
-      pois: pois
-    })
   }
 
   onPOICardClick = (poi) => {
@@ -35,12 +24,12 @@ class Explore extends React.Component {
   }
 
   render () {
-    let cards = this.state.pois.map((poi,i) => {
+    let cards = this.props.pois.map((poi,i) => {
       return (
         <POICard
           title={poi.name}
           key={i}
-          pic={poi.pictures.length > 0 ? poi.pictures[0] : null}
+          pic={(poi.pictures && poi.pictures.length > 0) ? poi.pictures[0] : null}
           rating={poi.rating}
           onClick={() => this.onPOICardClick(poi)}
         />
@@ -49,6 +38,7 @@ class Explore extends React.Component {
     return (
       <div id='exploreComponent'>
         <Navagation/>
+        <button onClick={this.props.refreshPOIs}>Refresh</button>
         <div id='explorePage'>
         {cards}
         </div>
@@ -59,7 +49,7 @@ class Explore extends React.Component {
 
 function mapStateToProps(state) {
   return {
-
+    pois: state.poi.allPOIs
   };
 }
 

@@ -1,6 +1,7 @@
 export const initialState = {
   poi: {
-    currPOI: null
+    currPOI: null,
+    allPOIs: []
   },
   user: {
     currUser: null,

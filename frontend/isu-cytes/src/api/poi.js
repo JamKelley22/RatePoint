@@ -67,7 +67,7 @@ export const DeletePOI = async(id) => {
 
 export const GetPOIs = async() => {
   let error, response;
-  [error, response] = await to(fetch(`${BASE_URL}/poi`, {
+  [error, response] = await to(fetch(`${BASE_URL}/pois`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -98,6 +98,25 @@ export const SubmitPOI = async(userID,name,pictures,description,coordinates) => 
       pictures: pictures.split(','),
       description: description,
       coordinates: coordinates
+    }
+  }));
+  if(error) {
+    console.error(error);
+    return {error: error}
+  }
+  else {
+    let data = await response.json();
+    return data;
+  }
+}
+
+export const GetPOIRating = async(poiID) => {
+  let error, response;
+  [error, response] = await to(fetch(`${BASE_URL}/pois/${poiID}/average`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
     }
   }));
   if(error) {

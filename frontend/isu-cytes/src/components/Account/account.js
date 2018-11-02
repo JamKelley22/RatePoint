@@ -7,9 +7,11 @@ import './account.scss'
 class Account extends React.Component {
   render () {
     return (
-      <div>
+      <div className='accountPage'>
         <Navagation/>
-        <h1>Account</h1>
+        <div className='accountContent'>
+
+        </div>
       </div>
     );
   }

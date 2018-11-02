@@ -44,3 +44,6 @@ export function userConnect(username) {
 export function getCurrentUsers() {
   return { type: actions.GET_CURRENT_USERS }
 }
+export function setAllPOIs(pois) {
+  return { type: actions.SET_ALL_POIS, payload: pois }
+}

@@ -108,3 +108,22 @@ export const SubmitReview = async(poiID,rating,title,body) => {
     return data;
   }
 }
+
+export const GetReviewsByPOI = async(poiID) => {
+  let error, response;
+  [error, response] = await to(fetch(`${BASE_URL}/reviews/poi/${poiID}`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  }));
+  if(error) {
+    console.error(error);
+    return {error: error}
+  }
+  else {
+    let data = await response.json();
+    return data;
+  }
+}
