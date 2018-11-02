@@ -24,13 +24,12 @@ class Explore extends React.Component {
   }
 
   render () {
-    console.log(this.state.pois);
     let cards = this.props.pois.map((poi,i) => {
       return (
         <POICard
           title={poi.name}
           key={i}
-          pic={poi.pictures.length > 0 ? poi.pictures[0] : null}
+          pic={(poi.pictures && poi.pictures.length > 0) ? poi.pictures[0] : null}
           rating={poi.rating}
           onClick={() => this.onPOICardClick(poi)}
         />

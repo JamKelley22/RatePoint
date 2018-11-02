@@ -1,27 +1,10 @@
 import React, { Component } from 'react';
-import {
-  Router,
-  Route,
-  Switch
-} from 'react-router-dom';
+import { Router,Route,Switch } from 'react-router-dom';
 import { connect } from 'react-redux'
 import {bindActionCreators} from 'redux';
 
-import {
-  Landing,
-  Home,
-  Map,
-  Explore,
-  Friends,
-  Suggest,
-  Account,
-  Review,
-  POI,
-  Error404,
-  Login,
-  CreateAccount,
-  APIPage
-} from './components'
+import { Landing,Home,Map,Explore,Friends,Suggest,Account,
+  Review,POI,Error404,Login,CreateAccount,APIPage } from './components'
 import { history } from './history.js'
 import * as routes from './constants/routes'
 import { POIAPI } from './api'

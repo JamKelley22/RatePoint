@@ -67,7 +67,7 @@ export const DeletePOI = async(id) => {
 
 export const GetPOIs = async() => {
   let error, response;
-  [error, response] = await to(fetch(`${BASE_URL}/poi`, {
+  [error, response] = await to(fetch(`${BASE_URL}/pois`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
