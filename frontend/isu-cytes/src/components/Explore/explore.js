@@ -43,7 +43,6 @@ class Explore extends React.Component {
 
     return (
       <div id='exploreComponent'>
-        <button onClick={this.props.refreshPOIs}>Refresh</button>
         <div id='explorePage'>
         {cards}
         </div>

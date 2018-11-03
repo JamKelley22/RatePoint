@@ -6,6 +6,7 @@
   justify-content: space-evenly;
   color: $secondary_color;
   min-height: 50px;
+  max-height: 55px;
   height: 8%;
   min-width: 800px;
 }
@@ -124,4 +125,5 @@ h3 {
 
 .orSeperator {
   color: opacify($secondary_color, 1);
+  margin: 10px;
 }

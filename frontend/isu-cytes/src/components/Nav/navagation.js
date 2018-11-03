@@ -230,7 +230,7 @@ class Navigation extends React.Component {
               </div>
             </div>
             :
-            <React.Fragment>
+            <div>
               <NavLink
                 className='navagation__link'
                 to={routes._LOGIN}>
@@ -242,7 +242,7 @@ class Navigation extends React.Component {
                 to={routes._CREATEACCOUNT}>
                 Signup
               </NavLink>
-            </React.Fragment>
+            </div>
           }
 
         </div>

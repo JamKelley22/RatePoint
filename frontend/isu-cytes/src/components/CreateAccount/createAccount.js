@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs'
 import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux';
 import Recaptcha from 'react-recaptcha'
+import { Redirect } from 'react-router-dom'
 
 import Navagation from '../Nav/navagation.js'
 import { history, routes } from '../../history.js'
@@ -159,6 +160,12 @@ class CreateAccount extends React.Component {
     }
 
     render(){
+      if(this.props.user) {
+        //Already Logged in
+        return (
+          <Redirect to={routes._HOME}/>
+        )
+      }
         return(
           <div id="containerCreate">
               <div id="formCreate">

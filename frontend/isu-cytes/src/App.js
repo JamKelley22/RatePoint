@@ -59,7 +59,7 @@ class App extends Component {
             <Route exact path={routes._LANDING} component={() => <Landing/>} />
             <Route exact path={routes._HOME} component={() => <Home/>} />
             <Route exact path={routes._MAP} component={() => <Map/>} />
-            <Route exact path={routes._EXPLORE} component={() => <Explore refreshPOIs={this.cachePOIs}/>} />
+            <Route exact path={routes._EXPLORE} component={() => <Explore/>} />
             <Route exact path={routes._FRIENDS} component={() => <Friends/>} />
             <Route exact path={routes._SUGGEST} component={() => <Suggest/>} />
             <Route exact path={routes._ACCOUNT} component={() => <Account/>} />

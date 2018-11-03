@@ -2,7 +2,7 @@ import React from 'react'
 import { compose } from 'redux';
 
 import { withAuthentication, withAuthorization, withNav } from '../../hoc'
-import { Navagation } from '../index.js'
+import { USER_ROLES } from '../../constants'
 
 import './moderation.scss'
 
@@ -18,5 +18,5 @@ class Moderation extends React.Component {
 
 export default compose(
   withNav,
-  withAuthorization(2)
+  withAuthorization(USER_ROLES.MOD)
 )(Moderation);

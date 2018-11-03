@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux';
 import bcrypt from 'bcryptjs';
+import { Redirect } from 'react-router-dom'
 
 import { withAuthentication, withNav } from '../../hoc'
 import Navagation from '../Nav/navagation.js'
@@ -63,6 +64,12 @@ class Login extends React.Component {
   }
 
   render(){
+    if(this.props.user) {
+      //Already Logged in
+      return (
+        <Redirect to={routes._HOME}/>
+      )
+    }
       return(
         <div id="containerLogin">
             <div id="formLogin">
