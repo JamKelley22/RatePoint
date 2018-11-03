@@ -1,12 +1,9 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { connect } from 'react-redux'
-import {bindActionCreators} from 'redux'
 import fuzzysort from 'fuzzysort'
 
 import { history, routes } from '../../history.js'
-import * as Actions from '../../actions/actions.js'
 import { RatePointWebSocket } from '../../api'
 
 import './navagation.scss'
@@ -57,7 +54,7 @@ class Navigation extends React.Component {
   }
 
   clickPOI = (poi) => {
-    this.props.Actions.setSelectedPOI(poi);
+    this.props.setSelectedPOI(poi);
     history.push(routes._POI);
   }
 
@@ -71,7 +68,7 @@ class Navigation extends React.Component {
 
   logout = () => {
     RatePointWebSocket.closeWebsocket();
-    this.props.Actions.logoutUser(this.props.user.username);
+    this.props.logoutUser(this.props.user.username);
     history.push(routes._LANDING);
   }
 
@@ -217,20 +214,4 @@ class Navigation extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    pois: state.poi.poiList,
-    user: state.user.currUser
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    Actions: bindActionCreators(Actions, dispatch)
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Navigation);
+export default Navigation;

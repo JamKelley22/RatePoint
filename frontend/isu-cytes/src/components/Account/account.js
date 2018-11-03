@@ -1,5 +1,7 @@
 import React from 'react'
+import { compose } from 'redux';
 
+import { withAuthentication, withNav } from '../../hoc'
 import { Navagation } from '../index.js'
 
 import './account.scss'
@@ -17,4 +19,7 @@ class Account extends React.Component {
   }
 }
 
-export default Account;
+export default compose(
+    withAuthentication,
+    withNav
+)(Account);

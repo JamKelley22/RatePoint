@@ -9,9 +9,10 @@ import {
   EmailIcon,
 } from 'react-share';
 import { connect } from 'react-redux'
-import {bindActionCreators} from 'redux';
+import { bindActionCreators, compose } from 'redux';
 import { Redirect } from "react-router-dom";
 
+import { withAuthentication, withNav } from '../../hoc'
 import { history, routes } from '../../history.js'
 import { Navagation } from '../index.js'
 import { ReviewAPI } from '../../api'
@@ -397,7 +398,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  connect(mapStateToProps,mapDispatchToProps),
+  withNav
 )(POI);

@@ -1,5 +1,7 @@
 import React from 'react'
+import { compose } from 'redux';
 
+import { withAuthentication, withNav } from '../../hoc'
 import { Navagation } from '../index.js'
 import MapContainer from './mapContainer.js'
 
@@ -19,8 +21,7 @@ class Map extends React.Component {
 
   render () {
     return (
-      <div className = 'map'>
-        <Navagation/>
+      <div className = 'mapPage'>
         <div className='mapContainer'>
           {
             /*
@@ -48,4 +49,6 @@ class Map extends React.Component {
   }
 }
 
-export default Map;
+export default compose(
+  withNav
+)(Map);

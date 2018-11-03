@@ -2,48 +2,70 @@ import to from 'await-to-js';
 
 import { BASE_URL } from './index.js'
 
-export const GetPerson = async(id) => {
+export const GetPerson = async(username) => {
   let error, response;
-  [error, response] = await to(fetch(`${BASE_URL}/people/${id}`, {
+  [error, response] = await to(fetch(`${BASE_URL}/people/${username}`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    }
+    },
+    credentials: "same-origin"
   }));
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 200:
+        let data = await response.json();
+        return data;
+      case 401:
+        return {error: 'Unauthorized'}
+      case 404:
+        return {error: 'Person not found'}
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }
 
 export const UpdatePerson = async(id,username,email,name,biography,password) => {
+  let body = {
+    username: username,
+    email: email,
+    name: name,
+    biography: biography,
+    password: password
+  }
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/people/${id}`, {
-    method: 'PUT',
+    method: "PUT",
+    body: JSON.stringify(body),
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
-    body: {
-      username: username,
-      email: email,
-      name: name,
-      biography: biography,
-      password: password
-    }
+    credentials: "same-origin"
   }));
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 200:// TODO: Change with backend
+      case 201:
+        let data = await response.json();
+        return data;
+      case 401:
+        return {error: 'Unauthorized'}
+      case 404:
+        return {error: 'Person not found'}
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }
 
@@ -54,15 +76,25 @@ export const DeletePerson = async(id) => {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    }
+    },
+    credentials: "same-origin"
   }));
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 200:
+        let data = await response.json();
+        return data;
+      case 401:
+        return {error: 'Unauthorized'}
+      case 404:
+        return {error: 'Person not found'}
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }
 
@@ -73,15 +105,23 @@ export const GetAllPersons = async() => {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    }
+    },
+    credentials: "same-origin"
   }));
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 200:
+        let data = await response.json();
+        return data;
+      case 401:
+        return {error: 'Unauthorized'}
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }
 
@@ -100,6 +140,7 @@ export const SubmitPerson = async(username,email,name,biography,password) => {
     method: 'POST',
     body: JSON.stringify(body),
     headers: {
+      'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     credentials: "same-origin"
@@ -109,21 +150,23 @@ export const SubmitPerson = async(username,email,name,biography,password) => {
     console.error(error);
     return {error: error}
   }
-  else if(response.status === 201 || response.status === 200) {// TODO: Remove 200 when backend changes
-    //Good Verify
-    let person = await response.json();
-    return person;
-  }
-  else if(response.status === 401) {
-    //Incorrect password
-    return {error: 'Unauthorized'}
-  }
-  else if(response.status === 409) {
-    //Username not found
-    return {error: 'Conflict'}
-  }
   else {
-    return {error: `Unexpected server response code of ${response.status}`}
+    switch (response.status) {
+      case 201:
+      case 200:// TODO: Remove this when backend changes
+        //Good Verify
+        let person = await response.json();
+        return person;
+      case 401:
+        //Incorrect password
+        return {error: 'Incorrect password'}
+        break;
+      case 409:
+        //Username not found
+        return {error: 'Conflict'}
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }
 
@@ -140,6 +183,7 @@ export const VerifyPerson = async(username,password) => {
     method: "PUT",
     body: JSON.stringify(body),
     headers: {
+      'Accept': 'application/json',
       "Content-Type": "application/json"
     },
     credentials: "same-origin"
@@ -148,20 +192,20 @@ export const VerifyPerson = async(username,password) => {
     console.error(error);
     return {error: error}
   }
-  else if(response.status === 200) {
-    //Good Verify
-    let person = await response.json();
-    return person;
-  }
-  else if(response.status === 401) {
-    //Incorrect password
-    return {error: 'Incorrect password'}
-  }
-  else if(response.status === 404) {
-    //Username not found
-    return {error: 'Username not found'}
-  }
   else {
-    return {error: `Unexpected server response code of ${response.status}`}
+    switch (response.status) {
+      case 200:
+        //Good Verify
+        let person = await response.json();
+        return person;
+      case 401:
+        //Incorrect password
+        return {error: 'Incorrect password'}
+      case 404:
+        //Username not found
+        return {error: 'Username not found'}
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }

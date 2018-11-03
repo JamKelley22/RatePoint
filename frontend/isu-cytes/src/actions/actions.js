@@ -21,13 +21,18 @@ export const createUser = (username,email,name,biography,password) => (dispatch)
       // Function is expected to return a promise
       PersonAPI.SubmitPerson(username,email,name,biography,password).then(person => {
         //Next two actions are async
-        dispatch({
-          type: actions.CREATE_USER,
-          payload: person//could either be a person or error
-        })
-        resolve(person);//could either be a person or error
+        if(!person.error) {
+          dispatch({
+            type: actions.CREATE_USER,
+            payload: person
+          })
+          resolve(person);
+        }
+        else {
+          reject(person)
+        }
       }).catch(error => {
-        reject(error);
+        reject({error: error});
       })
   });
 
@@ -36,13 +41,18 @@ export const loginUser = (username, password) => (dispatch) =>
       // Function is expected to return a promise
       PersonAPI.VerifyPerson(username,password).then(person => {
         //Next two actions are async
-        dispatch({
-          type: actions.LOGIN,
-          payload: person//could either be a person or error
-        })
-        resolve(person);//could either be a person or error
+        if(!person.error) {
+          dispatch({
+            type: actions.LOGIN,
+            payload: person
+          })
+          resolve(person);
+        }
+        else {
+          reject(person)
+        }
       }).catch(error => {
-        reject(error);
+        reject({error: error});
       })
   });
 

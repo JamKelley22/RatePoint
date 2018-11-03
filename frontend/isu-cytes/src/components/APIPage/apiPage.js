@@ -1,4 +1,7 @@
 import React from 'react'
+import { compose } from 'redux';
+
+import { withNav } from '../../hoc'
 
 import { POIAPI, ReviewAPI, PersonAPI } from '../../api'
 
@@ -482,4 +485,6 @@ class APIPage extends React.Component {
   }
 }
 
-export default APIPage;
+export default compose(
+    withNav
+)(APIPage);

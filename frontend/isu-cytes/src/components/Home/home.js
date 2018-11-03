@@ -1,5 +1,7 @@
 import React from 'react'
+import { compose } from 'redux';
 
+import { withAuthentication, withNav } from '../../hoc'
 import { Navagation } from '../index.js'
 
 import './home.scss'
@@ -7,12 +9,14 @@ import './home.scss'
 class Home extends React.Component {
   render () {
     return (
-      <div>
-        <Navagation/>
+      <div className='homePage'>
         <h1>Home</h1>
       </div>
     );
   }
 }
 
-export default Home;
+export default compose(
+  withAuthentication,
+  withNav
+)(Home);

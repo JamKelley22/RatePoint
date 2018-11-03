@@ -1,27 +1,24 @@
 import React from 'react'
 import bcrypt from 'bcryptjs'
 import { connect } from 'react-redux'
-import {bindActionCreators} from 'redux';
+import { bindActionCreators, compose } from 'redux';
 
 import Navagation from '../Nav/navagation.js'
 import { history, routes } from '../../history.js'
 import { RatePointWebSocket } from '../../api'
 import * as Actions from '../../actions/actions.js'
 import { caesarShift } from '../../security/security.js'
+import { withAuthentication, withNav } from '../../hoc'
 
 import './createAccount.scss'
 
 class CreateAccount extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: '',
-            email: '',
-            pass1: '',
-            pass2: '',
-            error: null
-        };
+    state = {
+        username: '',
+        email: '',
+        pass1: '',
+        pass2: '',
+        error: null
     }
 
     validatePassword = (pass, passCon) => {
@@ -76,7 +73,7 @@ class CreateAccount extends React.Component {
     createRequest = async(e) => {
         e.preventDefault();
 
-        if(false) {//===============================================================
+        if(false) {// TODO: Remove this line
           if(this.validatePassword(this.state.pass1,this.state.pass2)){
               console.error("Form Invalid");
               //Some error in form
@@ -97,19 +94,13 @@ class CreateAccount extends React.Component {
 
           this.props.Actions.createUser(personProps.username,personProps.email,personProps.name,personProps.biography,personProps.password)
           .then(person => {
-            if(person.error) {
-              //Unsuscessful Create
-              alert(person.error)
-            }
-            else {
-              //Suscessful Login
-              alert("Created User")
-              RatePointWebSocket.connect(person.username)
-              this.setState({username:'',email:'', pass1:'', pass2:''});
-            }
+            //Suscessful Login
+            RatePointWebSocket.connect(person.username)
+            this.setState({username:'',email:'', pass1:'', pass2:''});
+            history.push(routes._HOME)
           })
           .catch(err => {
-            alert("Log in error: " + err);
+            alert(err.error);
           })
 
         })
@@ -136,7 +127,7 @@ class CreateAccount extends React.Component {
     };
 
 
-    handleInputChange(event) {
+    handleInputChange = (event) => {
       const target = event.target;
       const value = target.type === 'checkbox' ? target.checked : target.value;
       const name = target.name;
@@ -148,43 +139,40 @@ class CreateAccount extends React.Component {
 
     render(){
         return(
-            <React.Fragment>
-                <Navagation/>
-                <div id="containerCreate">
-                    <div id="formCreate">
-                        <b id="createHeader">Create Account</b>
-                        <div id="positionForm">
-                            <form onSubmit={(e) => this.createRequest(e)} noValidate autoComplete="off">
-                                <br/>
-                                <b>email:</b>
-                                <input type="email" maxLength="32" autoComplete="off" value={this.state.email}
-                                       onChange={this.emailChange} required onBlur={this.checkError} name='email'/>
-                                <br/><br/>
-                                <b>username:</b>
-                                <input maxLength="20" autoComplete="off" value={this.state.username}
-                                       onChange={this.usernameChange} required onBlur={this.checkError} name='username'/>
-                                <br/><br/>
-                                <b>password:</b>
-                                <input type="password" maxLength="32" autoComplete="off" id="pass1"
-                                  onChange={this.pass1Change} onBlur={this.checkError} name='pass1'/>
-                                <br/><br/>
-                                <b>confirm password:</b>
-                                <input type="password" maxLength="32" autoComplete="off" id="pass2"
-                                  onChange={this.pass2Change} onBlur={this.checkError} name='pass2'/>
-                                <br/><br/>
-                                <input type="submit" value="Submit" id="createSubmit"/>
-                            </form>
-                        </div>
-                    </div>
-                    {
-                      this.state.error
-                      &&
-                      <div className='formError'>
-                        {this.state.error}
-                      </div>
-                    }
+          <div id="containerCreate">
+              <div id="formCreate">
+                  <b id="createHeader">Create Account</b>
+                  <div id="positionForm">
+                      <form onSubmit={(e) => this.createRequest(e)} noValidate autoComplete="off">
+                          <br/>
+                          <b>email:</b>
+                          <input type="email" maxLength="32" autoComplete="off" value={this.state.email}
+                                 onChange={this.handleInputChange} required onBlur={this.checkError} name='email' value={this.state.email}/>
+                          <br/><br/>
+                          <b>username:</b>
+                          <input maxLength="20" autoComplete="off" value={this.state.username}
+                                 onChange={this.handleInputChange} required onBlur={this.checkError} name='username' value={this.state.username}/>
+                          <br/><br/>
+                          <b>password:</b>
+                          <input type="password" maxLength="32" autoComplete="off" id="pass1"
+                            onChange={this.handleInputChange} onBlur={this.checkError} name='pass1' value={this.state.pass1}/>
+                          <br/><br/>
+                          <b>confirm password:</b>
+                          <input type="password" maxLength="32" autoComplete="off" id="pass2"
+                            onChange={this.handleInputChange} onBlur={this.checkError} name='pass2' value={this.state.pass2}/>
+                          <br/><br/>
+                          <input type="submit" value="Submit" id="createSubmit"/>
+                      </form>
+                  </div>
+              </div>
+              {
+                this.state.error
+                &&
+                <div className='formError'>
+                  {this.state.error}
                 </div>
-            </React.Fragment>
+              }
+          </div>
         );
     }
 }
@@ -201,4 +189,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(CreateAccount);
+export default compose(
+  connect(mapStateToProps,mapDispatchToProps),
+  withNav
+)(CreateAccount);

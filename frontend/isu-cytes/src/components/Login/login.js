@@ -1,15 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {bindActionCreators} from 'redux';
+import { bindActionCreators, compose } from 'redux';
 import bcrypt from 'bcryptjs';
 
+import { withAuthentication, withNav } from '../../hoc'
 import Navagation from '../Nav/navagation.js'
 import { history, routes } from '../../history.js'
 import * as Actions from '../../actions/actions.js'
 import { RatePointWebSocket } from '../../api'
 import { caesarShift } from '../../security/security.js'
 
-import './login.css'
+import './login.scss'
 
 class Login extends React.Component {
   state = {
@@ -51,18 +52,13 @@ class Login extends React.Component {
   doLoginRequest = async(err,hashedPassword) => {
     this.props.Actions.loginUser(this.state.username,hashedPassword)
     .then(person => {
-      if(person.error) {
-        //Unsuscessful Login
-        alert(person.error)
-      }
-      else {
-        //Suscessful Login
-        console.log("=====Logged In=====");
-        RatePointWebSocket.connect(person.username)
-      }
+      //Suscessful Login
+      console.log("=====Logged In=====");
+      RatePointWebSocket.connect(person.username)
+      history.push(routes._HOME)
     })
     .catch(err => {
-      alert("Log in error: " + err);
+      alert(err.error);
     })
   }
 
@@ -104,4 +100,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Login);
+export default compose(
+  connect(mapStateToProps,mapDispatchToProps),
+  withNav
+)(Login);

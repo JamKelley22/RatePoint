@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {bindActionCreators} from 'redux';
+import { bindActionCreators, compose } from 'redux';
 
+import { withAuthentication, withNav } from '../../hoc'
 import { Navagation } from '../index.js'
 import POICard from './poiCard.js'
 import Moth from '../../images/moth.jpg'
@@ -59,7 +60,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  connect(mapStateToProps,mapDispatchToProps),
+  withNav
 )(Explore);

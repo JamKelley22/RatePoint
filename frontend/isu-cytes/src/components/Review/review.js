@@ -1,5 +1,7 @@
 import React from 'react'
+import { compose } from 'redux';
 
+import { withAuthentication, withNav } from '../../hoc'
 import { Navagation } from '../index.js'
 import { history, routes } from '../../history.js'
 
@@ -131,4 +133,7 @@ class Review extends React.Component {
     }
 }
 
-export default Review;
+export default compose(
+  withAuthentication,
+  withNav
+)(Review);
