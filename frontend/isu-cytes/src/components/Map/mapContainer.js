@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom';
 import {Map, InfoWindow, Marker, GoogleApiWrapper, InfoBox} from 'google-maps-react';
 import { connect } from 'react-redux'
 import {bindActionCreators, compose} from 'redux';
@@ -23,26 +24,52 @@ rating: 1
 
 class MapContainer extends React.Component {
   state = {
-    pois: []
+    activeMarker: {},
+    activePOI: {},
+    selectedPlace: {},
+    showingInfoWindow: false
   }
 
-  componentDidMount = () => {
-    this.getPOIS();
-  };
-
-  getPOIS = async() => {
-    let pois = await POIAPI.GetPOIs();
-
+  onMarkerClick = (props, marker, e, poi) => {
     this.setState({
-      pois: pois
-    })
-  };
+      selectedPlace: props,
+      activeMarker: marker,
+      activePOI: poi,
+      showingInfoWindow: true
+    });
+  }
 
-  onPOIClick = (poi) => {
-    //Update Redux
-    this.props.Actions.setPOI(poi);
-    //Push new history
-    history.push(routes._POI);
+  onMapClicked = (props) => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: {},
+        activePOI: {}
+      })
+    }
+  }
+
+  onInfoWindowOpen(props, e) {
+    const button = (<button onClick={this.goToPOI}>View</button>);
+
+    ReactDOM.render(
+      React.Children.only(button),
+      document.getElementById("iwc")
+    );
+  }
+
+  goToPOI = () => {
+    console.log("Here");
+    if(this.state.activePOI) {
+
+      //Update Redux
+      this.props.Actions.setPOI(this.state.activePOI);
+      //Push new history
+      history.push(routes._POI);
+    }
+    else {
+      console.error("No Active POI Set");
+    }
   }
 
   render () {
@@ -60,10 +87,11 @@ class MapContainer extends React.Component {
         zoom={16}
         style={style}
         initialCenter={ISU}
+        onClick={this.onMapClicked}
         >
         {
-          this.state.pois.map((marker, i) => {
-            let coordinatesArr = marker.coordinates.split(',');
+          this.props.pois.map((poi, i) => {
+            let coordinatesArr = poi.coordinates.split(',');
             let lat = coordinatesArr[0];
             let long = coordinatesArr[1];
             let coordinates = {
@@ -74,10 +102,24 @@ class MapContainer extends React.Component {
               <Marker
                 position={coordinates}
                 key={i}
-                onClick={() => this.onPOIClick(marker)}
+                onClick={(props, marker, e) => this.onMarkerClick(props, marker, e, poi)}
               />
             );
           })
+        }
+        {
+          <InfoWindow
+            marker={this.state.activeMarker}
+            visible={this.state.showingInfoWindow}
+            onOpen={e => {
+              this.onInfoWindowOpen(this.props, e);
+            }}
+          >
+            <div>
+              <h1>{this.state.activePOI.name}</h1>
+              <div id="iwc" />
+            </div>
+          </InfoWindow>
         }
       </Map>
     );
@@ -86,7 +128,7 @@ class MapContainer extends React.Component {
 
 function mapStateToProps(state) {
   return {
-
+    pois: state.poi.allPOIs
   };
 }
 

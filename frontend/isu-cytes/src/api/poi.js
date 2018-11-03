@@ -9,40 +9,58 @@ export const GetPOI = async(id) => {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    }
+    },
+    credentials: "same-origin"
   }));
+
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 200:
+        let poi = await response.json();
+        return poi;
+      case 404:
+        return {error: `POI with ID ${id} not found on server`}
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }
 
 export const UpdatePOI = async(id,name,pictures,description,coordinates) => {
+  let body = {
+    name: name,
+    pictures: pictures.split(','),
+    description: description,
+    coordinates: coordinates
+  }
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/poi/${id}`, {
     method: 'PUT',
+    body: JSON.stringify(body),
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    },
-    body: {
-      name: name,
-      pictures: pictures.split(','),
-      description: description,
-      coordinates: coordinates
     }
   }));
+
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 201:
+        let poi = await response.json();
+        return poi;
+      case 404:
+        return {error: `POI with ID ${id} not found on server`}
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }
 
@@ -55,13 +73,21 @@ export const DeletePOI = async(id) => {
       'Content-Type': 'application/json'
     }
   }));
+
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 200:
+        let poi = await response.json();
+        return poi;
+      case 404:
+        return {error: `POI with ID ${id} not found on server`}
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }
 
@@ -74,17 +100,30 @@ export const GetPOIs = async() => {
       'Content-Type': 'application/json'
     }
   }));
+
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 200:
+        let pois = await response.json();
+        return pois;
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }
 
 export const SubmitPOI = async(userID,name,pictures,description,coordinates) => {
+  let body = {
+    userID: userID,
+    name: name,
+    pictures: pictures.split(','),
+    description: description,
+    coordinates: coordinates
+  }
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/poi`, {
     method: 'POST',
@@ -92,21 +131,25 @@ export const SubmitPOI = async(userID,name,pictures,description,coordinates) => 
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: {
-      userID: userID,
-      name: name,
-      pictures: pictures.split(','),
-      description: description,
-      coordinates: coordinates
-    }
+    body: JSON.stringify(body)
   }));
+
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 201:
+        let pois = await response.json();
+        return pois;
+      case 401:
+        return {error: 'Unauthorized'}
+      case 409:
+        return {error: 'Conflict'}
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }
 
@@ -119,12 +162,18 @@ export const GetPOIRating = async(poiID) => {
       'Content-Type': 'application/json'
     }
   }));
+
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 201:// TODO: Check this return status
+        let pois = await response.json();
+        return pois;
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }

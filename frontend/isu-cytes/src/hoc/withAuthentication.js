@@ -5,21 +5,18 @@ import { Redirect } from "react-router-dom";
 
 import { history, routes } from '../history.js'
 
-const withAuthentication = (Component) => {
-  return (
-    class WithAuthentication extends React.Component {
-      render () {
-        return (
-          (this.props.user)
-          ?
-          <Component {...this.props} />
-          :
-          <Redirect to={routes._LOGIN}/>
-        )
-      }
+const withAuthentication = (Component) =>
+  class WithAuthentication extends React.Component {
+    render () {
+      return (
+        (this.props.user)
+        ?
+        <Component {...this.props} />
+        :
+        <Redirect to={routes._LOGIN}/>
+      )
     }
-  )
-}
+  }
 
 function mapStateToProps(state) {
   return {

@@ -9,8 +9,7 @@ export const GetPerson = async(username) => {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    },
-    credentials: "same-origin"
+    }
   }));
   if(error) {
     console.error(error);
@@ -46,8 +45,7 @@ export const UpdatePerson = async(id,username,email,name,biography,password) => 
     headers: {
       'Accept': 'application/json',
       "Content-Type": "application/json"
-    },
-    credentials: "same-origin"
+    }
   }));
   if(error) {
     console.error(error);
@@ -76,8 +74,7 @@ export const DeletePerson = async(id) => {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    },
-    credentials: "same-origin"
+    }
   }));
   if(error) {
     console.error(error);
@@ -105,8 +102,7 @@ export const GetAllPersons = async() => {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    },
-    credentials: "same-origin"
+    }
   }));
   if(error) {
     console.error(error);
@@ -142,8 +138,7 @@ export const SubmitPerson = async(username,email,name,biography,password) => {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    },
-    credentials: "same-origin"
+    }
   }));
 
   if(error) {
@@ -160,7 +155,6 @@ export const SubmitPerson = async(username,email,name,biography,password) => {
       case 401:
         //Incorrect password
         return {error: 'Incorrect password'}
-        break;
       case 409:
         //Username not found
         return {error: 'Conflict'}
@@ -185,8 +179,7 @@ export const VerifyPerson = async(username,password) => {
     headers: {
       'Accept': 'application/json',
       "Content-Type": "application/json"
-    },
-    credentials: "same-origin"
+    }
   }))
   if(error) {
     console.error(error);

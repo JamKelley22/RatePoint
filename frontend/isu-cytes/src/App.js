@@ -6,7 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faThumbsUp, faTrophy, faClock, faCar, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
 import { Landing,Home,Map,Explore,Friends,Suggest,Account,
-  Review,POI,Error404,Login,CreateAccount,APIPage } from './components'
+  Review,POI,Error404,Login,CreateAccount,Moderation,APIPage } from './components'
 import { history } from './history.js'
 import * as routes from './constants/routes'
 import { POIAPI, RatePointWebSocket } from './api'
@@ -67,6 +67,7 @@ class App extends Component {
             <Route exact path={routes._CREATEACCOUNT} component={() => <CreateAccount/>} />
             <Route exact path={routes._REVIEW} component={() => <Review/>} />
             <Route exact path={routes._POI} component={() => <POI/>} />
+            <Route exact path={routes._MODERATION} component={() => <Moderation/>} />
             <Route exact path={routes._API} component={() => <APIPage/>} />
             <Route component={() => <Error404/>} />
           </Switch>

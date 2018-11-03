@@ -26,7 +26,7 @@ class Explore extends React.Component {
 
   render () {
     let cards;
-    console.log(this.props.pois);
+    //console.log(this.props.pois);
     if(this.props.pois) {
       cards = this.props.pois.map((poi,i) => {
         return (

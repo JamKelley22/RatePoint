@@ -2,7 +2,6 @@ import to from 'await-to-js';
 
 import { BASE_URL } from './index.js'
 
-
 export const GetReview = async(id) => {
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/review/${id}`, {
@@ -12,17 +11,32 @@ export const GetReview = async(id) => {
       'Content-Type': 'application/json'
     }
   }));
+
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 200:
+        let review = await response.json();
+        return review;
+      case 401:
+        return {error: 'Unauthorized'}
+      case 404:
+        return {error: 'Review not found'}
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }
 
-export const UpdateReview = async(id,rating,title,body) => {
+export const UpdateReview = async(id,rating,title,reviewBody) => {
+  let body = {
+    rating: rating,
+    title: title,
+    body: reviewBody
+  }
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/review/${id}`, {
     method: 'PUT',
@@ -30,19 +44,23 @@ export const UpdateReview = async(id,rating,title,body) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: {
-      rating: rating,
-      title: title,
-      body: body
-    }
+    body: JSON.stringify(body)
   }));
+
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 201:
+        let review = await response.json();
+        return review;
+      case 404:
+        return {error: 'Review not found'}
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }
 
@@ -55,13 +73,21 @@ export const DeleteReview = async(id) => {
       'Content-Type': 'application/json'
     }
   }));
+
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 200:
+        let review = await response.json();
+        return review;
+      case 404:
+        return {error: 'Review not found'}
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }
 
@@ -74,17 +100,29 @@ export const GetAllReviews = async() => {
       'Content-Type': 'application/json'
     }
   }));
+
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 200:
+        let reviews = await response.json();
+        return reviews;
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }
 
-export const SubmitReview = async(poiID,rating,title,body) => {
+export const SubmitReview = async(poiID,rating,title,reviewBody) => {
+  let body = {
+    poi: poiID,
+    rating: rating,
+    title: title,
+    body: reviewBody
+  }
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/review`, {
     method: 'POST',
@@ -92,20 +130,25 @@ export const SubmitReview = async(poiID,rating,title,body) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: {
-      poi: poiID,
-      rating: rating,
-      title: title,
-      body: body
-    }
+    body: JSON.stringify(body)
   }));
+
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 201:
+        let review = await response.json();
+        return review;
+      case 401:
+        return {error: 'Unauthorized'}
+      case 409:
+        return {error: 'Review Conflict'}
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }
 
@@ -118,12 +161,22 @@ export const GetReviewsByPOI = async(poiID) => {
       'Content-Type': 'application/json'
     }
   }));
+
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 200:
+        let review = await response.json();
+        return review;
+      case 401:
+        return {error: 'Unauthorized'}
+      case 404:
+        return {error: `POI with id: ${poiID} not found`}
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }

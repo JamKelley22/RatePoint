@@ -2,7 +2,6 @@ import to from 'await-to-js';
 
 import { BASE_URL } from './index.js'
 
-
 export const GetList = async(id) => {
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/list/${id}`, {
@@ -12,17 +11,31 @@ export const GetList = async(id) => {
       'Content-Type': 'application/json'
     }
   }));
+
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 200:
+        let list = await response.json();
+        return list;
+      case 404:
+        return {error: `List with id: ${id} not found`}
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }
 
 export const UpdateList = async(id,listname,poilist,listuser) => {
+  let body = {
+    id: id,
+    listname: listname,
+    poilist: poilist,
+    listuser: listuser
+  }
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/list/${id}`, {
     method: 'PUT',
@@ -30,20 +43,23 @@ export const UpdateList = async(id,listname,poilist,listuser) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: {
-      id: id,
-      listname: listname,
-      poilist: poilist,
-      listuser: listuser
-    }
+    body: JSON.stringify(body)
   }));
+
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 201:
+        let list = await response.json();
+        return list;
+      case 404:
+        return {error: `List with id: ${id} not found`}
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }
 
@@ -56,35 +72,50 @@ export const DeleteList = async(id) => {
       'Content-Type': 'application/json'
     }
   }));
+
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 200:
+        let list = await response.json();
+        return list;
+      case 404:
+        return {error: `List with id: ${id} not found`}
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }
 
-export const CreateList = async(listname, poilist) => {
+export const CreateList = async(username, listname, poilist) => {
+  let body = {
+    listname: listname,
+    poilist: poilist
+  }
   let error, response;
-  [error, response] = await to(fetch(`${BASE_URL}/people/username/lists`, {
+  [error, response] = await to(fetch(`${BASE_URL}/people/${username}/lists`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: {
-      listname: listname,
-      poilist: poilist
-    }
+    body: JSON.stringify(body)
   }));
+
   if(error) {
     console.error(error);
     return {error: error}
   }
   else {
-    let data = await response.json();
-    return data;
+    switch (response.status) {
+      case 201:
+        let list = await response.json();
+        return list;
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
   }
 }

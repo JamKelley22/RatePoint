@@ -11,6 +11,7 @@ import Review from './Review/review.js'
 import Suggest from './Suggest/suggest.js'
 import Login from './Login/login.js'
 import CreateAccount from './CreateAccount/createAccount.js'
+import Moderation from './Moderation/moderation.js'
 import APIPage from './APIPage/apiPage.js'
 
 export {
@@ -27,5 +28,6 @@ export {
    Suggest,
    Login,
    CreateAccount,
-   APIPage
+   APIPage,
+   Moderation
  }
