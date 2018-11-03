@@ -97,7 +97,6 @@ class CreateAccount extends React.Component {
 
           this.props.Actions.createUser(personProps.username,personProps.email,personProps.name,personProps.biography,personProps.password)
           .then(person => {
-            console.log(person);
             if(person.error) {
               //Unsuscessful Create
               alert(person.error)
@@ -106,6 +105,7 @@ class CreateAccount extends React.Component {
               //Suscessful Login
               alert("Created User")
               RatePointWebSocket.connect(person.username)
+              this.setState({username:'',email:'', pass1:'', pass2:''});
             }
           })
           .catch(err => {
@@ -113,8 +113,6 @@ class CreateAccount extends React.Component {
           })
 
         })
-
-        //this.setState({username:'',email:'', pass1:'', pass2:''});
     };
 
     checkError = () => {
@@ -137,31 +135,16 @@ class CreateAccount extends React.Component {
       //Check username for foul language
     };
 
-    /*
-    Use in future for forms
-    onElementChange = (e) => {
-      console.log([e.target.name]);
+
+    handleInputChange(event) {
+      const target = event.target;
+      const value = target.type === 'checkbox' ? target.checked : target.value;
+      const name = target.name;
+
       this.setState({
-        [e.target.name]: e.target.value
-      })
+        [name]: value
+      });
     }
-    */
-
-    usernameChange = (e) => {
-        this.setState({ username: e.target.value });
-    };
-
-    emailChange = (e) => {
-        this.setState({ email: e.target.value });
-    };
-
-    pass1Change = (e) => {
-      this.setState({ pass1: e.target.value });
-    };
-
-    pass2Change = (e) => {
-      this.setState({ pass2: e.target.value });
-    };
 
     render(){
         return(
@@ -175,19 +158,19 @@ class CreateAccount extends React.Component {
                                 <br/>
                                 <b>email:</b>
                                 <input type="email" maxLength="32" autoComplete="off" value={this.state.email}
-                                       onChange={this.emailChange} required onBlur={this.checkError}/>
+                                       onChange={this.emailChange} required onBlur={this.checkError} name='email'/>
                                 <br/><br/>
                                 <b>username:</b>
                                 <input maxLength="20" autoComplete="off" value={this.state.username}
-                                       onChange={this.usernameChange} required onBlur={this.checkError}/>
+                                       onChange={this.usernameChange} required onBlur={this.checkError} name='username'/>
                                 <br/><br/>
                                 <b>password:</b>
                                 <input type="password" maxLength="32" autoComplete="off" id="pass1"
-                                  onChange={this.pass1Change} onBlur={this.checkError}/>
+                                  onChange={this.pass1Change} onBlur={this.checkError} name='pass1'/>
                                 <br/><br/>
                                 <b>confirm password:</b>
                                 <input type="password" maxLength="32" autoComplete="off" id="pass2"
-                                  onChange={this.pass2Change} onBlur={this.checkError}/>
+                                  onChange={this.pass2Change} onBlur={this.checkError} name='pass2'/>
                                 <br/><br/>
                                 <input type="submit" value="Submit" id="createSubmit"/>
                             </form>

@@ -54,17 +54,14 @@ class Form extends React.Component {
       switch (component.type) {
         case 'input':
           let inputName = `input_${component.label}`
-          //console.log(componentInputName);
           componentNamesForState.push(inputName)
           break;
         case 'dateTime':
           let dateTimeInputName = `dateTime_${component.label}`
-          //console.log(componentInputName);
           componentNamesForState.push(dateTimeInputName)
           break;
         case 'password':
           let passwordInputName = `password_${component.label}`
-          //console.log(componentInputName);
           componentNamesForState.push(passwordInputName)
           break;
         default:

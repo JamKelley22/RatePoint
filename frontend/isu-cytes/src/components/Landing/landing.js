@@ -11,7 +11,6 @@ import './landing.scss'
 class Landing extends React.Component {
 
   scroll = (to) => {
-    console.log(to);
     document.querySelector(to).scrollIntoView({
       behavior: 'smooth'
     });

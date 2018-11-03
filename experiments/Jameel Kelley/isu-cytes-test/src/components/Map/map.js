@@ -40,7 +40,6 @@ class Map extends React.Component {
         zoom: zoom
       })
       MAP = new maps.Map(node, mapConfig);
-      //console.log(this.map);
     }
   }
 

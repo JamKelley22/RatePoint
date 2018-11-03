@@ -5,7 +5,6 @@ import * as Actions from '../actions/actions.js'
 let ws;
 
 export function connect(username) {
-  console.log(WEBSOCKET_URL + username);
   if(ws) {
       ws.close();
       ws = null;

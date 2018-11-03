@@ -3,11 +3,11 @@ import React from 'react'
 class Tag extends React.Component {
 
   tagClick = () => {
-    //console.log("Clicked tag: " + this.props.name);
+    
   }
 
   tagHover = () => {
-    //console.log("Hover on tag: " + this.props.name);
+
   }
 
   render () {

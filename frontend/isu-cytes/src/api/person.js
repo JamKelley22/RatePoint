@@ -95,7 +95,6 @@ export const SubmitPerson = async(username,email,name,biography,password) => {
     cookie: "cookie",//=======Needs to be optional
     role: "0"//=======Needs to be optional, User role for now
   }
-  //console.log(JSON.stringify(body));
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/people`, {
     method: 'POST',
@@ -106,7 +105,6 @@ export const SubmitPerson = async(username,email,name,biography,password) => {
     credentials: "same-origin"
   }));
 
-  //console.log(response);
   if(error) {
     console.error(error);
     return {error: error}

@@ -34,27 +34,11 @@ class MapContainer extends React.Component {
     let pois = await POIAPI.GetPOIs();
 
     this.setState({
-      /*markers: pois.filter(poi => {
-        return poi.rating > this.props.ratingFilterNum;
-      })*/
       pois: pois
     })
   };
 
-  /*
-  componentWillReceiveProps() {//Apparently this is being depracated...
-    let filteredPOIS = fakePOIData.filter(poi => {
-      return poi.rating >= this.props.ratingFilterNum;
-    });
-    //console.log(filteredPOIS);
-    this.setState({
-      markers: filteredPOIS
-    })
-  }
-  */
-
   onPOIClick = (poi) => {
-    //alert(poi.name);
     //Update Redux
     this.props.Actions.setPOI(poi);
     //Push new history

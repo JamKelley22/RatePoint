@@ -31,7 +31,6 @@ class Review extends React.Component {
             rating: this.state.rating,
             body: formdata.get('body')
         };
-        console.log(data);
 
         let url = 'http://proj309-tg-03.misc.iastate.edu:8080/reviews/new';
         let rawResponse;
@@ -45,7 +44,7 @@ class Review extends React.Component {
               body: JSON.stringify(data)
           });
         } catch (e) {
-          console.log(e);
+          console.error(e);
         }
 
         this.setState({title:'',rating:1,body:''});

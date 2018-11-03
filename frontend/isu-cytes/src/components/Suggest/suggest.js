@@ -44,7 +44,6 @@ class Suggest extends React.Component {
     fileChange = (event) => {
         event.preventDefault();
         this.setState({file: URL.createObjectURL(event.target.files[0])});
-        console.log(this.state.file);
     };
 
     render() {

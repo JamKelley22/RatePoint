@@ -51,7 +51,6 @@ class Login extends React.Component {
   doLoginRequest = async(err,hashedPassword) => {
     this.props.Actions.loginUser(this.state.username,hashedPassword)
     .then(person => {
-      console.log(person);
       if(person.error) {
         //Unsuscessful Login
         alert(person.error)

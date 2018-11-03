@@ -177,17 +177,16 @@ class POI extends React.Component {
   }
 
   addToList = () => {
-    console.log("Add POI with id: " + this.state.id + " to list");
+    //console.log("Add POI with id: " + this.state.id + " to list");
   }
 
   reportPOI = () => {
-    console.log("Reported POI with id: " + this.state.id);
+    //console.log("Reported POI with id: " + this.state.id);
   }
 
   handleClick = (btn) => {
     switch (btn) {
       case 'Share':
-        //console.log('Clicked Share Btn');
         this.setState({
           shareButtonClassName: 'poi__lower__button--pressed'
         }, () => {
@@ -196,7 +195,6 @@ class POI extends React.Component {
         this.openCloseShareScreen(true);
         break;
       case 'List':
-        //console.log('Clicked List Btn');
         this.setState({
           listButtonClassName: 'poi__lower__button--pressed'
         }, () => {
@@ -205,7 +203,6 @@ class POI extends React.Component {
         this.addToList();
         break;
       case 'Review':
-        //console.log('Clicked Review Btn');
         this.setState({
           reviewButtonClassName: 'poi__lower__button--pressed'
         }, () => {
@@ -216,7 +213,6 @@ class POI extends React.Component {
         })
         break;
       case 'Report':
-        //console.log('Clicked Report Btn');
         this.setState({
           reportButtonClassName: 'poi__lower__button--pressed'
         }, () => {
@@ -235,7 +231,6 @@ class POI extends React.Component {
         overflowY: this.state.descriptionScrollState
     };
     let poi = this.props.poi;
-    //console.log(poi);
 
     if(poi == null) {
       return (

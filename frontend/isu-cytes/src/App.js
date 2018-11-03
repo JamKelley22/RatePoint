@@ -50,7 +50,6 @@ class App extends Component {
         )}
       </div>
     )
-    console.log(this.props.onlineusers);
 
     return (
       <Router history={history}>

@@ -20,17 +20,14 @@ class POICarousel extends React.Component {
   }
 */
   updatePics = (images) => {
-    console.log(images);
     if(this.props.images === undefined) {
       console.error("Problem loading images");
       return;
     }
     switch (this.props.images.length) {
       case 0:
-        console.log("0");
         break;
       case 1:
-        console.log("1");
         this.setState({
           leftPic: this.props.images[0],
           centerPic: this.props.images[0],
@@ -38,7 +35,6 @@ class POICarousel extends React.Component {
         })
         break;
       case 2:
-        console.log("2");
         this.setState({
           leftPic: this.props.images[1],
           centerPic: this.props.images[0],
@@ -46,7 +42,6 @@ class POICarousel extends React.Component {
         })
         break;
       case 3:
-        console.log("3");
         this.setState({
           leftPic: this.props.images[1],
           centerPic: this.props.images[0],

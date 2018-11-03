@@ -12,7 +12,6 @@ const userReducer = (state=initialState.user, action) => {
     case types.LOGOUT:
       return {...state, currUser: null, onlineusers: []};
     case types.USER_DISCONNECT:
-    console.log(state);
       return {
         ...state,
         onlineusers: state.onlineusers.filter(user => user !== action.payload)

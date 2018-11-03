@@ -3,16 +3,11 @@ import PropTypes from 'prop-types'
 
 class Marker extends React.Component {
   componentDidMount() {
-    //console.log("Marker");
+
   }
 
   componentDidUpdate(prevProps) {
     this.renderMarker();
-    /*if ((this.props.map !== prevProps.map) ||
-      (this.props.position !== prevProps.position)) {
-        console.log("Ren");
-        this.renderMarker();
-    }*/
   }
 
   renderMarker() {
@@ -27,7 +22,6 @@ class Marker extends React.Component {
       map: map,
       position: position
     };
-    console.log(pref);
     this.marker = new google.maps.Marker(pref);
   }
 
