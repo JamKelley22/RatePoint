@@ -1,8 +1,13 @@
 import React from 'react'
 import bcrypt from 'bcryptjs'
+import { connect } from 'react-redux'
+import {bindActionCreators} from 'redux';
 
 import Navagation from '../Nav/navagation.js'
 import { history, routes } from '../../history.js'
+import { RatePointWebSocket } from '../../api'
+import * as Actions from '../../actions/actions.js'
+import { caesarShift } from '../../security/security.js'
 
 import './createAccount.scss'
 
@@ -70,47 +75,46 @@ class CreateAccount extends React.Component {
 
     createRequest = async(e) => {
         e.preventDefault();
-        if(this.validatePassword(this.state.pass1,this.state.pass2)){
-            console.error("Form Invalid");
-            //Some error in form
-            return;
+
+        if(false) {//===============================================================
+          if(this.validatePassword(this.state.pass1,this.state.pass2)){
+              console.error("Form Invalid");
+              //Some error in form
+              return;
+          }
         }
-        /*if(this.checkError()) {
-          console.error("Form Invalid");
-          //Some error in form
-          return;
-        }*/
-        console.log("no error");
-        console.log("Username: " + this.state.username);
-        console.log("Email: " + this.state.email);
-        console.log("Password: " + this.state.pass1);
 
-        bcrypt.hash(this.state.pass1, 10,(err, hash) => {
-          console.log(hash);
+
+        bcrypt.hash(this.state.pass1, 10,(err, hashedPassword) => {
+
+          let personProps = {
+            username: this.state.username,
+            email: this.state.email,
+            name: this.state.username,
+            password: caesarShift(this.state.pass1),// TODO: Remove this trash
+            biography: ''
+          };
+
+          this.props.Actions.createUser(personProps.username,personProps.email,personProps.name,personProps.biography,personProps.password)
+          .then(person => {
+            console.log(person);
+            if(person.error) {
+              //Unsuscessful Create
+              alert(person.error)
+            }
+            else {
+              //Suscessful Login
+              alert("Created User")
+              RatePointWebSocket.connect(person.username)
+            }
+          })
+          .catch(err => {
+            alert("Log in error: " + err);
+          })
+
         })
-        let body = JSON.stringify({
-          username: this.state.username,
-          email: this.state.email,
-          name: this.state.username,
-          password: this.state.pass1,
-          biography: ''
-        });
-        console.log(body);
-        //Make post request
-        let response = await fetch('http://proj309-tg-03.misc.iastate.edu:8080/people/new', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: body
-        });
-        console.log(response);
-        //const data = await response.json();
 
-        //console.log(data);
-
-        this.setState({username:'',email:'', pass1:'', pass2:''});
+        //this.setState({username:'',email:'', pass1:'', pass2:''});
     };
 
     checkError = () => {
@@ -202,4 +206,16 @@ class CreateAccount extends React.Component {
     }
 }
 
-export default CreateAccount;
+function mapStateToProps(state) {
+  return {
+    user: state.user.currUser
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    Actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(CreateAccount);

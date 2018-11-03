@@ -11,7 +11,7 @@ const PRODUCTION_URL = 'proj309-tg-03.misc.iastate.edu:8080'
 const MOCK = PROTOCOL_MOCK + MOCK_URL;
 const PRODUCTION = PROTOCOL_PRODUCTION + PRODUCTION_URL;
 
-const BASE_URL = MOCK;
+const BASE_URL = PRODUCTION;
 
 const WEBSOCKET_URL = `ws://${PRODUCTION_URL}/websocket/onlineusers/`
 

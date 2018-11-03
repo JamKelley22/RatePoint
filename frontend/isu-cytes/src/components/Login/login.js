@@ -7,6 +7,7 @@ import Navagation from '../Nav/navagation.js'
 import { history, routes } from '../../history.js'
 import * as Actions from '../../actions/actions.js'
 import { RatePointWebSocket } from '../../api'
+import { caesarShift } from '../../security/security.js'
 
 import './login.css'
 
@@ -42,20 +43,22 @@ class Login extends React.Component {
   }
 
   hashPasswordThenLogin = async(password) => {
-    bcrypt.hash(password, 10, (err, hash) => this.doLoginRequest(err,hash));
+    //bcrypt.hash(password, 10, (err, hash) => this.doLoginRequest(err,hash));
+    this.doLoginRequest(null,caesarShift(password));//For now...
+    // TODO: Get the backend the hash and have them check it
   }
 
-  doLoginRequest = async(err,hash) => {
-    this.props.Actions.loginUser(this.state.username,hash)
+  doLoginRequest = async(err,hashedPassword) => {
+    this.props.Actions.loginUser(this.state.username,hashedPassword)
     .then(person => {
       console.log(person);
       if(person.error) {
         //Unsuscessful Login
-        alert("Problem")
+        alert(person.error)
       }
       else {
         //Suscessful Login
-        alert("Logged In")
+        console.log("=====Logged In=====");
         RatePointWebSocket.connect(person.username)
       }
     })

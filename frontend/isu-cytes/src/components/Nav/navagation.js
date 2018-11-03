@@ -7,6 +7,7 @@ import fuzzysort from 'fuzzysort'
 
 import { history, routes } from '../../history.js'
 import * as Actions from '../../actions/actions.js'
+import { RatePointWebSocket } from '../../api'
 
 import './navagation.scss'
 
@@ -69,8 +70,8 @@ class Navigation extends React.Component {
   }
 
   logout = () => {
-    console.log("Logout");
-    this.props.Actions.logoutUser();
+    RatePointWebSocket.closeWebsocket();
+    this.props.Actions.logoutUser(this.props.user.username);
     history.push(routes._LANDING);
   }
 

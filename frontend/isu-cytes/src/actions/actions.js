@@ -16,24 +16,38 @@ export function updatePOIList() {
  }
 }
 
-export const loginUser = (username, password) => (dispatch) =>
+export const createUser = (username,email,name,biography,password) => (dispatch) =>
   new Promise((resolve, reject) => {
       // Function is expected to return a promise
-      PersonAPI.VerifyPerson(username,password).then(person => {
+      PersonAPI.SubmitPerson(username,email,name,biography,password).then(person => {
+        //Next two actions are async
         dispatch({
-          type: actions.LOGIN,
-          payload: person
+          type: actions.CREATE_USER,
+          payload: person//could either be a person or error
         })
-
-        resolve(person);
+        resolve(person);//could either be a person or error
       }).catch(error => {
-        // TBD: Handle errors for Redux
         reject(error);
       })
   });
 
-export function logoutUser() {
-  return { type: actions.LOGOUT }
+export const loginUser = (username, password) => (dispatch) =>
+  new Promise((resolve, reject) => {
+      // Function is expected to return a promise
+      PersonAPI.VerifyPerson(username,password).then(person => {
+        //Next two actions are async
+        dispatch({
+          type: actions.LOGIN,
+          payload: person//could either be a person or error
+        })
+        resolve(person);//could either be a person or error
+      }).catch(error => {
+        reject(error);
+      })
+  });
+
+export function logoutUser(username) {
+  return { type: actions.LOGOUT, payload: username }
 }
 
 export function userDisconnect(username) {
