@@ -25,20 +25,24 @@ class Explore extends React.Component {
   }
 
   render () {
-    let cards = this.props.pois.map((poi,i) => {
-      return (
-        <POICard
-          title={poi.name}
-          key={i}
-          pic={(poi.pictures && poi.pictures.length > 0) ? poi.pictures[0] : null}
-          rating={poi.rating}
-          onClick={() => this.onPOICardClick(poi)}
-        />
-      )
-    })
+    let cards;
+    console.log(this.props.pois);
+    if(this.props.pois) {
+      cards = this.props.pois.map((poi,i) => {
+        return (
+          <POICard
+            title={poi.name}
+            key={i}
+            pic={(poi.pictures && poi.pictures.length > 0) ? poi.pictures[0] : null}
+            rating={poi.rating}
+            onClick={() => this.onPOICardClick(poi)}
+          />
+        )
+      })
+    }
+
     return (
       <div id='exploreComponent'>
-        <Navagation/>
         <button onClick={this.props.refreshPOIs}>Refresh</button>
         <div id='explorePage'>
         {cards}
@@ -61,6 +65,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default compose(
-  connect(mapStateToProps,mapDispatchToProps),
-  withNav
+  withNav,
+  connect(mapStateToProps,mapDispatchToProps)
 )(Explore);

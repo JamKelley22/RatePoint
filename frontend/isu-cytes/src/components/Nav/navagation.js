@@ -138,12 +138,16 @@ class Navigation extends React.Component {
           </NavLink>
         </div>
         <div className='navagation__links'>
-          <NavLink
-            className='navagation__link'
-            activeClassName='navagation__link--active'
-            to={routes._HOME}>
-            Home
-          </NavLink>
+          {
+            this.props.user
+            &&
+            <NavLink
+              className='navagation__link'
+              activeClassName='navagation__link--active'
+              to={routes._HOME}>
+              Home
+            </NavLink>
+          }
           <NavLink
             className='navagation__link'
             activeClassName='navagation__link--active'
@@ -156,12 +160,16 @@ class Navigation extends React.Component {
             to={routes._EXPLORE}>
             Explore
           </NavLink>
-          <NavLink
-            className='navagation__link'
-            activeClassName='navagation__link--active'
-            to={routes._FRIENDS}>
-            Friends
-          </NavLink>
+          {
+            this.props.user
+            &&
+            <NavLink
+              className='navagation__link'
+              activeClassName='navagation__link--active'
+              to={routes._FRIENDS}>
+              Friends
+            </NavLink>
+          }
         </div>
         <div className='navagation__searchbar'>
           <form onSubmit={(e) => this.handleSubmit(e)}>
@@ -170,44 +178,73 @@ class Navigation extends React.Component {
           </form>
         </div>
         <div className='navagation__links'>
-          <NavLink
-            className='navagation__link'
-            activeClassName='navagation__link--active'
-            to={routes._SUGGEST}>
-            Suggest a Location
-          </NavLink>
+          {
+            this.props.user
+            &&
+            <NavLink
+              className='navagation__link'
+              activeClassName='navagation__link--active'
+              to={routes._SUGGEST}>
+              Suggest a Location
+            </NavLink>
+          }
 
-          <div
-            className='navagation__link__account'
-            onClick={this.toggleAccount}>
-            Account <FontAwesomeIcon icon="caret-down" />
-          <div className={`accountBox ${this.state.accountVisible ? '' : '--hidden'}`}>
+          {
+            this.props.user
+            ?
+            <div
+              className='navagation__link__account'
+              onClick={this.toggleAccount}>
+              Account <FontAwesomeIcon icon="caret-down" />
+            <div className={`accountBox ${this.state.accountVisible ? '' : '--hidden'}`}>
+                <NavLink
+                  className='account__link'
+                  to={routes._ACCOUNT}>
+                  View
+                </NavLink>
+                {
+                  !this.props.user
+                  &&
+                  <React.Fragment>
+                    <NavLink
+                      className='account__link'
+                      to={routes._LOGIN}>
+                      Login
+                    </NavLink>
+                    <NavLink
+                      className='account__link'
+                      to={routes._CREATEACCOUNT}>
+                      Signup
+                    </NavLink>
+                  </React.Fragment>
+                }
+                {
+                  this.props.user
+                  &&
+                  <a
+                    className='account__link'
+                    onClick={() => this.logout()}>
+                    Logout
+                  </a>
+                }
+              </div>
+            </div>
+            :
+            <React.Fragment>
               <NavLink
-                className='account__link'
-                to={routes._ACCOUNT}>
-                View
-              </NavLink>
-              <NavLink
-                className='account__link'
+                className='navagation__link'
                 to={routes._LOGIN}>
                 Login
               </NavLink>
+              <span className='orSeperator'>or</span>
               <NavLink
-                className='account__link'
+                className='navagation__link'
                 to={routes._CREATEACCOUNT}>
                 Signup
               </NavLink>
-              {
-                this.props.user
-                &&
-                <a
-                  className='account__link'
-                  onClick={() => this.logout()}>
-                  Logout
-                </a>
-              }
-            </div>
-          </div>
+            </React.Fragment>
+          }
+
         </div>
       </div>
     );

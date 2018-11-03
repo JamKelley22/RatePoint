@@ -64,26 +64,23 @@ class Login extends React.Component {
 
   render(){
       return(
-          <React.Fragment>
-              <Navagation/>
-              <div id="containerLogin">
-                  <div id="formLogin">
-                      <b id="loginHeader">Login</b>
-                      <form onSubmit={(e) => this.onSubmitLogin(e)} noValidate autoComplete="off">
-                          <br/>
-                          <b>username:</b>
-                          <input maxLength="20" autoComplete="off" value={this.state.username}
-                                 onChange={this.usernameChange} />
-                          <br/><br/>
-                          <b>password:</b>
-                          <input type="password" maxLength="32" autoComplete="off" id="pass"
-                                 onChange={this.passChange} onBlur={this.checkError}/>
-                          <br/><br/>
-                          <input type="submit" value="Login"/>
-                      </form>
-                  </div>
-              </div>
-          </React.Fragment>
+        <div id="containerLogin">
+            <div id="formLogin">
+                <b id="loginHeader">Login</b>
+                <form onSubmit={(e) => this.onSubmitLogin(e)} noValidate autoComplete="off">
+                    <br/>
+                    <b>username:</b>
+                    <input maxLength="20" autoComplete="off" value={this.state.username}
+                           onChange={this.usernameChange} />
+                    <br/><br/>
+                    <b>password:</b>
+                    <input type="password" maxLength="32" autoComplete="off" id="pass"
+                           onChange={this.passChange} onBlur={this.checkError}/>
+                    <br/><br/>
+                    <input type="submit" value="Login"/>
+                </form>
+            </div>
+        </div>
       );
   }
 }
@@ -101,6 +98,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default compose(
-  connect(mapStateToProps,mapDispatchToProps),
-  withNav
+  withNav,
+  connect(mapStateToProps,mapDispatchToProps)
 )(Login);

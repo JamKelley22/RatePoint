@@ -243,7 +243,6 @@ class POI extends React.Component {
 
     return (
       <div className='poiPage'>
-        <Navagation className='navagation'/>
         <div className='poi__upper'>
           <h1>{poi.name}</h1>
           <POICarousel
@@ -399,6 +398,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default compose(
-  connect(mapStateToProps,mapDispatchToProps),
-  withNav
+  withNav,
+  connect(mapStateToProps,mapDispatchToProps)
 )(POI);

@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "google-maps-react": "^2.0.2",
+    "react-recaptcha": "^2.3.10",
     "socket.io": "^2.1.1"
   }
 }

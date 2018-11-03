@@ -2,15 +2,19 @@ import React from 'react'
 import bcrypt from 'bcryptjs'
 import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux';
+import Recaptcha from 'react-recaptcha'
 
 import Navagation from '../Nav/navagation.js'
 import { history, routes } from '../../history.js'
-import { RatePointWebSocket } from '../../api'
+import { RECAPTCHA_SITE_KEY } from '../../constants'
+import { RecaptchaAPI, RatePointWebSocket } from '../../api'
 import * as Actions from '../../actions/actions.js'
 import { caesarShift } from '../../security/security.js'
 import { withAuthentication, withNav } from '../../hoc'
 
 import './createAccount.scss'
+
+let recaptchaInstance;
 
 class CreateAccount extends React.Component {
     state = {
@@ -18,112 +22,129 @@ class CreateAccount extends React.Component {
         email: '',
         pass1: '',
         pass2: '',
-        error: null
+        error: []
     }
 
     validatePassword = (pass, passCon) => {
         if (pass !== passCon) {
-            this.setState({
-                error: 'Passwords do not match'
-            });
-            return true;
+          return 'Passwords do not match'
         }
         if (pass.length < 8) {
-            this.setState({
-                error: 'password must be atleast 8 characters'
-            });
-            return true;
+          return 'password must be atleast 8 characters';
         }
         let symbol = /[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/.test(pass);
         if (!symbol) {
-            this.setState({
-                error: 'password must include at least one symbol'
-            });
-            return true;
+          return 'password must include at least one symbol';
         }
         let symbol2 = /[a-z]/.test(pass);
         if (!symbol2) {
-            this.setState({
-                error: 'password must include at least one lower case character'
-            });
-            return true;
+          return 'password must include at least one lower case character';
         }
         let symbol3 = /[A-Z]/.test(pass);
         if (!symbol3) {
-            this.setState({
-                error: 'password must include at least one upper case character'
-            });
-            return true;
+          return 'password must include at least one upper case character';
         }
         let symbol4 = /[0-9]/.test(pass);
         if (!symbol4) {
-            this.setState({
-                error: 'password must include at least one number'
-            });
-            return true;
+          return 'password must include at least one number';
         }
-        this.setState({
-            error: null
-        });
-        return false;
+        return null;
         //Check email valid format
         //Check username for foul language
     };
 
+    validateForm = () => {
+      let errors = []
+      if(this.state.username.length === 0) {
+        errors.push("Please Enter Username")
+      }
+      if(this.state.email.length === 0) {
+        errors.push("Please Enter Email")
+      }
+      if(this.state.pass1.length === 0) {
+        errors.push("Please Enter Password")
+      }
+      if(this.state.pass2.length === 0) {
+        errors.push("Please Repeat Password")
+      }
+      /*
+      let passError = this.validatePassword(this.state.pass1,this.state.pass2)
+      if(passError)
+        errors.push(passError)
+      */
+
+      this.setState({
+        error: errors
+      })
+
+      return errors.length === 0;//Return true valid if 0 errors
+    }
+
     createRequest = async(e) => {
         e.preventDefault();
 
-        if(false) {// TODO: Remove this line
-          if(this.validatePassword(this.state.pass1,this.state.pass2)){
-              console.error("Form Invalid");
-              //Some error in form
-              return;
-          }
+        if(!this.validateForm()) {
+            console.error("Invalid Form");
+            return;
         }
 
-
-        bcrypt.hash(this.state.pass1, 10,(err, hashedPassword) => {
-
-          let personProps = {
-            username: this.state.username,
-            email: this.state.email,
-            name: this.state.username,
-            password: caesarShift(this.state.pass1),// TODO: Remove this trash
-            biography: ''
-          };
-
-          this.props.Actions.createUser(personProps.username,personProps.email,personProps.name,personProps.biography,personProps.password)
-          .then(person => {
-            //Suscessful Login
-            RatePointWebSocket.connect(person.username)
-            this.setState({username:'',email:'', pass1:'', pass2:''});
-            history.push(routes._HOME)
-          })
-          .catch(err => {
-            alert(err.error);
-          })
-
-        })
+        if(recaptchaInstance)
+          recaptchaInstance.execute(RECAPTCHA_SITE_KEY, {action: 'create_account'})//will then call verifyCallback
+        else
+          console.error("No reCAPTCHA!");
     };
 
-    checkError = () => {
-      //No empty fields
-
-      //Compare Passwords
-      if(this.state.pass1 !== this.state.pass2) {
-        this.setState({
-          error: 'Passwords do not match'
-        })
-        return true;
+    verifyCallback = async(response) => {
+      //DO NOT CHANGE ABOVE LINE, IT STOPS WORKING IF YOU DO
+      let serverResponse = await RecaptchaAPI.DoVerifyRecaptcha(response)
+      /*
+      serverResponse
+      {
+      "success": true|false,      // whether this request was a valid reCAPTCHA token for your site
+      "score": number             // the score for this request (0.0 - 1.0)
+      "action": string            // the action name for this request (important to verify)
+      "challenge_ts": timestamp,  // timestamp of the challenge load (ISO format yyyy-MM-dd'T'HH:mm:ssZZ)
+      "hostname": string,         // the hostname of the site where the reCAPTCHA was solved
+      "error-codes": [...]        // optional
+      }
+      */
+      if(serverResponse.success) {
+        this.attemptCreateUser();
       }
       else {
         this.setState({
-          error: null
+          error: ["Failed reCAPTCHA"]
         })
-        return false;
       }
-      //Check email valid format
-      //Check username for foul language
+    }
+
+    attemptCreateUser = () => {
+      bcrypt.hash(this.state.pass1, 10,(err, hashedPassword) => {
+
+        let personProps = {
+          username: this.state.username,
+          email: this.state.email,
+          name: this.state.username,
+          password: caesarShift(this.state.pass1),// TODO: Remove this trash
+          biography: ''
+        };
+
+        this.props.Actions.createUser(personProps.username,personProps.email,personProps.name,personProps.biography,personProps.password)
+        .then(person => {
+          //Suscessful Login
+          RatePointWebSocket.connect(person.username)
+          //this.setState({username:'',email:'', pass1:'', pass2:''});
+          history.push(routes._HOME)
+        })
+        .catch(err => {
+          alert(err.error);
+        })
+
+      })
+    }
+
+    checkError = () => {
+      //Check for empty on blur
     };
 
 
@@ -166,12 +187,18 @@ class CreateAccount extends React.Component {
                   </div>
               </div>
               {
-                this.state.error
+                this.state.error.length > 0
                 &&
                 <div className='formError'>
                   {this.state.error}
                 </div>
               }
+              <Recaptcha
+                ref={e => recaptchaInstance = e}
+                sitekey={RECAPTCHA_SITE_KEY}
+                size="invisible"
+                verifyCallback={this.verifyCallback}
+              />
           </div>
         );
     }
@@ -190,6 +217,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default compose(
-  connect(mapStateToProps,mapDispatchToProps),
-  withNav
+  withNav,
+  connect(mapStateToProps,mapDispatchToProps)
 )(CreateAccount);

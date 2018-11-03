@@ -121,3 +121,7 @@ h3 {
 .account__link:hover {
   text-decoration: underline;
 }
+
+.orSeperator {
+  color: opacify($secondary_color, 1);
+}
