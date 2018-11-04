@@ -7,6 +7,17 @@ const poiReducer = (state=initialState.poi, action) => {
       return {...state, currPOI: action.payload};
     case types.SET_ALL_POIS:
       return {...state, allPOIs: action.payload}
+    case types.APPROVE_POI:
+    case types.REJECT_POI:
+      return {
+        ...state,
+        allPOIs: state.allPOIs.map((poi,i) =>
+          (poi.id === action.payload.id) ?
+          {...poi, approved: action.payload.approved}
+          :
+          poi.approved
+        )
+      }
     default:
       return state;
   }

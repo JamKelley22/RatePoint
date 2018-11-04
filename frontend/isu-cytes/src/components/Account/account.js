@@ -107,12 +107,12 @@ class Account extends React.Component {
               ?
               this.props.user.lists.map((list,i) => {
                 return (
-                  <div>
-                    <div className='listItem' key={i}><h2>{list.listname}</h2></div>
+                  <div key={i}>
+                    <div className='listItem'><h2>{list.listname}</h2></div>
                     {
                       list.poilist.map((poi,i) => {
                         return (
-                          <div>{poi.name}</div>
+                          <div key={i}>{poi.name}</div>
                         )
                       })
                     }

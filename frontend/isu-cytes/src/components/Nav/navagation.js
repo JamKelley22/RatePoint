@@ -76,6 +76,7 @@ class Navigation extends React.Component {
   }
 
   render () {
+    console.log(this.state.searchResults.pois);
     let foundResults = this.state.searchResults.pois.length > 0 ||
                       this.state.searchResults.tags.length > 0  ||
                       this.state.searchResults.people.length > 0;
@@ -131,134 +132,149 @@ class Navigation extends React.Component {
     )
 
     return (
-      <div className='navagation__bar'>
-        <div className='navagation__logo'>
-          <NavLink
-            className='navagation__link'
-            activeClassName='navagation__link--active'
-            to={routes._HOME}>
-            <h3>RatePoint</h3>
-          </NavLink>
-        </div>
-        <div className='navagation__links'>
-          {
-            this.props.user
-            &&
+      <React.Fragment>
+        <div className='navagation__bar'>
+          <div className='navagation__logo'>
             <NavLink
               className='navagation__link'
               activeClassName='navagation__link--active'
               to={routes._HOME}>
-              Home
+              <h3>RatePoint</h3>
             </NavLink>
-          }
-          <NavLink
-            className='navagation__link'
-            activeClassName='navagation__link--active'
-            to={routes._MAP}>
-            Map
-          </NavLink>
-          <NavLink
-            className='navagation__link'
-            activeClassName='navagation__link--active'
-            to={routes._EXPLORE}>
-            Explore
-          </NavLink>
-          {
-            /*
-            this.props.user
-            &&
+          </div>
+          <div className='navagation__links'>
+            {
+              this.props.user
+              &&
+              <NavLink
+                className='navagation__link'
+                activeClassName='navagation__link--active'
+                to={routes._HOME}>
+                Home
+              </NavLink>
+            }
             <NavLink
               className='navagation__link'
               activeClassName='navagation__link--active'
-              to={routes._FRIENDS}>
-              Friends
+              to={routes._MAP}>
+              Map
             </NavLink>
-            */
-          }
-        </div>
-        <div className='navagation__searchbar'>
-          <form onSubmit={(e) => this.handleSubmit(e)}>
-            <input type='text' name='name' className='navagation__searchbar__input'/>
-            <button type='submit' className='navagation__searchbar__submit'><i className="fas fa-search"/></button>
-          </form>
-        </div>
-        <div className='navagation__links'>
-          {
-            this.props.user
-            &&
             <NavLink
               className='navagation__link'
               activeClassName='navagation__link--active'
-              to={routes._SUGGEST}>
-              Suggest a Location
+              to={routes._EXPLORE}>
+              Explore
             </NavLink>
-          }
+            {
+              /*
+              this.props.user
+              &&
+              <NavLink
+                className='navagation__link'
+                activeClassName='navagation__link--active'
+                to={routes._FRIENDS}>
+                Friends
+              </NavLink>
+              */
+            }
+          </div>
+          <div className='navagation__searchbar'>
+            <form onSubmit={(e) => this.handleSubmit(e)}>
+              <input
+                type='text'
+                name='navSearch'
+                className='navagation__searchbar__input'
+                onChange={this.handleInputChange}
+                onBlur={() => this.setState({searchVisable: false})}
+                onFocus={() => this.setState({searchVisable: true})}
+                />
+              <button type='submit' className='navagation__searchbar__submit'><i className="fas fa-search"/></button>
 
-          {
-            this.props.user
-            ?
-            <div
-              className='navagation__link__account'
-              onClick={this.toggleAccount}>
-              Account <FontAwesomeIcon icon="caret-down" />
-            <div className={`accountBox ${this.state.accountVisible ? '' : '--hidden'}`}>
-                <NavLink
-                  className='account__link'
-                  to={routes._ACCOUNT}>
-                  View
-                </NavLink>
-                {
-                  !this.props.user
-                  &&
-                  <React.Fragment>
-                    <NavLink
-                      className='account__link'
-                      to={routes._LOGIN}>
-                      Login
-                    </NavLink>
-                    <NavLink
-                      className='account__link'
-                      to={routes._CREATEACCOUNT}>
-                      Signup
-                    </NavLink>
-                  </React.Fragment>
-                }
-                {
-                  this.props.user
-                  &&
-                  <a
-                    className='account__link'
-                    onClick={() => this.logout()}>
-                    Logout
-                  </a>
-                }
+              <div className='navagation__searchbar__results'>
+                {this.state.searchVisable && searchList}
               </div>
-            </div>
-            :
-            <div>
-              <NavLink
-                className='navagation__link'
-                to={routes._LOGIN}>
-                Login
-              </NavLink>
-              <span className='orSeperator'>or</span>
-              <NavLink
-                className='navagation__link'
-                to={routes._CREATEACCOUNT}>
-                Signup
-              </NavLink>
-            </div>
-          }
 
+            </form>
+          </div>
+          <div className='navagation__links'>
+            {
+              this.props.user
+              &&
+              <NavLink
+                className='navagation__link'
+                activeClassName='navagation__link--active'
+                to={routes._SUGGEST}>
+                Suggest a Location
+              </NavLink>
+            }
+
+            {
+              this.props.user
+              ?
+              <div
+                className='navagation__link__account'
+                onClick={this.toggleAccount}>
+                Account <FontAwesomeIcon icon="caret-down" />
+              <div className={`accountBox ${this.state.accountVisible ? '' : '--hidden'}`}>
+                  <NavLink
+                    className='account__link'
+                    to={routes._ACCOUNT}>
+                    View
+                  </NavLink>
+                  {
+                    !this.props.user
+                    &&
+                    <React.Fragment>
+                      <NavLink
+                        className='account__link'
+                        to={routes._LOGIN}>
+                        Login
+                      </NavLink>
+                      <NavLink
+                        className='account__link'
+                        to={routes._CREATEACCOUNT}>
+                        Signup
+                      </NavLink>
+                    </React.Fragment>
+                  }
+                  {
+                    this.props.user
+                    &&
+                    <a
+                      className='account__link'
+                      onClick={() => this.logout()}>
+                      Logout
+                    </a>
+                  }
+                </div>
+              </div>
+              :
+              <div>
+                <NavLink
+                  className='navagation__link'
+                  to={routes._LOGIN}>
+                  Login
+                </NavLink>
+                <span className='orSeperator'>or</span>
+                <NavLink
+                  className='navagation__link'
+                  to={routes._CREATEACCOUNT}>
+                  Signup
+                </NavLink>
+              </div>
+            }
+
+          </div>
         </div>
-      </div>
+        <div className={this.state.searchVisable ? 'pageCover' : ''}/>
+      </React.Fragment>
     );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    pois: state.poi.poiList
+    pois: state.poi.allPOIs
   };
 }
 

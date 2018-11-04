@@ -35,7 +35,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "push": "cross-env-shell scp -r build/* $NETID@proj309-tg-03.misc.iastate.edu:/var/www/html",
-    "clean": "cross-env-shell ssh $NETID@proj309-tg-03.misc.iastate.edu \"rm -rf /var/www/html/*\"",
+    "clean": "cross-env-shell ssh $NETID@proj309-tg-03.misc.iastate.edu \"sudo rm -rf /var/www/html/*\"",
     "upload": "yarn build && yarn clean && yarn push",
     "testserver": "json-server --watch db.json --port 3004"
   },

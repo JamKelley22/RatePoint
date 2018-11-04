@@ -9,6 +9,7 @@
   max-height: 55px;
   height: 8%;
   min-width: 800px;
+  z-index: 2;
 }
 
 .navagation__logo {
@@ -43,6 +44,8 @@
   border-bottom-left-radius: 5px;
   border: none;
   height: 100%;
+  padding: 5px;
+  color: $primary_color;
 }
 
 .navagation__searchbar__submit {
@@ -126,4 +129,12 @@ h3 {
 .orSeperator {
   color: opacify($secondary_color, 1);
   margin: 10px;
+}
+
+.pageCover {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(#000000, 0.5);
+  z-index: 1;
 }

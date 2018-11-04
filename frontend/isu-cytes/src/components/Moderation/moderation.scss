@@ -1,0 +1,43 @@
+@import '../../colors.scss';
+@import '../../mediaQuery';
+
+.moderationPage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.modCols {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+.modCol {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.scrollView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+//=====ModerationOverviewCard=====
+.overviewCard {
+  min-width: 100px;
+  min-height: 100px;
+  width: 80%;
+  margin: 20px;
+  background-color: $primary_color;
+  display: flex;
+  flex-direction: column;
+}
+.modDecisionBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

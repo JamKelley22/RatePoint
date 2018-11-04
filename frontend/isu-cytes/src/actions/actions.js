@@ -1,5 +1,5 @@
 import * as actions from './actionTypes.js'
-import {POIAPI,PersonAPI,ListAPI} from '../api/'
+import { POIAPI, PersonAPI, ListAPI } from '../api/'
 
 export function setPOI(poi) {
   return { type: actions.SET_POI, payload: poi }
@@ -132,3 +132,45 @@ export function getCurrentUsers() {
 export function setAllPOIs(pois) {
   return { type: actions.SET_ALL_POIS, payload: pois }
 }
+
+export function setSelectedPOI(poi) {
+  return { type: actions.SET_POI, payload: poi }
+}
+
+export const approvePOI = (poi) => (dispatch) =>
+  new Promise((resolve, reject) => {
+      // Function is expected to return a promise
+       POIAPI.UpdatePOI(poi.id,poi.name,poi.pictures,poi.description,poi.coordinates).then(poi => {
+        if(!poi.error) {
+          dispatch({
+            type: actions.APPROVE_POI,
+            payload: poi
+          })
+          resolve(poi);
+        }
+        else {
+          reject(poi)
+        }
+      }).catch(error => {
+        reject({error: error});
+      })
+  });
+
+export const rejectPOI = (poi) => (dispatch) =>
+  new Promise((resolve, reject) => {
+      // Function is expected to return a promise
+       POIAPI.UpdatePOI(poi.id,poi.name,poi.pictures,poi.description,poi.coordinates).then(poi => {
+        if(!poi.error) {
+          dispatch({
+            type: actions.REJECT_POI,
+            payload: poi
+          })
+          resolve(poi);
+        }
+        else {
+          reject(poi)
+        }
+      }).catch(error => {
+        reject({error: error});
+      })
+  });
