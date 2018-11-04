@@ -18,6 +18,11 @@ const poiReducer = (state=initialState.poi, action) => {
           poi.approved
         )
       }
+    case types.ADD_POI: 
+      return {
+        ...state,
+        allPOIs: [...state.allPOIs,action.payload]
+      }
     default:
       return state;
   }

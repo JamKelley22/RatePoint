@@ -33,7 +33,7 @@ export const GetPOI = async(id) => {
 export const UpdatePOI = async(id,name,pictures,description,coordinates) => {
   let body = {
     name: name,
-    pictures: (pictures) ? pictures.split(',') : [],
+    pictures: (pictures && pictures.length > 0) ? pictures.split(',') : [],
     description: description,
     coordinates: coordinates
   }
@@ -120,7 +120,7 @@ export const SubmitPOI = async(userID,name,pictures,description,coordinates) => 
   let body = {
     userID: userID,
     name: name,
-    pictures: pictures.split(','),
+    pictures: (pictures && pictures.length > 0) ? pictures.split(',') : [],
     description: description,
     coordinates: coordinates
   }

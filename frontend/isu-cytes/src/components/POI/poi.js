@@ -193,6 +193,7 @@ class POI extends React.Component {
     else {
       //user has some number of lists, ask them if they want to add to that one.
       // TODO: This
+      console.log(this.props.user.lists[0].id);
       this.props.Actions.updateList(this.props.user.lists[0].id,[...this.props.user.lists[0].poilist,this.props.poi])
       .then(person => {
         console.log(person);

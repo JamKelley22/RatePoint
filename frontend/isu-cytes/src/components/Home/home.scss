@@ -1,0 +1,11 @@
+.onlineUserList {
+  background-color: red;
+  overflow-y: auto;
+  width: 20%;
+}
+.onlineUser {
+  color: black;
+}
+.onlineUser:hover {
+  background-color: darken(red, 20%);
+}

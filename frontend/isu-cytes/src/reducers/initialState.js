@@ -5,6 +5,7 @@ export const initialState = {
   },
   user: {
     currUser: null,
+    selectedUser: null,
     onlineusers: []
   },
   search: {

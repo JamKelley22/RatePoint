@@ -13,6 +13,7 @@ import Login from './Login/login.js'
 import CreateAccount from './CreateAccount/createAccount.js'
 import Moderation from './Moderation/moderation.js'
 import Search from './Search/search.js'
+import ViewUser from './ViewUser/viewUser.js'
 import APIPage from './APIPage/apiPage.js'
 
 export {
@@ -31,5 +32,6 @@ export {
    CreateAccount,
    APIPage,
    Moderation,
-   Search
+   Search,
+   ViewUser
  }

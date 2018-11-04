@@ -1,10 +1,12 @@
 import React from 'react';
 import GoogleMap from 'google-map-react';
-import { compose } from 'redux';
+import { connect } from 'react-redux'
+import { bindActionCreators, compose } from 'redux';
 
 import { withAuthentication, withNav } from '../../hoc'
 import {Navagation} from '../index.js';
 import { POIAPI } from '../../api/';
+import * as Actions from '../../actions/actions.js'
 
 import './suggest.scss'
 
@@ -35,10 +37,17 @@ class Suggest extends React.Component {
         this.setState({description: e.target.value});
     };
 
-    createRequest = async (e) => {
+    suggestRequest = async (e) => {
         e.preventDefault();
-        let response = await POIAPI.submitPOI(" ",this.state.name,this.state.file,this.state.description,this.state.markerLat+","+this.state.markerLng);
-        this.setState({name: '', description: '',markerLat: 0, markerLng: 0, file: undefined});
+        //let response = await POIAPI.submitPOI(" ",this.state.name,this.state.file,this.state.description,this.state.markerLat+","+this.state.markerLng);
+        this.props.Actions.submitPOI(this.props.user.id,this.state.name,[],this.state.description,`${this.state.markerLat},${this.state.markerLng}`)
+        .then(res => {
+          console.log("success");
+          this.setState({name: '', description: '',markerLat: 0, markerLng: 0, file: undefined});
+        })
+        .catch(err => {
+          console.error(err);
+        })
     };
 
     setMarker = ({lat, lng}) => {
@@ -107,7 +116,20 @@ class Suggest extends React.Component {
     }
 }
 
+function mapStateToProps(state) {
+  return {
+    user: state.user.currUser
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    Actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
 export default compose(
   withAuthentication,
-  withNav
+  withNav,
+  connect(mapStateToProps,mapDispatchToProps)
 )(Suggest);

@@ -178,3 +178,41 @@ export const rejectPOI = (poi) => (dispatch) =>
 export function setSearchTerm(term) {
   return { type: actions.SET_SEARCH_TERM, payload: term }
 }
+
+export const submitPOI = (userID,name,pictures,description,coordinates) => (dispatch) =>
+  new Promise((resolve, reject) => {
+      // Function is expected to return a promise
+       POIAPI.SubmitPOI(userID,name,pictures,description,coordinates).then(poi => {
+        if(!poi.error) {
+          dispatch({
+            type: actions.ADD_POI,
+            payload: poi
+          })
+          resolve(poi);
+        }
+        else {
+          reject(poi)
+        }
+      }).catch(error => {
+        reject({error: error});
+      })
+  });
+
+export const getSetSelectedUserByUsername = (username) => (dispatch) =>
+  new Promise((resolve, reject) => {
+      // Function is expected to return a promise
+       PersonAPI.GetPerson(username).then(person => {
+        if(!person.error) {
+          dispatch({
+            type: actions.SET_SELECTED_PERSON,
+            payload: person
+          })
+          resolve(person);
+        }
+        else {
+          reject(person)
+        }
+      }).catch(error => {
+        reject({error: error});
+      })
+  });

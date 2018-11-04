@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Router,Route,Switch } from 'react-router-dom';
 import { connect } from 'react-redux'
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from 'redux';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faThumbsUp, faTrophy, faClock, faCar, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
 import { Landing,Home,Map,Explore,Friends,Suggest,Account,
-  Review,POI,Error404,Login,CreateAccount,Moderation,Search,APIPage } from './components'
+  Review,POI,Error404,Login,CreateAccount,Moderation,Search,ViewUser,APIPage } from './components'
 import { history } from './history.js'
 import * as routes from './constants/routes'
 import { POIAPI, RatePointWebSocket } from './api'
@@ -41,20 +41,9 @@ class App extends Component {
   }
 
   render() {
-    let OnlineUserList = (
-      <div className='onlineUserList'>
-        {this.props.onlineusers.map((user,i) =>
-          <div className='onlineUser' key={i}>
-            {user}
-          </div>
-        )}
-      </div>
-    )
-
     return (
       <Router history={history}>
         <div className="App">
-          { this.props.currUser && OnlineUserList }
           <Switch>
             <Route exact path={routes._LANDING} component={() => <Landing/>} />
             <Route exact path={routes._HOME} component={() => <Home/>} />
@@ -69,6 +58,7 @@ class App extends Component {
             <Route exact path={routes._POI} component={() => <POI/>} />
             <Route exact path={routes._MODERATION} component={() => <Moderation/>} />
             <Route exact path={routes._SEARCH} component={() => <Search/>} />
+            <Route exact path={routes._VIEWUSER} component={() => <ViewUser/>} />
             <Route exact path={routes._API} component={() => <APIPage/>} />
             <Route component={() => <Error404/>} />
           </Switch>
