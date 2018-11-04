@@ -1,0 +1,10 @@
+@import '../../colors.scss';
+@import '../../mediaQuery';
+
+.searchPage {
+
+}
+.resultsScroll {
+  max-height: 100%;
+  overflow-y: scroll;
+}

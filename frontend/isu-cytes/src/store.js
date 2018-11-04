@@ -4,7 +4,7 @@ import thunk from 'redux-thunk'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
-import {userReducer,poiReducer,initialState} from './reducers/'
+import { userReducer, poiReducer, searchReducer, initialState } from './reducers/'
 
 const persistConfig = {
   key: 'rate-point',
@@ -13,7 +13,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   user: userReducer,
-  poi: poiReducer
+  poi: poiReducer,
+  search: searchReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

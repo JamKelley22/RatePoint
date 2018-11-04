@@ -18,3 +18,5 @@ export const UPDATE_LIST = 'UPDATE_LIST'
 
 export const APPROVE_POI = 'APPROVE_POI'
 export const REJECT_POI = 'REJECT_POI'
+
+export const SET_SEARCH_TERM = 'SET_SEARCH_TERM'

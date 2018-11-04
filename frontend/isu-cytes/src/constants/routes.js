@@ -10,6 +10,7 @@ export const _FRIENDS       = '/friends';
 export const _SUGGEST       = '/suggest';
 export const _ACCOUNT       = '/account';
 export const _MODERATION    = '/moderation';
+export const _SEARCH        = '/search';
 export const _API           = '/api';
 
 

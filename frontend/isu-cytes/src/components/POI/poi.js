@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux';
 import { Redirect } from "react-router-dom";
 
-import { withAuthentication, withNav } from '../../hoc'
+import { withNav } from '../../hoc'
 import { history, routes } from '../../history.js'
 import { Navagation } from '../index.js'
 import { ReviewAPI } from '../../api'

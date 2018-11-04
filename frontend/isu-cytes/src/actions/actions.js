@@ -174,3 +174,7 @@ export const rejectPOI = (poi) => (dispatch) =>
         reject({error: error});
       })
   });
+
+export function setSearchTerm(term) {
+  return { type: actions.SET_SEARCH_TERM, payload: term }
+}

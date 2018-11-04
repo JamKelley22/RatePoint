@@ -56,6 +56,12 @@ class Navigation extends React.Component {
     })
   }
 
+  doFullSearch = () => {
+    //Save search to redux store?
+    this.props.Actions.setSearchTerm(this.state.navSearch)
+    history.push(routes._SEARCH)
+  }
+
   clickPOI = (poi) => {
     this.props.setSelectedPOI(poi);
     history.push(routes._POI);
@@ -188,7 +194,12 @@ class Navigation extends React.Component {
                 onBlur={() => this.setState({searchVisable: false})}
                 onFocus={() => this.setState({searchVisable: true})}
                 />
-              <button type='submit' className='navagation__searchbar__submit'><i className="fas fa-search"/></button>
+              <button
+                type='submit'
+                className='navagation__searchbar__submit'
+                onClick={this.doFullSearch}>
+                <i className="fas fa-search"/>
+              </button>
 
               <div className='navagation__searchbar__results'>
                 {this.state.searchVisable && searchList}
