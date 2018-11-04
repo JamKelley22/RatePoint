@@ -1,23 +1,22 @@
 import React from 'react'
-import { compose } from 'redux';
+import { connect } from 'react-redux'
+import { bindActionCreators, compose } from 'redux';
+
 
 import { withAuthentication, withNav } from '../../hoc'
-import { Navagation } from '../index.js'
 import { history, routes } from '../../history.js'
+import * as Actions from '../../actions/actions.js'
+import { ReviewAPI } from '../../api'
 
 import './review.scss'
 
 class Review extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            poi: 1,
-            title: '',
-            display: 1,
-            rating: 1,
-            body: ''
-        };
+    state = {
+        title: '',
+        body: '',
+        display: 1,
+        rating: 1,
+        error: null
     }
 
     reviewSubmit = async(e) => {
@@ -27,6 +26,7 @@ class Review extends React.Component {
             alert("not valid input");
             return;
         }
+        /*
         let data = {
             poi: this.state.poi,
             title: formdata.get('title'),
@@ -48,9 +48,19 @@ class Review extends React.Component {
         } catch (e) {
           console.error(e);
         }
-
-        this.setState({title:'',rating:1,body:''});
-        setTimeout(() => history.push(routes._POI),1000);
+        */
+        let review = await ReviewAPI.SubmitReview(this.props.poi.id,this.state.rating,this.state.title,this.state.body)
+        if(review.error) {
+          this.setState({
+            error: review.error
+          })
+          return;
+        }
+        else {
+          //Suscessful
+          alert("Suscess")
+          history.push(routes._POI);
+        }
     };
 
     TitleChange = (e) => {
@@ -75,65 +85,75 @@ class Review extends React.Component {
 
     render() {
         return (
-          <React.Fragment>
-            <Navagation/>
-              <div id="form">
-                  <h2>{this.state.poi}</h2>
-                  <form onSubmit={(e) => this.reviewSubmit(e)} noValidate autoComplete="off">
-                      <fieldset>
-                          <legend>Write A Review</legend>
-                          Title
-                          <br/>
-                          <input type="text" required id="title" name="title" value={this.state.title}
-                                 onChange={this.TitleChange} maxLength="20" autoComplete="off"/>
-                          <br/>
-                          Rating
-                          <br/>
-                          <div id="container">
-                              <div id="gettable">
-                                  <div id="icon1div" onMouseOver={(e) => this.RatingDisplayedChange(1)}
-                                       onClick={(e) => this.RatingChange(1)} onMouseLeave={this.RatingBackToState}
-                                        className={(this.state.display<1) ? "review__kiwi":"review__kiwi--colored"}>
-                                      <i id="icon1" className="fas fa-kiwi-bird"></i>
-                                  </div>
-                                  <div id="icon2div" onMouseOver={(e) => this.RatingDisplayedChange(2)}
-                                       onClick={(e) => this.RatingChange(2)} onMouseLeave={this.RatingBackToState}
-                                       className={(this.state.display<2) ? "review__kiwi":"review__kiwi--colored"}>
-                                      <i id="icon2" className="fas fa-kiwi-bird"></i>
-                                  </div>
-                                  <div id="icon3div" onMouseOver={(e) => this.RatingDisplayedChange(3)}
-                                       onClick={(e) => this.RatingChange(3)} onMouseLeave={this.RatingBackToState}
-                                       className={(this.state.display<3) ? "review__kiwi":"review__kiwi--colored"}>
-                                      <i id="icon3" className="fas fa-kiwi-bird"></i>
-                                  </div>
-                                  <div id="icon4div" onMouseOver={(e) => this.RatingDisplayedChange(4)}
-                                       onClick={(e) => this.RatingChange(4)} onMouseLeave={this.RatingBackToState}
-                                       className={(this.state.display<4) ? "review__kiwi":"review__kiwi--colored"}>
-                                      <i id="icon4" className="fas fa-kiwi-bird"></i>
-                                  </div>
-                                  <div id="icon5div" onMouseOver={(e) => this.RatingDisplayedChange(5)}
-                                       onClick={(e) => this.RatingChange(5)} onMouseLeave={this.RatingBackToState}
-                                       className={(this.state.display<5) ? "review__kiwi":"review__kiwi--colored"}>
-                                      <i id="icon5" className="fas fa-kiwi-bird"></i>
-                                  </div>
+          <div id="form">
+              <h2>{this.props.poi.name}</h2>
+              <form onSubmit={(e) => this.reviewSubmit(e)} noValidate autoComplete="off">
+                  <fieldset>
+                      <legend>Write A Review</legend>
+                      Title
+                      <br/>
+                      <input type="text" required id="title" name="title" value={this.state.title}
+                             onChange={this.TitleChange} maxLength="20" autoComplete="off"/>
+                      <br/>
+                      Rating
+                      <br/>
+                      <div id="container">
+                          <div id="gettable">
+                              <div id="icon1div" onMouseOver={(e) => this.RatingDisplayedChange(1)}
+                                   onClick={(e) => this.RatingChange(1)} onMouseLeave={this.RatingBackToState}
+                                    className={(this.state.display<1) ? "review__kiwi":"review__kiwi--colored"}>
+                                  <i id="icon1" className="fas fa-kiwi-bird"></i>
+                              </div>
+                              <div id="icon2div" onMouseOver={(e) => this.RatingDisplayedChange(2)}
+                                   onClick={(e) => this.RatingChange(2)} onMouseLeave={this.RatingBackToState}
+                                   className={(this.state.display<2) ? "review__kiwi":"review__kiwi--colored"}>
+                                  <i id="icon2" className="fas fa-kiwi-bird"></i>
+                              </div>
+                              <div id="icon3div" onMouseOver={(e) => this.RatingDisplayedChange(3)}
+                                   onClick={(e) => this.RatingChange(3)} onMouseLeave={this.RatingBackToState}
+                                   className={(this.state.display<3) ? "review__kiwi":"review__kiwi--colored"}>
+                                  <i id="icon3" className="fas fa-kiwi-bird"></i>
+                              </div>
+                              <div id="icon4div" onMouseOver={(e) => this.RatingDisplayedChange(4)}
+                                   onClick={(e) => this.RatingChange(4)} onMouseLeave={this.RatingBackToState}
+                                   className={(this.state.display<4) ? "review__kiwi":"review__kiwi--colored"}>
+                                  <i id="icon4" className="fas fa-kiwi-bird"></i>
+                              </div>
+                              <div id="icon5div" onMouseOver={(e) => this.RatingDisplayedChange(5)}
+                                   onClick={(e) => this.RatingChange(5)} onMouseLeave={this.RatingBackToState}
+                                   className={(this.state.display<5) ? "review__kiwi":"review__kiwi--colored"}>
+                                  <i id="icon5" className="fas fa-kiwi-bird"></i>
                               </div>
                           </div>
-                          <br/>
-                          Body
-                          <br/>
-                          <textarea type="text" required id="body" name="body" value={this.state.body} cols="100"
-                                    rows="5" onChange={this.BodyChange} autoComplete="off" maxLength="500"/>
-                          <br/><br/>
-                          <input type="submit" value="Submit Review"/>
-                      </fieldset>
-                  </form>
-              </div>
-          </React.Fragment>
+                      </div>
+                      <br/>
+                      Body
+                      <br/>
+                      <textarea type="text" required id="body" name="body" value={this.state.body} cols="100"
+                                rows="5" onChange={this.BodyChange} autoComplete="off" maxLength="500"/>
+                      <br/><br/>
+                      <input type="submit" value="Submit Review"/>
+                  </fieldset>
+              </form>
+          </div>
         );
     }
 }
 
+function mapStateToProps(state) {
+  return {
+    poi: state.poi.currPOI
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    Actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
 export default compose(
+  withNav,
   withAuthentication,
-  withNav
+  connect(mapStateToProps,mapDispatchToProps)
 )(Review);

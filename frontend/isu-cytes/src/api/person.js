@@ -30,16 +30,16 @@ export const GetPerson = async(username) => {
   }
 }
 
-export const UpdatePerson = async(id,username,email,name,biography,password) => {
+export const UpdatePerson = async(oldUsername, newUsername,email,name,biography,password) => {
   let body = {
-    username: username,
+    username: newUsername,
     email: email,
     name: name,
     biography: biography,
     password: password
   }
   let error, response;
-  [error, response] = await to(fetch(`${BASE_URL}/people/${id}`, {
+  [error, response] = await to(fetch(`${BASE_URL}/people/${oldUsername}`, {
     method: "PUT",
     body: JSON.stringify(body),
     headers: {
@@ -55,8 +55,8 @@ export const UpdatePerson = async(id,username,email,name,biography,password) => 
     switch (response.status) {
       case 200:// TODO: Change with backend
       case 201:
-        let data = await response.json();
-        return data;
+        let person = await response.json();
+        return person;
       case 401:
         return {error: 'Unauthorized'}
       case 404:

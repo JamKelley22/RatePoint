@@ -56,6 +56,26 @@ export const loginUser = (username, password) => (dispatch) =>
       })
   });
 
+export const updateUser = (oldUsername,newUsername,email,name,biography,password) => (dispatch) =>
+  new Promise((resolve, reject) => {
+      // Function is expected to return a promise
+       PersonAPI.UpdatePerson(oldUsername,newUsername,email,name,biography,password).then(person => {
+        //Next two actions are async
+        if(!person.error) {
+          dispatch({
+            type: actions.UPDATE_USER,
+            payload: person
+          })
+          resolve(person);
+        }
+        else {
+          reject(person)
+        }
+      }).catch(error => {
+        reject({error: error});
+      })
+  });
+
 export function logoutUser(username) {
   return { type: actions.LOGOUT, payload: username }
 }

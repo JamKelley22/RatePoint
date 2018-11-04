@@ -161,6 +161,7 @@ class Navigation extends React.Component {
             Explore
           </NavLink>
           {
+            /*
             this.props.user
             &&
             <NavLink
@@ -169,6 +170,7 @@ class Navigation extends React.Component {
               to={routes._FRIENDS}>
               Friends
             </NavLink>
+            */
           }
         </div>
         <div className='navagation__searchbar'>

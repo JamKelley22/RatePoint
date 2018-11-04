@@ -1,0 +1,32 @@
+.accountPage {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+}
+.accountUser {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  align-items: center;
+
+}
+.userProfilePic {
+  min-height: 150px;
+  min-width: 150px;
+}
+.accountContent {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+
+  .accountTabs {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+
+.activeTab {
+  border: 1px solid blue;
+}
