@@ -2,7 +2,10 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import fuzzysort from 'fuzzysort'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
+import * as Actions from '../../actions/actions.js'
 import { history, routes } from '../../history.js'
 import { RatePointWebSocket } from '../../api'
 
@@ -253,4 +256,19 @@ class Navigation extends React.Component {
   }
 }
 
-export default Navigation;
+function mapStateToProps(state) {
+  return {
+    pois: state.poi.poiList
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    Actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Navigation);

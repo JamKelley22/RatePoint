@@ -5,15 +5,17 @@ import Rating from '../POI/rating.js'
 
 const POICard = (props) => {
   return (
-    <div className='poiCard' onClick={props.onClick}>
-      <h1>{props.title}</h1>
-      <div className='poiCardImg'>
-        <img src={props.pic} alt='site'/>
-      </div>
-      <div className='poiCardRating'>
-        <Rating
-          number={props.rating}
-        />
+    <div className='poiContainer'>
+      <div className='poiCard' onClick={props.onClick}>
+        <h1>{props.title}</h1>
+        <div className='poiCardImg'>
+          <img src={props.pic} alt='site'/>
+        </div>
+        <div className='poiCardRating'>
+          <Rating
+            number={props.rating}
+          />
+        </div>
       </div>
     </div>
   )
