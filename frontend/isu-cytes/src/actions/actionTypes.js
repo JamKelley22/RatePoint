@@ -12,3 +12,6 @@ export const USER_CONNECT = 'USER_CONNECT'
 export const GET_CURRENT_USERS = 'GET_CURRENT_USERS'
 
 export const SET_ALL_POIS = 'SET_ALL_POIS'
+
+export const CREATE_LIST = 'CREATE_LIST'
+export const UPDATE_LIST = 'UPDATE_LIST'

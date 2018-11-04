@@ -16,6 +16,7 @@ import { withAuthentication, withNav } from '../../hoc'
 import { history, routes } from '../../history.js'
 import { Navagation } from '../index.js'
 import { ReviewAPI } from '../../api'
+import * as Actions from '../../actions/actions.js'
 
 import POICarousel from './poiCarousel.js'
 import Rating from './rating.js'
@@ -177,8 +178,30 @@ class POI extends React.Component {
     })
   }
 
-  addToList = () => {
-    //console.log("Add POI with id: " + this.state.id + " to list");
+  addToList = async() => {
+    if(this.props.user.lists.length === 0) {
+      //User has no lists, for now lets just make a default list and add poi to it
+      this.props.Actions.createList(this.props.user.username,'default',[this.props.poi])
+      .then(person => {
+        console.log(person);
+        console.log('success');
+      })
+      .catch(err => {
+        console.error(err);
+      })
+    }
+    else {
+      //user has some number of lists, ask them if they want to add to that one.
+      // TODO: This
+      this.props.Actions.updateList(this.props.user.lists[0].id,[...this.props.user.lists[0].poilist,this.props.poi])
+      .then(person => {
+        console.log(person);
+        console.log('success');
+      })
+      .catch(err => {
+        console.error(err);
+      })
+    }
   }
 
   reportPOI = () => {
@@ -387,13 +410,14 @@ class POI extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    poi: state.poi.currPOI
+    poi: state.poi.currPOI,
+    user: state.user.currUser
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-
+    Actions: bindActionCreators(Actions, dispatch)
   };
 }
 

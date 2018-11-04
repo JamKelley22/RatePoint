@@ -103,11 +103,22 @@ class Account extends React.Component {
         Tab = (
           <div className='tabContent'>
             {
-              this.props.user.lists > 0
+              this.props.user.lists.length > 0
               ?
-              this.props.user.lists.map((list,i) =>
-                <div className='listItem' key={i}>{list.listname}</div>
-              )
+              this.props.user.lists.map((list,i) => {
+                return (
+                  <div>
+                    <div className='listItem' key={i}><h2>{list.listname}</h2></div>
+                    {
+                      list.poilist.map((poi,i) => {
+                        return (
+                          <div>{poi.name}</div>
+                        )
+                      })
+                    }
+                  </div>
+                )
+              })
               :
               <h3>No Lists</h3>
             }
@@ -213,7 +224,7 @@ class Account extends React.Component {
           <div className='accountTabs'>
             <button className={`accountTab ${this.state.openTab === TABS.LISTS && 'activeTab'}`} onClick={() => this.switchTab(TABS.LISTS)}>{TABS.LISTS}</button>
             <button className={`accountTab ${this.state.openTab === TABS.REVIEWS && 'activeTab'}`} onClick={() => this.switchTab(TABS.REVIEWS)}>{TABS.REVIEWS}</button>
-            <button className={`accountTab ${this.state.openTab === TABS.FRIENDS && 'activeTab'}`} onClick={() => this.switchTab(TABS.FRIENDS)}>{TABS.FRIENDS}</button>
+            {/*<button className={`accountTab ${this.state.openTab === TABS.FRIENDS && 'activeTab'}`} onClick={() => this.switchTab(TABS.FRIENDS)}>{TABS.FRIENDS}</button>*/}
           </div>
           {Tab}
         </div>

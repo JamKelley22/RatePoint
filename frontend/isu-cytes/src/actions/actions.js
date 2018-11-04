@@ -1,5 +1,5 @@
 import * as actions from './actionTypes.js'
-import {POIAPI,PersonAPI} from '../api/'
+import {POIAPI,PersonAPI,ListAPI} from '../api/'
 
 export function setPOI(poi) {
   return { type: actions.SET_POI, payload: poi }
@@ -64,6 +64,46 @@ export const updateUser = (oldUsername,newUsername,email,name,biography,password
         if(!person.error) {
           dispatch({
             type: actions.UPDATE_USER,
+            payload: person
+          })
+          resolve(person);
+        }
+        else {
+          reject(person)
+        }
+      }).catch(error => {
+        reject({error: error});
+      })
+  });
+
+export const createList = (username,listname,poilist) => (dispatch) =>
+  new Promise((resolve, reject) => {
+      // Function is expected to return a promise
+       ListAPI.CreateList(username,listname,poilist).then(person => {//Returns a person
+        //Next two actions are async
+        if(!person.error) {
+          dispatch({
+            type: actions.CREATE_LIST,
+            payload: person
+          })
+          resolve(person);
+        }
+        else {
+          reject(person)
+        }
+      }).catch(error => {
+        reject({error: error});
+      })
+  });
+
+export const updateList = (listID,poilist) => (dispatch) =>
+  new Promise((resolve, reject) => {
+      // Function is expected to return a promise
+       ListAPI.UpdateList(listID,poilist).then(person => {//Returns a person
+        //Next two actions are async
+        if(!person.error) {
+          dispatch({
+            type: actions.UPDATE_LIST,
             payload: person
           })
           resolve(person);

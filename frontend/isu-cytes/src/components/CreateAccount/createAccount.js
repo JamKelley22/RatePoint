@@ -20,6 +20,7 @@ let recaptchaInstance;
 class CreateAccount extends React.Component {
     state = {
         username: '',
+        name: '',
         email: '',
         pass1: '',
         pass2: '',
@@ -125,7 +126,7 @@ class CreateAccount extends React.Component {
         let personProps = {
           username: this.state.username,
           email: this.state.email,
-          name: this.state.username,
+          name: this.state.name,
           password: caesarShift(this.state.pass1),// TODO: Remove this trash
           biography: ''
         };
@@ -173,12 +174,16 @@ class CreateAccount extends React.Component {
                   <div id="positionForm">
                       <form onSubmit={(e) => this.createRequest(e)} noValidate autoComplete="off">
                           <br/>
+                          <b>name:</b>
+                          <input maxLength="20" autoComplete="off"
+                                 onChange={this.handleInputChange} required onBlur={this.checkError} name='name' value={this.state.name}/>
+                          <br/><br/>
                           <b>email:</b>
-                          <input type="email" maxLength="32" autoComplete="off" value={this.state.email}
+                          <input type="email" maxLength="32" autoComplete="off"
                                  onChange={this.handleInputChange} required onBlur={this.checkError} name='email' value={this.state.email}/>
                           <br/><br/>
                           <b>username:</b>
-                          <input maxLength="20" autoComplete="off" value={this.state.username}
+                          <input maxLength="20" autoComplete="off"
                                  onChange={this.handleInputChange} required onBlur={this.checkError} name='username' value={this.state.username}/>
                           <br/><br/>
                           <b>password:</b>

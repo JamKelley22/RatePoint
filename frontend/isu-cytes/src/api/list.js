@@ -29,12 +29,9 @@ export const GetList = async(id) => {
   }
 }
 
-export const UpdateList = async(id,listname,poilist,listuser) => {
+export const UpdateList = async(id,poilist) => {
   let body = {
-    id: id,
-    listname: listname,
     poilist: poilist,
-    listuser: listuser
   }
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/list/${id}`, {
@@ -112,6 +109,7 @@ export const CreateList = async(username, listname, poilist) => {
   else {
     switch (response.status) {
       case 201:
+      case 200:
         let list = await response.json();
         return list;
       default:

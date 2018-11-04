@@ -1,6 +1,7 @@
 import * as POIAPI from './poi.js'
 import * as PersonAPI from './person.js'
 import * as ReviewAPI from './review.js'
+import * as ListAPI from './list.js'
 import * as RatePointWebSocket from './webSocket.js'
 import * as RecaptchaAPI from './recaptcha.js'
 
@@ -17,4 +18,4 @@ const BASE_URL = PRODUCTION;
 
 const WEBSOCKET_URL = `ws://${PRODUCTION_URL}/websocket/onlineusers/`
 
-export { POIAPI, PersonAPI, ReviewAPI, RecaptchaAPI, BASE_URL, WEBSOCKET_URL, RatePointWebSocket, RECAPTCHA_WEBTASK_SERVER_URL }
+export { POIAPI, PersonAPI, ReviewAPI, ListAPI, RecaptchaAPI, BASE_URL, WEBSOCKET_URL, RatePointWebSocket, RECAPTCHA_WEBTASK_SERVER_URL }

@@ -6,6 +6,8 @@ const userReducer = (state=initialState.user, action) => {
     case types.LOGIN:
     case types.CREATE_USER:
     case types.UPDATE_USER:
+    case types.CREATE_LIST:
+    case types.UPDATE_LIST:
       return {...state, currUser: action.payload};
     case types.LOGOUT:
       return {...state, currUser: null, onlineusers: []};
