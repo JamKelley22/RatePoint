@@ -27,6 +27,9 @@ public class Review {
 	@Column
 	private String body;
 	
+	@Column 
+	private String author;
+
 	public Integer getId() {
 		return this.id;
 	}
@@ -65,6 +68,14 @@ public class Review {
 	
 	public void setBody(String body) {
 		this.body = body;
+	}
+	
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 	
 	public void updateReview(Review review) { 
