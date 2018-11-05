@@ -23,27 +23,54 @@ class Home extends React.Component {
   }
 
   render () {
-    let OnlineUserList = (
-      <React.Fragment>
-        {this.props.onlineusers.map((username,i) =>
+    console.log(this.props.onlineusers);
+    let OnlineUserList = [];
+
+    this.props.onlineusers.map((username,i) => {
+      if(username !== this.props.currUser.username) {
+        OnlineUserList.push(
           <div
             className='onlineUser'
             key={i}>
+            Username: {username}
             <a
               onClick={() => this.onUserClick(username)}>
-              Username: {username}
+              View
             </a>
           </div>
-        )}
-      </React.Fragment>
+          )
+        }
+      }
     )
+
+    console.log(OnlineUserList);
 
     return (
       <div className='homePage'>
         <h1>Home</h1>
         <h2>Online Users</h2>
         <div className='onlineUserList'>
-          { this.props.currUser && OnlineUserList }
+          <h3>Me</h3>
+          <hr/>
+          <div
+            className='onlineUser'>
+            {this.props.currUser.username}
+            <a
+              onClick={() => history.push(routes._ACCOUNT)}>
+              View
+            </a>
+          </div>
+          {
+            OnlineUserList.length > 0
+            ?
+            <React.Fragment>
+              <h3>Others</h3>
+              <hr/>
+              {OnlineUserList}
+            </React.Fragment>
+            :
+            ''
+          }
         </div>
       </div>
     );
