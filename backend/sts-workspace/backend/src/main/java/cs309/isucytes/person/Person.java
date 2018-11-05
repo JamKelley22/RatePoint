@@ -43,7 +43,7 @@ public class Person {
 	/**
 	 * A person's name
 	 */
-	@Column(nullable=false)
+	@Column
 	private String name;
 
 	/**
@@ -73,7 +73,7 @@ public class Person {
 	/**
 	 * Role that the user is assigned (0 = user, 1 = mod, 2 = admin);
 	 */
-	@Column(nullable=false)
+	@Column
 	private Integer role;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
