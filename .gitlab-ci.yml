@@ -42,6 +42,7 @@ frontend-build:
     script:
         - cd frontend/isu-cytes
         - yarn install
+        - CI=false 
         - yarn build
         - cp -r build/* /var/www/html
 # Below stage builds, deploys and executes the jar as service.
