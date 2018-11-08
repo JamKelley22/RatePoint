@@ -1,7 +1,7 @@
 .accountPage {
   height: 100%;
   display: flex;
-  flex-direction: row;
+  margin: 10%;
   margin-top: 30px;
 }
 .accountUser {
@@ -29,4 +29,12 @@
 
 .activeTab {
   border: 1px solid blue;
+}
+
+
+//=====CurrentUserView=====
+.userProfilePic {
+  img {
+    width: 100%;
+  }
 }

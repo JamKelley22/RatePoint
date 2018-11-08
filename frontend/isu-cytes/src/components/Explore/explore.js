@@ -33,10 +33,10 @@ class Explore extends React.Component {
           <POICard
             title={poi.name}
             key={i}
-            pic={(poi.pictures && poi.pictures.length > 0) ? poi.pictures[0] : null}
-            rating={poi.rating}
+            /*pic={(poi.pictures && poi.pictures.length > 0) ? poi.pictures[0] : null}*/
+            /*rating={poi.rating}*/
             onClick={() => this.onPOICardClick(poi)}
-            delay={i * .5}
+            delay={i * .1}
           />
         )
       })

@@ -8,12 +8,13 @@ import { bindActionCreators } from 'redux'
 import * as Actions from '../../actions/actions.js'
 import { history, routes } from '../../history.js'
 import { RatePointWebSocket } from '../../api'
+import AccountDropdown from './accountDropdown.js'
 
 import './navagation.scss'
 
 class Navigation extends React.Component {
   state = {
-    accountVisible: false,
+    accountDropdownVisible: false,
     navSearch: '',
     searchResults: {
       pois: [],
@@ -29,7 +30,7 @@ class Navigation extends React.Component {
 
   toggleAccount = () => {
     this.setState({
-      accountVisible: !this.state.accountVisible
+      accountDropdownVisible: !this.state.accountDropdownVisible
     })
   }
 
@@ -221,62 +222,21 @@ class Navigation extends React.Component {
               </NavLink>
             }
 
-            {
-              this.props.user
-              ?
-              <div
-                className='navagation__link__account'
-                onClick={this.toggleAccount}>
-                Account <FontAwesomeIcon icon="caret-down" />
-              <div className={`accountBox ${this.state.accountVisible ? '' : '--hidden'}`}>
-                  <NavLink
-                    className='account__link'
-                    to={routes._ACCOUNT}>
-                    View
-                  </NavLink>
-                  {
-                    !this.props.user
-                    &&
-                    <React.Fragment>
-                      <NavLink
-                        className='account__link'
-                        to={routes._LOGIN}>
-                        Login
-                      </NavLink>
-                      <NavLink
-                        className='account__link'
-                        to={routes._CREATEACCOUNT}>
-                        Signup
-                      </NavLink>
-                    </React.Fragment>
-                  }
-                  {
-                    this.props.user
-                    &&
-                    <a
-                      className='account__link'
-                      onClick={() => this.logout()}>
-                      Logout
-                    </a>
-                  }
-                </div>
-              </div>
-              :
-              <div>
-                <NavLink
-                  className='navagation__link'
-                  to={routes._LOGIN}>
-                  Login
-                </NavLink>
-                <span className='orSeperator'>or</span>
-                <NavLink
-                  className='navagation__link'
-                  to={routes._CREATEACCOUNT}>
-                  Signup
-                </NavLink>
-              </div>
-            }
-
+            <div
+              className='navagation__link__account'
+              onClick={this.toggleAccount}>
+              Account <FontAwesomeIcon icon="caret-down" />
+            <AccountDropdown
+              accountDropdownVisible={this.state.accountDropdownVisible}
+              me={this.props.user}
+              links={[
+                {name: 'View', dest: routes._ACCOUNT, action: null, visible: this.props.currUser},
+                {name: 'Login', dest: routes._ACCOUNT, action: null, visible: !this.props.currUser},
+                {name: 'Sign Up', dest: routes._ACCOUNT, action: null, visible: !this.props.currUser},
+                {name: 'Logout', dest: history.location, action: this.logout, visible: this.props.currUser}
+              ]}
+            />
+            </div>
           </div>
         </div>
         <div className={this.state.searchVisable ? 'pageCover' : ''}/>
@@ -287,6 +247,7 @@ class Navigation extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    currUser: state.user.currUser,
     pois: state.poi.allPOIs
   };
 }

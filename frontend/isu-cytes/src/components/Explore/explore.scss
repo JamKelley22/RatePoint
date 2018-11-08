@@ -1,3 +1,8 @@
+@import '../../colors.scss';
+@import '../../mediaQuery';
+
+//=====Explore=====
+
 #explorePage {
   background-color: #4F5946;
   height: 100%;
@@ -7,6 +12,12 @@
   overflow-y: auto;
   justify-content: center;
 }
+#exploreComponent {
+  height: 100%;
+  overflow: hidden;
+}
+
+//=====POICard=====
 
 .poiCard {
   overflow: hidden;
@@ -27,7 +38,7 @@
   .poiCardImg {
     width: 100%;
     img {
-      max-width: 200px;
+      max-width: 150px;
       padding: 5px;
     }
   }
@@ -43,6 +54,7 @@
   max-height: 250px;
   min-width: 250px;
   margin: 30px;
+  z-index: 1;
 }
 
 .poiContainer:hover {
@@ -58,9 +70,4 @@
     box-shadow: none;
     transform: translate(3px,3px);
   }
-}
-
-#exploreComponent {
-  height: 100%;
-  overflow: hidden;
 }

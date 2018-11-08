@@ -5,7 +5,7 @@ import Rating from '../POI/rating.js'
 
 const POICard = (props) => {
   return (
-    <div className={`poiContainer animated bounceInDown delay-${props.delay}s`}>
+    <div className={'poiContainer animated bounceInDown'} style={{animationDelay: `${props.delay}s`}}>
       <div className='poiCard' onClick={props.onClick}>
         <h1>{props.title}</h1>
         <div className='poiCardImg'>
@@ -22,3 +22,15 @@ const POICard = (props) => {
 }
 
 export default POICard;
+
+POICard.propTypes = {
+  title: PropTypes.string,
+  pic: PropTypes.string,
+  rating: PropTypes.number
+}
+
+POICard.defaultProps = {
+  title: 'POI Title',
+  pic: 'https://cdn.browshot.com/static/images/not-found.png',
+  rating: 0
+}
