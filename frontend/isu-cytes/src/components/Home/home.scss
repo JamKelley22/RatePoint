@@ -1,11 +1,23 @@
 @import '../../colors.scss';
 @import '../../mediaQuery';
 
+//=====Home=====
 .homePage {
   background-color: $secondary_color;
   height: 100%;
 }
+.homePage__elements {
+  display: flex;
+}
+.homePage__element {
+  background-color: $primary_color;
+  border: 1px solid black;
+}
 
+
+//=====Feed=====
+
+//=====OnlineUsers=====
 .onlineUserList {
   background-color: $primary_color;
   overflow-y: auto;

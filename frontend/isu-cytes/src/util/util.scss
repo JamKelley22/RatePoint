@@ -17,6 +17,7 @@ button, input {
   color: $base_color;
   max-width: 100%;
   margin: 10px;
+  transition: transform .1s ease;
 
   box-shadow: $clickDistance $clickDistance 0px darken( $secondary_color, 10% );
 }

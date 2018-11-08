@@ -82,7 +82,6 @@ class Navigation extends React.Component {
   }
 
   render () {
-    console.log(this.state.searchResults.pois);
     let foundResults = this.state.searchResults.pois.length > 0 ||
                       this.state.searchResults.tags.length > 0  ||
                       this.state.searchResults.people.length > 0;
@@ -186,20 +185,23 @@ class Navigation extends React.Component {
           </div>
           <div className='navagation__searchbar'>
             <form onSubmit={(e) => this.handleSubmit(e)}>
-              <input
-                type='text'
-                name='navSearch'
-                className='navagation__searchbar__input'
-                onChange={this.handleInputChange}
-                onBlur={() => this.setState({searchVisable: false})}
-                onFocus={() => this.setState({searchVisable: true})}
-                />
-              <button
-                type='submit'
-                className='navagation__searchbar__submit'
-                onClick={this.doFullSearch}>
-                <i className="fas fa-search"/>
-              </button>
+              <div className='navagation__searchbar__wrapper'>
+                <input
+                  type='text'
+                  name='navSearch'
+                  className='navagation__searchbar__input'
+                  onChange={this.handleInputChange}
+                  onBlur={() => this.setState({searchVisable: false})}
+                  onFocus={() => this.setState({searchVisable: true})}
+                  />
+                <button
+                  type='submit'
+                  className='navagation__searchbar__submit'
+                  onClick={this.doFullSearch}>
+                  <i className="fas fa-search"/>
+                </button>
+              </div>
+
 
               <div className='navagation__searchbar__results'>
                 {this.state.searchVisable && searchList}

@@ -14,6 +14,7 @@ import CreateAccount from './CreateAccount/createAccount.js'
 import Moderation from './Moderation/moderation.js'
 import Search from './Search/search.js'
 import ViewUser from './ViewUser/viewUser.js'
+import PasswordForgot from './PasswordForgot/passwordForgot.js'
 import APIPage from './APIPage/apiPage.js'
 
 export {
@@ -33,5 +34,6 @@ export {
    APIPage,
    Moderation,
    Search,
-   ViewUser
+   ViewUser,
+   PasswordForgot
  }

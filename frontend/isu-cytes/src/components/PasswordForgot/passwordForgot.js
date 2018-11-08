@@ -14,14 +14,10 @@ import { caesarShift } from '../../security/security.js'
 import { Button } from '../../util'
 
 import Logo from '../../images/logo.png'
-import './login.scss'
-
-class Login extends React.Component {
+class PasswordForgot extends React.Component {
   state = {
     username: '',
-    pass: '',
-    error: '',
-    inputType: 'password'
+    error: ''
   }
 
   handleInputChange = (event) => {
@@ -32,62 +28,6 @@ class Login extends React.Component {
     this.setState({
       [name]: value
     });
-  }
-
-  onSubmitLogin = async(e) => {
-      e.preventDefault();
-      let err = this.formHasError();
-      if(err) {
-        this.setState({
-          error: err
-        })
-        return;
-      }
-      this.hashPasswordThenLogin(this.state.pass);
-  };
-
-  checkError = () => {
-    let err = this.formHasError();
-    this.setState({
-      error: err
-    })
-  }
-
-  formHasError = () => {
-    if(this.state.username.length === 0) {
-      return 'Please enter your username '
-    }
-    else if(this.state.pass.length === 0) {
-      return 'Please enter your password '
-    }
-    else {
-      return null;
-    }
-    //Do error checking
-    //Fields not empty
-    //password length
-  }
-
-  hashPasswordThenLogin = async(password) => {
-    //bcrypt.hash(password, 10, (err, hash) => this.doLoginRequest(err,hash));
-    this.doLoginRequest(null,caesarShift(password));//For now...
-    // TODO: Get the backend the hash and have them check it
-  }
-
-  doLoginRequest = async(err,hashedPassword) => {
-    this.props.Actions.loginUser(this.state.username,hashedPassword)
-    .then(person => {
-      //Suscessful Login
-      console.log("=====Logged In=====");
-      RatePointWebSocket.connect(person.username)
-      history.push(routes._HOME)
-    })
-    .catch(err => {
-      //alert(err.error);
-      this.setState({
-        error: err
-      })
-    })
   }
 
   render(){
@@ -101,13 +41,12 @@ class Login extends React.Component {
         <div className="loginPage">
           <div className='clickableContent'>
             <div className='login__topBar'>
-              <a className='arrow' onClick={() => history.goBack()}><FontAwesomeIcon icon="arrow-left" /></a>
-              <NavLink to={routes._CREATEACCOUNT}>Sign Up</NavLink>
+              <a className='arrow' onClick={() => history.goBack()} ><FontAwesomeIcon icon="arrow-left" /></a>
             </div>
             <div className="loginFormWrapper">
               <div className="loginForm">
                 <div ><img className='login__logo' src={Logo} alt='Logo'/></div>
-                <form onSubmit={(e) => this.onSubmitLogin(e)}>
+                <form onSubmit={(e) => e.preventDefault()}>
                     <label>Username</label>
                     <input
                       type="text"
@@ -118,33 +57,19 @@ class Login extends React.Component {
                       onFocus={this.checkError}
                       onChange={this.handleInputChange}
                     />
-                  <label className='passLabel'>Password
-                    <input
-                      type="password"
-                      type={this.state.inputType}
-                      maxLength="32"
-                      className="passInput"
-                      name='pass'
-                      onChange={this.handleInputChange}
-                      onBlur={this.checkError}
-                      onFocus={this.checkError}
-                      value={this.state.pass}
-                    />
-                  <span className="password-trigger" onClick={() => this.setState({inputType: this.state.inputType === 'password' ? 'text' : 'password'})}>
-                    <FontAwesomeIcon icon={this.state.inputType === 'password' ? 'eye' : 'eye-slash'} />
-                  </span>
-                  </label>
                   {
                     this.state.error
                     &&
                     <div className='errorBox'>{this.state.error}</div>
+
                   }
                   <div className={this.state.error ? 'moveError' : ''}>
-                    <div className='submitBtn'><Button name='Log In' size='medium' onClick={this.onSubmitLogin}/></div>
+                    <div className='submitBtn'><Button name='Email Me' size='medium' onClick={this.onSubmitLogin}/></div>
                     <hr/>
 
                     <div className='login__formFooter'>
-                      <NavLink to={routes._PASSWORDFORGOT}>Need Help?</NavLink>
+                      <a onClick={() => history.push(routes._SIGNUP)}>Sign Up</a>
+                      <a onClick={() => history.push(routes._CREATEACCOUNT)}>Join</a>
                     </div>
                   </div>
                 </form>
@@ -192,4 +117,4 @@ function mapDispatchToProps(dispatch) {
 
 export default compose(
   connect(mapStateToProps,mapDispatchToProps)
-)(Login);
+)(PasswordForgot);

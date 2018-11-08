@@ -11,6 +11,13 @@ import { Provider } from 'react-redux'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 
+//Make sure that user is at least notified before leaving page
+//Annoying for devlopment b/c it also runs on page reload
+/*
+window.onbeforeunload = function() {
+    return 'testing';
+};
+*/
 let persistor = persistStore(store)
 
 ReactDOM.render(

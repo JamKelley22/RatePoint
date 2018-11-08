@@ -5,7 +5,7 @@ import Rating from '../POI/rating.js'
 
 const POICard = (props) => {
   return (
-    <div className='poiContainer'>
+    <div className={`poiContainer animated bounceInDown delay-${props.delay}s`}>
       <div className='poiCard' onClick={props.onClick}>
         <h1>{props.title}</h1>
         <div className='poiCardImg'>

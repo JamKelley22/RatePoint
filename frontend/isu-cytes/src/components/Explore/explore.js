@@ -36,17 +36,16 @@ class Explore extends React.Component {
             pic={(poi.pictures && poi.pictures.length > 0) ? poi.pictures[0] : null}
             rating={poi.rating}
             onClick={() => this.onPOICardClick(poi)}
+            delay={i * .5}
           />
         )
       })
     }
 
     return (
-      <div id='exploreComponent'>
         <div id='explorePage'>
         {cards}
         </div>
-      </div>
     );
   }
 }
