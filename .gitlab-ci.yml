@@ -9,8 +9,8 @@ cache:
 stages:
   - mavenbuild
   - maventest
-  - frontendbuild
   - autodeploy
+  - frontendbuild
 
 # tags: "shell" should match with the tag name provided to runner, for spring runner should execute in shell.
 # Notice that in petclinic project, the spring project is in root of master, if yours is in folder then cd to that folder.
@@ -35,16 +35,6 @@ maven-test:
     paths:
       - backend/sts-workspace/backend/target/*.jar
       
-frontend-build: 
-    stage: frontendbuild
-    tags:
-        - frontend
-    script:
-        - cd frontend/isu-cytes
-        - yarn install
-        - CI=false 
-        - yarn build
-        - sudo cp -r build/* /var/www/html
 # Below stage builds, deploys and executes the jar as service.
 # Make sure there is /target directory in your server, else script will fail, or use any other folder you like.
 # If you are changing the folder, reflect the change in systemd-web-demo service too.
@@ -58,3 +48,14 @@ autoDeploy:
     - sudo mv target/*.jar /target/web-demo.jar 
     - sudo systemctl stop systemd-web-demo
     - sudo systemctl start systemd-web-demo
+    
+frontend-build: 
+    stage: frontendbuild
+    tags:
+        - frontend
+    script:
+        - cd frontend/isu-cytes
+        - yarn install
+        - CI=false 
+        - yarn build
+        - sudo cp -r build/* /var/www/html
