@@ -9,7 +9,7 @@
   overflow: hidden;
 
   @include mobile {
-    background-color: green;
+    //background-color: green;
     overflow: auto;
     overflow-y: scroll; /* has to be scroll, not auto */
     -webkit-overflow-scrolling: touch;
@@ -17,7 +17,7 @@
   }
 
   @include tablet {
-    background-color: red;
+    //background-color: red;
     overflow: auto;
   }
 
@@ -26,7 +26,7 @@
   }
 
   @include desktop {
-    background-color: yellow;
+    //background-color: yellow;
   }
 
 }
@@ -62,7 +62,7 @@ a:hover, a:focus {
 
 button {
   background-color: white;
-  color: #FF3500;
+  color: $primary_color;
   height: 3.5rem;
   border-radius: 4px;
   margin-top: 1rem;
@@ -101,6 +101,7 @@ input[type="password"],
 input[type="number"],
 input[type="submit"],
 textarea {
+  box-sizing : border-box;
   border-radius: 5px;
   border: none;
   padding: 1rem;

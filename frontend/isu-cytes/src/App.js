@@ -86,3 +86,11 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(App);
+
+
+//Empty
+//<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1"><defs><style>.a{fill:#820000;stroke:#707070;}</style></defs><path class="a" d="M0,0H0Z" transform="translate(0 0.5)"/></svg>
+//Middle
+//<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1"><defs><style>.a{fill:#820000;stroke:#707070;}</style></defs><path class="a" d="M0,0H0Z" transform="translate(0 0.5)"/></svg>
+//End
+//<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1921.349 565.545"><defs><style>.a{fill:#820000;stroke:#707070;}</style></defs><path class="a" d="M0,0S152.727,526.364,327.273,526.364,433.93,343.636,600,343.636s425.114,220.909,600,220.909,163.636-220.909,387.273-220.909S1920,0,1920,0Z" transform="translate(0.666 0.5)"/></svg>

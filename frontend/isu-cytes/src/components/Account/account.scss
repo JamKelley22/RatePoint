@@ -1,8 +1,15 @@
+@import '../../colors.scss';
+@import '../../mediaQuery';
+
 .accountPage {
   height: 100%;
   display: flex;
-  margin: 10%;
-  margin-top: 30px;
+  padding: 10%;
+  padding-top: 30px;
+  background-color: $secondary_color;
+}
+.currentUserViewComponent {
+  width: 20%;
 }
 .accountUser {
   display: flex;
@@ -19,6 +26,7 @@
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+  width: 100%;
 
   .accountTabs {
     display: flex;
@@ -26,9 +34,21 @@
   }
 }
 
+.accountTab {
+  background-color: $secondary_color;
+  border: none;
+  border-bottom: 3px solid $secondary_color;
+  outline: none;
+  border-radius: 0px;
+  margin: 10px;
+  height: 35px;
+}
+.accountTab:hover {
+  border-bottom: 3px solid transparentize($accent_color,.8);
+}
 
 .activeTab {
-  border: 1px solid blue;
+  border-bottom: 3px solid $accent_color !important;
 }
 
 

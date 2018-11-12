@@ -14,6 +14,7 @@ const AccountDropdown = (props) => {
                 <NavLink
                   className='account__link'
                   to={link.dest}
+                  key={i}
                   onClick={link.action}>
                   {link.name}
                 </NavLink>
