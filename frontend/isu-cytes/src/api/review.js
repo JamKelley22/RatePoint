@@ -4,7 +4,7 @@ import { BASE_URL } from './index.js'
 
 export const GetReview = async(id) => {
   let error, response;
-  [error, response] = await to(fetch(`${BASE_URL}/review/${id}`, {
+  [error, response] = await to(fetch(`${BASE_URL}/reviews/${id}`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -38,7 +38,7 @@ export const UpdateReview = async(id,rating,title,reviewBody) => {
     body: reviewBody
   }
   let error, response;
-  [error, response] = await to(fetch(`${BASE_URL}/review/${id}`, {
+  [error, response] = await to(fetch(`${BASE_URL}/reviews/${id}`, {
     method: 'PUT',
     headers: {
       'Accept': 'application/json',
@@ -66,7 +66,7 @@ export const UpdateReview = async(id,rating,title,reviewBody) => {
 
 export const DeleteReview = async(id) => {
   let error, response;
-  [error, response] = await to(fetch(`${BASE_URL}/review/${id}`, {
+  [error, response] = await to(fetch(`${BASE_URL}/reviews/${id}`, {
     method: 'DELETE',
     headers: {
       'Accept': 'application/json',
@@ -93,7 +93,7 @@ export const DeleteReview = async(id) => {
 
 export const GetAllReviews = async() => {
   let error, response;
-  [error, response] = await to(fetch(`${BASE_URL}/review`, {
+  [error, response] = await to(fetch(`${BASE_URL}/reviews`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -124,7 +124,7 @@ export const SubmitReview = async(poiID,rating,title,reviewBody) => {
     body: reviewBody
   }
   let error, response;
-  [error, response] = await to(fetch(`${BASE_URL}/review`, {
+  [error, response] = await to(fetch(`${BASE_URL}/reviews`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

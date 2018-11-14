@@ -4,7 +4,7 @@ import { BASE_URL } from './index.js'
 
 export const GetPOI = async(id) => {
   let error, response;
-  [error, response] = await to(fetch(`${BASE_URL}/poi/${id}`, {
+  [error, response] = await to(fetch(`${BASE_URL}/pois/${id}`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -38,7 +38,7 @@ export const UpdatePOI = async(id,name,pictures,description,coordinates) => {
     coordinates: coordinates
   }
   let error, response;
-  [error, response] = await to(fetch(`${BASE_URL}/poi/${id}`, {
+  [error, response] = await to(fetch(`${BASE_URL}/pois/${id}`, {
     method: 'PUT',
     body: JSON.stringify(body),
     headers: {
@@ -54,6 +54,7 @@ export const UpdatePOI = async(id,name,pictures,description,coordinates) => {
   else {
     switch (response.status) {
       case 201:
+      case 200:
         let poi = await response.json();
         return poi;
       case 404:
@@ -66,7 +67,7 @@ export const UpdatePOI = async(id,name,pictures,description,coordinates) => {
 
 export const DeletePOI = async(id) => {
   let error, response;
-  [error, response] = await to(fetch(`${BASE_URL}/poi${id}`, {
+  [error, response] = await to(fetch(`${BASE_URL}/pois/${id}`, {
     method: 'DELETE',
     headers: {
       'Accept': 'application/json',
@@ -120,16 +121,19 @@ export const SubmitPOI = async(userID,name,pictures,description,coordinates) => 
   let body = {
     userID: userID,
     name: name,
-    pictures: (pictures && pictures.length > 0) ? pictures.split(',') : [],
+    /*pictures: (pictures && pictures.length > 0) ? pictures.split(',') : [],*/
     description: description,
-    coordinates: coordinates
+    coordinates: coordinates,
+    approved: false
   }
+  console.log(body);
   let error, response;
-  [error, response] = await to(fetch(`${BASE_URL}/poi`, {
+  [error, response] = await to(fetch(`${BASE_URL}/pois`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'origin': 'same-origin'
     },
     body: JSON.stringify(body)
   }));
@@ -148,7 +152,7 @@ export const SubmitPOI = async(userID,name,pictures,description,coordinates) => 
       case 409:
         return {error: 'Conflict'}
       default:
-        return {error: `Unexpected server response code of ${response.status}`}
+        return {error: `Unexpected server response code of ${response.status}`, res: response}
     }
   }
 }

@@ -5,6 +5,8 @@ import { Redirect } from "react-router-dom";
 
 import { history, routes } from '../history.js'
 
+import './auth.scss'
+
 /*
   When composed with this HOC, the component can only be viewed by user of role >= minimumUserRole
   (0 = user, 1 = mod, 2 = admin);
@@ -19,7 +21,7 @@ const withAuthorization = (minimumUserRole) => WrappedComponent => {
           ?
           <WrappedComponent {...this.props} />
           :
-          <div>
+          <div className='authErrorPage'>
             <h3>User Role: {this.props.user.role}</h3>
             <h1>Error 401</h1>
             <h3>You are Unauthorized to be here 🤖</h3>

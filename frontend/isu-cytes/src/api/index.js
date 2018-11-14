@@ -11,6 +11,8 @@ const MOCK_URL = 'private-b668e9-ratepoint.apiary-mock.com'
 const PRODUCTION_URL = 'proj309-tg-03.misc.iastate.edu:8080'
 const RECAPTCHA_WEBTASK_SERVER_URL = 'https://wt-c441cf5c5addaa35ef0621c594b39c20-0.sandbox.auth0-extend.com/RatePoint-Recaptcha'
 
+const PROXY_URL = 'http://raspberrypi-jk.student.iastate.edu:8080/'
+
 const MOCK = PROTOCOL_MOCK + MOCK_URL;
 const PRODUCTION = PROTOCOL_PRODUCTION + PRODUCTION_URL;
 

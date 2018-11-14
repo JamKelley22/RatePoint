@@ -1,0 +1,7 @@
+@import '../colors.scss';
+@import '../mediaQuery';
+
+.authErrorPage {
+  background-color: $secondary_color;
+  height: 100%;
+}
