@@ -67,10 +67,10 @@ class Account extends React.Component {
 
     switch (this.state.openTab) {
       case TABS.LISTS:
-        Tab = <CurrentUserList />;
+        Tab = <CurrentUserList lists={this.props.user.lists}/>;
         break;
       case TABS.REVIEWS:
-        Tab = <CurrentUserReviews />;
+        Tab = <CurrentUserReviews reviews={[]}/>;
         break;
       case TABS.FRIENDS:
         Tab = <CurrentUserFriends />;

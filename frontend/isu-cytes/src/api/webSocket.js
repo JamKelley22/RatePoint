@@ -5,7 +5,9 @@ import * as Actions from '../actions/actions.js'
 let ws;
 
 export function connect(username) {
+  console.log("WebSocket Connect");
   if(ws) {
+    console.log("WebSocket already exists, reseting");
       ws.close();
       ws = null;
   }
@@ -36,6 +38,7 @@ export function connect(username) {
 }
 
 export function closeWebsocket() {
+  console.log("WebSocket Close");
   if(!ws) {
     console.error("WebSocket Not Initialized");
     return;
