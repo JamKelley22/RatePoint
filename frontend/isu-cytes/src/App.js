@@ -3,7 +3,7 @@ import { Router,Route,Switch } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faThumbsUp, faTrophy, faClock, faCar, faCaretDown, faArrowLeft, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { faThumbsUp, faTrophy, faClock, faCar, faCaretDown, faArrowLeft, faEye, faEyeSlash, faMapMarker } from '@fortawesome/free-solid-svg-icons'
 
 import { Landing,Home,Map,Explore,Friends,Suggest,Account,
   Review,POI,Error404,Login,CreateAccount,Moderation,Search,ViewUser,APIPage,PasswordForgot } from './components'
@@ -14,7 +14,7 @@ import * as Actions from './actions/actions.js'
 
 import './App.scss'
 
-library.add(faThumbsUp, faTrophy, faClock, faCar, faCaretDown, faArrowLeft, faEye, faEyeSlash)
+library.add(faThumbsUp, faTrophy, faClock, faCar, faCaretDown, faArrowLeft, faEye, faEyeSlash, faMapMarker)
 
 /*
 //Make it so user has to confirm page close (which then logs them out)
