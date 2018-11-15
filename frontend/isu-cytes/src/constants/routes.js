@@ -12,7 +12,6 @@ export const _ACCOUNT       = '/account';
 export const _MODERATION    = '/moderation';
 export const _SEARCH        = '/search';
 export const _VIEWUSER      = '/user';
-export const _PASSWORDFORGOT= '/passwordforgot'
 export const _API           = '/api';
 
 

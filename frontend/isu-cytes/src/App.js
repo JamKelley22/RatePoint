@@ -6,7 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faThumbsUp, faTrophy, faClock, faCar, faCaretDown, faArrowLeft, faEye, faEyeSlash, faMapMarker } from '@fortawesome/free-solid-svg-icons'
 
 import { Landing,Home,Map,Explore,Friends,Suggest,Account,
-  Review,POI,Error404,Login,CreateAccount,Moderation,Search,ViewUser,APIPage,PasswordForgot } from './components'
+  Review,POI,Error404,Login,CreateAccount,Moderation,Search,ViewUser,APIPage } from './components'
 import { history } from './history.js'
 import * as routes from './constants/routes'
 import { POIAPI, RatePointWebSocket } from './api'
