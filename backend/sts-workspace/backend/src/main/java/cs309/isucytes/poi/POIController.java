@@ -56,7 +56,10 @@ public class POIController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> addNewPOI (@RequestBody POI poi) {
 		//if the poi we are about to add is not found, then we add it
-		if(this.getPOIByID(poi.getId()).getStatusCode() == HttpStatus.NOT_FOUND) {
+		if(poi.getApproved() == null) {
+			poi.setApproved(false);
+		}
+		if(POIRepository.findByCoordinates(poi.getCoordinates()).isPresent() == false) {
 			POIRepository.save(poi);
 			Optional<POI> getPOI = POIRepository.findById(poi.getId());
 			return new ResponseEntity<>(getPOI.get(), HttpStatus.OK);
