@@ -85,7 +85,7 @@ class Login extends React.Component {
     .catch(err => {
       //alert(err.error);
       this.setState({
-        error: err
+        error: err.toString()
       })
     })
   }

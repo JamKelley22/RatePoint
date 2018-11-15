@@ -16,11 +16,20 @@ import './App.scss'
 
 library.add(faThumbsUp, faTrophy, faClock, faCar, faCaretDown, faArrowLeft, faEye, faEyeSlash)
 
+/*
+//Make it so user has to confirm page close (which then logs them out)
+window.onbeforeunload = function() {
+  //Not
+  Actions.logoutUser();
+  RatePointWebSocket.closeWebsocket();
+  return true;
+};
+*/
+
 class App extends Component {
 
   componentDidMount() {
     this.cachePOIs();
-    //RatePointWebSocket.connect("JoeMama")
   }
 
   cachePOIs = async() => {

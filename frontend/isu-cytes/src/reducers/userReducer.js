@@ -10,6 +10,7 @@ const userReducer = (state=initialState.user, action) => {
     case types.UPDATE_LIST:
       return {...state, currUser: action.payload};
     case types.LOGOUT:
+      console.log("Logout!");
       return {...state, currUser: null, onlineusers: []};
     case types.USER_DISCONNECT:
       return {

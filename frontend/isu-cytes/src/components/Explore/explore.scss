@@ -37,9 +37,10 @@
 
   .poiCardImg {
     width: 100%;
+    height: 60%;
     img {
-      max-width: 150px;
-      padding: 5px;
+      background-size: cover;
+      max-height: 100%;
     }
   }
 
