@@ -68,7 +68,6 @@ class App extends Component {
             <Route exact path={routes._MODERATION} component={() => <Moderation/>} />
             <Route exact path={routes._SEARCH} component={() => <Search/>} />
             <Route exact path={routes._VIEWUSER} component={() => <ViewUser/>} />
-            <Route exact path={routes._PASSWORDFORGOT} component={() => <PasswordForgot/>} />
             <Route exact path={routes._API} component={() => <APIPage/>} />
             <Route component={() => <Error404/>} />
           </Switch>
