@@ -193,7 +193,7 @@ class POI extends React.Component {
     else {
       //user has some number of lists, ask them if they want to add to that one.
       // TODO: This
-      console.log(this.props.user.lists[0].id);
+      console.log(this.props.user.lists);
       this.props.Actions.updateList(this.props.user.lists[0].id,[...this.props.user.lists[0].poilist,this.props.poi])
       .then(person => {
         console.log(person);
@@ -338,13 +338,29 @@ class POI extends React.Component {
               <p>Share</p>
             </div>
 
-            <div className='poi__lower__buttons__option'>
-              <button
-                className={this.state.listButtonClassName}
-                onClick={() => this.handleClick('List')}>
-                <p>+</p>
-              </button>
-              <p>Add to List</p>
+            <div className='poi__lower__buttons__option listBtn'>
+              <div>
+                <button
+                  className={this.state.listButtonClassName}
+                  onClick={() => this.handleClick('List')}>
+                  <p>+</p>
+                </button>
+                <p>Add to List</p>
+              </div>
+
+              <div className='listAddOptions'>
+                <ul>
+                  {
+                    this.props.user.lists.map((list,i) => {
+                      return (
+                        <li key={i}>
+                          {list.listname}
+                        </li>
+                      );
+                    })
+                  }
+                </ul>
+              </div>
             </div>
 
             <div className='poi__lower__buttons__option'>

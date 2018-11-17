@@ -29,8 +29,9 @@ export const GetList = async(id) => {
   }
 }
 
-export const UpdateList = async(id,poilist) => {
+export const UpdateList = async(id,listname,poilist) => {
   let body = {
+    listname: listname,
     poilist: poilist,
   }
   let error, response;

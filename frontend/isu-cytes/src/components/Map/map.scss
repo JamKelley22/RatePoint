@@ -1,9 +1,23 @@
+@import '../../colors.scss';
+@import '../../mediaQuery';
+
 .mapContainer {
   height: 92%;
   max-height: 92%;
   overflow: hidden;
+  h1 {
+    color: black;
+  }
 }
 
 .rangeFilter {
   width: 150px;
+}
+
+#mapViewPOIA {
+  color: black;
+}
+
+#iwc  {
+
 }

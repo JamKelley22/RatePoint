@@ -283,3 +283,17 @@ button {
   font-weight: bold;
   font-variant: small-caps;
 }
+
+.listBtn {
+  display: flex;
+  flex-direction: row;
+}
+
+.listAddOptions {
+  position: absolute;
+  transform: translateX(100px);
+  background-color: red;
+  border-radius: 10px;
+  padding: 10px;
+  z-index: 1000;
+}

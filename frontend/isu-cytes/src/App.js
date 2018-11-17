@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import { Router,Route,Switch } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
+
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faThumbsUp, faTrophy, faClock, faCar, faCaretDown, faArrowLeft, faEye, faEyeSlash, faMapMarker } from '@fortawesome/free-solid-svg-icons'
+import { faThumbsUp, faTrophy, faClock, faCar, faArrowLeft,
+  faEye, faEyeSlash, faMapMarker, faPlusCircle, faTrash, faCheck,
+  faBan, faEdit, faCaretRight,faCaretDown
+} from '@fortawesome/free-solid-svg-icons'
 
 import { Landing,Home,Map,Explore,Friends,Suggest,Account,
   Review,POI,Error404,Login,CreateAccount,Moderation,Search,ViewUser,APIPage } from './components'
+
 import { history } from './history.js'
 import * as routes from './constants/routes'
 import { POIAPI, RatePointWebSocket } from './api'
@@ -14,7 +19,10 @@ import * as Actions from './actions/actions.js'
 
 import './App.scss'
 
-library.add(faThumbsUp, faTrophy, faClock, faCar, faCaretDown, faArrowLeft, faEye, faEyeSlash, faMapMarker)
+library.add(faThumbsUp, faTrophy, faClock, faCar, faArrowLeft,
+  faEye, faEyeSlash, faMapMarker, faPlusCircle, faTrash, faCheck,
+  faBan, faEdit,faCaretRight,faCaretDown
+)
 
 /*
 //Make it so user has to confirm page close (which then logs them out)

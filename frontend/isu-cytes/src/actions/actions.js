@@ -32,7 +32,7 @@ export const createUser = (username,email,name,biography,password) => (dispatch)
           reject(person)
         }
       }).catch(error => {
-        reject({error: error});
+        reject(error);
       })
   });
 
@@ -52,7 +52,7 @@ export const loginUser = (username, password) => (dispatch) =>
           reject(person)
         }
       }).catch(error => {
-        reject({error: error});
+        reject(error);
       })
   });
 
@@ -72,7 +72,7 @@ export const updateUser = (oldUsername,newUsername,email,name,biography,password
           reject(person)
         }
       }).catch(error => {
-        reject({error: error});
+        reject(error);
       })
   });
 
@@ -92,29 +92,49 @@ export const createList = (username,listname,poilist) => (dispatch) =>
           reject(person)
         }
       }).catch(error => {
-        reject({error: error});
+        reject(error);
       })
   });
 
-export const updateList = (listID,poilist) => (dispatch) =>
+export const updateList = (listID,listname,poilist) => (dispatch) =>
   new Promise((resolve, reject) => {
       // Function is expected to return a promise
-       ListAPI.UpdateList(listID,poilist).then(person => {//Returns a person
+       ListAPI.UpdateList(listID,listname,poilist).then(list => {
         //Next two actions are async
-        if(!person.error) {
+        if(!list.error) {
           dispatch({
             type: actions.UPDATE_LIST,
-            payload: person
+            payload: list
           })
-          resolve(person);
+          resolve(list);
         }
         else {
-          reject(person)
+          reject(list)
         }
       }).catch(error => {
-        reject({error: error});
+        reject(error);
       })
   });
+
+  export const deleteList = (listID) => (dispatch) =>
+    new Promise((resolve, reject) => {
+        // Function is expected to return a promise
+         ListAPI.DeleteList(listID).then(list => {
+          //Next two actions are async
+          if(!list.error) {
+            dispatch({
+              type: actions.DELETE_LIST,
+              payload: list
+            })
+            resolve(list);
+          }
+          else {
+            reject(list)
+          }
+        }).catch(error => {
+          reject(error);
+        })
+    });
 
 export function logoutUser(username) {
   return { type: actions.LOGOUT, payload: username }
@@ -152,7 +172,7 @@ export const approvePOI = (poi) => (dispatch) =>
           reject(poi)
         }
       }).catch(error => {
-        reject({error: error});
+        reject(error);
       })
   });
 
@@ -171,7 +191,7 @@ export const rejectPOI = (poi) => (dispatch) =>
           reject(poi)
         }
       }).catch(error => {
-        reject({error: error});
+        reject(error);
       })
   });
 
@@ -194,7 +214,7 @@ export const submitPOI = (userID,name,pictures,description,coordinates) => (disp
           reject(poi)
         }
       }).catch(error => {
-        reject({error: error});
+        reject(error);
       })
   });
 
@@ -213,6 +233,6 @@ export const getSetSelectedUserByUsername = (username) => (dispatch) =>
           reject(person)
         }
       }).catch(error => {
-        reject({error: error});
+        reject(error);
       })
   });

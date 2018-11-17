@@ -4,6 +4,7 @@ import { bindActionCreators, compose } from 'redux';
 
 import { withAuthentication, withNav } from '../../hoc'
 import * as Actions from '../../actions/actions.js'
+import { history, routes } from '../../history.js'
 import { ReviewAPI, PersonAPI } from '../../api'
 import CurrentUserList from './currentUserLists.js'
 import CurrentUserReviews from './currentUserReviews.js'
@@ -62,12 +63,65 @@ class Account extends React.Component {
     })
   }
 
+  deleteList = (list) => {
+    if(window.confirm(`Delete List: ${list.listname}?`)) {
+      console.log(list);
+      this.props.Actions.deleteList(list)
+      .then(ret => {
+        console.log("success");
+        console.log(`Deleted List: ${list.listname}`);
+      })
+      .catch(e => {
+        console.error(e);
+      })
+    }
+    else {
+      //Canceled
+    }
+  }
+
+  viewPOI = (poi) => {
+    //Update Redux
+    this.props.Actions.setPOI(poi);
+    //Push new history
+    history.push(routes._POI);
+  }
+
+  setListName = (list, newName) => {
+    console.log(newName);
+    this.props.Actions.updateList(list.id,newName,list.poilist)
+    .then(ret => {
+      console.log("success");
+    })
+    .catch(e => {
+      console.error(e);
+    })
+  }
+
+  createList = (name) => {
+    console.log(name);
+    this.props.Actions.createList(this.props.user.username,name,[])
+    .then(ret => {
+      console.log("success");
+    })
+    .catch(e => {
+      console.error(e);
+    })
+  }
+
   render () {
     let Tab;
 
     switch (this.state.openTab) {
       case TABS.LISTS:
-        Tab = <CurrentUserList lists={this.props.user.lists}/>;
+        Tab =
+        <CurrentUserList
+          lists={this.props.user.lists}
+          deleteList={this.deleteList}
+          viewPOI={this.viewPOI}
+          setListName={this.setListName}
+          createList={this.createList}
+          />;
         break;
       case TABS.REVIEWS:
         Tab = <CurrentUserReviews reviews={[]}/>;

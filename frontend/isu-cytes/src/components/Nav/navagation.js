@@ -144,7 +144,7 @@ class Navigation extends React.Component {
             <NavLink
               className='navagation__link'
               activeClassName='navagation__link--active'
-              to={routes._HOME}>
+              to={routes._LANDING}>
               <h3>RatePoint</h3>
             </NavLink>
           </div>

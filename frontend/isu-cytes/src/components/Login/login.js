@@ -144,7 +144,7 @@ class Login extends React.Component {
                     <hr/>
 
                     <div className='login__formFooter'>
-                      <NavLink to={routes._PASSWORDFORGOT}>Need Help?</NavLink>
+                      
                     </div>
                   </div>
                 </form>

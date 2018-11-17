@@ -9,6 +9,14 @@ const userReducer = (state=initialState.user, action) => {
     case types.CREATE_LIST:
     case types.UPDATE_LIST:
       return {...state, currUser: action.payload};
+    case types.DELETE_LIST:
+      return {
+        ...state,
+        currUser: {
+          ...state.currUser,
+          lists: state.currUser.lists.filter(list => list.id !== action.payload.id)
+        }
+      };
     case types.LOGOUT:
       console.log("Logout!");
       return {...state, currUser: null, onlineusers: []};

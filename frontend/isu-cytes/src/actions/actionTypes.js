@@ -16,6 +16,7 @@ export const SET_ALL_POIS = 'SET_ALL_POIS'
 
 export const CREATE_LIST = 'CREATE_LIST'
 export const UPDATE_LIST = 'UPDATE_LIST'
+export const DELETE_LIST = 'DELETE_LIST'
 
 export const APPROVE_POI = 'APPROVE_POI'
 export const REJECT_POI = 'REJECT_POI'

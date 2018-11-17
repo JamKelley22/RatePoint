@@ -50,10 +50,8 @@ class MapContainer extends React.Component {
   }
 
   onInfoWindowOpen(props, e) {
-    const button = (<button onClick={this.goToPOI}>View</button>);
-
     ReactDOM.render(
-      React.Children.only(button),
+      React.Children.only(<a id='mapViewPOIA' onClick={this.goToPOI}>View</a>),
       document.getElementById("iwc")
     );
   }
@@ -103,6 +101,7 @@ class MapContainer extends React.Component {
                 position={coordinates}
                 key={i}
                 onClick={(props, marker, e) => this.onMarkerClick(props, marker, e, poi)}
+                id='mapMarker'
               />
             );
           })
@@ -114,8 +113,11 @@ class MapContainer extends React.Component {
             onOpen={e => {
               this.onInfoWindowOpen(this.props, e);
             }}
+            style={{
+              backgroundColor: 'red'
+            }}
           >
-            <div>
+            <div className='infoBox'>
               <h1>{this.state.activePOI.name}</h1>
               <div id="iwc" />
             </div>

@@ -58,3 +58,77 @@
     width: 100%;
   }
 }
+
+//=====CurrentUserLists=====
+.listItem {
+  display: flex;
+  align-items: center;
+  height: 70px;
+
+  h2 {
+    width: 80px;
+    height: 30px;
+    padding: 2px;
+  }
+
+  #editListNameInput {
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: lighter;
+    padding: 2px;
+
+    &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: transparentize(black, .8);
+        opacity: 1; /* Firefox */
+    }
+  }
+}
+
+.listDiv {
+  display: flex;
+  position: relative;
+  background-color: transparentize(black, .8);
+  border-radius: 10px;
+  margin: 5px;
+  transition: width .2s;
+  width: 32px;
+
+}
+#trashIcon, #editIcon {
+  padding: 5px 5px 5px 10px;
+  //font-size: .5em;
+  transition: color 1s;
+  font-size: .8em;
+}
+#banIcon, #checkIcon {
+  padding: 5px 5px 5px 10px;
+  //font-size: .5em;
+  transition: color 1s;
+  font-size: .8em;
+}
+#listOpenCarot {
+  transition: transform .1s;
+  font-size: 1.5em;
+  margin-right: 10px;
+}
+.poiListItems {
+  margin-left: 20px;
+}
+#listViewPOI {
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+.createNewListDiv {
+  display: flex;
+  align-items: center;
+
+  p {
+    margin: 0px;
+  }
+}
+#createListPlusCircle {
+  margin: 5px;
+}
