@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin
 @RequestMapping(path = "/lists")
 public class UserlistController {
 
@@ -28,6 +27,7 @@ public class UserlistController {
 	 * @return List if found, 404 if not
 	 */
 	@ResponseBody
+	@CrossOrigin
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}")
 	public ResponseEntity<Userlist> getUserlistByID(@PathVariable("id") Integer id) {
 		Optional<Userlist> getList = userlistRepository.findById(id);
@@ -46,6 +46,7 @@ public class UserlistController {
 	 * @return Userlist if updated, 404 if not found
 	 */
 	@ResponseBody
+	@CrossOrigin
 	@RequestMapping(method = RequestMethod.PUT, path = "/{id}")
 	public ResponseEntity<Userlist> updateUserlist(@PathVariable("id") Integer id, @RequestBody Userlist userlist) {
 		Optional<Userlist> getList = userlistRepository.findById(id);
@@ -64,6 +65,7 @@ public class UserlistController {
 	 * @return List that was deleted, or 404 if it didn't exist.
 	 */
 	@ResponseBody
+	@CrossOrigin
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
 	public ResponseEntity<Userlist> deleteUserlist(@PathVariable("id") Integer id) {
 		Optional<Userlist> getList = userlistRepository.findById(id);
