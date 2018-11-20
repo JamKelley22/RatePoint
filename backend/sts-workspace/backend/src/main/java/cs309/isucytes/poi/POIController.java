@@ -18,8 +18,6 @@ import cs309.isucytes.poi.POI;
 import cs309.isucytes.poi.POIRepository;
 import cs309.isucytes.review.ReviewRepository;
 
-
-@CrossOrigin
 @RestController
 @RequestMapping(path = "/pois")
 public class POIController {

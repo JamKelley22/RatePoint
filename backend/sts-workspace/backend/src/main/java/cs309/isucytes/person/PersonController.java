@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import cs309.isucytes.userlist.Userlist;
 
 @RestController
-@CrossOrigin
 public class PersonController {
 
 	@Autowired
