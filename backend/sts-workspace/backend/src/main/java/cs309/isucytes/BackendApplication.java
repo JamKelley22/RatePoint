@@ -20,21 +20,7 @@ public class BackendApplication {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/lists").allowedOrigins("*");
-                registry.addMapping("/lists/{id}").allowedOrigins("*");
-
-                registry.addMapping("/people").allowedOrigins("*");
-                registry.addMapping("/people/{username}").allowedOrigins("*");
-                registry.addMapping("/people/{username}/lists").allowedOrigins("*");
-                registry.addMapping("/verify").allowedOrigins("*");
-
-                registry.addMapping("/pois").allowedOrigins("*");
-                registry.addMapping("/pois/{id}").allowedOrigins("*");
-                registry.addMapping("/pois/{id}/average").allowedOrigins("*");
-
-                registry.addMapping("/reviews").allowedOrigins("*");
-                registry.addMapping("/reviews/poi/{id}").allowedOrigins("*");
-                registry.addMapping("/pois/{id}").allowedOrigins("*");
+                registry.addMapping("/**");
             }
         };
     }
