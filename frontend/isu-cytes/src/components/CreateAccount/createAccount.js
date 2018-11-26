@@ -175,7 +175,7 @@ class CreateAccount extends React.Component {
                       <form onSubmit={(e) => this.createRequest(e)} noValidate autoComplete="off">
                           <br/>
                           <b>name:</b>
-                          <input maxLength="20" autoComplete="off"
+                          <input type="text" maxLength="20" autoComplete="off"
                                  onChange={this.handleInputChange} required onBlur={this.checkError} name='name' value={this.state.name}/>
                           <br/><br/>
                           <b>email:</b>
@@ -183,7 +183,7 @@ class CreateAccount extends React.Component {
                                  onChange={this.handleInputChange} required onBlur={this.checkError} name='email' value={this.state.email}/>
                           <br/><br/>
                           <b>username:</b>
-                          <input maxLength="20" autoComplete="off"
+                          <input type="text" maxLength="20" autoComplete="off"
                                  onChange={this.handleInputChange} required onBlur={this.checkError} name='username' value={this.state.username}/>
                           <br/><br/>
                           <b>password:</b>
