@@ -12,7 +12,7 @@ export const GetPerson = async(username) => {
     }
   }));
   if(error) {
-    console.error(error);
+    //console.error(error);
     return {error: error}
   }
   else {
@@ -48,7 +48,7 @@ export const UpdatePerson = async(oldUsername, newUsername,email,name,biography,
     }
   }));
   if(error) {
-    console.error(error);
+    //console.error(error);
     return {error: error}
   }
   else {
@@ -77,8 +77,8 @@ export const DeletePerson = async(id) => {
     }
   }));
   if(error) {
-    console.error(error);
-    return {error: error}
+    //console.error(error);
+    return error
   }
   else {
     switch (response.status) {
@@ -105,7 +105,7 @@ export const GetAllPersons = async() => {
     }
   }));
   if(error) {
-    console.error(error);
+    //console.error(error);
     return {error: error}
   }
   else {
@@ -142,7 +142,7 @@ export const SubmitPerson = async(username,email,name,biography,password) => {
   }));
 
   if(error) {
-    console.error(error);
+    //console.error(error);
     return {error: error}
   }
   else {
@@ -182,7 +182,7 @@ export const VerifyPerson = async(username,password) => {
     }
   }))
   if(error) {
-    console.error(error);
+    //console.error(error);
     return {error: error}
   }
   else {

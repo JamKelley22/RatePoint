@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux';
+import to from 'await-to-js';
 
 import { withAuthentication, withNav } from '../../hoc'
 import * as Actions from '../../actions/actions.js'
@@ -23,7 +24,11 @@ class Account extends React.Component {
   state = {
     openTab: TABS.LISTS,
     reviewsFromUser: [],
-    reviewsError: null
+    reviewsError: null,
+    fetching: {
+      list: null,
+      msg: ''
+    }
   }
 
   componentDidMount() {
@@ -65,13 +70,31 @@ class Account extends React.Component {
 
   deleteList = (list) => {
     if(window.confirm(`Delete List: ${list.listname}?`)) {
-      console.log(list);
-      this.props.Actions.deleteList(list)
+      this.setState({
+        fetching: {
+          list: list,
+          msg: 'Deleting List...'
+        }
+      })
+      //console.log(list);
+      this.props.Actions.deleteList(list.id)
       .then(ret => {
-        console.log("success");
-        console.log(`Deleted List: ${list.listname}`);
+        this.setState({
+          fetching: {
+            list: null,
+            msg: ''
+          }
+        })
+        console.log("then");
+        console.log(ret);
+        //console.log("success");
+        //console.log(`Deleted List: ${list.listname}`);
       })
       .catch(e => {
+        this.setState({
+          list: null,
+          msg: ''
+        })
         console.error(e);
       })
     }
@@ -100,17 +123,61 @@ class Account extends React.Component {
 
   createList = (name) => {
     console.log(name);
+    this.setState({
+      fetching: {
+        list: null,
+        msg: 'New List'
+      }
+    })
     this.props.Actions.createList(this.props.user.username,name,[])
     .then(ret => {
+      this.setState({
+        fetching: {
+          list: null,
+          msg: ''
+        }
+      })
       console.log("success");
     })
     .catch(e => {
+      this.setState({
+        fetching: {
+          list: null,
+          msg: ''
+        }
+      })
       console.error(e);
     })
   }
 
+  testLocal = async() => {
+    let error, response;
+    [error, response] = await to(fetch(`http://localhost:8080/greeting?name=User`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }));
+
+    if(error) {
+      console.error(error);
+      return {error: error}
+    }
+    else {
+      switch (response.status) {
+        case 200:
+          let list = await response.json();
+          console.log(list);
+        default:
+          console.log(`Unexpected server response code of ${response.status}`);
+      }
+    }
+  }
+
   render () {
     let Tab;
+    console.log(this.state.fetching);
 
     switch (this.state.openTab) {
       case TABS.LISTS:
@@ -121,6 +188,7 @@ class Account extends React.Component {
           viewPOI={this.viewPOI}
           setListName={this.setListName}
           createList={this.createList}
+          fetching={this.state.fetching}
           />;
         break;
       case TABS.REVIEWS:
@@ -158,7 +226,7 @@ class Account extends React.Component {
           <hr/>
           {Tab}
         </div>
-
+        <button onClick={this.testLocal}>Test Local</button>
       </div>
     );
   }

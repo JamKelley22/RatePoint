@@ -83,9 +83,9 @@ class Login extends React.Component {
       history.push(routes._HOME)
     })
     .catch(err => {
-      //alert(err.error);
+      console.log(err.error.message);
       this.setState({
-        error: err.toString()
+        error: err.error.message
       })
     })
   }
@@ -144,7 +144,7 @@ class Login extends React.Component {
                     <hr/>
 
                     <div className='login__formFooter'>
-                      
+
                     </div>
                   </div>
                 </form>

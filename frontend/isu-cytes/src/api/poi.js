@@ -160,7 +160,7 @@ export const SubmitPOI = async(userID,name,pictures,description,coordinates) => 
 export const GetPOIRating = async(poiID) => {
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/pois/${poiID}/average`, {
-    method: 'POST',
+    method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'

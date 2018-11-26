@@ -116,6 +116,7 @@ class CurrentUserLists extends React.Component {
             return (
               <UserList
                 list={list}
+                fetching={this.props.fetching}
                 key={i}
                 deleteList={this.props.deleteList}
                 viewPOI={this.props.viewPOI}

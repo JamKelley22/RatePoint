@@ -4,7 +4,7 @@ import { BASE_URL } from './index.js'
 
 export const GetList = async(id) => {
   let error, response;
-  [error, response] = await to(fetch(`${BASE_URL}/list/${id}`, {
+  [error, response] = await to(fetch(`${BASE_URL}/lists/${id}`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -35,7 +35,7 @@ export const UpdateList = async(id,listname,poilist) => {
     poilist: poilist,
   }
   let error, response;
-  [error, response] = await to(fetch(`${BASE_URL}/list/${id}`, {
+  [error, response] = await to(fetch(`${BASE_URL}/lists/${id}`, {
     method: 'PUT',
     headers: {
       'Accept': 'application/json',
@@ -63,17 +63,31 @@ export const UpdateList = async(id,listname,poilist) => {
 
 export const DeleteList = async(id) => {
   let error, response;
-  [error, response] = await to(fetch(`${BASE_URL}/list/${id}`, {
+  fetch(`${BASE_URL}/lists/${id}`, {
     method: 'DELETE',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }
-  }));
+  })
+  .then(res => {
+    console.log("Response===");
+    console.log(res);
+    return res;
+  })
+  .catch(err => {
+    console.log("err");
+    console.log(err);
+    return err;
+  })
+  /*
+  console.log("Response===");
+  console.log(response);
+  console.log(error);
 
   if(error) {
-    console.error(error);
-    return {error: error}
+    //console.error(error);
+    return error;
   }
   else {
     switch (response.status) {
@@ -86,6 +100,7 @@ export const DeleteList = async(id) => {
         return {error: `Unexpected server response code of ${response.status}`}
     }
   }
+  */
 }
 
 export const CreateList = async(username, listname, poilist) => {

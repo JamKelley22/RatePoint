@@ -16,7 +16,7 @@ const PROXY_URL = 'http://raspberrypi-jk.student.iastate.edu:8080/'
 const MOCK = PROTOCOL_MOCK + MOCK_URL;
 const PRODUCTION = PROTOCOL_PRODUCTION + PRODUCTION_URL;
 
-const BASE_URL = PROXY_URL + PRODUCTION;
+const BASE_URL = PRODUCTION;
 
 const WEBSOCKET_URL = `ws://${PRODUCTION_URL}/websocket/onlineusers/`
 

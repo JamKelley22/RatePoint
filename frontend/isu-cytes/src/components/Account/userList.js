@@ -130,7 +130,7 @@ class UserList extends React.Component {
                 />
             }
             <FontAwesomeIcon
-              onClick={() => this.props.setListName(this.props.list, this.state.newListName)}
+              onClick={this.state.editCheckmarkVisible ? () => this.props.setListName(this.props.list, this.state.newListName): null}
               style={{
                 visibility: (this.state.editCheckmarkVisible) ? 'visible' : 'hidden'
               }}
@@ -161,7 +161,7 @@ class UserList extends React.Component {
                   />
               </a>
             }
-            <a onClick={() => this.props.deleteList(this.props.list)}>
+            <a onClick={this.state.deleteCheckmarkVisible ? () => this.props.deleteList(this.props.list): null}>
               <FontAwesomeIcon
                 style={{
                   visibility: (this.state.deleteCheckmarkVisible) ? 'visible' : 'hidden'
@@ -171,7 +171,11 @@ class UserList extends React.Component {
                 />
             </a>
           </div>
-
+          {
+            this.props.fetching.list === this.props.list
+            &&
+            this.props.fetching.msg
+          }
         </div>
         <div className='poiListItems'>
           {
