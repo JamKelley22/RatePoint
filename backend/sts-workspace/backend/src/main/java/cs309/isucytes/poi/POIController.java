@@ -122,7 +122,6 @@ public class POIController {
 	 * 
 	 * @return the average rating of all reviews for a POI.
 	 */
-	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}/average")
 	public Double getAverageRating(@PathVariable("id") Integer id){
