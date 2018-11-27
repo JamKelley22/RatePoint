@@ -29,16 +29,18 @@ class Explore extends React.Component {
     //console.log(this.props.pois);
     if(this.props.pois) {
       cards = this.props.pois.map((poi,i) => {
-        return (
-          <POICard
-            title={poi.name}
-            key={i}
-            /*pic={(poi.pictures && poi.pictures.length > 0) ? poi.pictures[0] : null}*/
-            /*rating={poi.rating}*/
-            onClick={() => this.onPOICardClick(poi)}
-            delay={i * .1}
-          />
-        )
+        if(poi.approved) {
+          return (
+            <POICard
+              title={poi.name}
+              key={i}
+              /*pic={(poi.pictures && poi.pictures.length > 0) ? poi.pictures[0] : null}*/
+              /*rating={poi.rating}*/
+              onClick={() => this.onPOICardClick(poi)}
+              delay={i * .1}
+            />
+          )
+        }
       })
     }
 
