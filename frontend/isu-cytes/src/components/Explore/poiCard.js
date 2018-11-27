@@ -26,11 +26,11 @@ export default POICard;
 POICard.propTypes = {
   title: PropTypes.string,
   pic: PropTypes.string,
-  rating: PropTypes.number
+  rating: PropTypes.string
 }
 
 POICard.defaultProps = {
   title: 'POI Title',
   pic: 'https://cdn.browshot.com/static/images/not-found.png',
-  rating: 0
+  rating: "0"
 }

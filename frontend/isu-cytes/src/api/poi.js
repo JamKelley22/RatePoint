@@ -173,9 +173,36 @@ export const GetPOIRating = async(poiID) => {
   }
   else {
     switch (response.status) {
-      case 201:// TODO: Check this return status
-        let pois = await response.json();
-        return pois;
+      case 201:
+      case 200:
+        let rating = await response.json();
+        return rating;
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
+  }
+}
+
+export const GetPOINumRatings = async(poiID) => {
+  let error, response;
+  [error, response] = await to(fetch(`${BASE_URL}/reviews/poi/${poiID}`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  }));
+
+  if(error) {
+    console.error(error);
+    return {error: error}
+  }
+  else {
+    switch (response.status) {
+      case 201:
+      case 200:
+        let rating = await response.json();
+        return rating.length;
       default:
         return {error: `Unexpected server response code of ${response.status}`}
     }
