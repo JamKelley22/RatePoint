@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,7 @@ public class PersonController {
 	 * @param person New person to be added
 	 * @return success message upon completion.
 	 */
+	@CrossOrigin(origins="*")
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST, path = "/people")
 	public ResponseEntity<Person> newPerson(@RequestBody Person person) {
@@ -43,6 +45,7 @@ public class PersonController {
 	 * 
 	 * @return JSON array of all people in the DB
 	 */
+	@CrossOrigin(origins="*")
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, path = "/people")
 	public List<Person> getAllPeople() {
@@ -55,6 +58,7 @@ public class PersonController {
 	 * @param username username to search for
 	 * @return Person with the username, if they exist.
 	 */
+	@CrossOrigin(origins="*")
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, path = "/people/{username}")
 	public ResponseEntity<Person> getPersonByUsername(@PathVariable("username") String username) {
@@ -72,6 +76,7 @@ public class PersonController {
 	 * @param username username to delete passed in URL
 	 * @return username if deleted, nothing if not found, along with HTTP codes
 	 */
+	@CrossOrigin(origins="*")
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.DELETE, path = "/people/{username}")
 	public ResponseEntity<Person> deletePersonByUsername(@PathVariable("username") String username) {
@@ -84,6 +89,7 @@ public class PersonController {
 		}
 	}
 	
+	@CrossOrigin(origins="*")
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST, path = "/people/{username}/lists")
 	public ResponseEntity<Person> addNewUserList (@PathVariable("username") String username, @RequestBody Userlist userlist) {
@@ -108,6 +114,7 @@ public class PersonController {
 	 * @return person if update, 404 if not found, 409 if email or username
 	 *         conflict.
 	 */
+	@CrossOrigin(origins="*")
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.PUT, path = "/people/{username}")
 	public ResponseEntity<Person> updatePerson (@PathVariable("username") String username, @RequestBody Person person) {
@@ -140,6 +147,7 @@ public class PersonController {
 	 * @return Person if the login succeeds, 404 if no user found, 401 if incorrect
 	 *         password if login fails (i.e. password does not match.
 	 */
+	@CrossOrigin(origins="*")
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.PUT, path = "/verify")
 	public ResponseEntity<Person> verifyPersonLogic(@RequestBody Person person) {
