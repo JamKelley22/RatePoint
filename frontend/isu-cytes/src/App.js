@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faThumbsUp, faTrophy, faClock, faCar, faArrowLeft,
   faEye, faEyeSlash, faMapMarker, faPlusCircle, faTrash, faCheck,
-  faBan, faEdit, faCaretRight,faCaretDown,faStar,faStarHalfAlt
+  faBan, faEdit, faCaretRight,faCaretDown,faStar,faStarHalfAlt, faTimes
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faStar as faEmptyStar
@@ -24,7 +24,7 @@ import './App.scss'
 
 library.add(faThumbsUp, faTrophy, faClock, faCar, faArrowLeft,
   faEye, faEyeSlash, faMapMarker, faPlusCircle, faTrash, faCheck,
-  faBan, faEdit,faCaretRight,faCaretDown,faStar,faEmptyStar,faStarHalfAlt
+  faBan, faEdit,faCaretRight,faCaretDown,faStar,faEmptyStar,faStarHalfAlt,faTimes
 )
 
 /*
