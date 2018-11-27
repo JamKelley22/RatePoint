@@ -176,7 +176,6 @@ export const GetPOIRating = async(poiID) => {
       case 201:
       case 200:
         let rating = await response.json();
-        console.log(rating);
         return rating;
       default:
         return {error: `Unexpected server response code of ${response.status}`}

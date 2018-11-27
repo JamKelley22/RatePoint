@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class Rating extends React.Component {
 
@@ -11,18 +11,18 @@ class Rating extends React.Component {
       let dec = this.props.number % 1;
       for (i = 0; i < wholeNum; i++) {
         arr.push(
-          <i className="fas fa-star" key={i}/>
+          <FontAwesomeIcon icon="star" key={i}/>
         )
       };
       if(dec === .5) {
         arr.push(
-          <i className="fas fa-star-half-alt" key={i}/>
+          <FontAwesomeIcon icon="star-half-alt" key={i}/>
         );
         i++;
       }
       while(i < 5) {
         arr.push(
-          <i className="far fa-star" key={i}/>
+          <FontAwesomeIcon icon="star" key={i}/>
         )
         i++;
       }

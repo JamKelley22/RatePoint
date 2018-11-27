@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faThumbsUp, faTrophy, faClock, faCar, faArrowLeft,
   faEye, faEyeSlash, faMapMarker, faPlusCircle, faTrash, faCheck,
-  faBan, faEdit, faCaretRight,faCaretDown
+  faBan, faEdit, faCaretRight,faCaretDown,faStar,faStarHalfAlt
 } from '@fortawesome/free-solid-svg-icons'
 
 import { Landing,Home,Map,Explore,Friends,Suggest,Account,
@@ -21,7 +21,7 @@ import './App.scss'
 
 library.add(faThumbsUp, faTrophy, faClock, faCar, faArrowLeft,
   faEye, faEyeSlash, faMapMarker, faPlusCircle, faTrash, faCheck,
-  faBan, faEdit,faCaretRight,faCaretDown
+  faBan, faEdit,faCaretRight,faCaretDown,faStar,faStarHalfAlt
 )
 
 /*
@@ -50,7 +50,6 @@ class App extends Component {
     let newPOIs = [];
     for(var i = 0; i < pois.length; i++) {
       let rating = await POIAPI.GetPOIRating(pois[i].id);
-      //console.log(rating);
       let newPOI = pois[i];
       newPOI.rating = (rating.average) ? rating.average : null;
       newPOIs.push(newPOI);
