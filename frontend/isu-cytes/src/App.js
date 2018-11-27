@@ -8,6 +8,9 @@ import { faThumbsUp, faTrophy, faClock, faCar, faArrowLeft,
   faEye, faEyeSlash, faMapMarker, faPlusCircle, faTrash, faCheck,
   faBan, faEdit, faCaretRight,faCaretDown,faStar,faStarHalfAlt
 } from '@fortawesome/free-solid-svg-icons'
+import {
+  faStar as faEmptyStar
+} from '@fortawesome/free-regular-svg-icons'
 
 import { Landing,Home,Map,Explore,Friends,Suggest,Account,
   Review,POI,Error404,Login,CreateAccount,Moderation,Search,ViewUser,APIPage } from './components'
@@ -21,7 +24,7 @@ import './App.scss'
 
 library.add(faThumbsUp, faTrophy, faClock, faCar, faArrowLeft,
   faEye, faEyeSlash, faMapMarker, faPlusCircle, faTrash, faCheck,
-  faBan, faEdit,faCaretRight,faCaretDown,faStar,faStarHalfAlt
+  faBan, faEdit,faCaretRight,faCaretDown,faStar,faEmptyStar,faStarHalfAlt
 )
 
 /*

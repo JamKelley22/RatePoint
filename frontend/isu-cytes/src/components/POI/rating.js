@@ -22,7 +22,7 @@ class Rating extends React.Component {
       }
       while(i < 5) {
         arr.push(
-          <FontAwesomeIcon icon="star" key={i}/>
+          <FontAwesomeIcon icon={['far', 'star']} key={i}/>
         )
         i++;
       }
