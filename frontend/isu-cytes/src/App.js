@@ -3,10 +3,10 @@ import { Router,Route,Switch } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faThumbsUp, faTrophy, faClock, faCar, faCaretDown, faArrowLeft, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { faThumbsUp, faTrophy, faClock, faCar, faCaretDown, faArrowLeft, faEye, faEyeSlash, faMapMarker } from '@fortawesome/free-solid-svg-icons'
 
 import { Landing,Home,Map,Explore,Friends,Suggest,Account,
-  Review,POI,Error404,Login,CreateAccount,Moderation,Search,ViewUser,APIPage,PasswordForgot } from './components'
+  Review,POI,Error404,Login,CreateAccount,Moderation,Search,ViewUser,APIPage } from './components'
 import { history } from './history.js'
 import * as routes from './constants/routes'
 import { POIAPI, RatePointWebSocket } from './api'
@@ -14,7 +14,7 @@ import * as Actions from './actions/actions.js'
 
 import './App.scss'
 
-library.add(faThumbsUp, faTrophy, faClock, faCar, faCaretDown, faArrowLeft, faEye, faEyeSlash)
+library.add(faThumbsUp, faTrophy, faClock, faCar, faCaretDown, faArrowLeft, faEye, faEyeSlash, faMapMarker)
 
 /*
 //Make it so user has to confirm page close (which then logs them out)
@@ -68,7 +68,6 @@ class App extends Component {
             <Route exact path={routes._MODERATION} component={() => <Moderation/>} />
             <Route exact path={routes._SEARCH} component={() => <Search/>} />
             <Route exact path={routes._VIEWUSER} component={() => <ViewUser/>} />
-            <Route exact path={routes._PASSWORDFORGOT} component={() => <PasswordForgot/>} />
             <Route exact path={routes._API} component={() => <APIPage/>} />
             <Route component={() => <Error404/>} />
           </Switch>

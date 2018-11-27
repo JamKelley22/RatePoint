@@ -2,7 +2,7 @@ import React from 'react';
 import GoogleMap from 'google-map-react';
 import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { withAuthentication, withNav } from '../../hoc'
 import {Navagation} from '../index.js';
 import { POIAPI } from '../../api/';
@@ -81,7 +81,7 @@ class Suggest extends React.Component {
                                 <br/>
                                 <input type="file" onChange={(e)=>this.fileChange(e)}/>
                                 <br/>
-                                <img src={this.state.file}/>
+                                <img src={this.state.file} id="suggestImage"/>
                             </div>
                             <div id="suggestMaps">
                                 <b>Location:</b>
@@ -92,9 +92,8 @@ class Suggest extends React.Component {
                                         defaultZoom={this.state.zoom}
                                         onClick={this.setMarker}
                                     >
-                                        <i id="icon" className="fas fa-kiwi-bird"
-                                           lat={this.state.markerLat} lng={this.state.markerLng}
-                                        />
+                                        <FontAwesomeIcon icon="map-marker" id="mapMarker"
+                                                         lat={this.state.markerLat} lng={this.state.markerLng}/>
                                     </GoogleMap>
                                 </div>
                             </div>

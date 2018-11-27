@@ -4,23 +4,23 @@
     background-color: #99AE8D;
     height: 100%;
     width: 100%;
-    display: flex;
 }
 
 #formCreate {
     background-color: #777F70;
-    height: 275px;
-    width: 475px;
+    height: auto;
+    width: 50%;
     margin: auto;
-    margin-top: 10%;
-    text-align: center;
+    margin-top: 3%;
     border-radius: 30%;
+    text-align: center;
 }
 
 #positionForm {
-    height: 100%;
-    text-align: right;
-    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20em;
+    text-align: left;
 }
 
 #createHeader {
@@ -28,7 +28,6 @@
 }
 
 #createSubmit {
-    margin-right: 20%;
 }
 
 @include mobile {
