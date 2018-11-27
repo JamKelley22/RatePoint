@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ public class UserlistController {
 	 * @param id ID to look for
 	 * @return List if found, 404 if not
 	 */
+	@CrossOrigin(origins="*")
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}")
 	public ResponseEntity<Userlist> getUserlistByID(@PathVariable("id") Integer id) {
@@ -43,6 +45,7 @@ public class UserlistController {
 	 * @param userlist new User List
 	 * @return Userlist if updated, 404 if not found
 	 */
+	@CrossOrigin(origins="*")
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.PUT, path = "/{id}")
 	public ResponseEntity<Userlist> updateUserlist(@PathVariable("id") Integer id, @RequestBody Userlist userlist) {
@@ -61,6 +64,7 @@ public class UserlistController {
 	 * @param id ID to look for
 	 * @return List that was deleted, or 404 if it didn't exist.
 	 */
+	@CrossOrigin(origins="*")
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
 	public ResponseEntity<Userlist> deleteUserlist(@PathVariable("id") Integer id) {
