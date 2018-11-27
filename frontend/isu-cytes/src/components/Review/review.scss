@@ -10,6 +10,12 @@
     display: table;
 }
 
+#formReview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #gettable{
     display: table-row;
 }
