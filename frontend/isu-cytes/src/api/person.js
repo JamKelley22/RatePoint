@@ -181,6 +181,31 @@ export const VerifyPerson = async(username,password) => {
       "Content-Type": "application/json"
     }
   }))
+  return {
+    id: 72,
+    username: "AAA",
+    name: "iyfgu",
+    email: "sfd",
+    password: "123",
+    biography: "TEst bio",
+    cookie: "cookie",
+    role: 0,
+    lists: [
+      {
+        id: 103,
+        listname: "Tripple List",
+        poilist: [],
+        listuser: 72
+      },
+      {
+        id: 104,
+        listname: "New List",
+        poilist: [],
+        listuser: 72
+      }
+    ]
+  }
+  /*
   if(error) {
     //console.error(error);
     return {error: error}
@@ -201,4 +226,5 @@ export const VerifyPerson = async(username,password) => {
         return {error: `Unexpected server response code of ${response.status}`}
     }
   }
+  */
 }
