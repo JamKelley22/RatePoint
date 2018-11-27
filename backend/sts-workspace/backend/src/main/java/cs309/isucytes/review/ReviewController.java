@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ public class ReviewController {
 	 * @param review New review to be added.
 	 * @return the JSON object and the proper HTTP status
 	 */
+	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Review> addNewReview(@RequestBody Review review) {
@@ -41,6 +43,7 @@ public class ReviewController {
 	 * Returns all reviews in the database.
 	 * @return An array of JSON reviews.
 	 */
+	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Review> getAllReviews(){
@@ -51,6 +54,7 @@ public class ReviewController {
 	 * Returns all reviews in the database relating to a specific POI, if any.
 	 * @return An array of JSON reviews for a POI.
 	 */
+	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, path = "/poi/{id}")
 	public List<Review> getAllReviewsByPOI(@PathVariable("id") int PoiID){
@@ -62,6 +66,7 @@ public class ReviewController {
 	 * @param id id to search for
 	 * @return Review with the specified id, if any, and proper HTTP status.
 	 */
+	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}")
 	public ResponseEntity<Review> getReviewByID(@PathVariable("id") int id){
@@ -78,6 +83,7 @@ public class ReviewController {
 	 * @param id id to search for
 	 * @return Deleted review and an HTTP status. 
 	 */
+	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
 	public ResponseEntity<Review> deleteReviewByID(@PathVariable("id") Integer id) {
@@ -95,6 +101,7 @@ public class ReviewController {
 	 * @param id id to search for
 	 * @return Updated review and an HTTP status. 
 	 */
+	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.PUT, path = "/{id}")
 	public ResponseEntity<Review> updateReview(@PathVariable("id") Integer id, @RequestBody Review review) {
