@@ -15,7 +15,7 @@ import { Redirect } from "react-router-dom";
 import { withNav } from '../../hoc'
 import { history, routes } from '../../history.js'
 import { Navagation } from '../index.js'
-import { ReviewAPI } from '../../api'
+import { ReviewAPI, POIAPI } from '../../api'
 import * as Actions from '../../actions/actions.js'
 
 import POICarousel from './poiCarousel.js'
@@ -43,12 +43,17 @@ class POI extends React.Component {
     shareButtonClassName: 'poi__lower__button',
     listButtonClassName: 'poi__lower__button',
     reviewButtonClassName: 'poi__lower__button',
-    reportButtonClassName: 'poi__lower__button'
+    reportButtonClassName: 'poi__lower__button',
+    numRatings: 0
   }
 
-  componentDidMount() {
+  componentDidMount = async() => {
     //this.fetchDataFromServer();
     this.getReviews();
+    let numRatings = await POIAPI.GetPOINumRatings(this.props.poi.id);
+    this.setState({
+      numRatings: numRatings
+    })
   }
 
   getReviews = async() => {
@@ -280,7 +285,7 @@ class POI extends React.Component {
               <Rating
                 number={poi.rating}
               />
-              <p>{poi.numRatings} Ratings</p>
+            <p>{this.state.numRatings} Ratings</p>
               {/*this.getAccessibilityIcons()*/}
             </div>
 
@@ -312,6 +317,8 @@ class POI extends React.Component {
               </div>
               <div id='allReviews'>
                 {
+                  this.state.reviews.length > 0
+                  ?
                   this.state.reviews.map((review,i) => {
                     return (
                       <Review
@@ -323,6 +330,8 @@ class POI extends React.Component {
                       />
                     );
                   })
+                  :
+                  <p>No Reviews Yet!</p>
                 }
               </div>
             </div>

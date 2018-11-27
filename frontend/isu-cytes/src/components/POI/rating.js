@@ -29,7 +29,7 @@ class Rating extends React.Component {
     }
     else {
       //null
-      arr = "No Reviews"
+      arr = <FontAwesomeIcon icon={['fas', 'star']} style={{color: 'red'}}/>
     }
 
     return (
