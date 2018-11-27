@@ -3,10 +3,12 @@ import GoogleMap from 'google-map-react';
 import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { withAuthentication, withNav } from '../../hoc'
+import { withAuthentication, withNav } from '../../hoc';
 import {Navagation} from '../index.js';
 import { POIAPI } from '../../api/';
-import * as Actions from '../../actions/actions.js'
+import * as Actions from '../../actions/actions.js';
+import { Redirect } from "react-router-dom";
+import { history, routes } from '../../history.js';
 
 import './suggest.scss'
 
@@ -25,7 +27,8 @@ class Suggest extends React.Component {
             markerLat: 0,
             markerLng: 0,
             file: undefined,
-            error: null
+            error: null,
+            submitted: false,
         };
     }
 
@@ -44,10 +47,11 @@ class Suggest extends React.Component {
         .then(res => {
           console.log("success");
           this.setState({name: '', description: '',markerLat: 0, markerLng: 0, file: undefined});
+          this.setState({submitted:true});
         })
         .catch(err => {
           console.error(err);
-        })
+        });
     };
 
     setMarker = ({lat, lng}) => {
@@ -60,6 +64,11 @@ class Suggest extends React.Component {
     };
 
     render() {
+        if(this.state.submitted){
+            return(
+                <Redirect to={routes._LOGIN}/>
+            )
+        }
         return (
             <div id="containerSuggest">
                 <b id="suggestHeader">Suggest a Point of Interest</b>
@@ -69,7 +78,7 @@ class Suggest extends React.Component {
                             <div id="suggestNotMaps">
                                 <b>Name of Place:</b>
                                 <br/>
-                                <input maxLength="32" autoComplete="off" value={this.state.name}
+                                <input maxLength="32" type="text" autoComplete="off" value={this.state.name}
                                        onChange={this.nameChange} onBlur={this.checkError}/>
                                 <br/><br/>
                                 <b>Description:</b>
