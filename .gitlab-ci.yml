@@ -48,6 +48,8 @@ autoDeploy:
     - sudo mv target/*.jar /target/web-demo.jar 
     - sudo systemctl stop systemd-web-demo
     - sudo systemctl start systemd-web-demo
+  only:
+    - master
     
 frontend-build: 
     stage: frontendbuild
@@ -59,3 +61,5 @@ frontend-build:
         - CI=false 
         - yarn build
         - sudo cp -r build/* /var/www/html
+    only:
+      - master

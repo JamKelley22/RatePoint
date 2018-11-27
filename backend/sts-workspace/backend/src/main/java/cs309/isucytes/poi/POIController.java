@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +17,6 @@ import cs309.isucytes.poi.POI;
 import cs309.isucytes.poi.POIRepository;
 import cs309.isucytes.review.ReviewRepository;
 
-
-@CrossOrigin
 @RestController
 @RequestMapping(path = "/pois")
 public class POIController {
@@ -122,7 +119,6 @@ public class POIController {
 	 * 
 	 * @return the average rating of all reviews for a POI.
 	 */
-	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}/average")
 	public Double getAverageRating(@PathVariable("id") Integer id){

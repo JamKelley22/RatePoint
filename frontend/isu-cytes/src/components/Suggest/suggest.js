@@ -81,7 +81,7 @@ class Suggest extends React.Component {
                                 <br/>
                                 <input type="file" onChange={(e)=>this.fileChange(e)}/>
                                 <br/>
-                                <img src={this.state.file}/>
+                                <img src={this.state.file} id="suggestImage"/>
                             </div>
                             <div id="suggestMaps">
                                 <b>Location:</b>
