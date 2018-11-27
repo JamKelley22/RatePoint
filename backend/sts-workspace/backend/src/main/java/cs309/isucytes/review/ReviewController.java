@@ -3,6 +3,7 @@ package cs309.isucytes.review;
 import java.util.List;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import cs309.isucytes.poi.POIRepository;
+
 @RestController
 @RequestMapping(path = "/reviews")
 public class ReviewController {
 
 	@Autowired
     ReviewRepository reviewRepository;
+	@Autowired
+	POIRepository POIRepository; 
 
 	/**
 	 * Takes in a new review to add to the database.
@@ -30,12 +35,12 @@ public class ReviewController {
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Review> addNewReview(@RequestBody Review review) {
-		if(this.getReviewByID(review.getId()).getStatusCode() == HttpStatus.NOT_FOUND) {
+		if(POIRepository.findById(review.getPoi()).isPresent()){
 			reviewRepository.save(review);
 			Optional<Review> getReview = reviewRepository.findById(review.getId());
 			return new ResponseEntity<>(getReview.get(), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		}
 	}
 	
