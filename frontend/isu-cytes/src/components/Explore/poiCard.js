@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Rating from '../POI/rating.js'
 
 const POICard = (props) => {
+  console.log(props.rating);
   return (
     <div className={'poiContainer animated pulse'} style={{animationDelay: `${props.delay}s`}}>
       <div className='poiCard' onClick={props.onClick}>

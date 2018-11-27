@@ -49,10 +49,11 @@ class App extends Component {
   getPOIsWithRatings = async(pois) => {
     let newPOIs = [];
     for(var i = 0; i < pois.length; i++) {
-      let rating = await POIAPI.GetPOIRating(pois[i].id)
+      let rating = await POIAPI.GetPOIRating(pois[i].id);
+      //console.log(rating);
       let newPOI = pois[i];
-      newPOI.rating = rating.averageRating
-      newPOIs.push(newPOI)
+      newPOI.rating = (rating.average) ? rating.average : null;
+      newPOIs.push(newPOI);
     }
     return newPOIs;
   }
