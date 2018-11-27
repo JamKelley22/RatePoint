@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,7 @@ public class POIController {
 	 * @param id ID to search for
 	 * @return a POI that matched with the id 
 	 */
+	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}")
 	public ResponseEntity<?> getPOIByID(@PathVariable("id") Integer id) {
@@ -49,6 +51,7 @@ public class POIController {
 	 * @param poi New POI to be added
 	 * @return an HTTP status code 
 	 */
+	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> addNewPOI (@RequestBody POI poi) {
@@ -70,6 +73,7 @@ public class POIController {
 	 * 
 	 * @return a JSON list of all POIS
 	 */
+	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET)
 	public List<POI> getAllPOIs(){
@@ -82,6 +86,7 @@ public class POIController {
 	 * @param id id of the POI to be deleted
 	 * @return an HTTP status code
 	 */
+	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
 	public ResponseEntity<?> deletePOIByID(@PathVariable("id") Integer id) {
@@ -101,6 +106,7 @@ public class POIController {
 	 * @return an HTTP status code
 	 * 	 
 	 */
+	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.PUT, path = "/{id}")
 	public ResponseEntity<POI> updatePOI(@PathVariable("id") Integer id, @RequestBody POI poi) {
@@ -119,6 +125,7 @@ public class POIController {
 	 * 
 	 * @return the average rating of all reviews for a POI.
 	 */
+	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}/average")
 	public Double getAverageRating(@PathVariable("id") Integer id){
