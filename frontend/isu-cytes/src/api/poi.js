@@ -33,7 +33,7 @@ export const GetPOI = async(id) => {
 export const UpdatePOI = async(id,name,pictures,description,coordinates) => {
   let body = {
     name: name,
-    pictures: (pictures && pictures.length > 0) ? pictures.split(',') : [],
+    pictures: pictures,//Comma seperated, only unique imgur uri subset (eg https://i.imgur.com/mlDOzKK.png => mlDOzKK), limited to 255 characters
     description: description,
     coordinates: coordinates
   }
@@ -121,7 +121,7 @@ export const SubmitPOI = async(userID,name,pictures,description,coordinates) => 
   let body = {
     userID: userID,
     name: name,
-    /*pictures: (pictures && pictures.length > 0) ? pictures.split(',') : [],*/
+    pictures: pictures,//Comma seperated, only unique imgur uri subset (eg https://i.imgur.com/mlDOzKK.png => mlDOzKK), limited to 255 characters
     description: description,
     coordinates: coordinates,
     approved: false
