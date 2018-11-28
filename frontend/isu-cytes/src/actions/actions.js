@@ -203,6 +203,7 @@ export const submitPOI = (userID,name,pictures,description,coordinates) => (disp
   new Promise((resolve, reject) => {
       // Function is expected to return a promise
        POIAPI.SubmitPOI(userID,name,pictures,description,coordinates).then(poi => {
+         console.log(poi);
         if(!poi.error) {
           dispatch({
             type: actions.ADD_POI,

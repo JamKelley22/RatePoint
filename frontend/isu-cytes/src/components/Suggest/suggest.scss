@@ -67,5 +67,10 @@
 }
 
 #suggestImage{
-  max-width: 400px;
+  max-width: 200px;
+}
+
+#uploadImageBtn {
+  z-index: 1000;
+  position: absolute;
 }

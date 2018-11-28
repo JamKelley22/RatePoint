@@ -5,7 +5,7 @@ import { bindActionCreators, compose } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { withAuthentication, withNav } from '../../hoc'
 import {Navagation} from '../index.js';
-import { POIAPI } from '../../api/';
+import { POIAPI, ImgurAPI } from '../../api/';
 import * as Actions from '../../actions/actions.js'
 
 import './suggest.scss'
@@ -25,6 +25,8 @@ class Suggest extends React.Component {
             markerLat: 0,
             markerLng: 0,
             file: undefined,
+            displayFile: null,
+            uploadImageURI: null,
             error: null
         };
     }
@@ -39,11 +41,23 @@ class Suggest extends React.Component {
 
     suggestRequest = async (e) => {
         e.preventDefault();
+        if(this.state.markerLat === 0 && this.state.markerLng === 0) {
+          alert("Please select a Location on the map");
+          return;
+        }
+        if(this.state.file === null) {
+          alert("Please choose an image");
+          return;
+        }
+        if(this.state.uploadImageURI === null) {
+          alert("Please upload your image");
+          return;
+        }
         //let response = await POIAPI.submitPOI(" ",this.state.name,this.state.file,this.state.description,this.state.markerLat+","+this.state.markerLng);
-        this.props.Actions.submitPOI(this.props.user.id,this.state.name,[],this.state.description,`${this.state.markerLat},${this.state.markerLng}`)
+        this.props.Actions.submitPOI(this.props.user.id,this.state.name,this.state.uploadImageURI,this.state.description,`${this.state.markerLat},${this.state.markerLng}`)
         .then(res => {
           console.log("success");
-          this.setState({name: '', description: '',markerLat: 0, markerLng: 0, file: undefined});
+          this.setState({name: '', description: '',markerLat: 0, markerLng: 0, file: undefined, displayFile: null, uploadImageURI: null});
         })
         .catch(err => {
           console.error(err);
@@ -56,7 +70,31 @@ class Suggest extends React.Component {
 
     fileChange = (event) => {
         event.preventDefault();
-        this.setState({file: URL.createObjectURL(event.target.files[0])});
+
+        const imageFile = event.target.files[0];
+        this.setState({
+          file: imageFile,
+          displayFile: URL.createObjectURL(event.target.files[0])
+        });
+    };
+
+    uploadImage = async(event) => {
+      event.preventDefault();
+      if(this.state.file === null) {
+        console.error("Must select a file");
+        return;
+      }
+      console.log("===Uploading===");
+      let res = await ImgurAPI.PostImage(this.state.file);
+      if(res.error) {
+        console.error(res.error);
+      }
+      else {
+        console.log(res);
+        this.setState({
+          uploadImageURI: res.data.link
+        })
+      }
     };
 
     render() {
@@ -74,14 +112,19 @@ class Suggest extends React.Component {
                                 <br/><br/>
                                 <b>Description:</b>
                                 <br/>
-                                <textarea type="text" value={this.state.body} cols="100" rows="5" id="discriptBox"
+                                <textarea type="text" value={this.state.description} cols="100" rows="5" id="discriptBox"
                                           onChange={this.descriptionChange} autoComplete="off" maxLength="500"/>
                                 <br/><br/>
                                 <b>Image:</b>
                                 <br/>
                                 <input type="file" onChange={(e)=>this.fileChange(e)}/>
                                 <br/>
-                                <img src={this.state.file} id="suggestImage"/>
+                                <img src={this.state.displayFile} id="suggestImage"/>
+                                {
+                                  this.state.file
+                                  &&
+                                  <button id='uploadImageBtn' onClick={this.uploadImage}>Upload Image</button>
+                                }
                             </div>
                             <div id="suggestMaps">
                                 <b>Location:</b>
