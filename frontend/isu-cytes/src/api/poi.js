@@ -132,8 +132,7 @@ export const SubmitPOI = async(userID,name,pictures,description,coordinates) => 
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'origin': 'same-origin'
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(body)
   }));
@@ -145,6 +144,7 @@ export const SubmitPOI = async(userID,name,pictures,description,coordinates) => 
   else {
     switch (response.status) {
       case 201:
+      case 200:
         let pois = await response.json();
         return pois;
       case 401:
