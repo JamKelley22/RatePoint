@@ -122,6 +122,7 @@ export const updateList = (listID,listname,poilist) => (dispatch) =>
          ListAPI.DeleteList(listID).then(list => {
           //Next two actions are async
           if(!list.error) {
+            console.log("NO EERR DEL");
             dispatch({
               type: actions.DELETE_LIST,
               payload: list

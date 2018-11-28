@@ -64,34 +64,21 @@ export const UpdateList = async(id,listname,poilist) => {
 
 export const DeleteList = async(id) => {
   let error, response;
-  fetch(`${BASE_URL}/lists/${id}`, {
+  [error, response] = await to(fetch(`${BASE_URL}/lists/${id}`, {
     method: 'DELETE',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }
-  })
-  .then(res => {
-    console.log("Response===");
-    console.log(res);
-    return res;
-  })
-  .catch(err => {
-    console.log("err");
-    console.log(err);
-    return err;
-  })
-  /*
-  console.log("Response===");
-  console.log(response);
-  console.log(error);
+  }));
 
   if(error) {
-    //console.error(error);
-    return error;
+    console.error(error);
+    return {error: error}
   }
   else {
     switch (response.status) {
+      case 201:
       case 200:
         let list = await response.json();
         return list;
@@ -101,7 +88,6 @@ export const DeleteList = async(id) => {
         return {error: `Unexpected server response code of ${response.status}`}
     }
   }
-  */
 }
 
 export const CreateList = async(username, listname, poilist) => {
