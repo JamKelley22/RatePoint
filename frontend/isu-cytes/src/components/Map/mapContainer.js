@@ -96,14 +96,16 @@ class MapContainer extends React.Component {
               lat: lat,
               lng: long
             }
-            return (
-              <Marker
-                position={coordinates}
-                key={i}
-                onClick={(props, marker, e) => this.onMarkerClick(props, marker, e, poi)}
-                id='mapMarker'
-              />
-            );
+            if(poi.approved) {
+              return (
+                <Marker
+                  position={coordinates}
+                  key={i}
+                  onClick={(props, marker, e) => this.onMarkerClick(props, marker, e, poi)}
+                  id='mapMarker'
+                />
+              );
+            }
           })
         }
         {

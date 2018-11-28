@@ -84,8 +84,6 @@ class Account extends React.Component {
           msg: ''
         }
       })
-      console.log("then");
-      console.log(ret);
       //console.log("success");
       //console.log(`Deleted List: ${list.listname}`);
     })
@@ -106,7 +104,6 @@ class Account extends React.Component {
   }
 
   setListName = (list, newName) => {
-    console.log(newName);
     this.props.Actions.updateList(list.id,newName,list.poilist)
     .then(ret => {
       console.log("success");
@@ -117,7 +114,6 @@ class Account extends React.Component {
   }
 
   createList = (name) => {
-    console.log(name);
     this.setState({
       fetching: {
         list: null,
@@ -132,7 +128,6 @@ class Account extends React.Component {
           msg: ''
         }
       })
-      console.log("success");
     })
     .catch(e => {
       this.setState({
@@ -163,7 +158,6 @@ class Account extends React.Component {
       switch (response.status) {
         case 200:
           let list = await response.json();
-          console.log(list);
         default:
           console.log(`Unexpected server response code of ${response.status}`);
       }
