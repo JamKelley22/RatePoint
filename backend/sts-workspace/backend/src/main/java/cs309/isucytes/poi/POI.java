@@ -83,7 +83,7 @@ public class POI {
 	}
 
 	public String getPictures() {
-		return approved;
+		return pictures;
 	}
 
 	public void setPictures(String pictures) {
