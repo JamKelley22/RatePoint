@@ -24,28 +24,29 @@ class POICarousel extends React.Component {
       console.error("Problem loading images");
       return;
     }
-    switch (this.props.images.length) {
+    let imgList = this.props.images.split(',');
+    switch (imgList.length) {
       case 0:
         break;
       case 1:
         this.setState({
-          leftPic: this.props.images[0],
-          centerPic: this.props.images[0],
-          rightPic: this.props.images[0],
+          leftPic: imgList[0],
+          centerPic: imgList[0],
+          rightPic: imgList[0],
         })
         break;
       case 2:
         this.setState({
-          leftPic: this.props.images[1],
-          centerPic: this.props.images[0],
-          rightPic: this.props.images[1],
+          leftPic: imgList[1],
+          centerPic: imgList[0],
+          rightPic: imgList[1],
         })
         break;
       case 3:
         this.setState({
-          leftPic: this.props.images[1],
-          centerPic: this.props.images[0],
-          rightPic: this.props.images[2],
+          leftPic: imgList[1],
+          centerPic: imgList[0],
+          rightPic: imgList[2],
         })
         break;
       default:
