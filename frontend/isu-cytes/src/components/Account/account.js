@@ -69,38 +69,33 @@ class Account extends React.Component {
   }
 
   deleteList = (list) => {
-    if(window.confirm(`Delete List: ${list.listname}?`)) {
+    this.setState({
+      fetching: {
+        list: list,
+        msg: 'Deleting List...'
+      }
+    })
+    //console.log(list);
+    this.props.Actions.deleteList(list.id)
+    .then(ret => {
       this.setState({
         fetching: {
-          list: list,
-          msg: 'Deleting List...'
-        }
-      })
-      //console.log(list);
-      this.props.Actions.deleteList(list.id)
-      .then(ret => {
-        this.setState({
-          fetching: {
-            list: null,
-            msg: ''
-          }
-        })
-        console.log("then");
-        console.log(ret);
-        //console.log("success");
-        //console.log(`Deleted List: ${list.listname}`);
-      })
-      .catch(e => {
-        this.setState({
           list: null,
           msg: ''
-        })
-        console.error(e);
+        }
       })
-    }
-    else {
-      //Canceled
-    }
+      console.log("then");
+      console.log(ret);
+      //console.log("success");
+      //console.log(`Deleted List: ${list.listname}`);
+    })
+    .catch(e => {
+      this.setState({
+        list: null,
+        msg: ''
+      })
+      console.error(e);
+    })
   }
 
   viewPOI = (poi) => {
