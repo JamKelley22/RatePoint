@@ -51,6 +51,7 @@ export const UpdateList = async(id,listname,poilist) => {
   else {
     switch (response.status) {
       case 201:
+      case 200:
         let list = await response.json();
         return list;
       case 404:
