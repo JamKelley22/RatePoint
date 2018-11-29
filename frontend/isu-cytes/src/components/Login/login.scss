@@ -111,9 +111,13 @@
   animation: slideInBox 1s forwards;
 }
 
-.passLabel, .passInput {
+.passLabel {
   display: block;
   position: relative;
+}
+
+.passInput {
+  display: flex;
 }
 
 .password-trigger {

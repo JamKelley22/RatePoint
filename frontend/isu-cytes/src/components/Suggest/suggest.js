@@ -90,9 +90,11 @@ class Suggest extends React.Component {
         console.error(res.error);
       }
       else {
-        console.log(res);
+        let linkArr = res.data.link.split('/');
+        let uniqueLinkPart = linkArr[linkArr.length - 1]
+        console.log(uniqueLinkPart);
         this.setState({
-          uploadImageURI: res.data.link
+          uploadImageURI: uniqueLinkPart
         })
       }
     };
@@ -100,7 +102,7 @@ class Suggest extends React.Component {
     render() {
         return (
             <div id="containerSuggest">
-                <b id="suggestHeader">Suggest a Point of Interest</b>
+                <h1 id="suggestHeader">Suggest a Point of Interest</h1>
                 <div id="suggestForm">
                     <form onSubmit={(e) => this.suggestRequest(e)} noValidate autoComplete="off">
                         <div id="row1">
@@ -145,6 +147,12 @@ class Suggest extends React.Component {
                             <input type="submit" value="Submit" id="suggestSubmit"/>
                         </div>
                     </form>
+                    <div id='reqirements'>
+                        <input type="checkbox" checked={this.state.name.length > 0}/> Name<br/>
+                        <input type="checkbox" checked={this.state.description.length > 0}/> Descritpion<br/>
+                        <input type="checkbox" checked={this.state.uploadImageURI !== null}/> Image Upload<br/>
+                        <input type="checkbox" checked={this.state.markerLat !== 0 && this.state.markerLng !== 0}/> Map Location<br/>
+                    </div>
                 </div>
                 {
                     this.state.error

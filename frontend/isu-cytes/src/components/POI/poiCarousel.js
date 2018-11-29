@@ -24,7 +24,14 @@ class POICarousel extends React.Component {
       console.error("Problem loading images");
       return;
     }
-    let imgList = this.props.images.split(',');
+    let imgList = this.props.images.split(',').map(img => {
+      let pic = img;
+      if(img.slice(0,5) !== 'https') {//should always be at least this long
+        pic = `https://i.imgur.com/${img}`;
+      }
+      return pic;
+    })
+
     switch (imgList.length) {
       case 0:
         break;
