@@ -135,7 +135,7 @@ class Navigation extends React.Component {
 
       :
       <div>
-        Try searching for names, tags, or people
+        Try searching for POIs
       </div>
     )
 

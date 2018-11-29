@@ -261,7 +261,6 @@ class POI extends React.Component {
         overflowY: this.state.descriptionScrollState
     };
     let poi = this.props.poi;
-    console.log(poi);
     if(poi == null) {
       return (
         <div className=''>

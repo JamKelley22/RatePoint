@@ -19,7 +19,7 @@ class Explore extends React.Component {
 
   onPOICardClick = (poi) => {
     //Update Redux
-    this.props.Actions.setPOI(poi);
+    this.props.Actions.setSelectedPOI(poi);
     //Push new history
     history.push(routes._POI);
   }
