@@ -20,7 +20,7 @@ class POICarousel extends React.Component {
   }
 */
   updatePics = (images) => {
-    if(this.props.images === undefined) {
+    if(this.props.images === null) {
       console.error("Problem loading images");
       return;
     }
