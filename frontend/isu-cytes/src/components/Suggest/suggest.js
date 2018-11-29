@@ -3,10 +3,13 @@ import GoogleMap from 'google-map-react';
 import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { withAuthentication, withNav } from '../../hoc'
+import { withAuthentication, withNav } from '../../hoc';
 import {Navagation} from '../index.js';
+import * as Actions from '../../actions/actions.js';
+import { Redirect } from "react-router-dom";
+import { history, routes } from '../../history.js';
+import { ClipLoader } from 'react-spinners';
 import { POIAPI, ImgurAPI } from '../../api/';
-import * as Actions from '../../actions/actions.js'
 
 import './suggest.scss'
 
@@ -24,10 +27,11 @@ class Suggest extends React.Component {
             zoom: 15,
             markerLat: 0,
             markerLng: 0,
-            file: undefined,
+            error: null,
+            submitted: false,
+            loading: false,
             displayFile: null,
             uploadImageURI: null,
-            error: null
         };
     }
 
@@ -54,14 +58,17 @@ class Suggest extends React.Component {
           return;
         }
         //let response = await POIAPI.submitPOI(" ",this.state.name,this.state.file,this.state.description,this.state.markerLat+","+this.state.markerLng);
+        this.setState({loading:true});
         this.props.Actions.submitPOI(this.props.user.id,this.state.name,this.state.uploadImageURI,this.state.description,`${this.state.markerLat},${this.state.markerLng}`)
         .then(res => {
-          console.log("success");
+            this.setState({submitted:true});
           this.setState({name: '', description: '',markerLat: 0, markerLng: 0, file: undefined, displayFile: null, uploadImageURI: null});
         })
         .catch(err => {
-          console.error(err);
-        })
+          console.log(err);
+          this.setState({error:"submit failed"});
+        });
+        this.setState({loading:false});
     };
 
     setMarker = ({lat, lng}) => {
@@ -100,6 +107,11 @@ class Suggest extends React.Component {
     };
 
     render() {
+        if(this.state.submitted){
+            return(
+                <Redirect to={routes._EXPLORE}/>
+            )
+        }
         return (
             <div id="containerSuggest">
                 <h1 id="suggestHeader">Suggest a Point of Interest</h1>
@@ -109,7 +121,7 @@ class Suggest extends React.Component {
                             <div id="suggestNotMaps">
                                 <b>Name of Place:</b>
                                 <br/>
-                                <input maxLength="32" autoComplete="off" value={this.state.name}
+                                <input maxLength="32" type="text" autoComplete="off" value={this.state.name}
                                        onChange={this.nameChange} onBlur={this.checkError}/>
                                 <br/><br/>
                                 <b>Description:</b>
@@ -145,6 +157,10 @@ class Suggest extends React.Component {
                         </div>
                         <div id="row2">
                             <input type="submit" value="Submit" id="suggestSubmit"/>
+                            <ClipLoader
+                                color={'#123abc'}
+                                loading={this.state.loading}
+                            />
                         </div>
                     </form>
                     <div id='reqirements'>
