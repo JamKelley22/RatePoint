@@ -1,10 +1,6 @@
 import * as actions from './actionTypes.js'
 import { POIAPI, PersonAPI, ListAPI } from '../api/'
 
-export function setPOI(poi) {
-  return { type: actions.SET_POI, payload: poi }
-}
-
 export function updatePOIList() {
   return function (dispatch){
    return POIAPI.GetPOIs().then(pois => {

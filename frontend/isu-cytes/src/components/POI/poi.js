@@ -56,6 +56,12 @@ class POI extends React.Component {
     })
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.poi !== prevProps.poi) {
+      this.getReviews();
+    }
+  }
+
   getReviews = async() => {
     if(this.props.poi === null) {
       console.error("Null POI");
@@ -261,7 +267,6 @@ class POI extends React.Component {
         overflowY: this.state.descriptionScrollState
     };
     let poi = this.props.poi;
-    console.log(poi);
     if(poi == null) {
       return (
         <div className=''>
