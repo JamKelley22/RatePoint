@@ -9,6 +9,7 @@ import { POIAPI } from '../../api/';
 import * as Actions from '../../actions/actions.js';
 import { Redirect } from "react-router-dom";
 import { history, routes } from '../../history.js';
+import { ClipLoader } from 'react-spinners';
 
 import './suggest.scss'
 
@@ -29,6 +30,7 @@ class Suggest extends React.Component {
             file: undefined,
             error: null,
             submitted: false,
+            loading: false
         };
     }
 
@@ -43,15 +45,17 @@ class Suggest extends React.Component {
     suggestRequest = async (e) => {
         e.preventDefault();
         //let response = await POIAPI.submitPOI(" ",this.state.name,this.state.file,this.state.description,this.state.markerLat+","+this.state.markerLng);
+        this.setState({loading:true});
         this.props.Actions.submitPOI(this.props.user.id,this.state.name,[],this.state.description,`${this.state.markerLat},${this.state.markerLng}`)
         .then(res => {
-          console.log("success");
           this.setState({name: '', description: '',markerLat: 0, markerLng: 0, file: undefined});
           this.setState({submitted:true});
         })
         .catch(err => {
-          console.error(err);
+          console.log(err);
+          this.setState({error:"submit failed"});
         });
+        this.setState({loading:false});
     };
 
     setMarker = ({lat, lng}) => {
@@ -66,7 +70,7 @@ class Suggest extends React.Component {
     render() {
         if(this.state.submitted){
             return(
-                <Redirect to={routes._LOGIN}/>
+                <Redirect to={routes._EXPLORE}/>
             )
         }
         return (
@@ -109,6 +113,10 @@ class Suggest extends React.Component {
                         </div>
                         <div id="row2">
                             <input type="submit" value="Submit" id="suggestSubmit"/>
+                            <ClipLoader
+                                color={'#123abc'}
+                                loading={this.state.loading}
+                            />
                         </div>
                     </form>
                 </div>
