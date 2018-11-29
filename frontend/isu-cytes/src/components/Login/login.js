@@ -119,20 +119,21 @@ class Login extends React.Component {
                       onChange={this.handleInputChange}
                     />
                   <label className='passLabel'>Password
-                    <input
-                      type="password"
-                      type={this.state.inputType}
-                      maxLength="32"
-                      className="passInput"
-                      name='pass'
-                      onChange={this.handleInputChange}
-                      onBlur={this.checkError}
-                      onFocus={this.checkError}
-                      value={this.state.pass}
-                    />
-                  <span className="password-trigger" onClick={() => this.setState({inputType: this.state.inputType === 'password' ? 'text' : 'password'})}>
-                    <FontAwesomeIcon icon={this.state.inputType === 'password' ? 'eye' : 'eye-slash'} />
-                  </span>
+                    <div className='passInput'>
+                      <input
+                        type="password"
+                        type={this.state.inputType}
+                        maxLength="32"
+                        name='pass'
+                        onChange={this.handleInputChange}
+                        onBlur={this.checkError}
+                        onFocus={this.checkError}
+                        value={this.state.pass}
+                      />
+                      <span className="password-trigger" onClick={() => this.setState({inputType: this.state.inputType === 'password' ? 'text' : 'password'})}>
+                        <FontAwesomeIcon icon={this.state.inputType === 'password' ? 'eye' : 'eye-slash'} />
+                      </span>
+                    </div>
                   </label>
                   {
                     this.state.error

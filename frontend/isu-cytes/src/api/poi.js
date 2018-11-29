@@ -33,7 +33,7 @@ export const GetPOI = async(id) => {
 export const UpdatePOI = async(id,name,pictures,description,coordinates) => {
   let body = {
     name: name,
-    pictures: (pictures && pictures.length > 0) ? pictures.split(',') : [],
+    pictures: pictures,//Comma seperated, only unique imgur uri subset (eg https://i.imgur.com/mlDOzKK.png => mlDOzKK), limited to 255 characters
     description: description,
     coordinates: coordinates
   }
@@ -121,7 +121,7 @@ export const SubmitPOI = async(userID,name,pictures,description,coordinates) => 
   let body = {
     userID: userID,
     name: name,
-    /*pictures: (pictures && pictures.length > 0) ? pictures.split(',') : [],*/
+    pictures: pictures,//Comma seperated, only unique imgur uri subset (eg https://i.imgur.com/mlDOzKK.png => mlDOzKK), limited to 255 characters
     description: description,
     coordinates: coordinates,
     approved: false
@@ -132,8 +132,7 @@ export const SubmitPOI = async(userID,name,pictures,description,coordinates) => 
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'origin': 'same-origin'
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(body)
   }));
@@ -145,6 +144,7 @@ export const SubmitPOI = async(userID,name,pictures,description,coordinates) => 
   else {
     switch (response.status) {
       case 201:
+      case 200:
         let pois = await response.json();
         return pois;
       case 401:
@@ -173,9 +173,36 @@ export const GetPOIRating = async(poiID) => {
   }
   else {
     switch (response.status) {
-      case 201:// TODO: Check this return status
-        let pois = await response.json();
-        return pois;
+      case 201:
+      case 200:
+        let rating = await response.json();
+        return rating;
+      default:
+        return {error: `Unexpected server response code of ${response.status}`}
+    }
+  }
+}
+
+export const GetPOINumRatings = async(poiID) => {
+  let error, response;
+  [error, response] = await to(fetch(`${BASE_URL}/reviews/poi/${poiID}`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  }));
+
+  if(error) {
+    console.error(error);
+    return {error: error}
+  }
+  else {
+    switch (response.status) {
+      case 201:
+      case 200:
+        let rating = await response.json();
+        return rating.length;
       default:
         return {error: `Unexpected server response code of ${response.status}`}
     }

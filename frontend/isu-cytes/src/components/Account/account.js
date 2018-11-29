@@ -69,38 +69,31 @@ class Account extends React.Component {
   }
 
   deleteList = (list) => {
-    if(window.confirm(`Delete List: ${list.listname}?`)) {
+    this.setState({
+      fetching: {
+        list: list,
+        msg: 'Deleting List...'
+      }
+    })
+    //console.log(list);
+    this.props.Actions.deleteList(list.id)
+    .then(ret => {
       this.setState({
         fetching: {
-          list: list,
-          msg: 'Deleting List...'
-        }
-      })
-      //console.log(list);
-      this.props.Actions.deleteList(list.id)
-      .then(ret => {
-        this.setState({
-          fetching: {
-            list: null,
-            msg: ''
-          }
-        })
-        console.log("then");
-        console.log(ret);
-        //console.log("success");
-        //console.log(`Deleted List: ${list.listname}`);
-      })
-      .catch(e => {
-        this.setState({
           list: null,
           msg: ''
-        })
-        console.error(e);
+        }
       })
-    }
-    else {
-      //Canceled
-    }
+      //console.log("success");
+      //console.log(`Deleted List: ${list.listname}`);
+    })
+    .catch(e => {
+      this.setState({
+        list: null,
+        msg: ''
+      })
+      console.error(e);
+    })
   }
 
   viewPOI = (poi) => {
@@ -111,7 +104,6 @@ class Account extends React.Component {
   }
 
   setListName = (list, newName) => {
-    console.log(newName);
     this.props.Actions.updateList(list.id,newName,list.poilist)
     .then(ret => {
       console.log("success");
@@ -122,7 +114,6 @@ class Account extends React.Component {
   }
 
   createList = (name) => {
-    console.log(name);
     this.setState({
       fetching: {
         list: null,
@@ -137,7 +128,6 @@ class Account extends React.Component {
           msg: ''
         }
       })
-      console.log("success");
     })
     .catch(e => {
       this.setState({
@@ -168,7 +158,6 @@ class Account extends React.Component {
       switch (response.status) {
         case 200:
           let list = await response.json();
-          console.log(list);
         default:
           console.log(`Unexpected server response code of ${response.status}`);
       }

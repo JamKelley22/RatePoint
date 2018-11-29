@@ -14,38 +14,57 @@ class POICarousel extends React.Component {
     this.updatePics(this.props.images);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.images !== prevProps.images) {
+      this.updatePics(this.props.images);
+    }
+  }
+
 /*
   componentWillReceiveProps = (nextProps) => {
     this.updatePics(nextProps.images);
   }
 */
   updatePics = (images) => {
-    if(this.props.images === undefined) {
+    if(this.props.images === null) {
       console.error("Problem loading images");
+      this.setState({
+        leftPic: null,
+        centerPic: null,
+        rightPic: null,
+      })
       return;
     }
-    switch (this.props.images.length) {
+    let imgList = this.props.images.split(',').map(img => {
+      let pic = img;
+      if(img.slice(0,5) !== 'https') {//should always be at least this long
+        pic = `https://i.imgur.com/${img}`;
+      }
+      return pic;
+    })
+
+    switch (imgList.length) {
       case 0:
         break;
       case 1:
         this.setState({
-          leftPic: this.props.images[0],
-          centerPic: this.props.images[0],
-          rightPic: this.props.images[0],
+          leftPic: imgList[0],
+          centerPic: imgList[0],
+          rightPic: imgList[0],
         })
         break;
       case 2:
         this.setState({
-          leftPic: this.props.images[1],
-          centerPic: this.props.images[0],
-          rightPic: this.props.images[1],
+          leftPic: imgList[1],
+          centerPic: imgList[0],
+          rightPic: imgList[1],
         })
         break;
       case 3:
         this.setState({
-          leftPic: this.props.images[1],
-          centerPic: this.props.images[0],
-          rightPic: this.props.images[2],
+          leftPic: imgList[1],
+          centerPic: imgList[0],
+          rightPic: imgList[2],
         })
         break;
       default:

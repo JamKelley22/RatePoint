@@ -7,7 +7,6 @@ const userReducer = (state=initialState.user, action) => {
     case types.CREATE_USER:
     case types.UPDATE_USER:
     case types.CREATE_LIST:
-    case types.UPDATE_LIST:
       return {...state, currUser: action.payload};
     case types.DELETE_LIST:
       return {
@@ -39,6 +38,22 @@ const userReducer = (state=initialState.user, action) => {
       return {
         ...state,
         selectedUser: action.payload
+      }
+    case types.UPDATE_LIST:
+      return {
+        ...state,
+        currUser: {
+          ...state.currUser,
+          lists: state.currUser.lists.map(list => {
+            if(list.id !== action.payload.id) {
+              return list;
+            }
+            else {
+              console.log("PAyload");
+              return action.payload;
+            }
+          })
+        }
       }
     default:
       return state;

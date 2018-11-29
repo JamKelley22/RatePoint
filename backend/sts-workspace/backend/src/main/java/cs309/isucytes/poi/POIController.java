@@ -1,6 +1,8 @@
 package cs309.isucytes.poi;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,7 +130,8 @@ public class POIController {
 	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}/average")
-	public Double getAverageRating(@PathVariable("id") Integer id){
-		return reviewRepository.avgReviewsByPoiId(id);
+	public Map<String, String> getAverageRating(@PathVariable("id") Integer id){
+		Double d = new Double(reviewRepository.avgReviewsByPoiId(id));
+		return Collections.singletonMap("average", d.toString());
 	}
 }

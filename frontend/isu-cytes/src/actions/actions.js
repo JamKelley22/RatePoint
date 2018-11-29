@@ -1,10 +1,6 @@
 import * as actions from './actionTypes.js'
 import { POIAPI, PersonAPI, ListAPI } from '../api/'
 
-export function setPOI(poi) {
-  return { type: actions.SET_POI, payload: poi }
-}
-
 export function updatePOIList() {
   return function (dispatch){
    return POIAPI.GetPOIs().then(pois => {
@@ -122,6 +118,7 @@ export const updateList = (listID,listname,poilist) => (dispatch) =>
          ListAPI.DeleteList(listID).then(list => {
           //Next two actions are async
           if(!list.error) {
+            console.log("NO EERR DEL");
             dispatch({
               type: actions.DELETE_LIST,
               payload: list
@@ -203,6 +200,7 @@ export const submitPOI = (userID,name,pictures,description,coordinates) => (disp
   new Promise((resolve, reject) => {
       // Function is expected to return a promise
        POIAPI.SubmitPOI(userID,name,pictures,description,coordinates).then(poi => {
+         console.log(poi);
         if(!poi.error) {
           dispatch({
             type: actions.ADD_POI,

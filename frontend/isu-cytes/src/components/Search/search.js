@@ -40,7 +40,7 @@ class Search extends React.Component {
 
   onPOICardClick = (poi) => {
     //Update Redux
-    this.props.Actions.setPOI(poi);
+    this.props.Actions.setSelectedPOI(poi);
     //Push new history
     history.push(routes._POI);
   }
@@ -58,17 +58,19 @@ class Search extends React.Component {
               this.state.searchResults.pois.length > 0
               ?
               this.state.searchResults.pois.map((poi,i) => {
-                return (
-                  <div className='poiResult'>
-                    <POICard
-                      title={poi.name}
-                      key={i}
-                      pic={(poi.pictures && poi.pictures.length > 0) ? poi.pictures[0] : null}
-                      rating={poi.rating}
-                      onClick={() => this.onPOICardClick(poi)}
-                    />
-                  </div>
-                )
+                if(poi.approved) {
+                  return (
+                    <div className='poiResult'>
+                      <POICard
+                        title={poi.name}
+                        key={i}
+                        pic={(poi.pictures && poi.pictures.length > 0) ? poi.pictures[0] : null}
+                        rating={poi.rating}
+                        onClick={() => this.onPOICardClick(poi)}
+                      />
+                    </div>
+                  )
+                }
               })
               :
               <p>No Results</p>

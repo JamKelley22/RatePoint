@@ -93,14 +93,16 @@ class Navigation extends React.Component {
         <div className='searchHeading'>POIs</div>
         {
           this.state.searchResults.pois.map((poi,i) => {
-            return (
-              <div
-                key={i}
-                className='searchResult'
-                onMouseDown={() => this.clickPOI(poi)}>
-                {poi.name}
-              </div>
-            )
+            if(poi.approved) {
+              return (
+                <div
+                  key={i}
+                  className='searchResult'
+                  onMouseDown={() => this.clickPOI(poi)}>
+                  {poi.name}
+                </div>
+              )
+            }
           })
         }
         <div className='searchHeading'>People</div>
@@ -133,7 +135,7 @@ class Navigation extends React.Component {
 
       :
       <div>
-        Try searching for names, tags, or people
+        Try searching for POIs
       </div>
     )
 
