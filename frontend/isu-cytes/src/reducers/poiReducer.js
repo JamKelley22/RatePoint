@@ -12,7 +12,7 @@ const poiReducer = (state=initialState.poi, action) => {
         ...state,
         allPOIs: [...state.allPOIs, action.payload]
       }
-    case types.REJECT_POI:
+    case types.DELETE_POI:
       return {
         ...state,
         allPOIs: state.allPOIs.filter((poi,i) =>

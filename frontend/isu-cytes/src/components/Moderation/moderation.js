@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators, compose } from 'redux';
+import { bindActionCreators, compose } from 'redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import OverviewCard from './overviewCard.js'
 import { withAuthentication, withAuthorization, withNav } from '../../hoc'
@@ -48,7 +49,7 @@ class Moderation extends React.Component {
     this.props.Actions.approvePOI(poi)
     .then(poi => {
       console.log("Success");
-      //this.refresh();
+      this.refresh();
     })
     .catch(err => {
       console.error(err);
@@ -60,7 +61,7 @@ class Moderation extends React.Component {
     this.props.Actions.rejectPOI(poi)
     .then(poi => {
       console.log("Success");
-      //this.refresh();
+      this.refresh();
     })
     .catch(err => {
       console.error(err);
@@ -94,18 +95,20 @@ class Moderation extends React.Component {
               {
                 this.state.unapprovedPOIs.length > 0
                 ?
-                this.state.unapprovedPOIs.map(poi => {
+                this.state.unapprovedPOIs.map((poi,i) => {
                   return (
                     <OverviewCard
+                      key={i}
                       cardType='POISuggestion'
                       poi={poi}
+                      setSelectedPOI={this.props.Actions.setSelectedPOI}
                       onApprove={() => this.approvePOISuggestion(poi)}
                       onReject={() => this.rejectPOISuggestion(poi)}
                     />
                   )
                 })
                 :
-                <p>All Clear Here</p>
+                <p>All Clear Here <FontAwesomeIcon icon={['far','thumbs-up']}/></p>
               }
             </div>
           </div>
@@ -127,7 +130,7 @@ class Moderation extends React.Component {
                   )
                 })
                 :
-                <p>All Clear Here</p>
+                <p>All Clear Here <FontAwesomeIcon icon={['far','thumbs-up']}/></p>
               }
             </div>
           </div>
@@ -149,12 +152,11 @@ class Moderation extends React.Component {
                   )
                 })
                 :
-                <p>All Clear Here</p>
+                <p>All Clear Here <FontAwesomeIcon icon={['far','thumbs-up']}/></p>
               }
             </div>
           </div>
         </div>
-        <button onClick={this.refresh}>Refresh</button>
       </div>
     );
   }

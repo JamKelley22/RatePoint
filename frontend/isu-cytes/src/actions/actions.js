@@ -176,10 +176,10 @@ export const approvePOI = (poi) => (dispatch) =>
 export const rejectPOI = (poi) => (dispatch) =>
   new Promise((resolve, reject) => {
       // Function is expected to return a promise
-       POIAPI.UpdatePOI(poi.id,poi.name,poi.pictures,poi.description,poi.coordinates,false).then(poi => {
+       POIAPI.DeletePOI(poi.id).then(poi => {
         if(!poi.error) {
           dispatch({
-            type: actions.REJECT_POI,
+            type: actions.DELETE_POI,
             payload: poi
           })
           resolve(poi);
