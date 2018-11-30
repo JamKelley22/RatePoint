@@ -2,9 +2,13 @@
 @import '../../mediaQuery';
 
 .searchPage {
-
+  background-color: $secondary_color;
+  height: 100%;
+  z-index: 2;
+  overflow: hidden;
+  padding: 10px;
 }
 .resultsScroll {
-  max-height: 100%;
+  height: 100%;
   overflow-y: scroll;
 }

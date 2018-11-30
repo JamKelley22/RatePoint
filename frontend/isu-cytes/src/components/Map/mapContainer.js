@@ -61,7 +61,7 @@ class MapContainer extends React.Component {
     if(this.state.activePOI) {
 
       //Update Redux
-      this.props.Actions.setPOI(this.state.activePOI);
+      this.props.Actions.setSelectedPOI(this.state.activePOI);
       //Push new history
       history.push(routes._POI);
     }
