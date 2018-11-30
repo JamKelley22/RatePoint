@@ -17,7 +17,7 @@ class Moderation extends React.Component {
   }
 
   componentDidMount() {
-    this.filterPOISuggestions();
+    this.refresh();
   }
 
   refresh = () => {
@@ -44,10 +44,11 @@ class Moderation extends React.Component {
   }
 
   approvePOISuggestion = (poi) => {
-    console.log(poi);
+    //console.log(poi);
     this.props.Actions.approvePOI(poi)
     .then(poi => {
       console.log("Success");
+      //this.refresh();
     })
     .catch(err => {
       console.error(err);
@@ -55,10 +56,11 @@ class Moderation extends React.Component {
   }
 
   rejectPOISuggestion = (poi) => {
-    console.log(poi);
+    //console.log(poi);
     this.props.Actions.rejectPOI(poi)
     .then(poi => {
       console.log("Success");
+      //this.refresh();
     })
     .catch(err => {
       console.error(err);

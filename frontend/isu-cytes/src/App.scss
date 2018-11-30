@@ -2,6 +2,7 @@
 @import 'mediaQuery';
 
 .App {
+  z-index: 2;
   height: 100%;
   width: 100%;
   display: flex;
@@ -138,4 +139,8 @@ input[type="password"]:invalid,
 input[type="number"]:invalid,
 textarea:invalid {
   box-shadow: none;
+}
+
+.grecaptcha-badge {
+    z-index: 0;
 }

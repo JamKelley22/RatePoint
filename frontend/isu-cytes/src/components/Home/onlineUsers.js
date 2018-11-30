@@ -2,40 +2,36 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { history, routes } from '../../history.js'
 
-const OnlineUsers = (props) => {
-  console.log(props.onlineUserList);
-  return (
-    <div className='onlineUsersComponent'>
-      <h2>Online Users</h2>
-      <h3>Me</h3>
-      <div
-        className='onlineUser'>
-        {props.me.username}
-        <a
-          onClick={() => history.push(routes._ACCOUNT)}>
-          View
-        </a>
-      </div>
-      <h3>Others</h3>
-      {
-        props.onlineUserList.map((username,i) => {
-          if(username !== props.me.username) {
-            return (
-              <div
-                className='onlineUser'
-                key={i}>
-                Username: {username}
-                <a
-                  onClick={() => props.onUserClick(username)}>
-                  View
-                </a>
-              </div>
-              )
+class OnlineUsers extends React.Component {
+  state = {
+    open: false
+  }
+  render() {
+    return (
+      <div className='onlineUsersComponent'>
+        <a className='openListBtn' onClick={() => this.setState({open: !this.state.open})}>Online Users</a>
+        <div className={`onlineUsersList ${this.state.open ? '' : 'closed'}`}>
+          {
+            this.props.onlineUserList.map((username,i) => {
+              //if(username !== props.me.username) {
+                return (
+                  <div
+                    className='onlineUser'
+                    key={i}>
+                    Username: {username}
+                    <a
+                      onClick={() => this.props.onUserClick(username)}>
+                      View
+                    </a>
+                  </div>
+                  )
+                }
+              )//})
             }
-          })
-        }
-    </div>
-  )
+        </div>
+      </div>
+    )
+  }
 }
 
 export default OnlineUsers;

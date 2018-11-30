@@ -1,6 +1,9 @@
 @import '../../colors.scss';
 @import '../../mediaQuery';
 
+.mapPage {
+  z-index: 2;
+}
 .mapContainer {
   height: 92%;
   max-height: 92%;
