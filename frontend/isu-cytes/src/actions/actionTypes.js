@@ -7,6 +7,7 @@ export const CREATE_USER = 'CREATE_USER'
 export const SET_POI = 'SET_POI'
 export const SET_POI_LIST = 'SET_POI_LIST'
 export const ADD_POI = 'ADD_POI'
+export const DELETE_POI = 'DELETE_POI'
 
 export const USER_DISCONNECT = 'USER_DISCONNECT'
 export const USER_CONNECT = 'USER_CONNECT'

@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { history, routes } from '../../history.js'
 
 const CARD_TYPES = {
   POI_SUGGESTION: 'POISuggestion',
@@ -9,7 +10,26 @@ const CARD_TYPES = {
 
 class OverviewCard extends React.Component {
   state = {
-    disabled: false
+    approve: null,
+    approvedChecked: false,
+    rejectCheckeed: false
+  }
+
+  submitPOIChange = () => {
+    if(this.state.approve === null)
+      return;
+
+    if(this.state.approve) {
+      this.props.onApprove();
+    }
+    else {
+      this.props.onReject();
+    }
+  }
+
+  viewPOI = () => {
+    this.props.setSelectedPOI(this.props.poi);
+    history.push(routes._POI);
   }
 
   render () {
@@ -32,24 +52,26 @@ class OverviewCard extends React.Component {
         )
     }
     let approveInputProps = {
-      type:"checkbox",
-      disabled: this.state.disabled,
+      type:"radio",
+      checked: this.state.approvedChecked,
       onClick: () => {
         this.setState({
-          disabled: true
+          approve: true,
+          approvedChecked: true,
+          rejectCheckeed: false
         })
-        this.props.onApprove();
       }
     };
 
     let rejectInputProps = {
-      type:"checkbox",
-      disabled: this.state.disabled,
+      type:"radio",
+      checked: this.state.rejectCheckeed,
       onClick: () => {
         this.setState({
-          disabled: true
+          approve: false,
+          approvedChecked: false,
+          rejectCheckeed: true
         })
-        this.props.onReject();
       }
     };
     return (
@@ -57,19 +79,27 @@ class OverviewCard extends React.Component {
         {cardTop}
 
         <div className='modDecisionBox'>
-          <div>
-            <input
-            {...approveInputProps}>
-            </input>
-            <label>Approve</label>
-          </div>
+          <form onSubmit={e => e.preventDefault()}>
+            <div className='modDecisionBoxRadios'>
+              <div>
+                <input
+                {...approveInputProps}>
+                </input>
+                <label>Approve</label>
+              </div>
 
-          <div>
-            <input
-            {...rejectInputProps}>
-            </input>
-            <label>Reject</label>
-          </div>
+              <div>
+                <input
+                {...rejectInputProps}>
+                </input>
+                <label>Reject</label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div className='overviewCardBtns'>
+          <a className='modViewPOIBtn' onClick={this.viewPOI}>View</a>
+          <button className='modViewPOIBtn' onClick={this.submitPOIChange}>Submit</button>
         </div>
       </div>
     )
@@ -77,17 +107,17 @@ class OverviewCard extends React.Component {
 }
 
 const POISuggestOverview = (poi) =>
-  <div>
+  <div className='cardTitle'>
     {poi.name}
   </div>
 
 const POIFlaggedOverview = (poi) =>
-  <div>
+  <div className='cardTitle'>
     {poi.name}
   </div>
 
 const FlaggedReviewOverview = (review) =>
-  <div>
+  <div className='cardTitle'>
     FlaggedReviewOverview
   </div>
 

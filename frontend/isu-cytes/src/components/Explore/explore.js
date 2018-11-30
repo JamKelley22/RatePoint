@@ -45,7 +45,7 @@ class Explore extends React.Component {
     }
 
     return (
-        <div id='explorePage'>
+        <div className='explorePage'>
         {cards}
         </div>
     );

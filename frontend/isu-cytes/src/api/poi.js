@@ -30,12 +30,13 @@ export const GetPOI = async(id) => {
   }
 }
 
-export const UpdatePOI = async(id,name,pictures,description,coordinates) => {
+export const UpdatePOI = async(id,name,pictures,description,coordinates,approved) => {
   let body = {
     name: name,
     pictures: pictures,//Comma seperated, only unique imgur uri subset (eg https://i.imgur.com/mlDOzKK.png => mlDOzKK), limited to 255 characters
     description: description,
-    coordinates: coordinates
+    coordinates: coordinates,
+    approved: approved
   }
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/pois/${id}`, {

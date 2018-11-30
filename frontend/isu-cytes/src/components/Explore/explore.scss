@@ -3,7 +3,7 @@
 
 //=====Explore=====
 
-#explorePage {
+.explorePage {
   background-color: #4F5946;
   height: 100%;
   width: 100%;
@@ -11,6 +11,7 @@
   flex-wrap: wrap;
   overflow-y: auto;
   justify-content: center;
+  z-index: 2;
 }
 #exploreComponent {
   height: 100%;

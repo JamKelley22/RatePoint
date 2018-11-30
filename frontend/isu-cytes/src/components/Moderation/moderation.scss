@@ -6,6 +6,8 @@
   flex-direction: column;
   height: 100%;
   background-color: $secondary_color;
+  z-index: 2;
+  padding: 10px;
 }
 .modCols {
   display: flex;
@@ -36,9 +38,38 @@
   background-color: $primary_color;
   display: flex;
   flex-direction: column;
+  border-radius: 4px;
+  padding: 5px;
+  overflow: hidden;
+  align-items: center;
+
 }
 .modDecisionBox {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  input {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+  label {
+    margin: 5px;
+    text-align: center;
+  }
+}
+.overviewCardBtns {
+  display: flex;
+  height: 20px;
+}
+.modViewPOIBtn {
+  margin: 5px !important;
+  height: 100% !important;
+}
+.modDecisionBoxRadios {
+  display: flex;
+}
+.cardTitle {
+  font-weight: bold;
+  font-size: 1.2em;
 }
