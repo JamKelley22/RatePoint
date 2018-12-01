@@ -21,6 +21,12 @@ class Moderation extends React.Component {
     this.refresh();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.pois.length !== prevProps.pois.length) {
+      this.refresh();
+    }
+  }
+
   refresh = () => {
     this.filterPOISuggestions();
     this.filterPOIFlags();

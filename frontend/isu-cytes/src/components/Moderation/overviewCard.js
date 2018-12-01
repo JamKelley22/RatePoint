@@ -21,9 +21,17 @@ class OverviewCard extends React.Component {
 
     if(this.state.approve) {
       this.props.onApprove();
+      this.setState({
+        approvedChecked: false,
+        rejectCheckeed: false
+      })
     }
     else {
       this.props.onReject();
+      this.setState({
+        approvedChecked: false,
+        rejectCheckeed: false
+      })
     }
   }
 
