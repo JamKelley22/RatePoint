@@ -2,6 +2,11 @@ import to from 'await-to-js';
 
 import { BASE_URL } from './index.js'
 
+/**
+ * REST Query, Get List by id
+ * @param {id} The id of the requested list
+ * @return Error object or list object
+ */
 export const GetList = async(id) => {
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/lists/${id}`, {
@@ -29,6 +34,11 @@ export const GetList = async(id) => {
   }
 }
 
+/**
+ * REST Query, Update List
+ * @param {id, listname, poilist}
+ * @return Error object or list object
+ */
 export const UpdateList = async(id,listname,poilist) => {
   let body = {
     listname: listname,
@@ -62,6 +72,11 @@ export const UpdateList = async(id,listname,poilist) => {
   }
 }
 
+/**
+ * REST Query, Delete List by id
+ * @param {id}
+ * @return Error object or list object
+ */
 export const DeleteList = async(id) => {
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/lists/${id}`, {
@@ -90,6 +105,11 @@ export const DeleteList = async(id) => {
   }
 }
 
+/**
+ * REST Query, Create List
+ * @param {id, listname, poilist}
+ * @return Error object or list object
+ */
 export const CreateList = async(username, listname, poilist) => {
   let body = {
     listname: listname,

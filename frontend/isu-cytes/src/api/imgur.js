@@ -1,6 +1,11 @@
 import to from 'await-to-js';
 import { IMGUR_URL } from './index.js'
 
+/**
+ * REST Query Imgur to Post New Image
+ * @param {image} The imgur url (excluding https://i.imgur.com/)
+ * @return Error object or imgur response object
+ */
 export const PostImage = async(image) => {// TODO:
   const formData = new FormData();
   formData.append('image', image);

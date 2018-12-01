@@ -2,6 +2,11 @@ import to from 'await-to-js';
 
 import { BASE_URL } from './index.js'
 
+/**
+ * REST Query, Get Person by username
+ * @param {username} The username of the user (string)
+ * @return Error object or person object
+ */
 export const GetPerson = async(username) => {
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/people/${username}`, {
@@ -30,6 +35,11 @@ export const GetPerson = async(username) => {
   }
 }
 
+/**
+ * REST Query, Update Person
+ * @param {oldUsername, newUsername,email,name,biography,password}
+ * @return Error object or person object
+ */
 export const UpdatePerson = async(oldUsername, newUsername,email,name,biography,password) => {
   let body = {
     username: newUsername,
@@ -67,6 +77,11 @@ export const UpdatePerson = async(oldUsername, newUsername,email,name,biography,
   }
 }
 
+/**
+ * REST Query, Delete Person
+ * @param {id}
+ * @return Error object or person object
+ */
 export const DeletePerson = async(id) => {
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/people/${id}`, {
@@ -95,6 +110,11 @@ export const DeletePerson = async(id) => {
   }
 }
 
+/**
+ * REST Query, GET All Persons
+ * @param {}
+ * @return Error object or list person arr
+ */
 export const GetAllPersons = async() => {
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/people`, {
@@ -121,6 +141,11 @@ export const GetAllPersons = async() => {
   }
 }
 
+/**
+ * REST Query, Submit Person
+ * @param {username,email,name,biography,password}
+ * @return Error object or person object
+ */
 export const SubmitPerson = async(username,email,name,biography,password) => {
   let body = {
     username: username,
@@ -164,9 +189,11 @@ export const SubmitPerson = async(username,email,name,biography,password) => {
   }
 }
 
-/*
-Returns either a person or error
-*/
+/**
+ * REST Query, Verify Person, Checks to see if person is created
+ * @param {username,password}
+ * @return Error object or person object
+ */
 export const VerifyPerson = async(username,password) => {
   let body = {
     username: username,
