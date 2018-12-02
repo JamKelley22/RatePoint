@@ -52,7 +52,7 @@ public class Review {
 	 * Flagged column that determines if a review is flagged for review or not. 
 	 */
 	@Column
-	private boolean flagged;
+	private boolean flagged = false;
 
 	/**
 	 * Gets the id of a review.
@@ -187,6 +187,6 @@ public class Review {
 			this.body = review.getBody();
 		}
 		
-		this.flagged = review.getFlagged();
+		this.flagged = review.getFlagged();	
 	}	
 }
