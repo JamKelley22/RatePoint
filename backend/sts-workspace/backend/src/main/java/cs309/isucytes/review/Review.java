@@ -47,6 +47,12 @@ public class Review {
 	 */
 	@Column 
 	private String author;
+	
+	/**
+	 * Flagged column that determines if a review is flagged for review or not. 
+	 */
+	@Column
+	private boolean flagged = false;
 
 	/**
 	 * Gets the id of a review.
@@ -145,6 +151,22 @@ public class Review {
 	}
 	
 	/**
+	 * This method gets the flagged field for a review.
+	 * @return A boolean value indicating whether a review is flagged or not.
+	 */
+	public boolean getFlagged() {
+		return flagged;
+	}
+
+	/**
+	 * This method sets the flagged field for a review. 
+	 * @param flagged A boolean value to set the flagged field to. 
+	 */
+	public void setFlagged(Boolean flagged) {
+		this.flagged = flagged;
+	}
+	
+	/**
 	 * This method updates a review given a review object.
 	 * @param review This review object contains all fields that the new review will contain.
 	 */
@@ -164,5 +186,7 @@ public class Review {
 		if (review.getBody() != null) {
 			this.body = review.getBody();
 		}
+		
+		this.flagged = review.getFlagged();	
 	}	
 }
