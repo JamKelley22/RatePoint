@@ -114,7 +114,7 @@ public class POIController {
 	
 	/**
 	 * Update a POI, if any, that matches id
-	 * 
+	 * @param poi the POI that will be updated
 	 * @param id id of the POI to be updated
 	 * @return an HTTP status code
 	 * 	 
@@ -135,7 +135,7 @@ public class POIController {
 	
 	/**
 	 * Calculates the average rating of all reviews for a POI given its id.
-	 * 
+	 * @param id the id of the POI.
 	 * @return the average rating of all reviews for a POI.
 	 */
 	@CrossOrigin
