@@ -12,6 +12,7 @@ public class OnlineWebSocket {
 	
 	/**
 	 * Creates a new server endpoint for the websocket.
+	 * @return the Server endpoint object
 	 */
 	@Bean
 	public ServerEndpointExporter serverEndpointExporter() {

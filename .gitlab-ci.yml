@@ -70,6 +70,7 @@ docsDeploy:
   tags:
     - shell
   script:
+    - sudo rm -r /var/www/html/docs/
     - sudo mv documents/docs/ /var/www/html/
   only:
     - master
