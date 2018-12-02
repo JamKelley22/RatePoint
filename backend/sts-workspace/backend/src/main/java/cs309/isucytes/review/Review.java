@@ -7,6 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * This class defines a review entry in our database. 
+ *
+ */
 @Entity
 @Table
 public class Review {
