@@ -11,6 +11,7 @@ stages:
   - maventest
   - autodeploy
   - frontendbuild
+  - docsdeploy
 
 # tags: "shell" should match with the tag name provided to runner, for spring runner should execute in shell.
 # Notice that in petclinic project, the spring project is in root of master, if yours is in folder then cd to that folder.
@@ -63,3 +64,12 @@ frontend-build:
         - sudo cp -r build/* /var/www/html
     only:
       - master
+
+docsDeploy:
+  stage: docsdeploy
+  tags:
+    - shell
+  script:
+    - sudo mv documents/docs/ /var/www/html/
+  only:
+    - master
