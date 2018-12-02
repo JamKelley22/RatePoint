@@ -68,6 +68,7 @@ public class ReviewController {
 	
 	/**
 	 * Returns all reviews in the database relating to a specific POI, if any.
+	 * @param PoiID the id of the POI we are trying to get reviews from. 
 	 * @return An array of JSON reviews for a POI.
 	 */
 	@CrossOrigin
@@ -126,7 +127,8 @@ public class ReviewController {
 	
 	/**
 	 * Updates a review, if any, in the database given an id.
-	 * @param id id to search for
+	 * @param id the id to search for.
+	 * @param review the review that will be updated.
 	 * @return Updated review and an HTTP status. 
 	 */
 	@CrossOrigin
