@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux';
 
-
+import { Redirect } from "react-router-dom";
 import { withAuthentication, withNav } from '../../hoc'
 import { history, routes } from '../../history.js'
 import * as Actions from '../../actions/actions.js'
@@ -16,7 +16,8 @@ class Review extends React.Component {
         body: '',
         display: 1,
         rating: 1,
-        error: null
+        error: null,
+        submitted: false
     }
 
     reviewSubmit = async(e) => {
@@ -60,6 +61,7 @@ class Review extends React.Component {
           //Suscessful
           alert("Suscess")
           history.push(routes._POI);
+          this.setState({submitted:true});
         }
     };
 
@@ -84,6 +86,11 @@ class Review extends React.Component {
     }
 
     render() {
+        if(this.state.submitted){
+            return(
+                <Redirect to={routes._POI}/>
+            )
+        }
         return (
           <div id="form">
               <h2>{this.props.poi.name}</h2>
