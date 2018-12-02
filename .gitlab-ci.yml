@@ -68,6 +68,6 @@ frontend-build:
 docsDeploy:
   stage: docsdeploy
   tags:
-    - docs
+    - shell
   script:
     - sudo mv documents/docs/ /var/www/html/
