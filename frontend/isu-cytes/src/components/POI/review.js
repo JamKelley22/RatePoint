@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { ReviewAPI } from '../../api'
 import Rating from './rating.js'
 
 const ANON_USER = 'https://cdn4.iconfinder.com/data/icons/danger-soft/512/people_user_business_web_man_person_social-512.png'
@@ -7,18 +7,24 @@ const ANON_USER = 'https://cdn4.iconfinder.com/data/icons/danger-soft/512/people
 class Review extends React.Component {
   state = {
     bodyState: 'hidden'
-  }
+  };
 
   setReviewScroll = (nextBodyState) => {
     this.setState({
       bodyState: nextBodyState
     })
-  }
+  };
+
+  reportReview = async(e) => {
+    alert(this.props.id);
+    let review = await ReviewAPI.UpdateReview(this.props.id,this.props.rating,this.props.title,this.props.body);
+    if(review.error){}
+  };
 
   render () {
     let bodyStyle = {
       overflowY: this.state.bodyState
-    }
+    };
     return (
       <div className='review'>
         {
@@ -46,6 +52,9 @@ class Review extends React.Component {
         <Rating
           number={this.props.rating}
         />
+        <div>
+          <button onClick={this.reportReview}>report</button>
+        </div>
       </div>
     );
   }

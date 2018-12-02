@@ -331,6 +331,7 @@ class POI extends React.Component {
                         title={review.title}
                         body={review.body}
                         rating={review.rating}
+                        id={review.id}
                         key={i}
                       />
                     );

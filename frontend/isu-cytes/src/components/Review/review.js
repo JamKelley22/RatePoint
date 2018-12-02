@@ -50,16 +50,17 @@ class Review extends React.Component {
           console.error(e);
         }
         */
-        let review = await ReviewAPI.SubmitReview(this.props.poi.id,this.state.rating,this.state.title,this.state.body)
+        let review = await ReviewAPI.SubmitReview(this.props.poi.id,this.state.rating,this.state.title,this.state.body);
         if(review.error) {
           this.setState({
             error: review.error
-          })
+          });
+          console.log(review.error);
           return;
         }
         else {
           //Suscessful
-          alert("Suscess")
+          alert("Suscess");
           history.push(routes._POI);
           this.setState({submitted:true});
         }
