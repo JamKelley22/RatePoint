@@ -157,7 +157,7 @@ public class PersonController {
 	/**
 	 * Verify's a person login by their username
 	 * 
-	 * @param username username to search for
+	 * @param person Person to check the database for (consists of Username and Password)
 	 * @return Person if the login succeeds, 404 if no user found, 401 if incorrect
 	 *         password if login fails (i.e. password does not match.
 	 */

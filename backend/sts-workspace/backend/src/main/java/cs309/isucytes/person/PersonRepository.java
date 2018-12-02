@@ -34,7 +34,7 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
 	/**
 	 * deletes a person by their username
 	 * @param username username to look for
-	 * @return
+	 * @return Person that was deleted.
 	 */
 	public Optional<Person> deleteByUsername(String username);
 }
