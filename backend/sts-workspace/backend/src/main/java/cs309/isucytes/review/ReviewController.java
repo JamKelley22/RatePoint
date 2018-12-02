@@ -84,6 +84,18 @@ public class ReviewController {
 	}
 	
 	/**
+	 * This method gets all reviews that are flagged. 
+	 * @return the list of all reviews that are flagged
+	 */
+	@CrossOrigin
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.GET, path = "/flagged")
+	public List<Review> getAllFlaggedReviews(){
+		//loop thru review and return those that are null 
+		return reviewRepository.findByFlagged(true);
+	}
+	
+	/**
 	 * Deletes a review, if any, in the database given an id.
 	 * @param id id to search for
 	 * @return Deleted review and an HTTP status. 
