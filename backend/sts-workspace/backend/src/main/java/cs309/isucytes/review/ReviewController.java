@@ -17,12 +17,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cs309.isucytes.poi.POIRepository;
 
+/**
+ * This class controls the end points for Reviews. 
+ *
+ */
 @RestController
 @RequestMapping(path = "/reviews")
 public class ReviewController {
 
+	/**
+	 * Connection to the database for review table on the DB.
+	 */
 	@Autowired
     ReviewRepository reviewRepository;
+	
+	/**
+	 * Connection to the database for POI table on the DB.
+	 */
 	@Autowired
 	POIRepository POIRepository; 
 
