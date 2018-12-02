@@ -21,12 +21,22 @@ import cs309.isucytes.poi.POIRepository;
 import cs309.isucytes.review.Review;
 import cs309.isucytes.review.ReviewRepository;
 
+/**
+ *This class handles the end points for POIs. 
+ */
 @RestController
 @RequestMapping(path = "/pois")
 public class POIController {
 	
+	/**
+	 * Connection to the database for POI table.
+	 */
 	@Autowired
     POIRepository POIRepository;
+	
+	/**
+	 * Connection to the database for Review table. 
+	 */
 	@Autowired
 	ReviewRepository reviewRepository;
 	
