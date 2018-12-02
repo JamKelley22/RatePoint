@@ -6,7 +6,8 @@ const ANON_USER = 'https://cdn4.iconfinder.com/data/icons/danger-soft/512/people
 
 class Review extends React.Component {
   state = {
-    bodyState: 'hidden'
+    bodyState: 'hidden',
+    reported: false
   };
 
   setReviewScroll = (nextBodyState) => {
@@ -17,8 +18,9 @@ class Review extends React.Component {
 
   reportReview = async(e) => {
     alert(this.props.id);
-    let review = await ReviewAPI.UpdateReview(this.props.id,this.props.rating,this.props.title,this.props.body);
+    let review = await ReviewAPI.UpdateReview(this.props.id,this.props.rating,this.props.title,this.props.body,true);
     if(review.error){}
+    this.setState({reported:true});
   };
 
   render () {
@@ -53,7 +55,12 @@ class Review extends React.Component {
           number={this.props.rating}
         />
         <div>
-          <button onClick={this.reportReview}>report</button>
+            {
+                (this.state.reported) ?
+                    <p>reported</p>
+                    :
+                    <a onClick={this.reportReview}>report</a>
+            }
         </div>
       </div>
     );
