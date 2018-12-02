@@ -1,5 +1,6 @@
 package cs309.isucytes.poi;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,4 +19,12 @@ public interface POIRepository extends JpaRepository<POI, Integer> {
 	 * 	Optional POI object
 	 */
 	public Optional<POI> findByCoordinates(String coordinates);
+	
+	/**
+	 * This query returns POI that have approved matching the specified value
+	 * 
+	 * @param approved Value of Approved to search for
+	 * @return List of POIs matching approved
+	 */
+	public List<POI> findByApproved(Boolean approved);
 }

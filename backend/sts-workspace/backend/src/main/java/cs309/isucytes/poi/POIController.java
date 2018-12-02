@@ -155,4 +155,16 @@ public class POIController {
 		Double d = new Double(reviewRepository.avgReviewsByPoiId(id));
 		return new ResponseEntity<>(Collections.singletonMap("average", d.toString()), HttpStatus.OK);
 	}
+	
+	/**
+	 * Gets a list of POIs that are not approved. Useful for the Moderation queue.
+	 * 
+	 * @return List of POIS with approved=false
+	 */
+	@CrossOrigin
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.GET, path = "/notapproved")
+	public List<POI> getPOIsNotApproved() {
+		return POIRepository.findByApproved(false);
+	}
 }
