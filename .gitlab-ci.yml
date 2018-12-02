@@ -71,3 +71,5 @@ docsDeploy:
     - shell
   script:
     - sudo mv documents/docs/ /var/www/html/
+  only:
+    - master
