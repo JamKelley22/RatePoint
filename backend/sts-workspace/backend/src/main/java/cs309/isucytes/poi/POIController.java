@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cs309.isucytes.poi.POI;
 import cs309.isucytes.poi.POIRepository;
+import cs309.isucytes.review.Review;
 import cs309.isucytes.review.ReviewRepository;
 
 @RestController
@@ -130,8 +131,18 @@ public class POIController {
 	@CrossOrigin
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}/average")
-	public Map<String, String> getAverageRating(@PathVariable("id") Integer id){
+	public ResponseEntity<Map<String, String>> getAverageRating(@PathVariable("id") Integer id){
+		Optional<POI> getPOI = POIRepository.findById(id);
+		List<Review> getReviews = reviewRepository.findByPoi(id);
+		if (!getPOI.isPresent()) {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
+		
+		if (getReviews.isEmpty()) {
+			return new ResponseEntity<>(Collections.singletonMap("average", "0.0"), HttpStatus.OK);
+		}
+		
 		Double d = new Double(reviewRepository.avgReviewsByPoiId(id));
-		return Collections.singletonMap("average", d.toString());
+		return new ResponseEntity<>(Collections.singletonMap("average", d.toString()), HttpStatus.OK);
 	}
 }
