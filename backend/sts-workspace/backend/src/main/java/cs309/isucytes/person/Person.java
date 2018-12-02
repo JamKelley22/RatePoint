@@ -65,12 +65,6 @@ public class Person {
 	private String biography;
 	
 	/**
-	 * Cookie to track login
-	 */
-	@Column
-	private String cookie;
-	
-	/**
 	 * Role that the user is assigned (0 = user, 1 = mod, 2 = admin);
 	 */
 	@Column
@@ -188,20 +182,6 @@ public class Person {
 	}
 
 	/**
-	 * @return the cookie
-	 */
-	public String getCookie() {
-		return cookie;
-	}
-
-	/**
-	 * @param cookie the cookie to set
-	 */
-	public void setCookie(String cookie) {
-		this.cookie = cookie;
-	}
-
-	/**
 	 * @return the role
 	 */
 	public Integer getRole() {
@@ -253,10 +233,6 @@ public class Person {
 		
 		if (person.getBiography() != null) {
 			this.biography = person.getBiography();
-		}
-		
-		if (person.getCookie() != null) {
-			this.cookie = person.getCookie();
 		}
 		
 		if (person.getRole() != null) {
