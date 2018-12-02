@@ -28,4 +28,11 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 	 */
 	@Query("select avg(r.rating) from Review r where r.poi = :poi")
 	public Double avgReviewsByPoiId(@Param("poi") Integer poi);
+	
+	/**
+	 * This query returns a list of Reviews that have flagged set to true.
+	 * @param flagged The boolean parameter to find Reviews by.
+	 * @return A list of reviews that are flagged if flagged is set to true. 
+	 */
+	public List<Review> findByFlagged(boolean flagged);
 }
