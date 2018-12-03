@@ -81,7 +81,8 @@ class Suggest extends React.Component {
         const imageFile = event.target.files[0];
         this.setState({
           file: imageFile,
-          displayFile: URL.createObjectURL(event.target.files[0])
+          displayFile: URL.createObjectURL(event.target.files[0]),
+          uploadImageURI: null
         });
     };
 
@@ -92,6 +93,9 @@ class Suggest extends React.Component {
         return;
       }
       console.log("===Uploading===");
+      this.setState({
+        uploading: true
+      })
       let res = await ImgurAPI.PostImage(this.state.file);
       if(res.error) {
         console.error(res.error);
@@ -104,6 +108,9 @@ class Suggest extends React.Component {
           uploadImageURI: uniqueLinkPart
         })
       }
+      this.setState({
+        uploading: false
+      })
     };
 
     render() {
@@ -133,12 +140,30 @@ class Suggest extends React.Component {
                                 <br/>
                                 <input type="file" onChange={(e)=>this.fileChange(e)}/>
                                 <br/>
-                                <img src={this.state.displayFile} id="suggestImage"/>
-                                {
-                                  this.state.file
-                                  &&
-                                  <button id='uploadImageBtn' onClick={this.uploadImage}>Upload Image</button>
-                                }
+                                <div id='imgRow'>
+                                  <img src={this.state.displayFile} id="suggestImage"/>
+                                  {
+                                    this.state.file
+                                    &&
+                                    <div id='upload'>
+                                      {
+                                        this.state.uploadImageURI === null && !this.state.uploading
+                                        &&
+                                        <button onClick={this.uploadImage}>Upload Image</button>
+                                      }
+                                      {
+                                        this.state.uploadImageURI !== null
+                                        &&
+                                        <FontAwesomeIcon style={{fontSize: '20px', color: 'green', margin: '10px'}} icon="check" id="check"/>
+                                      }
+                                      {
+                                        this.state.uploading
+                                        &&
+                                        <FontAwesomeIcon style={{fontSize: '20px', margin: '10px'}} icon="spinner" id="spinner"/>
+                                      }
+                                    </div>
+                                  }
+                                </div>
                             </div>
                             <div id="suggestMaps">
                                 <b>Location:</b>
@@ -162,12 +187,16 @@ class Suggest extends React.Component {
                                 loading={this.state.loading}
                             />
                         </div>
-                        <div id='row3'>
-                          <div className='loadPart' style={{backgroundColor: this.state.name.length > 0 ? 'blue' : ''}}>Name</div>
-                          <div className='loadPart' style={{backgroundColor: this.state.description.length > 0 ? 'blue' : ''}}>Description</div>
-                          <div className='loadPart' style={{backgroundColor: this.state.uploadImageURI !== null ? 'blue' : ''}}>Upload Image</div>
-                          <div className='loadPart' style={{backgroundColor: this.state.markerLat !== 0 && this.state.markerLng !== 0 ? 'blue' : ''}}>Map Marker</div>
-                        </div>
+                        {
+                          /*
+                          <div id='row3'>
+                            <div className='loadPart' style={{backgroundColor: this.state.name.length > 0 ? 'blue' : ''}}>Name</div>
+                            <div className='loadPart' style={{backgroundColor: this.state.description.length > 0 ? 'blue' : ''}}>Description</div>
+                            <div className='loadPart' style={{backgroundColor: this.state.uploadImageURI !== null ? 'blue' : ''}}>Upload Image</div>
+                            <div className='loadPart' style={{backgroundColor: this.state.markerLat !== 0 && this.state.markerLng !== 0 ? 'blue' : ''}}>Map Marker</div>
+                          </div>
+                          */
+                        }
                     </form>
                 </div>
                 {
