@@ -37,7 +37,13 @@ class Review extends React.Component {
               :
               <img className='review__user__pic' src={ANON_USER}/>
             }
-            <p>{this.props.user.username}</p>
+            {
+              this.props.user !== null
+              ?
+              <p>{this.props.user}</p>
+              :
+              <p>Anonymous</p>
+            }
           </div>
         }
         {

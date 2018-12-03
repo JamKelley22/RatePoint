@@ -61,7 +61,7 @@ class Review extends React.Component {
         }
         else {
           //Suscessful
-          alert("Suscess");
+          //alert("Suscess");
           history.push(routes._POI);
           this.setState({submitted:true});
         }

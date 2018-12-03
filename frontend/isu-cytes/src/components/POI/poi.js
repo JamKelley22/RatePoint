@@ -322,7 +322,7 @@ class POI extends React.Component {
                   this.state.reviews.map((review,i) => {
                     return (
                       <Review
-                        user={review.user}
+                        user={review.author}
                         title={review.title}
                         body={review.body}
                         rating={review.rating}
