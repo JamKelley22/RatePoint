@@ -37,6 +37,8 @@ class Account extends React.Component {
 
   getUserReviews = async() => {
     let allReviews = await ReviewAPI.GetAllReviews();
+    console.log("===");
+    console.log(allReviews);
     if(allReviews.error) {
       this.setState({
         reviewsError: allReviews.error
@@ -139,31 +141,7 @@ class Account extends React.Component {
       console.error(e);
     })
   }
-
-  testLocal = async() => {
-    let error, response;
-    [error, response] = await to(fetch(`http://localhost:8080/greeting?name=User`, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }));
-
-    if(error) {
-      console.error(error);
-      return {error: error}
-    }
-    else {
-      switch (response.status) {
-        case 200:
-          let list = await response.json();
-        default:
-          console.log(`Unexpected server response code of ${response.status}`);
-      }
-    }
-  }
-
+  
   render () {
     let Tab;
     console.log(this.state.fetching);
@@ -215,7 +193,6 @@ class Account extends React.Component {
           <hr/>
           {Tab}
         </div>
-        <button onClick={this.testLocal}>Test Local</button>
       </div>
     );
   }

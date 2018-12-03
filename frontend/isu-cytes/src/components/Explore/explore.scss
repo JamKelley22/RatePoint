@@ -31,10 +31,10 @@
 
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
-  h1 {
 
-  }
+  padding: 10px;
 
   .poiCardImg {
     width: 100%;
@@ -52,9 +52,8 @@
 
 .poiContainer {
   display: inline-block;
-  max-width: 300px;
-  max-height: 250px;
-  min-width: 250px;
+  height: 200px;
+  width: 280px;
   margin: 30px;
   z-index: 1;
 }
@@ -63,8 +62,7 @@
   .poiCard {
     box-shadow: 1px 1px 5px black;
     transform: translate(2px,2px);
-    padding-left: 2px;
-    padding-top: 2px;
+    padding: 10px;
   }
 }
 .poiContainer:active {

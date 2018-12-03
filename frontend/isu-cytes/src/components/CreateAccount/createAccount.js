@@ -167,6 +167,12 @@ class CreateAccount extends React.Component {
           <Redirect to={routes._HOME}/>
         )
       }
+      if(history.location === routes._LOGIN || history.location === routes._CREATEACCOUNT) {
+
+      }
+      else {
+
+      }
         return(
           <div id="containerCreate">
               <div id="formCreate">

@@ -48,7 +48,7 @@ class App extends Component {
     return newPOIs;
   }
 
-  render() {
+  render() {    
     return (
       <Router history={history}>
         <div className="App">
