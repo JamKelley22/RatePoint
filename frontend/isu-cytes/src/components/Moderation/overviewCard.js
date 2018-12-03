@@ -12,7 +12,8 @@ class OverviewCard extends React.Component {
   state = {
     approve: null,
     approvedChecked: false,
-    rejectCheckeed: false
+    rejectCheckeed: false,
+    reviewOpen: false
   }
 
   submitPOIChange = () => {
@@ -40,17 +41,29 @@ class OverviewCard extends React.Component {
     history.push(routes._POI);
   }
 
+  toggleReview = () => {
+    this.setState({
+      reviewOpen: !this.state.reviewOpen
+    })
+  }
+
   render () {
     let cardTop;
+    let viewOption;
+    let approveLabel;
+    let rejectLabel;
     switch (this.props.cardType) {
       case CARD_TYPES.POI_SUGGESTION:
-        cardTop = POISuggestOverview(this.props.poi)
-        break;
-      case CARD_TYPES.FLAGGED_POI:
-        cardTop = POIFlaggedOverview(this.props.poi)
+        cardTop = POISuggestOverview(this.props.poi);
+        viewOption = <a className='modViewPOIBtn' onClick={this.viewPOI}>View</a>
+        approveLabel = <label>Approve</label>;
+        rejectLabel = <label>Reject</label>;
         break;
       case CARD_TYPES.FLAGGED_REVIEW:
-        cardTop = POISuggestOverview(this.props.review)
+        cardTop = FlaggedReviewOverview(this.props.review);
+        viewOption = <a className='modViewPOIBtn' onClick={this.toggleReview}>{this.state.reviewOpen ? 'Close' : 'View'}</a>
+        approveLabel = <label>Delete</label>;
+        rejectLabel = <label>Remove Flag</label>;
         break;
       default:
         cardTop = (
@@ -85,6 +98,15 @@ class OverviewCard extends React.Component {
     return (
       <div className='overviewCard'>
         {cardTop}
+        <hr/>
+        {
+          this.state.reviewOpen
+          &&
+          <React.Fragment>
+            {this.props.review.body}
+            <hr/>
+          </React.Fragment>
+        }
 
         <div className='modDecisionBox'>
           <form onSubmit={e => e.preventDefault()}>
@@ -93,20 +115,20 @@ class OverviewCard extends React.Component {
                 <input
                 {...approveInputProps}>
                 </input>
-                <label>Approve</label>
+                {approveLabel}
               </div>
 
               <div>
                 <input
                 {...rejectInputProps}>
                 </input>
-                <label>Reject</label>
+                {rejectLabel}
               </div>
             </div>
           </form>
         </div>
         <div className='overviewCardBtns'>
-          <a className='modViewPOIBtn' onClick={this.viewPOI}>View</a>
+          {viewOption}
           <button className='modViewPOIBtn' onClick={this.submitPOIChange}>Submit</button>
         </div>
       </div>
@@ -119,14 +141,9 @@ const POISuggestOverview = (poi) =>
     {poi.name}
   </div>
 
-const POIFlaggedOverview = (poi) =>
-  <div className='cardTitle'>
-    {poi.name}
-  </div>
-
 const FlaggedReviewOverview = (review) =>
   <div className='cardTitle'>
-    FlaggedReviewOverview
+    {review.title}
   </div>
 
 export default OverviewCard;

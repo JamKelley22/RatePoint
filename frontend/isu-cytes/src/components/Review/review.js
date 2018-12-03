@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux';
 
-
+import { Redirect } from "react-router-dom";
 import { withAuthentication, withNav } from '../../hoc'
 import { history, routes } from '../../history.js'
 import * as Actions from '../../actions/actions.js'
@@ -16,7 +16,8 @@ class Review extends React.Component {
         body: '',
         display: 1,
         rating: 1,
-        error: null
+        error: null,
+        submitted: false
     }
 
     reviewSubmit = async(e) => {
@@ -26,18 +27,43 @@ class Review extends React.Component {
             alert("not valid input");
             return;
         }
+        /*
+        let data = {
+            poi: this.state.poi,
+            title: formdata.get('title'),
+            rating: this.state.rating,
+            body: formdata.get('body')
+        };
+
+        let url = 'http://proj309-tg-03.misc.iastate.edu:8080/reviews/new';
+        let rawResponse;
+        try {
+          rawResponse = await fetch(url, {
+              method: 'POST',
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+          });
+        } catch (e) {
+          console.error(e);
+        }
+        */
         let review = await ReviewAPI.SubmitReview(this.props.poi.id,this.state.rating,this.state.title,this.state.body,this.props.user.username)
         if(review.error) {
           console.error(review.error);
           this.setState({
             error: review.error
-          })
+          });
+          console.log(review.error);
           return;
         }
         else {
           //Suscessful
-          //alert("Suscess")
+          alert("Suscess");
           history.push(routes._POI);
+          this.setState({submitted:true});
         }
     };
 
@@ -62,6 +88,11 @@ class Review extends React.Component {
     }
 
     render() {
+        if(this.state.submitted){
+            return(
+                <Redirect to={routes._POI}/>
+            )
+        }
         return (
           <div id="form">
               <h2>{this.props.poi.name}</h2>

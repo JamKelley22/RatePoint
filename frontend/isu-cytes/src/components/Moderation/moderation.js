@@ -7,6 +7,7 @@ import OverviewCard from './overviewCard.js'
 import { withAuthentication, withAuthorization, withNav } from '../../hoc'
 import { USER_ROLES } from '../../constants'
 import * as Actions from '../../actions/actions.js'
+import { ReviewAPI } from '../../api'
 
 import './moderation.scss'
 
@@ -29,7 +30,6 @@ class Moderation extends React.Component {
 
   refresh = () => {
     this.filterPOISuggestions();
-    this.filterPOIFlags();
     this.filterReviewFlags();
   }
 
@@ -42,12 +42,14 @@ class Moderation extends React.Component {
     })
   }
 
-  filterPOIFlags = () => {
-    // TODO: Impliment this when api has flags
-  }
-
-  filterReviewFlags = () => {
-    // TODO: Impliment this when api has flags
+  filterReviewFlags = async() => {
+    let allReviews = await ReviewAPI.GetAllReviews();
+    let flaggedReviews = allReviews.filter(review =>
+      review.flagged === true
+    )
+    this.setState({
+      flaggedReviews: flaggedReviews
+    })
   }
 
   approvePOISuggestion = (poi) => {
@@ -74,20 +76,28 @@ class Moderation extends React.Component {
     })
   }
 
-  approvePOIFlag = () => {
-    //Delete POI???
+  approveReviewFlag = (review) => {
+    //Delete Review
+    ReviewAPI.DeleteReview(review.id)
+    .then(review => {
+      console.log("Success");
+      this.refresh();
+    })
+    .catch(err => {
+      console.error(err);
+    })
   }
 
-  rejectPOIFlag = () => {
-    //Remove Flag???
-  }
-
-  approveReviewFlag = () => {
-    //Delete Review???
-  }
-
-  rejectReviewFlag = () => {
-    //Remove Flag???
+  rejectReviewFlag = (review) => {
+    //Remove Flag
+    ReviewAPI.UpdateReview(review.id,review.rating,review.title,review.body,false)
+    .then(review => {
+      console.log("Success");
+      this.refresh();
+    })
+    .catch(err => {
+      console.error(err);
+    })
   }
 
   render () {
@@ -119,28 +129,6 @@ class Moderation extends React.Component {
             </div>
           </div>
 
-          <div className='modCol flaggedPOIs'>
-            <h2>Flagged POIs</h2>
-            <div className='scrollView'>
-              {
-                this.state.flaggedPOIs.length > 0
-                ?
-                this.state.flaggedPOIs.map(poi => {
-                  return (
-                    <OverviewCard
-                      cardType='FlaggedPOI'
-                      poi={poi}
-                      onApprove={() => this.approvePOIFlag(poi)}
-                      onReject={() => this.rejectPOIFlag(poi)}
-                    />
-                  )
-                })
-                :
-                <p>All Clear Here <FontAwesomeIcon icon={['far','thumbs-up']}/></p>
-              }
-            </div>
-          </div>
-
           <div className='modCol flaggedReviews'>
             <h2>Flagged Reviews</h2>
             <div className='scrollView'>
@@ -148,6 +136,7 @@ class Moderation extends React.Component {
                 this.state.flaggedReviews.length > 0
                 ?
                 this.state.flaggedReviews.map(review => {
+                  console.log(review);
                   return (
                     <OverviewCard
                       cardType='FlaggedReview'
