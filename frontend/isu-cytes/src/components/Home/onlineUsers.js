@@ -8,9 +8,10 @@ class OnlineUsers extends React.Component {
   }
   render() {
     return (
-      <div className='onlineUsersComponent'>
+      <div className='onlineUsersComponent' onClick={() => this.setState({open: !this.state.open})}>
         <a className='openListBtn' onClick={() => this.setState({open: !this.state.open})}>Online Users</a>
         <div className={`onlineUsersList ${this.state.open ? '' : 'closed'}`}>
+          <hr/>
           {
             this.props.onlineUserList.map((username,i) => {
               //if(username !== props.me.username) {

@@ -65,12 +65,6 @@ public class Person {
 	private String biography;
 	
 	/**
-	 * Cookie to track login
-	 */
-	@Column
-	private String cookie;
-	
-	/**
 	 * Role that the user is assigned (0 = user, 1 = mod, 2 = admin);
 	 */
 	@Column
@@ -82,7 +76,8 @@ public class Person {
 	
 	/**
 	 * get the unique identifier of a person
-	 * @return
+	 * 
+	 * @return ID of the person
 	 */
 	public Integer getId() {
 		return id;
@@ -188,20 +183,8 @@ public class Person {
 	}
 
 	/**
-	 * @return the cookie
-	 */
-	public String getCookie() {
-		return cookie;
-	}
-
-	/**
-	 * @param cookie the cookie to set
-	 */
-	public void setCookie(String cookie) {
-		this.cookie = cookie;
-	}
-
-	/**
+	 * Gets a users role as an int
+	 * 
 	 * @return the role
 	 */
 	public Integer getRole() {
@@ -209,6 +192,8 @@ public class Person {
 	}
 
 	/**
+	 * Updates the users role (integer)
+	 * 
 	 * @param role the role to set
 	 */
 	public void setRole(Integer role) {
@@ -216,6 +201,8 @@ public class Person {
 	}
 
 	/**
+	 * Get the lists a user owns
+	 * 
 	 * @return the lists
 	 */
 	public List<Userlist> getLists() {
@@ -223,6 +210,8 @@ public class Person {
 	}
 
 	/**
+	 * Updates the lists that a user has
+	 * 
 	 * @param lists the lists to set
 	 */
 	public void setLists(List<Userlist> lists) {
@@ -253,10 +242,6 @@ public class Person {
 		
 		if (person.getBiography() != null) {
 			this.biography = person.getBiography();
-		}
-		
-		if (person.getCookie() != null) {
-			this.cookie = person.getCookie();
 		}
 		
 		if (person.getRole() != null) {

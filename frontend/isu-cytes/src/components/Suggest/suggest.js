@@ -162,13 +162,13 @@ class Suggest extends React.Component {
                                 loading={this.state.loading}
                             />
                         </div>
+                        <div id='row3'>
+                          <div className='loadPart' style={{backgroundColor: this.state.name.length > 0 ? 'blue' : ''}}>Name</div>
+                          <div className='loadPart' style={{backgroundColor: this.state.description.length > 0 ? 'blue' : ''}}>Description</div>
+                          <div className='loadPart' style={{backgroundColor: this.state.uploadImageURI !== null ? 'blue' : ''}}>Upload Image</div>
+                          <div className='loadPart' style={{backgroundColor: this.state.markerLat !== 0 && this.state.markerLng !== 0 ? 'blue' : ''}}>Map Marker</div>
+                        </div>
                     </form>
-                    <div id='reqirements'>
-                        <input type="checkbox" checked={this.state.name.length > 0}/> Name<br/>
-                        <input type="checkbox" checked={this.state.description.length > 0}/> Descritpion<br/>
-                        <input type="checkbox" checked={this.state.uploadImageURI !== null}/> Image Upload<br/>
-                        <input type="checkbox" checked={this.state.markerLat !== 0 && this.state.markerLng !== 0}/> Map Location<br/>
-                    </div>
                 </div>
                 {
                     this.state.error
@@ -199,3 +199,13 @@ export default compose(
   withNav,
   connect(mapStateToProps,mapDispatchToProps)
 )(Suggest);
+
+/*
+<div id='reqirements'>
+    <input type="checkbox" checked={this.state.name.length > 0}/> Name<br/>
+    <input type="checkbox" checked={}/> Descritpion<br/>
+    <input type="checkbox" checked={}/> Image Upload<br/>
+    <input type="checkbox" checked={}/> Map Location<br/>
+</div>
+
+*/

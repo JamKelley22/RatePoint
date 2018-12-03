@@ -13,6 +13,9 @@ import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * A class that uses the websockets for the Online Users display
+ */
 @ServerEndpoint("/websocket/onlineusers/{username}")
 @Component
 public class OnlineWebSocketServer {
@@ -21,6 +24,13 @@ public class OnlineWebSocketServer {
 	private static Map<Session, String> sessionUsernameMap = new HashMap<>();
 	private static Map<String, Session> usernameSessionMap = new HashMap<>();
 
+	/**
+	 * Handles a new user connecting
+	 * 
+	 * @param session  Session object for the user
+	 * @param username Username of the user
+	 * @throws IOException If a session cannot be found or other error occurs
+	 */
 	@OnOpen
 	public void onOpen(Session session, @PathParam("username") String username) throws IOException {
 		sessionUsernameMap.put(session, username);
@@ -38,6 +48,12 @@ public class OnlineWebSocketServer {
 
 	}
 
+	/**
+	 * Handles the user logging off
+	 * 
+	 * @param session the session of the logging off user
+	 * @throws IOException If a session cannot be found or other error occurs
+	 */
 	@OnClose
 	public void onClose(Session session) throws IOException {
 		String username = sessionUsernameMap.get(session);
@@ -48,12 +64,24 @@ public class OnlineWebSocketServer {
 		broadcast(message);
 	}
 
+	/**
+	 * If an error occurs, it can be thrown here
+	 * 
+	 * @param session   Session of the error
+	 * @param throwable Error thrown
+	 */
 	@OnError
 	public void onError(Session session, Throwable throwable) {
 		// Do error handling here
 		System.err.println(throwable);
 	}
 
+	/**
+	 * Sends a message to an individual user
+	 * 
+	 * @param username The username to send to
+	 * @param message  The message to send.
+	 */
 	private void sendMessageToUser(String username, String message) {
 		try {
 			usernameSessionMap.get(username).getBasicRemote().sendText(message);
@@ -62,6 +90,12 @@ public class OnlineWebSocketServer {
 		}
 	}
 
+	/**
+	 * Sends a message to all connected users.
+	 * 
+	 * @param message The message to send
+	 * @throws IOException If an error in communication happens.
+	 */
 	private static void broadcast(String message) throws IOException {
 		sessionUsernameMap.forEach((session, username) -> {
 			synchronized (session) {

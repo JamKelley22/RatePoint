@@ -17,12 +17,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cs309.isucytes.poi.POIRepository;
 
+/**
+ * This class controls the end points for Reviews. 
+ *
+ */
 @RestController
 @RequestMapping(path = "/reviews")
 public class ReviewController {
 
+	/**
+	 * Connection to the database for review table on the DB.
+	 */
 	@Autowired
     ReviewRepository reviewRepository;
+	
+	/**
+	 * Connection to the database for POI table on the DB.
+	 */
 	@Autowired
 	POIRepository POIRepository; 
 
@@ -57,6 +68,7 @@ public class ReviewController {
 	
 	/**
 	 * Returns all reviews in the database relating to a specific POI, if any.
+	 * @param PoiID the id of the POI we are trying to get reviews from. 
 	 * @return An array of JSON reviews for a POI.
 	 */
 	@CrossOrigin
@@ -84,6 +96,18 @@ public class ReviewController {
 	}
 	
 	/**
+	 * This method gets all reviews that are flagged. 
+	 * @return the list of all reviews that are flagged
+	 */
+	@CrossOrigin
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.GET, path = "/flagged")
+	public List<Review> getAllFlaggedReviews(){
+		//loop thru review and return those that are null 
+		return reviewRepository.findByFlagged(true);
+	}
+	
+	/**
 	 * Deletes a review, if any, in the database given an id.
 	 * @param id id to search for
 	 * @return Deleted review and an HTTP status. 
@@ -103,7 +127,8 @@ public class ReviewController {
 	
 	/**
 	 * Updates a review, if any, in the database given an id.
-	 * @param id id to search for
+	 * @param id the id to search for.
+	 * @param review the review that will be updated.
 	 * @return Updated review and an HTTP status. 
 	 */
 	@CrossOrigin
