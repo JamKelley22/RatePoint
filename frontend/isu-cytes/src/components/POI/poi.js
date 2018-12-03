@@ -44,7 +44,8 @@ class POI extends React.Component {
     listButtonClassName: 'poi__lower__button',
     reviewButtonClassName: 'poi__lower__button',
     reportButtonClassName: 'poi__lower__button',
-    numRatings: 0
+    numRatings: 0,
+    addListModalOpen: false
   }
 
   componentDidMount = async() => {
@@ -189,9 +190,9 @@ class POI extends React.Component {
     })
   }
 
-  addToList = async() => {
-    if(this.props.user.lists.length === 0) {
-      //User has no lists, for now lets just make a default list and add poi to it
+  addToList = async(list) => {
+    console.log(list);
+    if(list === null) {//Create new list default
       this.props.Actions.createList(this.props.user.username,'default',[this.props.poi])
       .then(person => {
         console.log(person);
@@ -202,10 +203,8 @@ class POI extends React.Component {
       })
     }
     else {
-      //user has some number of lists, ask them if they want to add to that one.
-      // TODO: This
-      console.log(this.props.user.lists);
-      this.props.Actions.updateList(this.props.user.lists[0].id,[...this.props.user.lists[0].poilist,this.props.poi])
+      //(listID,listname,poilist)
+      this.props.Actions.updateList(list.id,list.name,[...list.poilist, this.props.poi])
       .then(person => {
         console.log(person);
         console.log('success');
@@ -232,11 +231,12 @@ class POI extends React.Component {
         break;
       case 'List':
         this.setState({
-          listButtonClassName: 'poi__lower__button--pressed'
+          listButtonClassName: 'poi__lower__button--pressed',
+          addListModalOpen: true
         }, () => {
           setTimeout(() => {this.setState({listButtonClassName: 'poi__lower__button'})}, 200);
         })
-        this.addToList();
+        //this.addToList();
         break;
       case 'Review':
         this.setState({
@@ -357,20 +357,6 @@ class POI extends React.Component {
                 </button>
                 <p>Add to List</p>
               </div>
-
-              <div className='listAddOptions'>
-                <ul>
-                  {
-                    this.props.user.lists.map((list,i) => {
-                      return (
-                        <li key={i}>
-                          {list.listname}
-                        </li>
-                      );
-                    })
-                  }
-                </ul>
-              </div>
             </div>
 
             <div className='poi__lower__buttons__option'>
@@ -392,6 +378,31 @@ class POI extends React.Component {
             </div>
           </div>
         </div>
+
+        <Modal show={this.state.addListModalOpen} onHide={() => this.setState({addListModalOpen: false})}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add {this.props.poi.name} to List</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            {
+              this.props.user.lists.map((list,i) => {
+                return (
+                  <button key={i} onClick={() => this.addToList(list)}>
+                    {list.listname}
+                  </button>
+                );
+              })
+            }
+            <button onClick={() => this.addToList(null)}>
+              Default
+            </button>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button onClick={() => this.setState({addListModalOpen: false})}>Close</Button>
+          </Modal.Footer>
+        </Modal>
 
 
         <Modal show={this.state.shareScreenState} onHide={() => this.openCloseShareScreen(false)}>

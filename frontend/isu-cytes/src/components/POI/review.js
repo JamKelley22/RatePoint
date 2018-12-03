@@ -50,16 +50,18 @@ class Review extends React.Component {
             {this.props.body}
           </p>
         </div>
-        <Rating
-          number={this.props.rating}
-        />
-        <div>
-            {
-                (this.state.reported) ?
-                    <p>reported</p>
-                    :
-                    <a onClick={this.reportReview}>report</a>
-            }
+        <div className='rightReview'>
+          <Rating
+            number={this.props.rating}
+          />
+          <div>
+              {
+                  (this.state.reported) ?
+                      <p>reported</p>
+                      :
+                      <a onClick={this.reportReview}>report</a>
+              }
+          </div>
         </div>
       </div>
     );
