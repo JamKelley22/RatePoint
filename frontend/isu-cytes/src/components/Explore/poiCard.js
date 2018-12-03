@@ -11,21 +11,40 @@ const POICard = (props) => {
       pic = `https://i.imgur.com/${pic}`;
     }
   }
-  return (
-    <div className={'poiContainer animated pulse'} style={{animationDelay: `${props.delay}s`}}>
-      <div className='poiCard' onClick={props.onClick}>
-        <div className='poiCardImg'>
-          <img src={pic} alt='site'/>
-        </div>
-        <h3>{props.title}</h3>
-        <div className='poiCardRating'>
-          <Rating
-            number={props.rating}
-          />
+  if(props.size === 'small') {
+    return (
+      <div className={'poiContainerSmall'}>
+        <div className='poiCardSmall' onClick={props.onClick}>
+          <div className='poiCardImgSmall'>
+            <img src={pic} alt='site'/>
+          </div>
+          <h3>{props.title}</h3>
+          <div className='poiCardRating'>
+            <Rating
+              number={props.rating}
+            />
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
+  else {
+    return (
+      <div className={'poiContainer animated pulse'} style={{animationDelay: `${props.delay}s`}}>
+        <div className='poiCard' onClick={props.onClick}>
+          <div className='poiCardImg'>
+            <img src={pic} alt='site'/>
+          </div>
+          <h3>{props.title}</h3>
+          <div className='poiCardRating'>
+            <Rating
+              number={props.rating}
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default POICard;

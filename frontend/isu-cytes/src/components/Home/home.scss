@@ -7,19 +7,34 @@
   height: 100%;
   z-index: 2;
   padding: 10px;
+  overflow: auto;
 }
 .homePage__elements {
   display: flex;
 }
 .homePage__element {
-  background-color: $primary_color;
-  border: 1px solid black;
+
 }
 
 
 //=====Feed=====
 .feedComponent {
   display: flex;
+  flex-direction: column;
+}
+.poiFeed {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.feedSection {
+  margin: 5px;
+}
+
+.feedExpand {
+  font-size: 12px;
+  
 }
 
 //=====OnlineUsers=====
