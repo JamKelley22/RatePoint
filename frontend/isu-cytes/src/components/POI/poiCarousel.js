@@ -75,23 +75,28 @@ class POICarousel extends React.Component {
   render () {
     return (
       <div className='carousel'>
-        <img
-          src={this.state.leftPic}
-          alt={this.props.name}
-          className='carousel__pic'
-          id={'carousel__left'}
-        />
+        {
+          /*
+          <img
+            src={this.state.leftPic}
+            alt={this.props.name}
+            className='carousel__pic'
+            id={'carousel__left'}
+          />
+
+          <img
+            src={this.state.rightPic}
+            alt={this.props.name}
+            className='carousel__pic'
+            id={'carousel__right'}
+          />
+          */
+        }
         <img
           src={this.state.centerPic}
           alt={this.props.name}
           className='carousel__pic'
           id={'carousel__center'}
-        />
-        <img
-          src={this.state.rightPic}
-          alt={this.props.name}
-          className='carousel__pic'
-          id={'carousel__right'}
         />
       </div>
     );

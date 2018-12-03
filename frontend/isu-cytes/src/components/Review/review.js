@@ -26,31 +26,9 @@ class Review extends React.Component {
             alert("not valid input");
             return;
         }
-        /*
-        let data = {
-            poi: this.state.poi,
-            title: formdata.get('title'),
-            rating: this.state.rating,
-            body: formdata.get('body')
-        };
-
-        let url = 'http://proj309-tg-03.misc.iastate.edu:8080/reviews/new';
-        let rawResponse;
-        try {
-          rawResponse = await fetch(url, {
-              method: 'POST',
-              headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(data)
-          });
-        } catch (e) {
-          console.error(e);
-        }
-        */
         let review = await ReviewAPI.SubmitReview(this.props.poi.id,this.state.rating,this.state.title,this.state.body,this.props.user.username)
         if(review.error) {
+          console.error(review.error);
           this.setState({
             error: review.error
           })
@@ -58,7 +36,7 @@ class Review extends React.Component {
         }
         else {
           //Suscessful
-          alert("Suscess")
+          //alert("Suscess")
           history.push(routes._POI);
         }
     };

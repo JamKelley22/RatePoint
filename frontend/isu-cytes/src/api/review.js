@@ -19,6 +19,7 @@ export const GetReview = async(id) => {
   else {
     switch (response.status) {
       case 200:
+      case 201:
         let review = await response.json();
         return review;
       case 401:
@@ -54,6 +55,7 @@ export const UpdateReview = async(id,rating,title,reviewBody) => {
   else {
     switch (response.status) {
       case 201:
+      case 200:
         let review = await response.json();
         return review;
       case 404:
@@ -81,6 +83,7 @@ export const DeleteReview = async(id) => {
   else {
     switch (response.status) {
       case 200:
+      case 201:
         let review = await response.json();
         return review;
       case 404:
@@ -108,6 +111,7 @@ export const GetAllReviews = async() => {
   else {
     switch (response.status) {
       case 200:
+      case 201:
         let reviews = await response.json();
         return reviews;
       default:
@@ -141,6 +145,7 @@ export const SubmitReview = async(poiID,rating,title,reviewBody,author) => {
   else {
     switch (response.status) {
       case 201:
+      case 200:
         let review = await response.json();
         return review;
       case 401:
@@ -170,6 +175,7 @@ export const GetReviewsByPOI = async(poiID) => {
   else {
     switch (response.status) {
       case 200:
+      case 201:
         let review = await response.json();
         return review;
       case 401:
