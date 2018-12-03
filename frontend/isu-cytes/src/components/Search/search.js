@@ -76,42 +76,46 @@ class Search extends React.Component {
               <p>No Results</p>
             }
           </div>
+          {
+            /*
+            <div className='peopleResults'>
+              <h1>People</h1>
+              <hr/>
+                {
+                  this.state.searchResults.people.length > 0
+                  ?
+                  this.state.searchResults.people.map((person,i) => {
+                    return (
+                      <div className='personResult'>
+                        {person.name}
+                      </div>
+                    )
+                  })
+                  :
+                  <p>No Results</p>
+                }
+            </div>
 
-          <div className='peopleResults'>
-            <h1>People</h1>
-            <hr/>
-              {
-                this.state.searchResults.people.length > 0
-                ?
-                this.state.searchResults.people.map((person,i) => {
-                  return (
-                    <div className='personResult'>
-                      {person.name}
-                    </div>
-                  )
-                })
-                :
-                <p>No Results</p>
-              }
-          </div>
+            <div className='tagResults'>
+              <h1>Tags</h1>
+              <hr/>
+                {
+                  this.state.searchResults.tags.length > 0
+                  ?
+                  this.state.searchResults.tags.map((tag,i) => {
+                    return (
+                      <div className='tagResult'>
+                        {tag.name}
+                      </div>
+                    )
+                  })
+                  :
+                  <p>No Results</p>
+                }
+            </div>
+            */
+          }
 
-          <div className='tagResults'>
-            <h1>Tags</h1>
-            <hr/>
-              {
-                this.state.searchResults.tags.length > 0
-                ?
-                this.state.searchResults.tags.map((tag,i) => {
-                  return (
-                    <div className='tagResult'>
-                      {tag.name}
-                    </div>
-                  )
-                })
-                :
-                <p>No Results</p>
-              }
-          </div>
         </div>
       </div>
     )
