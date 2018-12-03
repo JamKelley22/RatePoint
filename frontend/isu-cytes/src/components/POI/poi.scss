@@ -206,11 +206,13 @@ button {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  width: 30%;
 }
 .review__content {
   margin-left: 20px;
   overflow: hidden;
   margin-right: 20px;
+  width: 100%;
 }
 .review__content p {
   max-height: 100px;
