@@ -8,6 +8,7 @@
   flex-direction: column;
   overflow: hidden;
   z-index: 2;
+  align-items: center;
 }
 
 #suggestHeader{
@@ -18,7 +19,7 @@
   height: 100%;
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   background-color: grey;
 }
 
@@ -33,6 +34,9 @@
   flex-direction: row;
   text-align: center;
   margin-top: 2%;
+  width:30%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #suggestMaps {
@@ -44,6 +48,7 @@
   width: 50%;
   flex-direction: column;
   margin-left: 5%;
+  margin-right: 7%;
 }
 
 #actualMap{
@@ -75,6 +80,9 @@
 
 #row3 {
   display: flex;
+  width:30%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .loadPart {
