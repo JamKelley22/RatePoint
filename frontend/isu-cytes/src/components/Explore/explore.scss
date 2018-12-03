@@ -57,7 +57,7 @@
   color: #4F5946;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
-  box-shadow: 3px 3px 5px black;
+  border: 2px solid $primary_color;
 
   display: flex;
   flex-direction: column;
@@ -88,7 +88,7 @@
 
 .poiContainerSmall {
   display: inline-block;
-  height: 180px;
+  height: 200px;
   width: 180px;
   margin: 15px;
   z-index: 1;

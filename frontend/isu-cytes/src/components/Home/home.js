@@ -37,11 +37,21 @@ class Home extends React.Component {
     })
   }
 
+  viewPOIByNum = (poiId) => {
+    let poi = this.props.pois.find(poi =>
+      poi.id === poiId
+    )
+    //Update Redux
+    this.props.Actions.setSelectedPOI(poi);
+    //Push new history
+    history.push(routes._POI);
+  }
+
   render () {
     return (
       <div className='homePage'>
         <div className='homePage__elements'>
-          <div className='homePage__element'>
+          <div>
             <OnlineUsers
               me={this.props.currUser}
               onlineUserList={this.props.onlineusers}
@@ -54,6 +64,8 @@ class Home extends React.Component {
               peopleList={this.state.allPeople}
               reviewList={this.state.allReviews}
               setSelectedPOI={this.props.Actions.setSelectedPOI}
+              onUserClick={this.onUserClick}
+              viewPOIByNum={this.viewPOIByNum}
             />
           </div>
         </div>

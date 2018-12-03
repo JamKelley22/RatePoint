@@ -14,7 +14,7 @@ const POICard = (props) => {
   if(props.size === 'small') {
     return (
       <div className={'poiContainerSmall'}>
-        <div className='poiCardSmall' onClick={props.onClick}>
+        <div className='poiCardSmall'>
           <div className='poiCardImgSmall'>
             <img src={pic} alt='site'/>
           </div>
@@ -24,6 +24,7 @@ const POICard = (props) => {
               number={props.rating}
             />
           </div>
+          <a onClick={props.onClick}>View</a>
         </div>
       </div>
     )
