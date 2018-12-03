@@ -26,7 +26,6 @@ class Home extends React.Component {
   render () {
     return (
       <div className='homePage'>
-        <h1>Home</h1>
         <div className='homePage__elements'>
           <div className='homePage__element'>
             <OnlineUsers
