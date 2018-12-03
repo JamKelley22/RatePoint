@@ -60,7 +60,7 @@ class Account extends React.Component {
   }
 
   updateUser = (p,cb) => {
-    this.props.Actions.updateUser(p.oldUsername,p.newUsername,p.email,p.name,p.biography,p.password)
+    this.props.Actions.updateUser(p.oldUsername,p.newUsername,p.email,p.name,p.biography,p.password,p.role)
     .then(res => {
       console.log(res);
       cb();

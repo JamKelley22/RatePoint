@@ -1,0 +1,46 @@
+@import '../../colors.scss';
+@import '../../mediaQuery';
+
+.adminPage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: $secondary_color;
+  z-index: 2;
+  padding: 10px;
+}
+
+.peopleList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.adminPersonCard {
+  background-color: $primary_color;
+  margin: 5px;
+  border-radius: 5px;
+  padding: 5px;
+  width: 130px;
+
+  height: 100%;
+  background-color: #B1C79E;
+  color: #4F5946;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: 2px solid $primary_color;
+  a {
+    font-weight: lighter;
+    font-style: 12px;
+    font-style: italic;
+  }
+}
+
+.modal-content {
+  background-color: $secondary_color;
+  color: white;
+}
+.btn-default {
+  color: white !important;
+  background-color: $primary_color;
+  border: none;
+}

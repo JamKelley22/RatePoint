@@ -23,7 +23,8 @@ class CurrentUserView extends React.Component {
       email: this.props.email,
       name: this.state.name.length > 0 ? this.state.name : this.props.name,
       biography: this.state.biography.length > 0 ? this.state.biography : this.props.biography,
-      password: this.props.password
+      password: this.props.password,
+      role: this.props.role
     }
 
     this.props.updateUser(p,() => {
@@ -106,6 +107,11 @@ class CurrentUserView extends React.Component {
             this.props.role >= USER_ROLES.MOD
             &&
             <button onClick={() => history.push(routes._MODERATION)}>Moderator View</button>
+          }
+          {
+            this.props.role >= USER_ROLES.ADMIN
+            &&
+            <button onClick={() => history.push(routes._ADMIN)}>Admin View</button>
           }
         </div>
       </div>

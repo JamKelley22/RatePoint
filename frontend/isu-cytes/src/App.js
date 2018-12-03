@@ -6,7 +6,8 @@ import { bindActionCreators } from 'redux';
 import library from './icons.js'
 
 import { Landing,Home,Map,Explore,Friends,Suggest,Account,
-  Review,POI,Error404,Login,CreateAccount,Moderation,Search,ViewUser,APIPage } from './components'
+  Review,POI,Error404,Login,CreateAccount,Moderation,
+  Search,ViewUser,APIPage,Admin } from './components'
 
 import { history } from './history.js'
 import * as routes from './constants/routes'
@@ -48,7 +49,7 @@ class App extends Component {
     return newPOIs;
   }
 
-  render() {    
+  render() {
     return (
       <Router history={history}>
         <div className="App">
@@ -65,6 +66,7 @@ class App extends Component {
             <Route exact path={routes._REVIEW} component={() => <Review/>} />
             <Route exact path={routes._POI} component={() => <POI/>} />
             <Route exact path={routes._MODERATION} component={() => <Moderation/>} />
+            <Route exact path={routes._ADMIN} component={() => <Admin/>} />
             <Route exact path={routes._SEARCH} component={() => <Search/>} />
             <Route exact path={routes._VIEWUSER} component={() => <ViewUser/>} />
             <Route exact path={routes._API} component={() => <APIPage/>} />
