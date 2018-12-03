@@ -15,10 +15,16 @@ class Admin extends React.Component {
   state = {
     allPeople: [],
     showChangeUserRoleModal: false,
-    selectedUser: null
+    selectedUser: {},
+    selectedRole: null
   }
 
-  componentDidMount = async() => {
+  componentDidMount = () => {
+    this.refresh();
+  }
+
+  refresh = async() => {
+    console.log("refresh");
     let allPeople = await PersonAPI.GetAllPersons();
     this.setState({
       allPeople: allPeople
@@ -35,8 +41,34 @@ class Admin extends React.Component {
   handleClose = () => {
     this.setState({
       showChangeUserRoleModal: false,
-      selectedUser: null
+      selectedUser: {}
     })
+  }
+
+  handleSubmit = async() => {
+    if(this.state.selectedUser) {
+      let p = this.state.selectedUser;
+      let res = PersonAPI.UpdatePerson(p.username,p.username,p.email,p.name,p.biography,p.password,this.state.selectedRole || p.role)
+      .then(res => {
+        console.log(res);
+        console.log('Good');
+        this.setState({
+          showChangeUserRoleModal: false,
+          selectedUser: {},
+          selectedRole: null
+        })
+        this.refresh();
+      })
+      .catch(err => {
+        console.error(err);
+      })
+    }
+    else {
+      console.error("No user selected");
+      this.setState({
+        showChangeUserRoleModal: false
+      })
+    }
   }
 
   render () {
@@ -65,6 +97,24 @@ class Admin extends React.Component {
       );
     })
 
+    let selectedUserRole;
+
+    if(this.state.selectedUser.name) {
+      switch (this.state.selectedUser.role) {
+        case USER_ROLES.ADMIN:
+          selectedUserRole = 'Admin'
+          break;
+        case USER_ROLES.MOD:
+          selectedUserRole = 'Moderator'
+          break;
+        case USER_ROLES.USER:
+          selectedUserRole = 'User'
+          break;
+        default:
+
+      }
+    }
+
     return (
       <React.Fragment>
         <div className='adminPage'>
@@ -76,13 +126,29 @@ class Admin extends React.Component {
 
         <Modal show={this.state.showChangeUserRoleModal} onHide={this.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>{this.state.selectedUser.name}</Modal.Title>
+            <p>Current Role: {selectedUserRole}</p>
           </Modal.Header>
           <Modal.Body>
-
+            <Button
+              style={{backgroundColor: this.state.selectedRole === USER_ROLES.USER ? 'blue' : ''}}
+              onClick={() => this.setState({selectedRole: USER_ROLES.USER})}>
+              User
+            </Button>
+            <Button
+              style={{backgroundColor: this.state.selectedRole === USER_ROLES.MOD ? 'blue' : ''}}
+              onClick={() => this.setState({selectedRole: USER_ROLES.MOD})}>
+              Moderator
+            </Button>
+            <Button
+              style={{backgroundColor: this.state.selectedRole === USER_ROLES.ADMIN ? 'blue' : ''}}
+              onClick={() => this.setState({selectedRole: USER_ROLES.ADMIN})}>
+              Admin
+            </Button>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleClose}>Close</Button>
+            <Button onClick={this.handleSubmit}>Submit</Button>
           </Modal.Footer>
         </Modal>
       </React.Fragment>

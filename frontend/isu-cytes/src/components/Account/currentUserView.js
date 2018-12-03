@@ -23,7 +23,8 @@ class CurrentUserView extends React.Component {
       email: this.props.email,
       name: this.state.name.length > 0 ? this.state.name : this.props.name,
       biography: this.state.biography.length > 0 ? this.state.biography : this.props.biography,
-      password: this.props.password
+      password: this.props.password,
+      role: this.props.role
     }
 
     this.props.updateUser(p,() => {
