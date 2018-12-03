@@ -31,7 +31,6 @@
 
 #row2 {
   flex-direction: row;
-  height: 100%;
   text-align: center;
   margin-top: 2%;
 }
@@ -74,10 +73,14 @@
   position: absolute;
 }
 
-#reqirements {
-  flex: 1 1;
+#row3 {
+  display: flex;
 }
 
-#suggestForm form {
-  flex: 4 1;
+.loadPart {
+  width: 25%;
+  height: 12px;
+  border: 1px solid black;
+  font-size: 10px;
+  padding: 2px;
 }

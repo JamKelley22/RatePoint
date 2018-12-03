@@ -18,15 +18,25 @@
 
 
 //=====Feed=====
+.feedComponent {
+  display: flex;
+}
 
 //=====OnlineUsers=====
 .onlineUsersComponent {
+  cursor: pointer;
   position: absolute;
   bottom: 0px;
+  right: 5%;
   background-color: $primary_color;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   width:200px;
+  padding: 5px;
+
+  &:hover {
+    background-color: darken($primary_color, 5%);
+  }
 }
 .onlineUsersList {
 
