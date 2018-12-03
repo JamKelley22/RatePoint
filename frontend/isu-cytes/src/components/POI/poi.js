@@ -290,7 +290,13 @@ class POI extends React.Component {
               <Rating
                 number={poi.rating}
               />
-            <p>{this.state.numRatings} Ratings</p>
+              {
+                this.state.numRatings.length !== null
+                ?
+                <p>{this.state.numRatings} Ratings</p>
+                :
+                <p>? Ratings</p>
+              }
               {/*this.getAccessibilityIcons()*/}
             </div>
 
