@@ -1,6 +1,11 @@
 import * as actions from './actionTypes.js'
 import { POIAPI, PersonAPI, ListAPI } from '../api/'
 
+/**
+ * Updates the locally cached (Redux) POI list from server
+ * @param {username} The name of the user logged in
+ * @return Promise, resolves to poi list or error
+ */
 export function updatePOIList() {
   return function (dispatch){
    return POIAPI.GetPOIs().then(pois => {
@@ -12,6 +17,11 @@ export function updatePOIList() {
  }
 }
 
+/**
+ * Creates a user
+ * @param {username,email,name,biography,password}
+ * @return Promise, resolves to user or error
+ */
 export const createUser = (username,email,name,biography,password) => (dispatch) =>
   new Promise((resolve, reject) => {
       // Function is expected to return a promise
@@ -32,6 +42,11 @@ export const createUser = (username,email,name,biography,password) => (dispatch)
       })
   });
 
+  /**
+   * Logs a user in
+   * @param {username,password}
+   * @return Promise, resolves to user or error
+   */
 export const loginUser = (username, password) => (dispatch) =>
   new Promise((resolve, reject) => {
       // Function is expected to return a promise
@@ -52,6 +67,11 @@ export const loginUser = (username, password) => (dispatch) =>
       })
   });
 
+/**
+ * Updates fields on a user
+ * @param {oldUsername,newUsername,email,name,biography,password}
+ * @return Promise, resolves to user or error
+ */
 export const updateUser = (oldUsername,newUsername,email,name,biography,password) => (dispatch) =>
   new Promise((resolve, reject) => {
       // Function is expected to return a promise
@@ -72,6 +92,11 @@ export const updateUser = (oldUsername,newUsername,email,name,biography,password
       })
   });
 
+/**
+ * Creates a list for a user specified
+ * @param {username,listname,poilist}
+ * @return Promise, resolves to user or error
+ */
 export const createList = (username,listname,poilist) => (dispatch) =>
   new Promise((resolve, reject) => {
       // Function is expected to return a promise
@@ -92,6 +117,11 @@ export const createList = (username,listname,poilist) => (dispatch) =>
       })
   });
 
+/**
+ * Updates a list for a user specified
+ * @param {listID,listname,poilist}
+ * @return Promise, resolves to user or error
+ */
 export const updateList = (listID,listname,poilist) => (dispatch) =>
   new Promise((resolve, reject) => {
       // Function is expected to return a promise
@@ -112,6 +142,11 @@ export const updateList = (listID,listname,poilist) => (dispatch) =>
       })
   });
 
+/**
+ * Deletes a list for a user specified
+ * @param {listID}
+ * @return Promise, resolves to user or error
+ */
   export const deleteList = (listID) => (dispatch) =>
     new Promise((resolve, reject) => {
         // Function is expected to return a promise
@@ -133,27 +168,62 @@ export const updateList = (listID,listname,poilist) => (dispatch) =>
         })
     });
 
+/**
+ * Logs out a user by username
+ * @param {username}
+ * @return actionDispatch
+ */
 export function logoutUser(username) {
   return { type: actions.LOGOUT, payload: username }
 }
 
+/**
+ * Dissocnnects a user from webSocket by username
+ * @param {username}
+ * @return actionDispatch
+ */
 export function userDisconnect(username) {
   return { type: actions.USER_DISCONNECT, payload: username }
 }
+/**
+ * Connects a user to webSocket by username
+ * @param {username}
+ * @return actionDispatch
+ */
 export function userConnect(username) {
   return { type: actions.USER_CONNECT, payload: username }
 }
+/**
+ * Gets and updates cache of current users
+ * @param {}
+ * @return actionDispatch
+ */
 export function getCurrentUsers() {
   return { type: actions.GET_CURRENT_USERS }
 }
+/**
+ * Gets and sets all pois from server to cache
+ * @param {username}
+ * @return actionDispatch
+ */
 export function setAllPOIs(pois) {
   return { type: actions.SET_ALL_POIS, payload: pois }
 }
 
+/**
+ * Sets the selected POI locally (redux) by poi object
+ * @param {poi}
+ * @return actionDispatch
+ */
 export function setSelectedPOI(poi) {
   return { type: actions.SET_POI, payload: poi }
 }
 
+/**
+ * Approves the specified POI
+ * @param {poi}
+ * @return Promise
+ */
 export const approvePOI = (poi) => (dispatch) =>
   new Promise((resolve, reject) => {
       // Function is expected to return a promise
@@ -173,6 +243,11 @@ export const approvePOI = (poi) => (dispatch) =>
       })
   });
 
+/**
+ * Rejects the specified POI
+ * @param {poi}
+ * @return Promise
+ */
 export const rejectPOI = (poi) => (dispatch) =>
   new Promise((resolve, reject) => {
       // Function is expected to return a promise
@@ -192,10 +267,20 @@ export const rejectPOI = (poi) => (dispatch) =>
       })
   });
 
+/**
+ * Sets the search term in redux store
+ * @param {term}
+ * @return Action
+ */
 export function setSearchTerm(term) {
   return { type: actions.SET_SEARCH_TERM, payload: term }
 }
 
+/**
+ * Submits a new POI
+ * @param {userID,name,pictures,description,coordinates}
+ * @return Promise
+ */
 export const submitPOI = (userID,name,pictures,description,coordinates) => (dispatch) =>
   new Promise((resolve, reject) => {
       // Function is expected to return a promise
@@ -216,6 +301,11 @@ export const submitPOI = (userID,name,pictures,description,coordinates) => (disp
       })
   });
 
+/**
+ * Gets the full user object by username
+ * @param {username}
+ * @return Promise
+ */
 export const getSetSelectedUserByUsername = (username) => (dispatch) =>
   new Promise((resolve, reject) => {
       // Function is expected to return a promise

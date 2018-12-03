@@ -4,6 +4,11 @@ import * as Actions from '../actions/actions.js'
 
 let ws;
 
+/**
+ * Connect to Server side websocket
+ * @param {username} The name of the user logged in
+ * @return
+ */
 export function connect(username) {
   console.log("WebSocket Connect");
   if(ws) {
@@ -14,6 +19,11 @@ export function connect(username) {
 
   ws = new WebSocket(WEBSOCKET_URL + username);
 
+  /**
+   * Called when recieving a message from server WebSocket
+   * @param {event} 
+   * @return
+   */
   ws.onmessage = (event) => {
     console.log("===OnMessage===");
     console.log(event.data);
@@ -37,6 +47,11 @@ export function connect(username) {
   }
 }
 
+/**
+ * Closes to Server side websocket
+ * @param
+ * @return
+ */
 export function closeWebsocket() {
   console.log("WebSocket Close");
   if(!ws) {

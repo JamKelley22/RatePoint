@@ -2,6 +2,11 @@ import to from 'await-to-js';
 
 import { BASE_URL } from './index.js'
 
+/**
+ * REST Query, Get POI by id
+ * @param {id} The id of the poi (num)
+ * @return Error object or poi object
+ */
 export const GetPOI = async(id) => {
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/pois/${id}`, {
@@ -30,6 +35,11 @@ export const GetPOI = async(id) => {
   }
 }
 
+/**
+ * REST Query, Update POI by id
+ * @param {id,name,pictures,description,coordinates,approved}
+ * @return Error object or poi object
+ */
 export const UpdatePOI = async(id,name,pictures,description,coordinates,approved) => {
   let body = {
     name: name,
@@ -66,6 +76,11 @@ export const UpdatePOI = async(id,name,pictures,description,coordinates,approved
   }
 }
 
+/**
+ * REST Query, Delete POI by id
+ * @param {id}
+ * @return Error object or poi object
+ */
 export const DeletePOI = async(id) => {
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/pois/${id}`, {
@@ -93,6 +108,11 @@ export const DeletePOI = async(id) => {
   }
 }
 
+/**
+ * REST Query, get all pois
+ * @param {}
+ * @return Error object or poi list of objects
+ */
 export const GetPOIs = async() => {
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/pois`, {
@@ -118,6 +138,11 @@ export const GetPOIs = async() => {
   }
 }
 
+/**
+ * REST Query, Submit new POI
+ * @param {userID,name,pictures,description,coordinates}
+ * @return Error object or poi object
+ */
 export const SubmitPOI = async(userID,name,pictures,description,coordinates) => {
   let body = {
     userID: userID,
@@ -158,6 +183,11 @@ export const SubmitPOI = async(userID,name,pictures,description,coordinates) => 
   }
 }
 
+/**
+ * REST Query, Ge POI Rating by POI id
+ * @param {poiID}
+ * @return Error object or poi object
+ */
 export const GetPOIRating = async(poiID) => {
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/pois/${poiID}/average`, {
@@ -184,6 +214,11 @@ export const GetPOIRating = async(poiID) => {
   }
 }
 
+/**
+ * REST Query, Get num ratings on a poi
+ * @param {poiID}
+ * @return Error object or poi object
+ */
 export const GetPOINumRatings = async(poiID) => {
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/reviews/poi/${poiID}`, {

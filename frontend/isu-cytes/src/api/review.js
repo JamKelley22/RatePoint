@@ -2,6 +2,11 @@ import to from 'await-to-js';
 
 import { BASE_URL } from './index.js'
 
+/**
+ * REST Query, Get Review by id
+ * @param {id}
+ * @return Error object or review object
+ */
 export const GetReview = async(id) => {
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/reviews/${id}`, {
@@ -32,6 +37,11 @@ export const GetReview = async(id) => {
   }
 }
 
+/**
+ * REST Query, Update review by id
+ * @param {id,rating,title,reviewBody,flagged}
+ * @return Error object or review object
+ */
 export const UpdateReview = async(id,rating,title,reviewBody,flagged) => {
   let body = {
     rating: rating,
@@ -67,6 +77,11 @@ export const UpdateReview = async(id,rating,title,reviewBody,flagged) => {
   }
 }
 
+/**
+ * REST Query, Delete review by id
+ * @param {id}
+ * @return Error object or review object
+ */
 export const DeleteReview = async(id) => {
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/reviews/${id}`, {
@@ -95,6 +110,11 @@ export const DeleteReview = async(id) => {
   }
 }
 
+/**
+ * REST Query, Get all reviews
+ * @param {id}
+ * @return Error object or review list of objects
+ */
 export const GetAllReviews = async() => {
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/reviews`, {
@@ -121,6 +141,11 @@ export const GetAllReviews = async() => {
   }
 }
 
+/**
+ * REST Query, Submit review
+ * @param {poiID,rating,title,reviewBody,author}
+ * @return Error object or review object
+ */
 export const SubmitReview = async(poiID,rating,title,reviewBody,author) => {
   let body = {
     poi: poiID,
@@ -160,6 +185,11 @@ export const SubmitReview = async(poiID,rating,title,reviewBody,author) => {
   }
 }
 
+/**
+ * REST Query, Get reviews by POI id
+ * @param {poiID}
+ * @return Error object or review list of objects
+ */
 export const GetReviewsByPOI = async(poiID) => {
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/reviews/poi/${poiID}`, {

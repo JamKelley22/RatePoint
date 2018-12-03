@@ -2,6 +2,11 @@ import to from 'await-to-js';
 
 import { RECAPTCHA_WEBTASK_SERVER_URL } from './index.js'
 
+/**
+ * Verify user not robot by token
+ * @param {token}
+ * @return success or error object
+ */
 export const DoVerifyRecaptcha = async(token) => {
   let body = {
     captcha: token
