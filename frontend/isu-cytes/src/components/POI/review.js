@@ -17,7 +17,6 @@ class Review extends React.Component {
   };
 
   reportReview = async(e) => {
-    alert(this.props.id);
     let review = await ReviewAPI.UpdateReview(this.props.id,this.props.rating,this.props.title,this.props.body,true);
     if(review.error){}
     this.setState({reported:true});
