@@ -56,7 +56,7 @@ class Landing extends React.Component {
               Local Student Ratings & Reviews
             </div>
             <div className='subtitle'>
-              Lorim Ipsum Set Dolor
+              Find your new favorate place!
             </div>
             <div className='buttons'>
               <Button
@@ -75,47 +75,23 @@ class Landing extends React.Component {
               title='Ratings'
               body='Rate and Review Your Favorite Sites Around Campus'
               icon={<FontAwesomeIcon icon="thumbs-up" />}
-              onClick={() => this.scroll('#tab1')}
             />
             <Feature
               title='Top Sites'
               body='View the top sites on campus and vote on the best per catagory'
               icon={<FontAwesomeIcon icon="trophy" />}
-              onClick={() => this.scroll('#tab2')}
             />
             <Feature
               title='Explore'
               body='Explore your local ISU community and find the best place to study, play, and learn'
               icon={<FontAwesomeIcon icon="clock" />}
-              onClick={() => this.scroll('#tab3')}
             />
             <Feature
               title='Share'
               body='Add your friends and share your favorite locations with them anytime'
               icon={<FontAwesomeIcon icon="car" />}
-              onClick={() => this.scroll('#tab4')}
             />
           </div>
-        </div>
-
-        <div className='tab' id='tab1'>
-          <span className='featureTag'>Ratings</span>
-
-        </div>
-
-        <div className='tab' id='tab2'>
-          <span className='featureTag'>Top Sites</span>
-
-        </div>
-
-        <div className='tab' id='tab3'>
-          <span className='featureTag'>Explore</span>
-
-        </div>
-
-        <div className='tab' id='tab4'>
-          <span className='featureTag'>Share</span>
-
         </div>
       </div>
     );
