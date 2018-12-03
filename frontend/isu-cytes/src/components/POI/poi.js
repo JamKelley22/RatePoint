@@ -305,11 +305,6 @@ class POI extends React.Component {
               </p>
             </div>
 
-            <div>
-              <h4>Tags</h4>
-              <div className='poi__lower__tags'>{/*this.getTags()*/}</div>
-            </div>
-
             <div className='poi__lower__reviews'>
               <div className='poi__lower__reviews__line'>
                 <h4>Reviews</h4>

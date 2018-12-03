@@ -14,6 +14,10 @@ import javax.persistence.Table;
 
 import cs309.isucytes.userlist.Userlist;
 
+/**
+ * This class defines a POI in our database. 
+ * 
+ */
 @Entity
 @Table
 public class POI {

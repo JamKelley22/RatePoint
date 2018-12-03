@@ -21,12 +21,22 @@ import cs309.isucytes.poi.POIRepository;
 import cs309.isucytes.review.Review;
 import cs309.isucytes.review.ReviewRepository;
 
+/**
+ *This class handles the end points for POIs. 
+ */
 @RestController
 @RequestMapping(path = "/pois")
 public class POIController {
 	
+	/**
+	 * Connection to the database for POI table.
+	 */
 	@Autowired
     POIRepository POIRepository;
+	
+	/**
+	 * Connection to the database for Review table. 
+	 */
 	@Autowired
 	ReviewRepository reviewRepository;
 	
@@ -104,7 +114,7 @@ public class POIController {
 	
 	/**
 	 * Update a POI, if any, that matches id
-	 * 
+	 * @param poi the POI that will be updated
 	 * @param id id of the POI to be updated
 	 * @return an HTTP status code
 	 * 	 
@@ -125,7 +135,7 @@ public class POIController {
 	
 	/**
 	 * Calculates the average rating of all reviews for a POI given its id.
-	 * 
+	 * @param id the id of the POI.
 	 * @return the average rating of all reviews for a POI.
 	 */
 	@CrossOrigin
@@ -144,5 +154,17 @@ public class POIController {
 		
 		Double d = new Double(reviewRepository.avgReviewsByPoiId(id));
 		return new ResponseEntity<>(Collections.singletonMap("average", d.toString()), HttpStatus.OK);
+	}
+	
+	/**
+	 * Gets a list of POIs that are not approved. Useful for the Moderation queue.
+	 * 
+	 * @return List of POIS with approved=false
+	 */
+	@CrossOrigin
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.GET, path = "/notapproved")
+	public List<POI> getPOIsNotApproved() {
+		return POIRepository.findByApproved(false);
 	}
 }

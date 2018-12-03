@@ -50,8 +50,9 @@ class Review extends React.Component {
           console.error(e);
         }
         */
-        let review = await ReviewAPI.SubmitReview(this.props.poi.id,this.state.rating,this.state.title,this.state.body);
+        let review = await ReviewAPI.SubmitReview(this.props.poi.id,this.state.rating,this.state.title,this.state.body,this.props.user.username)
         if(review.error) {
+          console.error(review.error);
           this.setState({
             error: review.error
           });
@@ -152,7 +153,8 @@ class Review extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    poi: state.poi.currPOI
+    poi: state.poi.currPOI,
+    user: state.user.currUser
   }
 }
 

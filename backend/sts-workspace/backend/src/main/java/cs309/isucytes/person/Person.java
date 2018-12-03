@@ -76,7 +76,8 @@ public class Person {
 	
 	/**
 	 * get the unique identifier of a person
-	 * @return
+	 * 
+	 * @return ID of the person
 	 */
 	public Integer getId() {
 		return id;
@@ -182,6 +183,8 @@ public class Person {
 	}
 
 	/**
+	 * Gets a users role as an int
+	 * 
 	 * @return the role
 	 */
 	public Integer getRole() {
@@ -189,6 +192,8 @@ public class Person {
 	}
 
 	/**
+	 * Updates the users role (integer)
+	 * 
 	 * @param role the role to set
 	 */
 	public void setRole(Integer role) {
@@ -196,6 +201,8 @@ public class Person {
 	}
 
 	/**
+	 * Get the lists a user owns
+	 * 
 	 * @return the lists
 	 */
 	public List<Userlist> getLists() {
@@ -203,6 +210,8 @@ public class Person {
 	}
 
 	/**
+	 * Updates the lists that a user has
+	 * 
 	 * @param lists the lists to set
 	 */
 	public void setLists(List<Userlist> lists) {

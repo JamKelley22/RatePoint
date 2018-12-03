@@ -37,14 +37,16 @@ class Account extends React.Component {
 
   getUserReviews = async() => {
     let allReviews = await ReviewAPI.GetAllReviews();
+    console.log("===");
+    console.log(allReviews);
     if(allReviews.error) {
       this.setState({
         reviewsError: allReviews.error
       })
       return;
     }
-    let userReviews = allReviews.filter(review =>// TODO: Move this to backend (filtering on only review left by userID)
-      true
+    let userReviews = allReviews.filter(review =>
+      review.author === this.props.user.username
     )
     this.setState({
       reviewsFromUser: userReviews
@@ -98,9 +100,26 @@ class Account extends React.Component {
 
   viewPOI = (poi) => {
     //Update Redux
-    this.props.Actions.setPOI(poi);
+    this.props.Actions.setSelectedPOI(poi);
     //Push new history
     history.push(routes._POI);
+  }
+
+  viewPOIByNum = (poiId) => {
+    let poi = this.props.pois.find(poi =>
+      poi.id === poiId
+    )
+    //Update Redux
+    this.props.Actions.setSelectedPOI(poi);
+    //Push new history
+    history.push(routes._POI);
+  }
+
+  getPOIName = (poiId) => {
+    let poi = this.props.pois.find(poi =>
+      poi.id === poiId
+    )
+    return poi.name;
   }
 
   setListName = (list, newName) => {
@@ -140,33 +159,8 @@ class Account extends React.Component {
     })
   }
 
-  testLocal = async() => {
-    let error, response;
-    [error, response] = await to(fetch(`http://localhost:8080/greeting?name=User`, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }));
-
-    if(error) {
-      console.error(error);
-      return {error: error}
-    }
-    else {
-      switch (response.status) {
-        case 200:
-          let list = await response.json();
-        default:
-          console.log(`Unexpected server response code of ${response.status}`);
-      }
-    }
-  }
-
   render () {
     let Tab;
-    console.log(this.state.fetching);
 
     switch (this.state.openTab) {
       case TABS.LISTS:
@@ -181,7 +175,11 @@ class Account extends React.Component {
           />;
         break;
       case TABS.REVIEWS:
-        Tab = <CurrentUserReviews reviews={[]}/>;
+        Tab = <CurrentUserReviews
+          reviews={this.state.reviewsFromUser}
+          viewPOIByNum={this.viewPOIByNum}
+          getPOIName={this.getPOIName}
+          />;
         break;
       case TABS.FRIENDS:
         Tab = <CurrentUserFriends />;
@@ -215,7 +213,6 @@ class Account extends React.Component {
           <hr/>
           {Tab}
         </div>
-        <button onClick={this.testLocal}>Test Local</button>
       </div>
     );
   }
@@ -223,7 +220,8 @@ class Account extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.user.currUser
+    user: state.user.currUser,
+    pois: state.poi.allPOIs
   }
 }
 

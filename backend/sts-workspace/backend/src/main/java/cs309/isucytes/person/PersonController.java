@@ -16,9 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cs309.isucytes.userlist.Userlist;
 
+/**
+ * Handles the routes for the PersonController
+ */
 @RestController
 public class PersonController {
 
+	/**
+	 * Connection to the database for Person table on the DB.
+	 */
 	@Autowired
 	PersonRepository personRepository;
 
@@ -89,6 +95,14 @@ public class PersonController {
 		}
 	}
 	
+	/**
+	 * Creates a new list for a user
+	 * 
+	 * @param username the user requesting the list
+	 * @param userlist List object to create
+	 * @return The Person, complete with their new list. 404 if the person does not
+	 *         exist.
+	 */
 	@CrossOrigin(origins="*")
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST, path = "/people/{username}/lists")
@@ -143,7 +157,7 @@ public class PersonController {
 	/**
 	 * Verify's a person login by their username
 	 * 
-	 * @param username username to search for
+	 * @param person Person to check the database for (consists of Username and Password)
 	 * @return Person if the login succeeds, 404 if no user found, 401 if incorrect
 	 *         password if login fails (i.e. password does not match.
 	 */

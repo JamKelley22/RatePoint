@@ -13,10 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * The Controller for UserLists
+ */
 @RestController
 @RequestMapping(path = "/lists")
 public class UserlistController {
 
+	/**
+	 * Creates an instance of the repository to perform queries.
+	 */
 	@Autowired
 	UserlistRepository userlistRepository;
 

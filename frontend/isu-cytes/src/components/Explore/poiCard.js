@@ -17,8 +17,8 @@ const POICard = (props) => {
         <div className='poiCardImg'>
           <img src={pic} alt='site'/>
         </div>
+        <h3>{props.title}</h3>
         <div className='poiCardRating'>
-          <p>{props.title}</p>
           <Rating
             number={props.rating}
           />
