@@ -107,6 +107,11 @@ class CurrentUserView extends React.Component {
             &&
             <button onClick={() => history.push(routes._MODERATION)}>Moderator View</button>
           }
+          {
+            this.props.role >= USER_ROLES.ADMIN
+            &&
+            <button onClick={() => history.push(routes._ADMIN)}>Admin View</button>
+          }
         </div>
       </div>
     )

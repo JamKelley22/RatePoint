@@ -67,9 +67,14 @@
   height: 70px;
 
   h2 {
-    width: 80px;
+    min-width: 100px;
     height: 30px;
     padding: 2px;
+    margin-top: 10px;
+  }
+
+  .listItemArrow {
+    margin-top: 5px;
   }
 
   #editListNameInput {
@@ -79,6 +84,7 @@
     font-size: 1em;
     font-weight: lighter;
     padding: 2px;
+    color: black;
 
     &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
         color: transparentize(black, .8);
@@ -97,13 +103,13 @@
   width: 32px;
 
 }
-#trashIcon, #editIcon {
+.trashIcon, .editIcon {
   padding: 5px 5px 5px 10px;
   //font-size: .5em;
   transition: color 1s;
   font-size: .8em;
 }
-#banIcon, #checkIcon {
+.banIcon, .checkIcon {
   padding: 5px 5px 5px 10px;
   //font-size: .5em;
   transition: color 1s;
