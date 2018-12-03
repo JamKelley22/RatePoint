@@ -93,7 +93,7 @@ class UserList extends React.Component {
     return (
       <div>
         <div className='listItem'>
-          <a onClick={() => this.setState({open: !this.state.open})}>
+          <a className='listItemArrow' onClick={() => this.setState({open: !this.state.open})}>
             <FontAwesomeIcon id='listOpenCarot' style={{transform: this.state.open ? 'rotate(90deg)' : 'rotate(0deg)'}} icon="caret-right"/>
           </a>
           {
@@ -117,26 +117,29 @@ class UserList extends React.Component {
             {
               (!this.state.editingList)
               ?
-              <a onClick={this.editList}>
+              <a className='editIcon' onClick={this.editList}>
                 <FontAwesomeIcon
-                  id='editIcon'
                   icon="edit"
                   />
               </a>
               :
-              <FontAwesomeIcon onClick={this.cancel}
-                id='banIcon'
-                icon="ban"
-                />
+              <a className='banIcon' onClick={this.cancel}>
+                <FontAwesomeIcon
+                  icon="ban"
+                  />
+              </a>
             }
-            <FontAwesomeIcon
-              onClick={this.state.editCheckmarkVisible ? () => this.props.setListName(this.props.list, this.state.newListName): null}
+            <a
               style={{
                 visibility: (this.state.editCheckmarkVisible) ? 'visible' : 'hidden'
               }}
-              id='checkIcon'
-              icon="check"
-              />
+              className='checkIcon'
+              onClick={this.state.editCheckmarkVisible ? () => this.props.setListName(this.props.list, this.state.newListName): null}
+              >
+              <FontAwesomeIcon
+                icon="check"
+                />
+            </a>
           </div>
 
           <div
@@ -147,26 +150,25 @@ class UserList extends React.Component {
             {
               (!this.state.deleteSelected)
               ?
-                <a onClick={this.selectDeleteList}>
+                <a onClick={this.selectDeleteList} className='trashIcon'>
                   <FontAwesomeIcon
-                    id='trashIcon'
                     icon="trash"
                     />
                 </a>
               :
-              <a onClick={this.cancel}>
+              <a onClick={this.cancel} className='banIcon'>
                 <FontAwesomeIcon
-                  id='banIcon'
                   icon="ban"
                   />
               </a>
             }
-            <a onClick={this.state.deleteCheckmarkVisible ? () => this.props.deleteList(this.props.list): null}>
+            <a
+              onClick={this.state.deleteCheckmarkVisible ? () => this.props.deleteList(this.props.list): null}
+              style={{
+                visibility: (this.state.deleteCheckmarkVisible) ? 'visible' : 'hidden'
+              }}
+              className='checkIcon'>
               <FontAwesomeIcon
-                style={{
-                  visibility: (this.state.deleteCheckmarkVisible) ? 'visible' : 'hidden'
-                }}
-                id='checkIcon'
                 icon="check"
                 />
             </a>

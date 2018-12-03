@@ -40,13 +40,14 @@ export const GetPerson = async(username) => {
  * @param {oldUsername, newUsername,email,name,biography,password}
  * @return Error object or person object
  */
-export const UpdatePerson = async(oldUsername, newUsername,email,name,biography,password) => {
+export const UpdatePerson = async(oldUsername, newUsername,email,name,biography,password,role) => {
   let body = {
     username: newUsername,
     email: email,
     name: name,
     biography: biography,
-    password: password
+    password: password,
+    role: role
   }
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/people/${oldUsername}`, {

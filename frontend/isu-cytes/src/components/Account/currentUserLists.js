@@ -83,26 +83,25 @@ class CurrentUserLists extends React.Component {
             {
               (!this.state.newListSelected)
               ?
-                <a onClick={this.selectNewList}>
+                <a onClick={this.selectNewList} className='trashIcon'>
                   <FontAwesomeIcon
-                    id='trashIcon'
                     icon="plus-circle"
                     />
                 </a>
               :
-              <a onClick={this.cancel}>
+              <a onClick={this.cancel} className='banIcon'>
                 <FontAwesomeIcon
-                  id='banIcon'
                   icon="ban"
                   />
               </a>
             }
-            <a onClick={() => this.props.createList(this.state.listName)}>
+            <a
+              onClick={() => this.props.createList(this.state.listName)}
+              style={{
+                visibility: (this.state.listCheckmarkVisible) ? 'visible' : 'hidden'
+              }}
+              className='checkIcon'>
               <FontAwesomeIcon
-                style={{
-                  visibility: (this.state.listCheckmarkVisible) ? 'visible' : 'hidden'
-                }}
-                id='checkIcon'
                 icon="check"
                 />
             </a>
