@@ -193,7 +193,7 @@ class POI extends React.Component {
   addToList = async(list) => {
     console.log(list);
     if(list === null) {//Create new list default
-      this.props.Actions.createList(this.props.user.username,'default',[this.props.poi])
+      this.props.Actions.createList(this.props.user.username,'Default',[this.props.poi])
       .then(person => {
         console.log(person);
         console.log('success');
@@ -394,9 +394,13 @@ class POI extends React.Component {
                 );
               })
             }
-            <button onClick={() => this.addToList(null)}>
-              Default
-            </button>
+            {
+              this.props.user.lists.length === 0
+              &&
+              <button onClick={() => this.addToList(null)}>
+                Default
+              </button>
+            }
           </Modal.Body>
 
           <Modal.Footer>

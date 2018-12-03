@@ -2,7 +2,7 @@ import React from 'react'
 import { ReviewAPI } from '../../api'
 import Rating from './rating.js'
 
-const ANON_USER = 'https://cdn4.iconfinder.com/data/icons/danger-soft/512/people_user_business_web_man_person_social-512.png'
+const ANON_USER = 'http://www.stickpng.com/assets/images/585e4bf3cb11b227491c339a.png'
 
 class Review extends React.Component {
   state = {
@@ -38,6 +38,14 @@ class Review extends React.Component {
               <img className='review__user__pic' src={ANON_USER}/>
             }
             <p>{this.props.user.username}</p>
+          </div>
+        }
+        {
+          !this.props.user
+          &&
+          <div className='review__user'>
+            <img className='review__user__pic' src={ANON_USER}/>
+            <p>Anonymous</p>
           </div>
         }
         <div className='review__content'>
