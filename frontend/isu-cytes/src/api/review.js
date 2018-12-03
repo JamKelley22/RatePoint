@@ -31,11 +31,12 @@ export const GetReview = async(id) => {
   }
 }
 
-export const UpdateReview = async(id,rating,title,reviewBody) => {
+export const UpdateReview = async(id,rating,title,reviewBody,flagged) => {
   let body = {
     rating: rating,
     title: title,
-    body: reviewBody
+    body: reviewBody,
+    flagged: flagged
   }
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/reviews/${id}`, {
@@ -121,7 +122,8 @@ export const SubmitReview = async(poiID,rating,title,reviewBody) => {
     poi: poiID,
     rating: rating,
     title: title,
-    body: reviewBody
+    body: reviewBody,
+    flagged: false
   }
   let error, response;
   [error, response] = await to(fetch(`${BASE_URL}/reviews`, {
