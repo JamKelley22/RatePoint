@@ -1,0 +1,9 @@
+@import '../../colors.scss';
+@import '../../mediaQuery';
+
+.userPage {
+  background-color: $secondary_color;
+  z-index: 2;
+  height: 100%;
+  padding: 10px;
+}

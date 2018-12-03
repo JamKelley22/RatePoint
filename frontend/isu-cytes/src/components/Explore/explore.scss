@@ -50,11 +50,47 @@
   }
 }
 
+.poiCardSmall {
+  overflow: hidden;
+  height: 100%;
+  background-color: #B1C79E;
+  color: #4F5946;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: 2px solid $primary_color;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+
+  .poiCardImgSmall {
+    width: 100%;
+    height: 60%;
+    img {
+      background-size: cover;
+      max-height: 100%;
+    }
+  }
+
+  .poiCardRating {
+
+  }
+}
+
 .poiContainer {
   display: inline-block;
   height: 200px;
   width: 280px;
   margin: 30px;
+  z-index: 1;
+}
+
+.poiContainerSmall {
+  display: inline-block;
+  height: 200px;
+  width: 180px;
+  margin: 15px;
   z-index: 1;
 }
 

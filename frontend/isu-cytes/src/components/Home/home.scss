@@ -7,21 +7,108 @@
   height: 100%;
   z-index: 2;
   padding: 10px;
+  overflow: auto;
 }
 .homePage__elements {
   display: flex;
+  width: 100%;
 }
 .homePage__element {
-  background-color: $primary_color;
-  border: 1px solid black;
+  width: 100%;
 }
 
 
 //=====Feed=====
 .feedComponent {
   display: flex;
+  flex-direction: column;
+  max-width: 75%;
+}
+.feed {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  margin: 10px;
+  margin-bottom: 30px;
 }
 
+.feedSection {
+  margin: 5px;
+}
+
+.feedExpand {
+  font-size: 12px;
+
+}
+.feedLine {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: baseline;
+  h3 {
+    margin: 0px;
+  }
+}
+.filters {
+  a {
+    font-weight: lighter;
+    font-style: 12px;
+    font-style: italic;
+  }
+}
+.personCard {
+  background-color: $primary_color;
+  margin: 5px;
+  border-radius: 5px;
+  padding: 5px;
+  width: 130px;
+
+  overflow: hidden;
+  height: 100%;
+  background-color: #B1C79E;
+  color: #4F5946;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: 2px solid $primary_color;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  a {
+    font-weight: lighter;
+    font-style: 12px;
+    font-style: italic;
+  }
+}
+.reviewCard {
+  background-color: $primary_color;
+  margin: 5px;
+  border-radius: 5px;
+  padding: 5px;
+  width: 200px;
+
+  overflow: hidden;
+  height: 100%;
+  background-color: #B1C79E;
+  color: #4F5946;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: 2px solid $primary_color;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  a {
+    font-weight: lighter;
+    font-style: 12px;
+    font-style: italic;
+  }
+
+  p {
+    max-height: 80px;
+    overflow: auto;
+  }
+}
 //=====OnlineUsers=====
 .onlineUsersComponent {
   cursor: pointer;
