@@ -220,10 +220,10 @@ export const VerifyPerson = async(username,password) => {
         return person;
       case 401:
         //Incorrect password
-        return {error: 'Incorrect password'}
+        return {error: 'Incorrect password', status: 401}
       case 404:
         //Username not found
-        return {error: 'Username not found'}
+        return {error: 'Username not found', status: 404}
       default:
         return {error: `Unexpected server response code of ${response.status}`}
     }

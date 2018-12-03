@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux';
 import Recaptcha from 'react-recaptcha'
 import { Redirect } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { NavLink } from 'react-router-dom';
 
 import Navagation from '../Nav/navagation.js'
 import { history, routes } from '../../history.js'
@@ -11,7 +13,9 @@ import { RECAPTCHA_SITE_KEY } from '../../constants'
 import { RecaptchaAPI, RatePointWebSocket } from '../../api'
 import * as Actions from '../../actions/actions.js'
 import { caesarShift } from '../../security/security.js'
-import { withAuthentication, withNav } from '../../hoc'
+import { withAuthentication } from '../../hoc'
+import Logo from '../../images/logo.png'
+import { Button } from '../../util'
 
 import './createAccount.scss'
 
@@ -174,49 +178,179 @@ class CreateAccount extends React.Component {
 
       }
         return(
-          <div id="containerCreate">
-              <div id="formCreate">
-                  <b id="createHeader">Create Account</b>
-                  <div id="positionForm">
-                      <form onSubmit={(e) => this.createRequest(e)} noValidate autoComplete="off">
-                          <br/>
+          <div className="loginPage">
+            <div className='clickableContent'>
+              <div className='login__topBar'>
+                <a className='arrow' onClick={() => history.goBack()}><FontAwesomeIcon icon="arrow-left" /></a>
+                <NavLink to={routes._LOGIN}>Login</NavLink>
+              </div>
+              <div className="loginFormWrapper">
+                <div className="createAccountForm">
+                  <div ><img className='login__logo' src={Logo} alt='Logo'/></div>
+
+                    <form onSubmit={(e) => this.createRequest(e)} noValidate autoComplete="off">
+                        <div className='createAccountFormItem'>
                           <b>name:</b>
                           <input type="text" maxLength="20" autoComplete="off"
                                  onChange={this.handleInputChange} required onBlur={this.checkError} name='name' value={this.state.name}/>
-                          <br/><br/>
-                          <b>email:</b>
-                          <input type="email" maxLength="32" autoComplete="off"
-                                 onChange={this.handleInputChange} required onBlur={this.checkError} name='email' value={this.state.email}/>
-                          <br/><br/>
-                          <b>username:</b>
-                          <input type="text" maxLength="20" autoComplete="off"
-                                 onChange={this.handleInputChange} required onBlur={this.checkError} name='username' value={this.state.username}/>
-                          <br/><br/>
-                          <b>password:</b>
-                          <input type="password" maxLength="32" autoComplete="off" id="pass1"
-                            onChange={this.handleInputChange} onBlur={this.checkError} name='pass1' value={this.state.pass1}/>
-                          <br/><br/>
+                        </div>
+
+                        <div className='createAccountFormItem'>
+                         <b>email:</b>
+                         <input type="email" maxLength="32" autoComplete="off"
+                                onChange={this.handleInputChange} required onBlur={this.checkError} name='email' value={this.state.email}/>
+                       </div>
+
+                        <div className='createAccountFormItem'>
+                         <b>username:</b>
+                           <input type="text" maxLength="20" autoComplete="off"
+                                  onChange={this.handleInputChange} required onBlur={this.checkError} name='username' value={this.state.username}/>
+                        </div>
+
+                         <div className='createAccountFormItem'>
+                           <b>password:</b>
+                             <input type="password" maxLength="32" autoComplete="off" id="pass1"
+                               onChange={this.handleInputChange} onBlur={this.checkError} name='pass1' value={this.state.pass1}/>
+                         </div>
+
+                        <div className='createAccountFormItem'>
                           <b>confirm password:</b>
-                          <input type="password" maxLength="32" autoComplete="off" id="pass2"
-                            onChange={this.handleInputChange} onBlur={this.checkError} name='pass2' value={this.state.pass2}/>
-                          <br/><br/>
+                            <input type="password" maxLength="32" autoComplete="off" id="pass2"
+                                onChange={this.handleInputChange} onBlur={this.checkError} name='pass2' value={this.state.pass2}/>
+                        </div>
+                        <div className='createAccountFormItem'>
                           <input type="submit" value="Submit" id="createSubmit"/>
-                      </form>
-                  </div>
-              </div>
-              {
-                this.state.error.length > 0
-                &&
-                <div className='formError'>
-                  {this.state.error}
+                        </div>
+                    </form>
+
+          {
+            /*
+            <form onSubmit={(e) => this.onSubmitLogin(e)}>
+                <label>Username</label>
+                <input
+                  type="text"
+                  maxLength="20"
+                  value={this.state.username}
+                  name='username'
+                  onBlur={this.checkError}
+                  onFocus={this.checkError}
+                  onChange={this.handleInputChange}
+                />
+              <label className='passLabel'>Password
+                <div className='passInput'>
+                  <input
+                    type="password"
+                    type={this.state.inputType}
+                    maxLength="32"
+                    name='pass'
+                    onChange={this.handleInputChange}
+                    onBlur={this.checkError}
+                    onFocus={this.checkError}
+                    value={this.state.pass}
+                  />
+                  <span className="password-trigger" onClick={() => this.setState({inputType: this.state.inputType === 'password' ? 'text' : 'password'})}>
+                    <FontAwesomeIcon icon={this.state.inputType === 'password' ? 'eye' : 'eye-slash'} />
+                  </span>
                 </div>
-              }
+              </label>
+              <div >
+                <div className='submitBtn'><Button name='Log In' size='medium' onClick={this.onSubmitLogin}/></div>
+                <hr/>
+                <div className='login__formFooter'>
+                  {
+                    this.state.error
+                    &&
+                    <div className='errorBox'>{this.state.error}</div>
+                  }
+                </div>
+              </div>
+            </form>
+            */
+          }
+                </div>
+              </div>
+            </div>
+
+            <div className="angles">
+              <svg className="angle bottom-angle" viewBox="0 0 1440 128">
+                <polygon className='angle' points="1440 957.884 0 894.563 0 1021.205 1440 1021.205" transform="translate(0 -894)"></polygon>
+              </svg>
+
+              <svg className="angle bottom-right-angle" viewBox="0 0 1056 215">
+                <polygon className='angle' points="1440 807.75 384.781 1021.205 1440 1021.205" transform="translate(-384 -807)"></polygon>
+              </svg>
+
+              <svg className="angle bottom-right-large-angle" viewBox="0 0 1440 425">
+                <polygon className='angle' points="0 1001.5 0 1024 1440 1024 1440 599.055" transform="translate(0 -599)"></polygon>
+              </svg>
+
+              <svg className="angle top-left-angle" viewBox="0 0 1440 254">
+                <polygon className='angle' points="0 253.305 0 0 1440 0 1440 58.969" opacity=".15"></polygon>
+              </svg>
+
+              <svg className="angle top-right-angle" viewBox="0 0 720 134">
+                <polygon className='angle' points="720 0 1439.938 0 1439.938 133.984" transform="translate(-720)" ></polygon>
+              </svg>
+
               <Recaptcha
                 ref={e => recaptchaInstance = e}
                 sitekey={RECAPTCHA_SITE_KEY}
                 size="invisible"
                 verifyCallback={this.verifyCallback}
               />
+
+            {
+              this.state.error
+              &&
+              <div>
+                {this.state.error}
+              </div>
+            }
+            </div>
+
+            {
+              /*
+              <div id="containerCreate">
+                  <div id="formCreate">
+                      <b id="createHeader">Create Account</b>
+                      <div id="positionForm">
+                          <form onSubmit={(e) => this.createRequest(e)} noValidate autoComplete="off">
+                              <br/>
+                              <b>name:</b>
+                              <input type="text" maxLength="20" autoComplete="off"
+                                     onChange={this.handleInputChange} required onBlur={this.checkError} name='name' value={this.state.name}/>
+                              <br/><br/>
+                              <b>email:</b>
+                              <input type="email" maxLength="32" autoComplete="off"
+                                     onChange={this.handleInputChange} required onBlur={this.checkError} name='email' value={this.state.email}/>
+                              <br/><br/>
+                              <b>username:</b>
+                              <input type="text" maxLength="20" autoComplete="off"
+                                     onChange={this.handleInputChange} required onBlur={this.checkError} name='username' value={this.state.username}/>
+                              <br/><br/>
+                              <b>password:</b>
+                              <input type="password" maxLength="32" autoComplete="off" id="pass1"
+                                onChange={this.handleInputChange} onBlur={this.checkError} name='pass1' value={this.state.pass1}/>
+                              <br/><br/>
+                              <b>confirm password:</b>
+                              <input type="password" maxLength="32" autoComplete="off" id="pass2"
+                                onChange={this.handleInputChange} onBlur={this.checkError} name='pass2' value={this.state.pass2}/>
+                              <br/><br/>
+                              <input type="submit" value="Submit" id="createSubmit"/>
+                          </form>
+                      </div>
+                  </div>
+                  {
+                    this.state.error.length > 0
+                    &&
+                    <div className='formError'>
+                      {this.state.error}
+                    </div>
+                  }
+
+              </div>
+              */
+            }
           </div>
         );
     }
@@ -235,6 +369,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default compose(
-  withNav,
   connect(mapStateToProps,mapDispatchToProps)
 )(CreateAccount);

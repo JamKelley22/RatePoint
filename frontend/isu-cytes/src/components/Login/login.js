@@ -84,9 +84,21 @@ class Login extends React.Component {
     })
     .catch(err => {
       console.log(err.error.message);
-      this.setState({
-        error: err.error.message
-      })
+      if(err.status === 401) {
+        this.setState({
+          error: 'Incorrect Password'
+        })
+      }
+      else if(err.status === 404) {
+        this.setState({
+          error: 'User Not Found'
+        })
+      }
+      else {
+        this.setState({
+          error: err.error.message
+        })
+      }
     })
   }
 
@@ -135,17 +147,15 @@ class Login extends React.Component {
                       </span>
                     </div>
                   </label>
-                  {
-                    this.state.error
-                    &&
-                    <div className='errorBox'>{this.state.error}</div>
-                  }
-                  <div className={this.state.error ? 'moveError' : ''}>
+                  <div >
                     <div className='submitBtn'><Button name='Log In' size='medium' onClick={this.onSubmitLogin}/></div>
                     <hr/>
-
                     <div className='login__formFooter'>
-
+                      {
+                        this.state.error
+                        &&
+                        <div className='errorBox'>{this.state.error}</div>
+                      }
                     </div>
                   </div>
                 </form>
